@@ -60,6 +60,7 @@
   border: 1px solid var(--vert);
   white-space: nowrap;
   line-height: 1.4;
+  justify-self: start;
 }
 .mesure {
   background: var(--vert);

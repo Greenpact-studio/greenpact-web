@@ -33,6 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" className={poppins.variable}>
       <body>
+        <a href="#contenu" className="evitement">
+          Aller au contenu
+        </a>
         <SmoothScroll />
         <AnciennesAncres />
         <Header />

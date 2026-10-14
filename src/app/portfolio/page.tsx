@@ -32,7 +32,7 @@ export default function Page() {
               <span className={styles.panneauContenu}>
                 {p.logo && (
                   <span className={styles.logoBoite}>
-                    <Image src={`/logos/${p.logo}`} alt={p.nom} width={300} height={100} className={styles.logo} />
+                    <Image src={`/logos/${p.logo}`} alt={p.nom} width={300} height={100} className={styles.logo} loading="lazy" />
                   </span>
                 )}
                 <span className={styles.secteur}>{p.secteur}</span>
@@ -54,7 +54,7 @@ export default function Page() {
           {STUDIOS.map((st) => (
             <Reveal key={st.id} className={styles.studio}>
               <a href={st.url} {...externe} className={styles.studioEntete} aria-label={`${st.nom} — ouvrir le site dans un nouvel onglet`}>
-                <Image src={st.logo} alt="" width={520} height={160} className={`${styles.studioLogo} ${styles[st.id]}`} />
+                <Image src={st.logo} alt="" width={520} height={160} className={`${styles.studioLogo} ${styles[st.id]}`} loading="lazy" />
                 <span className={styles.studioNom}>{st.nom}</span>
                 <span className={styles.studioPositionnement}>{st.positionnement}</span>
                 <span className={styles.studioLien}>{st.url.replace(/^https?:\/\/(www\.)?/, "")} ↗</span>
@@ -63,7 +63,7 @@ export default function Page() {
                 {st.startups.map((su) => {
                   const contenu = (
                     <>
-                      <span className={styles.suLogo}>{su.logo ? <Image src={`/logos/${su.logo}`} alt="" width={240} height={80} /> : <span className={styles.suInitiale}>{su.nom.charAt(0)}</span>}</span>
+                      <span className={styles.suLogo}>{su.logo ? <Image src={`/logos/${su.logo}`} alt="" width={240} height={80} loading="lazy" /> : <span className={styles.suInitiale}>{su.nom.charAt(0)}</span>}</span>
                       <span className={styles.suNom}>{su.nom}</span>
                       <span className={styles.suTexte}>{su.description}</span>
                       {su.url && <span className={styles.suFleche} aria-hidden>↗</span>}

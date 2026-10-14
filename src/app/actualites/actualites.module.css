@@ -15,7 +15,7 @@
   padding: 0.9rem 0;
   font-size: var(--t-body);
   font-weight: 400;
-  color: var(--vert-55);
+  color: var(--vert-70);
   white-space: nowrap;
   transition: color 0.3s var(--ease);
 }
@@ -45,7 +45,7 @@
   margin-left: 0.4rem;
   font-size: 0.75rem;
   font-weight: 300;
-  color: var(--vert-55);
+  color: var(--vert-70);
 }
 .panneau[hidden] {
   display: none;

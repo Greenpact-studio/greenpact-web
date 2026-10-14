@@ -15,6 +15,8 @@ export const metadata: Metadata = {
 export default function Accueil() {
   return (
     <>
+      {/* Seule image préchargée du site : la photo d'accueil (hissée dans <head> par React). */}
+      <link rel="preload" as="image" href="/images/hero-foret.webp" fetchPriority="high" />
       <HeroPhoto />
       <Hero />
       <RecitModele />

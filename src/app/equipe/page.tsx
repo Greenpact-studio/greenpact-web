@@ -19,7 +19,7 @@ export default function Page() {
         <section key={g.id} className={styles.groupe} aria-labelledby={`g-${g.id}`}>
           <div className="conteneur">
             <div className={styles.groupeTete}>
-              <Image src={g.logo} alt="" width={520} height={160} className={`${styles.logo} ${styles[g.id]}`} />
+              <Image src={g.logo} alt="" width={520} height={160} className={`${styles.logo} ${styles[g.id]}`} loading="lazy" />
               <div>
                 <h2 id={`g-${g.id}`}>{g.nom}</h2>
                 <p className="sobre">{g.sousTitre}</p>

@@ -9,7 +9,7 @@ export function Footer() {
     <footer className={`sur-vert ${styles.footer}`}>
       <div className={`conteneur ${styles.grille}`}>
         <div className={styles.marque}>
-          <Image src="/logo-greenpact-blanc.png" alt="Greenpact" width={1200} height={138} className={styles.logo} />
+          <Image src="/logo-greenpact-blanc.png" alt="Greenpact" width={1200} height={138} className={styles.logo} loading="lazy" />
           <p className={`small ${styles.tagline}`}>{SITE.tagline}</p>
         </div>
 

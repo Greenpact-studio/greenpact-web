@@ -1,5 +1,8 @@
 .convictions {
   background: var(--clair);
+  /* Les items arrivent décalés de 24 px vers la droite : on coupe sans créer de zone de défilement
+     (clip, pas hidden, pour ne pas casser la photo collante). */
+  overflow-x: clip;
 }
 .grille {
   display: grid;

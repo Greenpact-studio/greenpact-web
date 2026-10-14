@@ -1,0 +1,51 @@
+.footer {
+  padding-block: 5rem 2.5rem;
+}
+.grille {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+}
+.logo {
+  width: 11rem;
+  height: auto;
+}
+.tagline {
+  margin-top: 1rem;
+  color: var(--clair-60);
+}
+.pages ul,
+.contact ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: var(--t-small);
+}
+.contact {
+  font-size: var(--t-small);
+}
+.contact ul {
+  margin-top: 0.25rem;
+}
+.bas {
+  border-top: 1px solid var(--clair-15);
+  padding-top: 2rem;
+}
+.mentions {
+  max-width: 60rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--clair-60);
+}
+.copy {
+  margin-top: 1.5rem;
+  color: var(--clair-60);
+}
+
+@media (max-width: 800px) {
+  .grille {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

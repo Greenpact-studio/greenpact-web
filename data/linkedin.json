@@ -1,0 +1,8 @@
+[
+  {
+    "titre": "Exemple — post LinkedIn",
+    "date": "2026-02-01",
+    "exemple": true,
+    "iframe": "<iframe src=\"https://www.linkedin.com/embed/feed/update/urn:li:share:7000000000000000000\" height=\"600\" width=\"504\" frameborder=\"0\" allowfullscreen=\"\" title=\"Post intégré\"></iframe>"
+  }
+]

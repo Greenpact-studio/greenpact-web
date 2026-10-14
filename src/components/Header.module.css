@@ -1,0 +1,168 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: var(--header-h);
+  transition:
+    background-color 0.5s var(--ease),
+    color 0.5s var(--ease);
+}
+.transparent {
+  background: transparent;
+  color: #fff;
+}
+.plein {
+  background: var(--clair);
+  color: var(--vert);
+}
+.barre {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo {
+  position: relative;
+  display: block;
+  width: 10.5rem;
+  height: 1.21rem;
+  flex-shrink: 0;
+}
+.logo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s var(--ease);
+}
+.transparent .logoVert,
+.plein .logoBlanc {
+  opacity: 0;
+}
+
+.nav ul {
+  display: flex;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.nav a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0.78;
+  transition: opacity 0.3s var(--ease);
+}
+.nav a:hover,
+.nav a.actif {
+  opacity: 1;
+}
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.2rem;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.nav a.actif::after {
+  transform: scaleX(1);
+}
+
+/* ─── Mobile ─── */
+.burger {
+  display: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  position: relative;
+  margin-right: -0.5rem;
+}
+.burger span {
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.4s var(--ease), top 0.4s var(--ease);
+}
+.burger span:first-child {
+  top: 1rem;
+}
+.burger span:last-child {
+  top: 1.45rem;
+}
+.ouvert .burger span:first-child {
+  top: 1.22rem;
+  transform: rotate(45deg);
+}
+.ouvert .burger span:last-child {
+  top: 1.22rem;
+  transform: rotate(-45deg);
+}
+
+.menuMobile {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .nav {
+    display: none;
+  }
+  .burger {
+    display: block;
+  }
+  .ouvert {
+    background: var(--vert);
+    color: var(--clair);
+  }
+  .ouvert .logoVert {
+    opacity: 0;
+  }
+  .ouvert .logoBlanc {
+    opacity: 1;
+  }
+  .menuMobile {
+    display: block;
+    position: fixed;
+    inset: var(--header-h) 0 0 0;
+    background: var(--vert);
+    color: var(--clair);
+    padding: 2rem var(--gutter);
+    overflow: auto;
+  }
+  .menuMobile[hidden] {
+    display: none;
+  }
+  .menuMobile ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .menuMobile li {
+    border-top: 1px solid var(--clair-15);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.5s var(--ease),
+      transform 0.5s var(--ease);
+  }
+  .ouvert .menuMobile li {
+    opacity: 1;
+    transform: none;
+  }
+  .menuMobile a {
+    display: block;
+    padding: 1.1rem 0;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  .menuMobile a[aria-current="page"] {
+    opacity: 0.6;
+  }
+}

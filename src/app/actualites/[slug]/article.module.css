@@ -1,0 +1,90 @@
+.entete {
+  padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.retour {
+  display: inline-block;
+  margin-bottom: 2.5rem;
+  font-size: var(--t-small);
+}
+.date {
+  display: block;
+  margin-bottom: 1.25rem;
+  font-size: var(--t-small);
+  color: var(--vert-70);
+}
+.entete h1 {
+  max-width: 20ch;
+}
+.resume {
+  margin-top: 1.75rem;
+}
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.corps {
+  padding-block: clamp(3rem, 6vw, 5rem) var(--section);
+  max-width: var(--mesure);
+  font-size: 1.05rem;
+}
+.corps > * + * {
+  margin-top: 1.25rem;
+}
+.corps h2 {
+  font-size: var(--t-h3);
+  margin-top: 2.5rem;
+}
+.corps h3 {
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+.corps ul,
+.corps ol {
+  padding-left: 1.25rem;
+}
+.corps ul {
+  list-style: disc;
+}
+.corps ol {
+  list-style: decimal;
+}
+.corps li + li {
+  margin-top: 0.4rem;
+}
+.corps a {
+  font-weight: 400;
+  text-decoration: underline;
+  text-decoration-color: var(--vert-30);
+  text-underline-offset: 3px;
+}
+.corps a:hover {
+  text-decoration-color: var(--vert);
+}
+.corps blockquote {
+  border-left: 2px solid var(--vert);
+  padding-left: 1.25rem;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+}
+.corps img {
+  border-radius: 2px;
+}
+.corps hr {
+  border: 0;
+  border-top: 1px solid var(--vert-30);
+}
+.exemple {
+  display: inline-block;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--vert-15);
+  line-height: 1.4;
+}

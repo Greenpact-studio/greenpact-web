@@ -1,0 +1,211 @@
+/* ─── Pourquoi nous rejoindre ─── */
+.pourquoi {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+.pourquoiTexte {
+  position: sticky;
+  top: calc(var(--header-h) + 2rem);
+}
+.pourquoiTexte > * + * {
+  margin-top: 1.25rem;
+}
+.pourquoiTexte h2 {
+  max-width: 14ch;
+}
+.raisons {
+  display: flex;
+  flex-direction: column;
+}
+.raison {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: 1px solid var(--vert-30);
+}
+.raison:last-child {
+  border-bottom: 1px solid var(--vert-30);
+}
+.numero {
+  font-size: var(--t-h2);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--vert-30);
+}
+.raisonTitre {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.3;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.raison p {
+  color: var(--vert-70);
+}
+
+/* ─── Le véhicule ─── */
+.vehicule {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.vehiculeTexte > * + * {
+  margin-top: 1.25rem;
+}
+.vehiculeTexte h2 {
+  max-width: 16ch;
+}
+.vehiculeTexte .lead {
+  color: var(--clair);
+}
+.attributs {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.attribut {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--clair-30);
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  font-size: var(--t-small);
+}
+.attribut:last-child {
+  border-bottom: 1px solid var(--clair-30);
+}
+.attribut dt {
+  font-weight: 500;
+  color: var(--clair);
+}
+.attribut dd {
+  color: var(--clair-80);
+}
+
+/* ─── Contact sur photo ─── */
+.contact {
+  position: relative;
+  padding-block: clamp(5rem, 12vw, 10rem);
+  overflow: hidden;
+  isolation: isolate;
+}
+.contactPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.contactVoile {
+  position: absolute;
+  inset: 0;
+  background: rgba(var(--vert-rgb), 0.35);
+  z-index: -1;
+}
+.contactTitre {
+  color: #fff;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  max-width: 16ch;
+}
+.carte {
+  background: var(--clair);
+  color: var(--vert);
+  border-radius: 2px;
+  padding: clamp(1.75rem, 4vw, 3.5rem);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+  max-width: 60rem;
+}
+.portrait {
+  width: clamp(9rem, 16vw, 14rem);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--vert-30);
+  padding: 0.5rem;
+  background: var(--clair);
+}
+.carteTexte > * + * {
+  margin-top: 0.6rem;
+}
+.carteNom {
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.carteRole {
+  color: var(--vert-70);
+}
+.carteEmail {
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+.carteBoutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+/* La carte est claire bien que posée sur la photo : on rétablit les boutons verts. */
+.carte a:global(.btn) {
+  background: var(--vert);
+  border-color: var(--vert);
+  color: var(--clair);
+}
+.carte a:global(.btn-secondaire) {
+  background: transparent;
+  color: var(--vert);
+}
+.carte a:global(.btn-secondaire):hover {
+  background: var(--vert-08);
+}
+.carte :focus-visible {
+  outline-color: var(--vert);
+}
+
+/* ─── Mentions ─── */
+.mentions {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+.mentions h2 {
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-bottom: 1rem;
+}
+.mentions p {
+  max-width: 60rem;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--vert-70);
+}
+
+@media (max-width: 900px) {
+  .pourquoi,
+  .vehicule {
+    grid-template-columns: 1fr;
+  }
+  .pourquoiTexte {
+    position: static;
+  }
+  .attribut {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .carte {
+    grid-template-columns: 1fr;
+  }
+  .raison {
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+  }
+}

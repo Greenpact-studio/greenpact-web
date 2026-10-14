@@ -1,10 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import { EmailProtegeClient } from "./EmailProtegeClient";
 
 /**
- * Protection anti-spam : l'adresse n'apparaît pas en clair dans le HTML
- * généré ; elle est assemblée côté client.
+ * Protection anti-spam : l'adresse n'apparaît jamais en clair dans le HTML
+ * généré ni dans les données transmises au navigateur. Elle est encodée ici
+ * (côté serveur, au build) et reconstituée côté client au montage.
  */
 export function EmailProtege({
   email,
@@ -17,19 +16,12 @@ export function EmailProtege({
   sujet?: string;
   children?: React.ReactNode;
 }) {
-  const [href, setHref] = useState<string | undefined>(undefined);
-  const [texte, setTexte] = useState<string>("");
+  const code = Buffer.from(email.split("").reverse().join(""), "utf8").toString("base64");
   const [user, domaine] = email.split("@");
-
-  useEffect(() => {
-    const adresse = `${user}@${domaine}`;
-    setTexte(adresse);
-    setHref(`mailto:${adresse}${sujet ? `?subject=${encodeURIComponent(sujet)}` : ""}`);
-  }, [user, domaine, sujet]);
-
+  const affichage = `${user} [at] ${domaine.replace(/\./g, " [point] ")}`;
   return (
-    <a href={href} className={className}>
-      {children ?? (texte || `${user} [at] ${domaine}`)}
-    </a>
+    <EmailProtegeClient code={code} affichage={affichage} className={className} sujet={sujet}>
+      {children}
+    </EmailProtegeClient>
   );
 }

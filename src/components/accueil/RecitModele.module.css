@@ -1,0 +1,100 @@
+.recit {
+  background: var(--vert);
+  color: var(--clair);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(4rem, 8vh, 6rem);
+}
+.grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: center;
+}
+.surtitre {
+  font-size: var(--t-small);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--clair-60);
+  margin-bottom: 2rem;
+}
+.pile {
+  position: relative;
+  min-height: 22rem;
+}
+.etape {
+  position: absolute;
+  inset: 0 0 auto 0;
+}
+.numero {
+  font-size: var(--t-small);
+  color: var(--clair-60);
+  margin-bottom: 0.9rem;
+}
+.etape h3 {
+  font-size: var(--t-h2);
+  font-weight: 500;
+  max-width: 16ch;
+  color: var(--clair);
+}
+.texte {
+  margin-top: 1.4rem;
+  font-size: var(--t-body);
+  line-height: 1.7;
+  color: var(--clair-80);
+}
+
+.schema {
+  margin: 0;
+}
+.schema svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.traits {
+  stroke: var(--clair);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: var(--clair);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 400;
+}
+.traits text {
+  stroke: none;
+  fill: var(--clair-80);
+}
+.traits :global(.point) {
+  stroke: none;
+}
+.traits :global(.startup) {
+  stroke: none;
+}
+.traits :global(.anneau) {
+  stroke-width: 1.4;
+}
+
+@media (max-width: 899px) {
+  .recit {
+    min-height: 0;
+    display: block;
+  }
+  .grille {
+    grid-template-columns: 1fr;
+  }
+  .pile {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .etape {
+    position: static;
+  }
+  .schema {
+    margin-top: 3rem;
+  }
+}

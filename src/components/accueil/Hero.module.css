@@ -10,27 +10,40 @@
 }
 .photo {
   position: absolute;
-  inset: -10% 0 0 0;
-  background: var(--vert) url("/images/hero-foret.webp") center / cover no-repeat;
+  inset: -12% 0 0 0;
+  background: var(--vert) url("/images/hero-foret.webp") center 40% / cover no-repeat;
   will-change: transform;
 }
 .voile {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(var(--vert-rgb), 0.35) 0%, rgba(var(--vert-rgb), 0) 35%),
-    linear-gradient(to top, rgba(var(--vert-rgb), 0.85) 0%, rgba(var(--vert-rgb), 0.35) 45%, rgba(var(--vert-rgb), 0) 75%);
+    linear-gradient(to bottom, rgba(var(--vert-rgb), 0.3) 0%, rgba(var(--vert-rgb), 0) 30%),
+    linear-gradient(to top, rgba(var(--vert-rgb), 0.82) 0%, rgba(var(--vert-rgb), 0.38) 42%, rgba(var(--vert-rgb), 0) 72%);
 }
-.heroContenu {
+.contenu {
   position: relative;
-  padding-bottom: clamp(5rem, 12vh, 8rem);
+  padding-bottom: clamp(5rem, 13vh, 9rem);
+  will-change: transform;
 }
-.heroContenu h1 {
-  max-width: 12ch;
+.titre {
+  max-width: 11.5ch;
+  color: #fff;
 }
-.heroContenu .lead {
+.motWrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.mot {
+  display: inline-block;
+  will-change: transform;
+}
+.accroche {
   margin-top: 2rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.86);
 }
 .defiler {
   position: absolute;
@@ -42,7 +55,7 @@
   gap: 0.6rem;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 .defiler::after {
   content: "";
@@ -61,5 +74,10 @@
   50% {
     opacity: 1;
     transform: scaleY(1);
+  }
+}
+@media (max-width: 700px) {
+  .defiler {
+    display: none;
   }
 }

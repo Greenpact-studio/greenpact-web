@@ -110,6 +110,8 @@
 .studioLogo {
   height: 2.2rem;
   width: auto;
+  align-self: flex-start; /* sinon l'en-tête en colonne flex étire le logo en largeur */
+  object-fit: contain;
   filter: brightness(0) invert(1);
   margin-bottom: 0.5rem;
 }
@@ -205,5 +207,9 @@ a.startup:hover {
   }
   .suTexte {
     grid-column: 2 / -1;
+  }
+  .suFleche {
+    grid-column: 3;
+    grid-row: 1;
   }
 }

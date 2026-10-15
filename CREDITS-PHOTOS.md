@@ -11,7 +11,7 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `modele-entrepreneurs.webp` | Le Modèle | Cemrecan Yurtman | https://unsplash.com/photos/WysVHhi69js |
 | `modele-industrie.webp` | Le Modèle | Peter Herrmann | https://unsplash.com/photos/ObYNcuJgrXI |
 | `these-economie-reelle.webp` | Thèse d'investissement | Bernd Dittrich | https://unsplash.com/photos/5rKyHGdcKaA |
-| `these-europe.webp` | Thèse d'investissement | Alexandru Boicu | https://unsplash.com/photos/h0z0ptvGVR8 |
+| `these-europe.webp` | Thèse d'investissement | Ant Rozetsky | https://unsplash.com/photos/SLIFI67jv5k |
 | `these-convictions.webp` | Thèse d'investissement | Andrew Dawes | https://unsplash.com/photos/3sbLZ8_w04c |
 | `impact-paysage.webp` | Thèse d'impact | Sam Burrough | https://unsplash.com/photos/sbz_GEl-K7o |
 | `impact-systemique.webp` | Thèse d'impact | Pascal Kiefer | https://unsplash.com/photos/zS6wQZIUysA |

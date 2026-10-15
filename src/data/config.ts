@@ -5,7 +5,7 @@ export const SITE = {
   url: "https://www.greenpact.fr",
   description:
     "Holding d'investissement à impact, Greenpact finance des startups pour la transformation durable des entreprises (industrie, énergie, construction, agriculture) via deux startup studios et des participations directes.",
-  tagline: "Entrepreneurs for a better world",
+  tagline: "Investir dans la transformation durable des entreprises",
   contact: {
     email: "Laurent@greenpact.fr",
     rendezVous: "https://fantastical.app/LaurentGERAY",

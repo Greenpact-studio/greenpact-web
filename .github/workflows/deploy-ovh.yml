@@ -48,7 +48,8 @@ jobs:
           username: ${{ secrets.OVH_FTP_USERNAME }}
           password: ${{ secrets.OVH_FTP_PASSWORD }}
           local_path: "./out/*"
-          remote_path: "/www"
+          # En SFTP, OVH ouvre la session dans le dossier personnel : www est relatif.
+          remote_path: "./www"
           sftp_only: true
           # Rien n'est supprimé côté serveur : les fichiers WordPress restent,
           # seul index.html (et les nouveaux fichiers) sont écrasés/ajoutés.

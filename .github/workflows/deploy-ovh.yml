@@ -1,4 +1,4 @@
-# Publication du site statique sur OVH par FTP.
+# Publication du site statique sur OVH.
 # Déclencheurs : chaque push sur main, un bouton manuel, et toutes les 6 h
 # (pour rafraîchir les épisodes du podcast lus dans le flux RSS au build).
 #
@@ -6,6 +6,11 @@
 #   OVH_FTP_SERVER    ex. ftp.cluster0xx.hosting.ovh.net
 #   OVH_FTP_USERNAME  identifiant FTP OVH
 #   OVH_FTP_PASSWORD  mot de passe FTP OVH
+#
+# Les serveurs FTP d'OVH n'acceptent pas le FTPS explicite (« 500 This security
+# scheme is not implemented »). On tente donc d'abord le SFTP (port 22, mêmes
+# identifiants, disponible sur les offres Pro et Performance), puis, en repli,
+# le FTP simple (offre Perso) — dans ce cas le mot de passe transite en clair.
 name: Déployer sur OVH
 
 on:
@@ -33,17 +38,32 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Envoi FTP vers /www/
+      - name: Envoi SFTP vers /www/ (chiffré)
+        id: sftp
+        continue-on-error: true
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          port: 22
+          username: ${{ secrets.OVH_FTP_USERNAME }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          local_path: "./out/*"
+          remote_path: "/www"
+          sftp_only: true
+          # Rien n'est supprimé côté serveur : les fichiers WordPress restent,
+          # seul index.html (et les nouveaux fichiers) sont écrasés/ajoutés.
+          delete_remote_files: false
+
+      - name: Envoi FTP simple vers /www/ (repli si SFTP indisponible)
+        if: steps.sftp.outcome == 'failure'
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.OVH_FTP_SERVER }}
           username: ${{ secrets.OVH_FTP_USERNAME }}
           password: ${{ secrets.OVH_FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ftp
           local-dir: ./out/
           server-dir: /www/
-          # Ne touche pas aux fichiers WordPress existants : seuls les fichiers
-          # générés sont envoyés ; rien n'est supprimé côté serveur.
           dangerous-clean-slate: false
           exclude: |
             **/.git*

@@ -69,7 +69,7 @@ export default function Page() {
               C'est en Europe que les enjeux sont les plus cruciaux, mais c'est aussi là que résident les plus grandes opportunités : changer les règles du jeu pour retrouver compétitivité, souveraineté et résilience.
             </p>
           </div>
-          <Image src="/images/these-europe.webp" alt="Remorqueurs dans un port, grues en arrière-plan" width={1600} height={900} className={s.photo} loading="lazy" />
+          <Image src="/images/these-europe.webp" alt="Pylônes électriques dans un paysage de campagne au crépuscule" width={1600} height={900} className={s.photo} loading="lazy" />
         </Reveal>
       </section>
 

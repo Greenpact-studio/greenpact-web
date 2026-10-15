@@ -51,7 +51,7 @@ export function Header() {
   return (
     <header className={`${styles.header} ${plein ? styles.plein : styles.transparent} ${ouvert ? styles.ouvert : ""}`}>
       <div className={`conteneur ${styles.barre}`}>
-        <Link href="/" className={styles.logo} aria-label="Greenpact — accueil">
+        <Link href="/" className={styles.logo} aria-label="Greenpact, accueil">
           <Image src="/logo-greenpact.png" alt="Greenpact" width={1200} height={138} priority className={styles.logoVert} />
           <Image src="/logo-greenpact-blanc.png" alt="" width={1200} height={138} priority className={styles.logoBlanc} aria-hidden />
         </Link>

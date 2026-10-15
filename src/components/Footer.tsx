@@ -49,7 +49,7 @@ export function Footer() {
       <div className={`conteneur ${styles.bas}`}>
         <p className={styles.mentions}>{MENTIONS_REGLEMENTAIRES}</p>
         <p className={`small ${styles.copy}`}>
-          © {new Date().getFullYear()} Greenpact — www.greenpact.fr
+          © {new Date().getFullYear()} Greenpact, www.greenpact.fr
         </p>
       </div>
     </footer>

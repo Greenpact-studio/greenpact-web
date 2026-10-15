@@ -1,4 +1,4 @@
-// Équipe — pour ajouter une personne : une ligne dans le bon groupe,
+// Équipe : pour ajouter une personne : une ligne dans le bon groupe,
 // et sa photo (carré, 240 px ou plus) dans /public/team/<photo>.jpg.
 // `linkedin` vide → la carte n'est pas cliquable.
 

@@ -77,7 +77,7 @@ export async function listerEpisodes(max = 8): Promise<Episode[]> {
       audio: it.enclosure?.url,
     }));
   } catch (e) {
-    console.warn("Podcast : flux RSS indisponible au build —", (e as Error).message);
+    console.warn("Podcast : flux RSS indisponible au build :", (e as Error).message);
     return [];
   }
 }

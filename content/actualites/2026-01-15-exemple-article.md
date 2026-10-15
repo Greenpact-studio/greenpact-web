@@ -1,5 +1,5 @@
 ---
-titre: "Exemple — Pourquoi nous construisons avec le marché, pas à côté"
+titre: "Exemple : Pourquoi nous construisons avec le marché, pas à côté"
 date: 2026-01-15
 image: /images/modele-industrie.webp
 resume: "Article d'exemple. Ce texte montre le rendu d'un article Greenpact : un titre, une date, une image, un résumé, puis le corps en Markdown."

@@ -83,7 +83,7 @@ export default function Page() {
         </Reveal>
         <div className={s.grilleBarres} style={{ gridTemplateColumns: "1fr 1fr" }}>
           <Barres
-            titre="Transition — × 3"
+            titre="Transition : × 3"
             max={4800}
             barres={[
               { label: "2023", valeur: 1700, affichage: "1 700 Md$" },
@@ -92,7 +92,7 @@ export default function Page() {
             note="Source : BloombergNEF."
           />
           <Barres
-            titre="Intelligence artificielle — × 6,5"
+            titre="Intelligence artificielle : × 6,5"
             max={1811}
             barres={[
               { label: "2023", valeur: 280, affichage: "280 Md$" },
@@ -159,7 +159,7 @@ export default function Page() {
               max={25}
               barres={[
                 { label: "Fonds VC", valeur: 10, affichage: "10 %" },
-                { label: "Studio", valeur: 25, affichage: "20–25 %", fort: true },
+                { label: "Studio", valeur: 25, affichage: "20 à 25 %", fort: true },
               ]}
               note="Part du capital détenue pour un même montant investi : deux fois plus, car l'investissement intervient dès la création, avant que la valeur ne soit créée."
             />

@@ -57,7 +57,7 @@ function Carte({ personne: p }: { personne: Personne }) {
     </>
   );
   return p.linkedin ? (
-    <a href={p.linkedin} target="_blank" rel="noopener noreferrer" className={styles.carte} aria-label={`${p.prenom} ${p.nom}, ${p.role} — profil LinkedIn dans un nouvel onglet`}>
+    <a href={p.linkedin} target="_blank" rel="noopener noreferrer" className={styles.carte} aria-label={`${p.prenom} ${p.nom}, ${p.role}, profil LinkedIn dans un nouvel onglet`}>
       {contenu}
     </a>
   ) : (

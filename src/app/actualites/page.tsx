@@ -65,7 +65,7 @@ export default async function Page() {
           </p>
           {episodes.length === 0 ? (
             <iframe
-              title={`Lecteur Apple Podcasts — ${SITE.podcast.nom}`}
+              title={`Lecteur Apple Podcasts : ${SITE.podcast.nom}`}
               src={`https://embed.podcasts.apple.com/fr/podcast/regen/id${SITE.podcast.appleId}?theme=light`}
               className={styles.lecteur}
               allow="autoplay *; encrypted-media *; clipboard-write"
@@ -76,7 +76,7 @@ export default async function Page() {
             <ul className={styles.lignes}>
               {episodes.map((e) => (
                 <li key={e.lien + e.date}>
-                  <a href={e.lien} {...externe} className={styles.ligne} aria-label={`${e.titre} — écouter dans un nouvel onglet`}>
+                  <a href={e.lien} {...externe} className={styles.ligne} aria-label={`${e.titre}, écouter dans un nouvel onglet`}>
                     <span className={styles.date}>{dateFR(e.date)}</span>
                     <span className={styles.ligneTitre}>{e.titre}</span>
                     <span className={styles.ligneDroite}>
@@ -152,7 +152,7 @@ export default async function Page() {
                     </span>
                     <span>{dateFR(p.date)}</span>
                   </span>
-                  {/* Code d'intégration copié depuis LinkedIn (« Intégrer ce post ») — data/linkedin.json */}
+                  {/* Code d'intégration copié depuis LinkedIn (« Intégrer ce post »), voir data/linkedin.json */}
                   <span dangerouslySetInnerHTML={{ __html: p.iframe }} />
                 </li>
               ))}

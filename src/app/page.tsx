@@ -8,7 +8,7 @@ import { Renvois } from "@/components/Renvois";
 import { SITE } from "@/data/config";
 
 export const metadata: Metadata = {
-  title: "Greenpact — Entrepreneurs for a better world",
+  title: "Greenpact | Entrepreneurs for a better world",
   description: SITE.description,
 };
 

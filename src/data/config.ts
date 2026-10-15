@@ -4,7 +4,7 @@ export const SITE = {
   nom: "Greenpact",
   url: "https://www.greenpact.fr",
   description:
-    "Holding d'investissement à impact, Greenpact finance des startups pour la transformation durable des entreprises — industrie, énergie, construction, agriculture — via deux startup studios et des participations directes.",
+    "Holding d'investissement à impact, Greenpact finance des startups pour la transformation durable des entreprises (industrie, énergie, construction, agriculture) via deux startup studios et des participations directes.",
   tagline: "Entrepreneurs for a better world",
   contact: {
     email: "Laurent@greenpact.fr",

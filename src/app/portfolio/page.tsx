@@ -26,7 +26,7 @@ export default function Page() {
         </div>
         <div className={styles.panneaux}>
           {DIRECTES.map((p, i) => (
-            <a key={p.nom} href={p.url} {...externe} className={`sur-photo ${styles.panneau}`} aria-label={`${p.nom} — ouvrir le site dans un nouvel onglet`}>
+            <a key={p.nom} href={p.url} {...externe} className={`sur-photo ${styles.panneau}`} aria-label={`${p.nom}, ouvrir le site dans un nouvel onglet`}>
               <Image src={`/images/${p.photo}`} alt="" width={1600} height={1067} className={styles.panneauPhoto} loading={i === 0 ? "eager" : "lazy"} />
               <span className={styles.panneauVoile} aria-hidden />
               <span className={styles.panneauContenu}>
@@ -53,7 +53,7 @@ export default function Page() {
         <div className={styles.studios}>
           {STUDIOS.map((st) => (
             <Reveal key={st.id} className={styles.studio}>
-              <a href={st.url} {...externe} className={styles.studioEntete} aria-label={`${st.nom} — ouvrir le site dans un nouvel onglet`}>
+              <a href={st.url} {...externe} className={styles.studioEntete} aria-label={`${st.nom}, ouvrir le site dans un nouvel onglet`}>
                 <Image src={st.logo} alt="" width={520} height={160} className={`${styles.studioLogo} ${styles[st.id]}`} loading="lazy" />
                 <span className={styles.studioNom}>{st.nom}</span>
                 <span className={styles.studioPositionnement}>{st.positionnement}</span>
@@ -72,7 +72,7 @@ export default function Page() {
                   return (
                     <li key={su.nom}>
                       {su.url ? (
-                        <a href={su.url} {...externe} className={styles.startup} aria-label={`${su.nom} — ${su.url.includes("linkedin.com") ? "page LinkedIn" : "site"} dans un nouvel onglet`}>
+                        <a href={su.url} {...externe} className={styles.startup} aria-label={`${su.nom}, ${su.url.includes("linkedin.com") ? "page LinkedIn" : "site"} dans un nouvel onglet`}>
                           {contenu}
                         </a>
                       ) : (

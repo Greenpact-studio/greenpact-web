@@ -1,4 +1,4 @@
-// Portfolio — pour ajouter une startup : une entrée dans le studio concerné
+// Portfolio : pour ajouter une startup : une entrée dans le studio concerné
 // (ou dans DIRECTES), son logo éventuel dans /public/logos/<logo>.png.
 // `url` absent → la startup s'affiche sans lien.
 

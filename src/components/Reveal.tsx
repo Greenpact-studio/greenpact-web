@@ -41,6 +41,6 @@ export function Reveal({
     }, el);
     return () => ctx.revert();
   }, [cascade, y]);
-  // @ts-expect-error — balise dynamique
+  // @ts-expect-error balise dynamique
   return <Tag ref={ref} className={className}>{children}</Tag>;
 }

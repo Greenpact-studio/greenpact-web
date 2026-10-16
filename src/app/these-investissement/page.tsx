@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { Barres } from "@/components/Barres";
 import { Bascule } from "@/components/these/Bascule";
@@ -11,11 +13,13 @@ export const metadata: Metadata = {
   title: "Thèse d'investissement",
   description:
     "Pourquoi et où Greenpact investit : l'économie réelle, les limites planétaires, la triple peine européenne, l'opportunité de la transition et de l'IA, et le venture studio.",
+  alternates: { canonical: "/these-investissement/" },
 };
 
 export default function Page() {
   return (
     <>
+      <JsonLd data={filAriane("/these-investissement/")} />
       <EnTetePage titre="Thèse d'investissement" intro="Pourquoi et où nous investissons." />
 
       {/* L'économie réelle pèse lourd */}

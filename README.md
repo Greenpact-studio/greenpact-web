@@ -49,3 +49,14 @@ codes provenant de LinkedIn.
 Chaque push sur `main` reconstruit le site et l'envoie par FTP dans `/www/` chez OVH
 (`.github/workflows/deploy-ovh.yml`). Un build planifié toutes les 6 h rafraîchit
 les épisodes du podcast REGEN.
+
+## Référencement (SEO et moteurs IA)
+
+- `src/data/seo.ts` : données structurées schema.org (Organisation, site, fil d'Ariane, FAQ).
+  Les questions fréquentes de la page Devenir investisseur se modifient là.
+- Chaque page a un titre, une description, une URL canonique et une image de partage
+  (`public/images/og-greenpact.jpg`, 1200 × 630).
+- `public/llms.txt` : fiche de présentation lue par les assistants IA ; à tenir à jour
+  avec les chiffres clés (nombre de participations, partenaires).
+- `sitemap.xml` et `robots.txt` sont générés au build (`src/app/sitemap.ts`, `robots.ts`).
+- Règle absolue : aucune donnée financière confidentielle (voir `src/data/seo.ts`).

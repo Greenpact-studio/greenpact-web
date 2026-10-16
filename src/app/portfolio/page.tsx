@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { DIRECTES, STUDIOS, SYNTHESE_PORTFOLIO } from "@/data/portfolio";
 import styles from "./portfolio.module.css";
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Portfolio : participations directes et startups des studios",
   description: "Nos trois participations directes, nos deux venture studios et les startups qu'ils ont créées : 1 holding, 2 venture studios, 18 participations à date.",
+  alternates: { canonical: "/portfolio/" },
 };
 
 const externe = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -15,6 +18,7 @@ const externe = { target: "_blank", rel: "noopener noreferrer" } as const;
 export default function Page() {
   return (
     <>
+      <JsonLd data={filAriane("/portfolio/")} />
       <EnTetePage titre="Portfolio" intro="Participations directes et startups de nos deux venture studios." />
 
       {/* 7.1 Participations directes */}

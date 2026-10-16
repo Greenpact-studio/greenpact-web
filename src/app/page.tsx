@@ -8,8 +8,9 @@ import { Renvois } from "@/components/Renvois";
 import { SITE } from "@/data/config";
 
 export const metadata: Metadata = {
-  title: "Greenpact | Investir dans la transformation durable des entreprises",
+  title: { absolute: "Greenpact | Holding d'investissement à impact et venture studios" },
   description: SITE.description,
+  alternates: { canonical: "/" },
 };
 
 export default function Accueil() {

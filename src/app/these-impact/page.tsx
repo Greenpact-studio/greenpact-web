@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { CycleImpact } from "@/components/impact/CycleImpact";
 import { Resultats } from "@/components/impact/Resultats";
@@ -11,6 +13,7 @@ export const metadata: Metadata = {
   title: "Thèse d'impact",
   description:
     "Impact by design : fonds Article 9, carried conditionné à l'impact, trois objectifs pilotés, un cycle de l'idée au reporting, et ce que les startups changent déjà chez des industriels.",
+  alternates: { canonical: "/these-impact/" },
 };
 
 const OBJECTIFS = [
@@ -29,6 +32,7 @@ const PRINCIPES = [
 export default function Page() {
   return (
     <>
+      <JsonLd data={filAriane("/these-impact/")} />
       <EnTetePage titre="Thèse d'impact" intro="Démarche et résultats d'impact." />
 
       {/* Impact by design */}

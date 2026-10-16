@@ -1,0 +1,22 @@
+# Greenpact
+
+> Greenpact est une holding d'investissement à impact française, créée en 2021, qui finance des startups pour la transformation durable des entreprises (industrie, énergie, construction, agriculture) via deux venture studios, Hoji Ventures et 4Elements, et des participations directes. Portefeuille : 1 holding, 2 venture studios, 18 participations à date. Réseau : 300 entreprises partenaires et 50 laboratoires de R&D. Président : Emmanuel Gonon. Directeur général : Laurent Geray.
+
+Site en français. Contact investisseurs : https://www.greenpact.fr/devenir-investisseur/
+
+## Pages
+
+- [Le Modèle](https://www.greenpact.fr/) : comment Greenpact investit, en 4 temps, et pourquoi le venture studio.
+- [Thèse d'investissement](https://www.greenpact.fr/these-investissement/) : économie réelle, limites planétaires, Europe, transition et IA, venture studio.
+- [Thèse d'impact](https://www.greenpact.fr/these-impact/) : démarche « impact by design », cycle d'impact, résultats avec niveaux de preuve, leviers systémiques.
+- [Équipe](https://www.greenpact.fr/equipe/) : gouvernance Greenpact, équipes Hoji Ventures et 4Elements.
+- [Portfolio](https://www.greenpact.fr/portfolio/) : participations directes (Bluefins, Enerpacte, Solarcare) et startups des studios.
+- [Actualités](https://www.greenpact.fr/actualites/) : articles, podcast REGEN, apparitions, LinkedIn.
+- [Devenir investisseur](https://www.greenpact.fr/devenir-investisseur/) : pourquoi rejoindre les Greenpacters, le véhicule evergreen, questions fréquentes, contact.
+
+## Liens
+
+- LinkedIn : https://www.linkedin.com/company/greenpact/
+- Podcast REGEN : https://podcasts.apple.com/fr/podcast/regen/id1784416624
+- Hoji Ventures : https://www.hojiventures.com/
+- 4Elements : https://www.4elements.studio/

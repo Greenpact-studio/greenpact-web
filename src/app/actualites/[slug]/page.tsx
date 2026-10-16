@@ -4,6 +4,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { listerArticles, lireArticle, dateFR } from "@/lib/actualites";
 import styles from "./article.module.css";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE } from "@/data/config";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,6 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: a.titre,
     description: a.resume,
+    alternates: { canonical: `/actualites/${slug}/` },
     openGraph: a.image ? { images: [a.image] } : undefined,
   };
 }
@@ -31,6 +34,20 @@ export default async function Page({ params }: Props) {
 
   return (
     <article>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: a.titre,
+          description: a.resume,
+          datePublished: a.date,
+          inLanguage: "fr-FR",
+          image: a.image ? `${SITE.url}${a.image}` : undefined,
+          author: { "@type": "Organization", name: "Greenpact", url: `${SITE.url}/` },
+          publisher: { "@id": `${SITE.url}/#organisation` },
+          mainEntityOfPage: `${SITE.url}/actualites/${a.slug}/`,
+        }}
+      />
       <div className={`conteneur ${styles.entete}`}>
         <Link href="/actualites/" className={`lien ${styles.retour}`}>
           ← Toutes les actualités

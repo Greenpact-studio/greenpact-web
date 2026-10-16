@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { EQUIPE, TRACK_RECORD, type Personne } from "@/data/equipe";
 import styles from "./equipe.module.css";
 
 export const metadata: Metadata = {
-  title: "Équipe",
+  title: "Équipe : gouvernance, Hoji Ventures et 4Elements",
   description: "Toutes les personnes de l'écosystème Greenpact, Hoji Ventures et 4Elements : gouvernance, associés et équipes opérationnelles.",
+  alternates: { canonical: "/equipe/" },
 };
 
 export default function Page() {
   return (
     <>
+      <JsonLd data={filAriane("/equipe/")} />
       <EnTetePage titre="Équipe" intro={TRACK_RECORD} />
 
       {EQUIPE.map((g) => (

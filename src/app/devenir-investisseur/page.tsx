@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane, FAQ, FAQ_JSONLD } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { EmailProtege } from "@/components/EmailProtege";
 import { Diversification } from "@/components/investir/Diversification";
@@ -8,8 +10,9 @@ import { SITE, MENTIONS_REGLEMENTAIRES } from "@/data/config";
 import styles from "./investir.module.css";
 
 export const metadata: Metadata = {
-  title: "Devenir investisseur",
+  title: "Devenir investisseur dans une holding à impact",
   description: "Un double retour sur investissement : financier et à impact. Rejoindre les Greenpacters, actionnaires d'une holding d'investissement evergreen.",
+  alternates: { canonical: "/devenir-investisseur/" },
 };
 
 // Éléments qualitatifs uniquement (cf. spec 8.6 et 8.8 : aucune donnée financière confidentielle).
@@ -46,6 +49,7 @@ const ATTRIBUTS = [
 export default function Page() {
   return (
     <>
+      <JsonLd data={filAriane("/devenir-investisseur/")} />
       <EnTetePage titre="Devenir investisseur" intro="Un double retour sur investissement : financier et à impact." />
 
       {/* Pourquoi nous rejoindre */}
@@ -121,6 +125,20 @@ export default function Page() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* Questions fréquentes (balisées FAQPage pour les moteurs de recherche et les assistants IA) */}
+      <section className={`conteneur section ${styles.faq}`} aria-labelledby="faq-titre">
+        <JsonLd data={FAQ_JSONLD} />
+        <h2 id="faq-titre">Questions fréquentes</h2>
+        <div className={styles.faqListe}>
+          {FAQ.map((f) => (
+            <details key={f.q} className={styles.faqItem}>
+              <summary>{f.q}</summary>
+              <p>{f.r}</p>
+            </details>
+          ))}
         </div>
       </section>
 

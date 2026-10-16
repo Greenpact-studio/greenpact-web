@@ -2,14 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
+import { JsonLd } from "@/components/JsonLd";
+import { filAriane } from "@/data/seo";
 import { Onglets } from "@/components/actualites/Onglets";
 import { SITE } from "@/data/config";
 import { listerArticles, listerEpisodes, listerApparitions, listerPostsLinkedIn, dateFR } from "@/lib/actualites";
 import styles from "./actualites.module.css";
 
 export const metadata: Metadata = {
-  title: "Actualités",
+  title: "Actualités, podcast REGEN et presse",
   description: "Articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact.",
+  alternates: { canonical: "/actualites/" },
 };
 
 const externe = { target: "_blank", rel: "noopener noreferrer" } as const;
@@ -170,6 +173,7 @@ export default async function Page() {
 
   return (
     <>
+      <JsonLd data={filAriane("/actualites/")} />
       <EnTetePage titre="Actualités" intro="Articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact." />
       <section className="conteneur" style={{ paddingBottom: "var(--section)" }}>
         <Onglets onglets={onglets} styles={styles} />

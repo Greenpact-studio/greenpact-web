@@ -38,7 +38,10 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Envoi SFTP vers /www/ (chiffré)
+      # Trois envois SFTP : d'abord les scripts (noms hachés), puis les pages,
+      # puis le .htaccess (ignoré par le motif ./out/*). Ainsi une page jamais
+      # ne référence un script absent du serveur pendant le déploiement.
+      - name: Envoi SFTP 1/3, scripts et styles
         id: sftp
         continue-on-error: true
         uses: wlixcc/SFTP-Deploy-Action@v1.2.6
@@ -47,12 +50,38 @@ jobs:
           port: 22
           username: ${{ secrets.OVH_FTP_USERNAME }}
           password: ${{ secrets.OVH_FTP_PASSWORD }}
-          local_path: "./out/*"
+          local_path: "./out/_next"
           # En SFTP, OVH ouvre la session dans le dossier personnel : www est relatif.
           remote_path: "./www"
           sftp_only: true
-          # Rien n'est supprimé côté serveur : les fichiers WordPress restent,
-          # seul index.html (et les nouveaux fichiers) sont écrasés/ajoutés.
+          delete_remote_files: false
+
+      - name: Envoi SFTP 2/3, pages et images
+        if: steps.sftp.outcome == 'success'
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          port: 22
+          username: ${{ secrets.OVH_FTP_USERNAME }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          local_path: "./out/*"
+          remote_path: "./www"
+          sftp_only: true
+          # Rien n'est supprimé côté serveur : les anciens scripts restent
+          # disponibles pour les onglets ouverts avant le déploiement.
+          delete_remote_files: false
+
+      - name: Envoi SFTP 3/3, .htaccess
+        if: steps.sftp.outcome == 'success'
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          server: ${{ secrets.OVH_FTP_SERVER }}
+          port: 22
+          username: ${{ secrets.OVH_FTP_USERNAME }}
+          password: ${{ secrets.OVH_FTP_PASSWORD }}
+          local_path: "./out/.htaccess"
+          remote_path: "./www"
+          sftp_only: true
           delete_remote_files: false
 
       - name: Envoi FTP simple vers /www/ (repli si SFTP indisponible)

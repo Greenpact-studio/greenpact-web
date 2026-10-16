@@ -23,13 +23,13 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   # Anciennes adresses WordPress → nouvelles pages.
-  RewriteRule ^notre-equipe/?$ /equipe/ [R=301,L]
-  RewriteRule ^nos-realisations/?$ /portfolio/ [R=301,L]
-  RewriteRule ^avec-qui/?$ /portfolio/ [R=301,L]
-  RewriteRule ^notre-actualite/?$ /actualites/ [R=301,L]
-  RewriteRule ^nos-defis/?$ /these-impact/ [R=301,L]
-  RewriteRule ^comment/?$ / [R=301,L]
-  RewriteRule ^contact/?$ /devenir-investisseur/ [R=301,L]
+  RewriteRule ^notre-equipe/?$ https://www.greenpact.fr/equipe/ [R=301,L]
+  RewriteRule ^nos-realisations/?$ https://www.greenpact.fr/portfolio/ [R=301,L]
+  RewriteRule ^avec-qui/?$ https://www.greenpact.fr/portfolio/ [R=301,L]
+  RewriteRule ^notre-actualite/?$ https://www.greenpact.fr/actualites/ [R=301,L]
+  RewriteRule ^nos-defis/?$ https://www.greenpact.fr/these-impact/ [R=301,L]
+  RewriteRule ^comment/?$ https://www.greenpact.fr/ [R=301,L]
+  RewriteRule ^contact/?$ https://www.greenpact.fr/devenir-investisseur/ [R=301,L]
   # Plus de WordPress : ses pages d'administration renvoient à l'accueil.
-  RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) / [R=301,L]
+  RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) https://www.greenpact.fr/ [R=301,L]
 </IfModule>

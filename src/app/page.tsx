@@ -36,7 +36,7 @@ export default function Accueil() {
             titre: "Portfolio",
             texte: "Participations directes et startups des studios.",
             image: "/images/entree-portfolio.webp",
-            alt: "Homme debout dans un atelier industriel",
+            alt: "Opérateurs sur une ligne de production",
           },
           {
             href: "/devenir-investisseur/",

@@ -20,7 +20,7 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `portfolio-solarcare.webp` | Portfolio | Sikwe Scarter | https://unsplash.com/photos/hBE96YanOlM |
 | `investir-cta.webp` | Devenir investisseur (plein écran) | Anton Darius | https://unsplash.com/photos/UNV-H5PgKNo |
 | `entree-these.webp` | Accueil, renvoi Thèse d'investissement | Moritz Kindler | https://unsplash.com/photos/2HAd6_Jz5H4 |
-| `entree-portfolio.webp` | Accueil, renvoi Portfolio | TruckRun | https://unsplash.com/photos/XBWF6_TEsFM |
+| `entree-portfolio-2.webp` | Accueil, renvoi Portfolio | TruckRun | https://unsplash.com/photos/XBWF6_TEsFM |
 | `entree-investir.webp` | Accueil, renvoi Devenir investisseur | Erfan Soltani | https://unsplash.com/photos/Mvqe0B6TINM |
 
 ## Choix de la photo d'accueil

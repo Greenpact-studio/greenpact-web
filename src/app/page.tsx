@@ -35,7 +35,7 @@ export default function Accueil() {
             href: "/portfolio/",
             titre: "Portfolio",
             texte: "Participations directes et startups des studios.",
-            image: "/images/entree-portfolio.webp",
+            image: "/images/entree-portfolio-2.webp",
             alt: "Opérateurs sur une ligne de production",
           },
           {

@@ -56,6 +56,8 @@ a.carte:focus-visible .cadre {
   aspect-ratio: 1;
   object-fit: cover;
   display: block;
+  /* Portraits harmonisés en noir et blanc (fichiers sources en couleur). */
+  filter: grayscale(1);
 }
 .nom {
   font-size: var(--t-body);

@@ -133,6 +133,7 @@
   border: 1px solid var(--vert-30);
   padding: 0.5rem;
   background: var(--clair);
+  filter: grayscale(1); /* cohérent avec la page Équipe */
 }
 .carteTexte > * + * {
   margin-top: 0.6rem;

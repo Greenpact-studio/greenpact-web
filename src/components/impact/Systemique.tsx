@@ -8,38 +8,39 @@ import styles from "./Systemique.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Nombre de points par niveau : illustration de la portée qui s'élargit (pas une donnée chiffrée).
+const ACTEURS = [1, 3, 6, 10, 16, 24];
+
 /**
- * Six leviers d'impact systémique : des cercles concentriques qui s'élargissent
- * au défilement, de l'entreprise à la communauté. Le schéma est collant à gauche,
- * chaque levier se révèle à droite et allume son cercle.
+ * Six leviers d'impact systémique, un par ligne. À gauche, un schéma de diffusion :
+ * une colonne relie les niveaux, chaque niveau est une bande qui s'élargit et se
+ * peuple d'acteurs. Le schéma va du premier levier au dernier, aligné sur les textes.
+ * Au défilement : la colonne se trace, la bande s'ouvre, les points apparaissent.
  */
 export function Systemique() {
   const racine = useRef<HTMLElement>(null);
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.matchMedia().add("(prefers-reduced-motion: no-preference) and (min-width: 900px)", () => {
-        const q = gsap.utils.selector(racine);
-        const cercles = q<SVGCircleElement>("[data-cercle]");
-        gsap.set(cercles, { scale: 0.2, opacity: 0, transformOrigin: "center" });
-        q<HTMLElement>(`.${styles.levier}`).forEach((lv, i) => {
-          // Le cercle s'allume dès que son levier entre dans l'écran : en bas de la
-          // section, les six cercles sont donc déjà tous visibles.
+      const q = gsap.utils.selector(racine);
+      const leviers = q<HTMLElement>(`.${styles.levier}`);
+      gsap.matchMedia().add("(prefers-reduced-motion: no-preference)", () => {
+        leviers.forEach((lv) => {
+          const trait = lv.querySelector(`.${styles.trait}`);
+          const bande = lv.querySelector(`.${styles.bande}`);
+          const points = lv.querySelectorAll(`.${styles.point}`);
+          gsap
+            .timeline({ scrollTrigger: { trigger: lv, start: "top 80%", toggleActions: "play none none reverse" } })
+            .from(trait, { scaleY: 0, transformOrigin: "top center", duration: 0.5, ease: "none" })
+            .from(bande, { scaleX: 0.08, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.2")
+            .from(points, { scale: 0, opacity: 0, duration: 0.3, stagger: 0.025, ease: "back.out(2.5)" }, "-=0.35")
+            .from(lv.querySelector(`.${styles.etiquette}`), { opacity: 0, y: 6, duration: 0.4 }, "-=0.2");
           ScrollTrigger.create({
             trigger: lv,
-            start: "top 92%",
-            onEnter: () => gsap.to(cercles[i], { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }),
-            onLeaveBack: () => gsap.to(cercles[i], { scale: 0.2, opacity: 0, duration: 0.4 }),
-          });
-          ScrollTrigger.create({
-            trigger: lv,
-            start: "top 65%",
-            end: "bottom 35%",
+            start: "top 60%",
+            end: "bottom 40%",
             onToggle: (st) => lv.classList.toggle(styles.actif, st.isActive),
           });
         });
-      });
-      gsap.matchMedia().add("(prefers-reduced-motion: reduce), (max-width: 899px)", () => {
-        gsap.set(racine.current!.querySelectorAll("[data-cercle]"), { scale: 1, opacity: 1 });
       });
     }, racine);
     return () => ctx.revert();
@@ -49,39 +50,34 @@ export function Systemique() {
 
   return (
     <section ref={racine} className={`section ${styles.sys}`} aria-labelledby="sys-titre">
-      <div className={`conteneur ${styles.grille}`}>
-        <div className={styles.colSchema}>
-          <div className={styles.collant}>
-            <h2 id="sys-titre" style={{ maxWidth: "14ch" }}>
-              Au-delà de nos startups : un impact systémique.
-            </h2>
-            <p className="sobre">Six leviers pour recalibrer un système entier plutôt qu'une solution ponctuelle.</p>
-            <svg viewBox="0 0 400 400" className={styles.schema} role="img" aria-label="Cercles concentriques : entreprise, dirigeants, clients et fournisseurs, filière, industrie, communauté">
-              {LEVIERS_SYSTEMIQUES.map((l, i) => {
-                const r = 28 + (i * 160) / (n - 1);
-                return (
-                  <g key={l.niveau}>
-                    <circle data-cercle cx="200" cy="200" r={r} fill="none" />
-                    <text x="200" y={200 - r + 11} textAnchor="middle" className={styles.etiquette}>
-                      {l.niveau}
-                    </text>
-                  </g>
-                );
-              })}
-              <circle cx="200" cy="200" r="4" className={styles.centre} />
-            </svg>
-          </div>
+      <div className="conteneur">
+        <div className={styles.tete}>
+          <h2 id="sys-titre">Au-delà de nos startups : un impact systémique.</h2>
+          <p className="sobre">Six leviers pour recalibrer un système entier plutôt qu&apos;une solution ponctuelle : l&apos;impact part d&apos;une entreprise et s&apos;étend jusqu&apos;à la communauté.</p>
         </div>
 
         <ol className={styles.leviers}>
           {LEVIERS_SYSTEMIQUES.map((l, i) => (
-            <li key={l.niveau} className={styles.levier}>
-              <p className={styles.meta}>
-                {String(i + 1).padStart(2, "0")} · {l.niveau}
-              </p>
-              <h3>{l.effet}</h3>
-              <p className={styles.texte}>{l.texte}</p>
-              <p className={styles.exemple}>{l.exemple}</p>
+            <li key={l.niveau} className={styles.levier} style={{ ["--i" as string]: i, ["--largeur" as string]: `${22 + (i * 78) / (n - 1)}%` }}>
+              <div className={styles.visuel} aria-hidden>
+                <span className={`${styles.trait} ${i === 0 ? styles.premier : ""} ${i === n - 1 ? styles.dernier : ""}`} />
+                <span className={styles.bande}>
+                  {Array.from({ length: ACTEURS[i] ?? 1 }).map((_, k) => (
+                    <span key={k} className={styles.point} />
+                  ))}
+                </span>
+                <span className={styles.etiquette}>
+                  {l.niveau}
+                </span>
+              </div>
+              <div className={styles.texte}>
+                <p className={styles.meta}>
+                  {String(i + 1).padStart(2, "0")} · {l.niveau}
+                </p>
+                <h3>{l.effet}</h3>
+                <p className={styles.description}>{l.texte}</p>
+                <p className={styles.exemple}>{l.exemple}</p>
+              </div>
             </li>
           ))}
         </ol>

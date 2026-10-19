@@ -1,51 +1,39 @@
-// Résultats d'impact des startups, avec niveau de preuve.
-// Niveaux : "Mesuré" | "Estimé" | "Intention".
-// TODO vérifier : les niveaux marqués `aVerifier: true` sont à confirmer
-// avec les studios (NetCarbon, Enerpacte, Revalue, Sapiologie).
+// Résultats d'impact mesurés : seules les startups dont le résultat est constaté
+// chez des clients figurent ici (aujourd'hui Bluefins et Sapiologie).
+// `ancre` renvoie vers la carte de la startup sur la page Portfolio.
 
-export type NiveauPreuve = "Mesuré" | "Estimé" | "Intention";
-
-export type Resultat = {
+export type ResultatMesure = {
   startup: string;
-  resultat: string;
-  niveau: NiveauPreuve;
-  aVerifier?: boolean;
+  theme: string;
+  chiffre: string;
+  libelle: string;
+  preuve: string;
+  image: string; // fichier dans /public/images/
+  alt: string;
+  ancre: string; // id de la carte sur /portfolio/
 };
 
-export type ThemeImpact = { theme: string; resultats: Resultat[] };
-
-export const RESULTATS_IMPACT: ThemeImpact[] = [
+export const RESULTATS_MESURES: ResultatMesure[] = [
   {
-    theme: "Décarboner la production",
-    resultats: [
-      { startup: "Bluefins", resultat: "−20 % de carburant et de CO₂ par navire équipé", niveau: "Mesuré" },
-      { startup: "CaliCO₂", resultat: "Coût de captation divisé par 2", niveau: "Intention" },
-      { startup: "NetCarbon", resultat: "11 270 tCO₂e évitées ou captées", niveau: "Estimé", aVerifier: true }, // TODO vérifier
-    ],
+    startup: "Bluefins",
+    theme: "Décarboner le transport maritime",
+    chiffre: "−20 %",
+    libelle: "de carburant et de CO₂ par navire équipé",
+    preuve: "Essais en mer de mars 2026 : gains à deux chiffres, validés par Bureau Veritas.",
+    image: "portfolio-bluefins.webp",
+    alt: "Porte-conteneurs en mer au lever du jour",
+    ancre: "bluefins",
   },
   {
-    theme: "Consommer moins d'énergie",
-    resultats: [
-      { startup: "Enerpacte", resultat: "+20 % de productible", niveau: "Estimé", aVerifier: true }, // TODO vérifier
-      { startup: "Thermal AI", resultat: "−50 % de consommation des datacenters", niveau: "Intention" },
-      { startup: "Cedrus", resultat: "531 bâtiments audités, 50 à 200 ktCO₂ de gisement", niveau: "Intention" },
-    ],
-  },
-  {
-    theme: "Boucler les cycles",
-    resultats: [
-      { startup: "Revalue", resultat: "Jusqu'à 97 % d'impact évité par produit reconditionné", niveau: "Estimé", aVerifier: true }, // TODO vérifier
-      { startup: "Sapiologie", resultat: "−25 % de CO₂ sur les produits éco-conçus", niveau: "Mesuré", aVerifier: true }, // TODO vérifier
-      { startup: "Ayakem", resultat: "PoC d'isolants biosourcés issus de résidus de bois", niveau: "Intention" },
-    ],
-  },
-  {
-    theme: "Adapter, transitionner",
-    resultats: [
-      { startup: "Nepsis", resultat: "2 GW de renouvelable dont le financement est structuré", niveau: "Estimé" },
-      { startup: "WatAO", resultat: "Destruction des PFAS dans l'eau", niveau: "Intention" },
-      { startup: "Aqua Green Protect", resultat: "Gel bio pour la protection des cultures", niveau: "Intention" },
-    ],
+    startup: "Sapiologie",
+    theme: "Éco-concevoir tout un catalogue",
+    chiffre: "−25 %",
+    libelle: "de CO₂ sur les produits éco-conçus",
+    preuve: "Des milliers d'analyses de cycle de vie générées en une journée chez Radiall ; contrat signé avec Hermès.",
+    // TODO : remplacer par une capture du logiciel Sapiologie (WebP 1600 px, même nom de fichier).
+    image: "impact-sapiologie.webp",
+    alt: "Logiciel Sapiologie",
+    ancre: "sapiologie",
   },
 ];
 

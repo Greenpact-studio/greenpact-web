@@ -14,7 +14,7 @@ const CHIFFRES = [
   { valeur: 300, suffixe: "", label: "partenaires industriels" },
 ];
 
-/** Quatre chiffres clés, compteur animé à l'apparition. Mise en page éditoriale. */
+/** Quatre chiffres clés de même taille, en quatre colonnes égales, compteur animé à l'apparition. */
 export function Chiffres() {
   const racine = useRef<HTMLElement>(null);
 
@@ -66,19 +66,21 @@ export function Chiffres() {
 
   return (
     <section ref={racine} className={`section ${styles.chiffres}`} aria-label="Chiffres clés">
-      <div className={`conteneur ${styles.grille}`}>
-        <p className={styles.intro}>Greenpact en quelques chiffres</p>
-        {CHIFFRES.map((c, i) => (
-          <div key={i} className={`${styles.item} ${styles[`item${i + 1}`]}`}>
-            <p className={styles.valeur}>
-              <span className={styles.nombre} data-valeur={c.valeur}>
-                0
-              </span>
-              {c.suffixe}
-            </p>
-            <p className={styles.label}>{c.label}</p>
-          </div>
-        ))}
+      <div className="conteneur">
+        <h2 className={styles.intro}>Greenpact en quelques chiffres</h2>
+        <div className={styles.grille}>
+          {CHIFFRES.map((c, i) => (
+            <div key={i} className={styles.item}>
+              <p className={styles.valeur}>
+                <span className={styles.nombre} data-valeur={c.valeur}>
+                  0
+                </span>
+                {c.suffixe}
+              </p>
+              <p className={styles.label}>{c.label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

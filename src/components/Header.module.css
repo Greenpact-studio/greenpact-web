@@ -76,6 +76,32 @@
   transform: scaleX(1);
 }
 
+/* Bouton Espace investisseur, distinct de la navigation */
+.espace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  padding: 0.55rem 1rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+.plein .espace:hover,
+.plein .espaceActif {
+  background: var(--vert);
+  color: var(--clair);
+}
+.transparent .espace:hover {
+  background: #fff;
+  color: var(--vert);
+}
+
 /* ─── Mobile ─── */
 .burger {
   display: none;
@@ -111,8 +137,14 @@
   display: none;
 }
 
+@media (max-width: 1240px) {
+  .nav ul {
+    gap: 1rem;
+  }
+}
 @media (max-width: 1100px) {
-  .nav {
+  .nav,
+  .espace {
     display: none;
   }
   .burger {

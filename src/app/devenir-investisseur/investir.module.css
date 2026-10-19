@@ -135,6 +135,17 @@
   background: var(--clair);
   filter: grayscale(1); /* cohérent avec la page Équipe */
 }
+/* Seconde carte (Emmanuel), plus compacte, juste sous celle de Laurent */
+.carteSeconde {
+  margin-top: 1.25rem;
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+.carteSeconde .portrait {
+  width: clamp(7rem, 11vw, 9.5rem);
+}
+.carteSeconde .carteBoutons {
+  margin-top: 1rem;
+}
 .carteTexte > * + * {
   margin-top: 0.6rem;
 }

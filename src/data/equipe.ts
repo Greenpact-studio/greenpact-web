@@ -1,5 +1,5 @@
 // Équipe : pour ajouter une personne : une ligne dans le bon groupe,
-// et sa photo (carré, 240 px ou plus) dans /public/team/<photo>.jpg.
+// et sa photo (carré, 480 px idéalement, noir et blanc appliqué par le site) dans /public/team/<photo>.jpg.
 // `linkedin` vide → la carte n'est pas cliquable.
 
 export type Personne = {

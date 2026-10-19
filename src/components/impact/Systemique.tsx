@@ -22,12 +22,18 @@ export function Systemique() {
         const cercles = q<SVGCircleElement>("[data-cercle]");
         gsap.set(cercles, { scale: 0.2, opacity: 0, transformOrigin: "center" });
         q<HTMLElement>(`.${styles.levier}`).forEach((lv, i) => {
+          // Le cercle s'allume dès que son levier entre dans l'écran : en bas de la
+          // section, les six cercles sont donc déjà tous visibles.
+          ScrollTrigger.create({
+            trigger: lv,
+            start: "top 92%",
+            onEnter: () => gsap.to(cercles[i], { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" }),
+            onLeaveBack: () => gsap.to(cercles[i], { scale: 0.2, opacity: 0, duration: 0.4 }),
+          });
           ScrollTrigger.create({
             trigger: lv,
             start: "top 65%",
             end: "bottom 35%",
-            onEnter: () => gsap.to(cercles[i], { scale: 1, opacity: 1, duration: 0.9, ease: "power3.out" }),
-            onLeaveBack: () => gsap.to(cercles[i], { scale: 0.2, opacity: 0, duration: 0.5 }),
             onToggle: (st) => lv.classList.toggle(styles.actif, st.isActive),
           });
         });

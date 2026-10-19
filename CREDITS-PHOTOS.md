@@ -23,6 +23,23 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `entree-portfolio-2.webp` | Accueil, renvoi Portfolio | TruckRun | https://unsplash.com/photos/XBWF6_TEsFM |
 | `entree-investir.webp` | Accueil, renvoi Devenir investisseur | Erfan Soltani | https://unsplash.com/photos/Mvqe0B6TINM |
 
+### Visuels repris de l'Espace actionnaires (dépôt `greenpact-investisseurs`, `assets/impact/`)
+
+Origine et licence à confirmer avant mise en ligne (photos déjà utilisées dans l'espace actionnaires).
+
+| Fichier | Page | Source |
+| --- | --- | --- |
+| `condition-energie.webp` | Thèse d'investissement, six conditions (01) | `assets/impact/consommer.jpg` |
+| `condition-matiere.webp` | Thèse d'investissement, six conditions (03) | `assets/impact/boucler.jpg` |
+| `condition-climat.webp` | Thèse d'investissement, six conditions (05) | `assets/impact/adapter.jpg` |
+| `condition-modeles.webp` | Thèse d'investissement, six conditions (06) | `assets/impact/decarboner.jpg` |
+
+### Visuel provisoire
+
+| Fichier | Page | À faire |
+| --- | --- | --- |
+| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Logo Sapiologie sur fond vert : remplacer par une capture du logiciel (WebP 1600 × 1067, même nom). |
+
 ## Choix de la photo d'accueil
 
 Parmi les trois candidates proposées, **Maciek Sulkowski (qkAqJuX6DVI)** a été retenue :

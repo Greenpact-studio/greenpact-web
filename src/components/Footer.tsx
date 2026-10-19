@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { NAV, SITE, MENTIONS_REGLEMENTAIRES } from "@/data/config";
+import { NAV, SITE, MENTIONS_REGLEMENTAIRES, ESPACE_INVESTISSEUR } from "@/data/config";
 import { EmailProtege } from "./EmailProtege";
 import styles from "./Footer.module.css";
 
@@ -22,12 +22,24 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href={ESPACE_INVESTISSEUR.href} className="lien">
+                {ESPACE_INVESTISSEUR.label}
+              </Link>
+            </li>
           </ul>
         </nav>
 
         <div className={styles.contact}>
           <p className="small sobre">Contact</p>
-          <EmailProtege email={SITE.contact.email} className="lien" />
+          <ul>
+            <li>
+              Laurent Geray · <EmailProtege email={SITE.contact.email} className="lien" />
+            </li>
+            <li>
+              Emmanuel Gonon · <EmailProtege email={SITE.contact.emailEmmanuel} className="lien" />
+            </li>
+          </ul>
           <p className="small sobre" style={{ marginTop: "1.25rem" }}>
             Suivre
           </p>

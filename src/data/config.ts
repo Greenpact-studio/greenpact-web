@@ -8,8 +8,9 @@ export const SITE = {
   tagline: "Investir dans la transformation durable des entreprises",
   contact: {
     email: "Laurent@greenpact.fr",
+    emailEmmanuel: "Emmanuel@greenpact.fr",
     rendezVous: "https://fantastical.app/LaurentGERAY",
-    linkedin: "https://www.linkedin.com/company/greenpact/",
+    linkedin: "https://www.linkedin.com/company/greenpactstudio/posts/",
   },
   podcast: {
     nom: "REGEN",
@@ -18,6 +19,15 @@ export const SITE = {
     rss: "https://anchor.fm/s/fe58efb8/podcast/rss",
     appleId: "1784416624",
   },
+};
+
+// Espace investisseur : la page publique /espace-investisseur/ présente l'espace
+// privé ; le bouton « Se connecter » ouvre l'application des actionnaires
+// (publiée sur Claude), dont l'accès est réservé aux personnes invitées.
+export const ESPACE_INVESTISSEUR = {
+  href: "/espace-investisseur/",
+  label: "Espace investisseur",
+  connexion: "https://claude.ai/artifact/HAZBk2GEnsAjWPtBh4hbxi",
 };
 
 // Les 7 pages du site, dans l'ordre de l'en-tête.

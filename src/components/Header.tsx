@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { NAV } from "@/data/config";
+import { NAV, ESPACE_INVESTISSEUR } from "@/data/config";
 import styles from "./Header.module.css";
 
 /**
@@ -68,6 +68,11 @@ export function Header() {
           </ul>
         </nav>
 
+        <Link href={ESPACE_INVESTISSEUR.href} className={`${styles.espace} ${actif(ESPACE_INVESTISSEUR.href) ? styles.espaceActif : ""}`} aria-current={actif(ESPACE_INVESTISSEUR.href) ? "page" : undefined}>
+          <Cadenas />
+          {ESPACE_INVESTISSEUR.label}
+        </Link>
+
         <button
           type="button"
           className={styles.burger}
@@ -90,8 +95,22 @@ export function Header() {
               </Link>
             </li>
           ))}
+          <li style={{ transitionDelay: `${80 + NAV.length * 40}ms` }}>
+            <Link href={ESPACE_INVESTISSEUR.href} aria-current={actif(ESPACE_INVESTISSEUR.href) ? "page" : undefined}>
+              {ESPACE_INVESTISSEUR.label}
+            </Link>
+          </li>
         </ul>
       </div>
     </header>
+  );
+}
+
+function Cadenas() {
+  return (
+    <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+      <rect x="3" y="7" width="10" height="7" rx="1.5" />
+      <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" />
+    </svg>
   );
 }

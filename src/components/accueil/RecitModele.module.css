@@ -4,45 +4,39 @@
   min-height: 100svh;
   display: flex;
   align-items: center;
-  padding-block: clamp(4rem, 8vh, 6rem);
+  padding-block: calc(var(--header-h) + 2rem) clamp(3rem, 6vh, 5rem);
 }
 .grille {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
   align-items: center;
-}
-.surtitre {
-  font-size: var(--t-small);
-  font-weight: 400;
-  letter-spacing: 0;
-  color: var(--clair-60);
-  margin-bottom: 2rem;
 }
 .pile {
   position: relative;
-  min-height: 22rem;
+  min-height: 30rem;
 }
 .etape {
   position: absolute;
   inset: 0 0 auto 0;
 }
-.numero {
-  font-size: var(--t-small);
-  color: var(--clair-60);
-  margin-bottom: 0.9rem;
-}
 .etape h3 {
-  font-size: var(--t-h2);
+  font-size: var(--t-h1);
   font-weight: 500;
-  max-width: 16ch;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 15ch;
   color: var(--clair);
+  margin-bottom: clamp(1.75rem, 3.5vh, 2.75rem);
 }
 .texte {
-  margin-top: 1.4rem;
-  font-size: var(--t-body);
-  line-height: 1.7;
+  font-size: var(--t-lead);
+  line-height: 1.75;
   color: var(--clair-80);
+  max-width: 32rem;
+}
+.texte + .texte {
+  margin-top: 1.4rem;
 }
 
 .schema {
@@ -51,36 +45,80 @@
 .schema svg {
   width: 100%;
   height: auto;
+  max-height: 78svh;
   overflow: visible;
+  font-family: var(--font);
 }
-.traits {
-  stroke: var(--clair);
+
+/* Traits : un seul trait fin et régulier */
+.ligne {
+  stroke: var(--clair-60);
   stroke-width: 1.2;
   stroke-linecap: round;
-  stroke-linejoin: round;
+}
+.socle {
+  stroke: var(--clair);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+.schema :global(.gp-anneau) {
+  stroke: var(--clair);
+  stroke-width: 1.6;
+}
+.schema :global(.gp-coeur) {
   fill: var(--clair);
-  font-family: var(--font);
-  font-size: 12px;
+}
+.plein {
+  fill: var(--clair);
+}
+
+/* Textes du schéma */
+.nomGp {
+  fill: var(--vert);
+  font-size: 17px;
+  font-weight: 500;
+}
+.blocPlein {
+  fill: var(--clair);
+}
+.blocVide {
+  fill: var(--vert);
+  stroke: var(--clair);
+  stroke-width: 1.2;
+}
+.titreBloc,
+.titreBlocClair {
+  font-size: 14.5px;
+  font-weight: 500;
+}
+.titreBloc {
+  fill: var(--vert);
+}
+.titreBlocClair {
+  fill: var(--clair);
+}
+.sousBloc,
+.sousBlocClair {
+  font-size: 11px;
   font-weight: 400;
 }
-.traits text {
-  stroke: none;
-  fill: var(--clair-80);
+.sousBloc {
+  fill: var(--vert-70);
 }
-.traits :global(.point) {
-  stroke: none;
+.sousBlocClair {
+  fill: var(--clair-60);
 }
-.traits :global(.startup) {
-  stroke: none;
-}
-.traits :global(.anneau) {
-  stroke-width: 1.4;
+.pilier {
+  fill: var(--clair);
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @media (max-width: 899px) {
   .recit {
     min-height: 0;
     display: block;
+    padding-block: var(--section);
   }
   .grille {
     grid-template-columns: 1fr;
@@ -94,7 +132,10 @@
   .etape {
     position: static;
   }
+  .etape h3 {
+    font-size: var(--t-h2);
+  }
   .schema {
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 }

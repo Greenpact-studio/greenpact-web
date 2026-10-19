@@ -10,10 +10,10 @@
   padding-bottom: var(--section);
 }
 .panneaux {
+  /* Les trois panneaux se touchent : aucun filet entre les photos. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--vert);
+  gap: 0;
 }
 .panneau {
   position: relative;
@@ -48,19 +48,18 @@
   justify-content: flex-end;
   gap: 0.5rem;
 }
-.logoBoite {
-  position: absolute;
-  top: clamp(1.5rem, 3vw, 2.5rem);
-  left: clamp(1.5rem, 3vw, 2.5rem);
-  background: var(--clair);
-  padding: 0.6rem 0.9rem;
-  border-radius: 2px;
+.panneau {
+  scroll-margin-top: var(--header-h);
 }
+/* Logo en version claire, posé directement sur la photo (pas de fond blanc). */
 .logo {
-  height: 1.6rem;
+  height: 2.6rem;
   width: auto;
-  max-width: 8rem;
+  max-width: 11rem;
   object-fit: contain;
+  object-position: left center;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.25));
 }
 .secteur {
   font-size: var(--t-small);
@@ -84,103 +83,131 @@
 }
 
 /* ─── Studios ─── */
+/* Deux tableaux de même hauteur. Couleurs froides et douces, tirées des logos :
+   ardoise pour Hoji (noir et orange), vert d'eau profond pour 4Elements. */
+.studio {
+  --studio-fonce: #2b3640;
+  --studio-teinte: #eef1f3;
+  --studio-accent: #e8875f;
+  --studio-filet: rgba(43, 54, 64, 0.12);
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--studio-teinte);
+}
+.studio.\34 elements {
+  --studio-fonce: #26433f;
+  --studio-teinte: #ebf1ee;
+  --studio-accent: #8fb9ad;
+  --studio-filet: rgba(38, 67, 63, 0.12);
+}
 .studios {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-.studio {
-  border: 1px solid var(--vert-30);
-  border-radius: 2px;
-  display: flex;
-  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: stretch;
 }
 .studioEntete {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  background: var(--vert);
+  gap: 1.1rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  background: var(--studio-fonce);
+  border-top: 3px solid var(--studio-accent);
   color: var(--clair);
-  transition: background 0.4s var(--ease);
+  min-height: 15rem;
+  transition: filter 0.4s var(--ease);
 }
 .studioEntete:hover {
-  background: #14301f;
+  filter: brightness(1.12);
 }
 .studioLogo {
-  height: 2.2rem;
+  height: 3.4rem;
   width: auto;
-  align-self: flex-start; /* sinon l'en-tête en colonne flex étire le logo en largeur */
+  max-width: 100%;
+  align-self: flex-start;
   object-fit: contain;
+}
+.\34 elements .studioLogo {
   filter: brightness(0) invert(1);
-  margin-bottom: 0.5rem;
-}
-.studioLogo.hoji {
-  height: 2rem;
-}
-.studioNom {
-  font-size: var(--t-h3);
-  font-weight: 500;
+  height: 2.6rem;
+  margin-block: 0.4rem;
 }
 .studioPositionnement {
   color: var(--clair-80);
-  font-size: var(--t-small);
-  max-width: 40ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  max-width: 34ch;
+  flex: 1;
 }
-.studioLien {
+.studioPied {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
   font-size: var(--t-small);
   color: var(--clair-60);
 }
 .startups {
   display: flex;
   flex-direction: column;
+  flex: 1;
+}
+.startups li {
+  flex: 1;
+  display: flex;
+  scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 .startup {
+  flex: 1;
   display: grid;
-  grid-template-columns: 5.5rem 8rem 1fr auto;
-  gap: 1rem;
+  grid-template-columns: 8.5rem minmax(0, 1fr) 1.25rem;
+  gap: 1.25rem;
   align-items: center;
-  padding: 1rem clamp(1.5rem, 3vw, 2.5rem);
-  border-top: 1px solid var(--vert-15);
+  min-height: 5.25rem;
+  padding: 0.9rem clamp(1.25rem, 2.5vw, 2rem);
+  border-top: 1px solid var(--studio-filet);
+  color: var(--studio-fonce);
   transition: background 0.3s var(--ease);
 }
-a.startup:hover {
-  background: var(--vert-08);
-}
-.sansLien {
-  color: var(--vert);
+a.startup:hover,
+a.startup:focus-visible {
+  background: rgba(255, 255, 255, 0.55);
 }
 .suLogo {
   display: flex;
   align-items: center;
-  height: 1.4rem;
+  height: 2.75rem;
 }
 .suLogo img {
-  height: 1.4rem;
-  width: auto;
-  max-width: 5rem;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  object-position: left center;
 }
-.suInitiale {
-  width: 1.6rem;
-  height: 1.6rem;
-  border: 1px solid var(--vert-30);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 0.75rem;
-  font-weight: 500;
+/* Pas encore de logo : le nom, en mot-symbole sobre */
+.suMot {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--studio-fonce);
+}
+.suTexte {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 .suNom {
   font-weight: 500;
 }
-.suTexte {
+.suDescription {
   font-size: var(--t-small);
-  color: var(--vert-70);
+  line-height: 1.5;
+  opacity: 0.75;
 }
 .suFleche {
   font-size: var(--t-small);
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 /* ─── Synthèse ─── */
@@ -203,13 +230,7 @@ a.startup:hover {
     aspect-ratio: 16 / 10;
   }
   .startup {
-    grid-template-columns: 4rem 1fr auto;
-  }
-  .suTexte {
-    grid-column: 2 / -1;
-  }
-  .suFleche {
-    grid-column: 3;
-    grid-row: 1;
+    grid-template-columns: 6.5rem minmax(0, 1fr) 1rem;
+    gap: 1rem;
   }
 }

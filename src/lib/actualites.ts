@@ -91,7 +91,8 @@ export async function listerEpisodes(max = 8): Promise<Episode[]> {
 
 /* ─── Données JSON (data/*.json) ─── */
 export type Apparition = { titre: string; media: string; date: string; lien?: string; exemple?: boolean };
-export type PostLinkedIn = { titre: string; date: string; iframe: string; exemple?: boolean };
+// Post LinkedIn : soit `iframe` (code « Intégrer ce post »), soit simplement `lien` vers le post.
+export type PostLinkedIn = { titre: string; date: string; iframe?: string; lien?: string; exemple?: boolean };
 
 export function listerApparitions(): Apparition[] {
   return lireJSON<Apparition[]>("apparitions.json").sort((a, b) => (a.date < b.date ? 1 : -1));

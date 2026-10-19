@@ -43,7 +43,8 @@ au build, la page affiche le lecteur Apple Podcasts à la place.
 
 **Post LinkedIn.** Sur le post, menu « … » → « Intégrer ce post », copier le code `<iframe …>`
 et l'ajouter dans `data/linkedin.json` : `{ "titre", "date", "iframe" }`. Ne coller que des
-codes provenant de LinkedIn.
+codes provenant de LinkedIn. À défaut de code d'intégration, mettre simplement le lien du post :
+`{ "titre", "date", "lien" }` (une carte « Voir la publication sur LinkedIn » s'affiche).
 
 ## Déploiement
 

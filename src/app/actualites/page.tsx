@@ -156,7 +156,14 @@ export default async function Page() {
                     <span>{dateFR(p.date)}</span>
                   </span>
                   {/* Code d'intégration copié depuis LinkedIn (« Intégrer ce post »), voir data/linkedin.json */}
-                  <span dangerouslySetInnerHTML={{ __html: p.iframe }} />
+                  {p.iframe ? (
+                    <span dangerouslySetInnerHTML={{ __html: p.iframe }} />
+                  ) : p.lien ? (
+                    <a href={p.lien} {...externe} className={styles.postLien} aria-label={`${p.titre}, voir sur LinkedIn dans un nouvel onglet`}>
+                      <span className={styles.postLienTitre}>Voir la publication sur LinkedIn</span>
+                      <span aria-hidden>↗</span>
+                    </a>
+                  ) : null}
                 </li>
               ))}
             </ul>

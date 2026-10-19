@@ -6,6 +6,7 @@ import { listerArticles, lireArticle, dateFR } from "@/lib/actualites";
 import styles from "./article.module.css";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/data/config";
+import { CorpsArticle } from "@/components/actualites/CorpsArticle";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -49,17 +50,19 @@ export default async function Page({ params }: Props) {
         }}
       />
       <div className={`conteneur ${styles.entete}`}>
-        <Link href="/actualites/" className={`lien ${styles.retour}`}>
-          ← Toutes les actualités
-        </Link>
-        <h1>{a.titre}</h1>
-        <p className={styles.signature}>
-          {a.auteur && <span className={styles.auteur}>{a.auteur}</span>}
-          <span>{dateFR(a.date)}</span>
-          {a.lecture && <span>{a.lecture}</span>}
-          {a.exemple && <span className={styles.exemple}>Exemple</span>}
-        </p>
-        {a.resume && <p className={`lead ${styles.resume}`}>{a.resume}</p>}
+        <div className={styles.colonne}>
+          <Link href="/actualites/" className={`lien ${styles.retour}`}>
+            ← Toutes les actualités
+          </Link>
+          <h1>{a.titre}</h1>
+          <p className={styles.signature}>
+            {a.auteur && <span className={styles.auteur}>{a.auteur}</span>}
+            <span>{dateFR(a.date)}</span>
+            {a.lecture && <span>{a.lecture}</span>}
+            {a.exemple && <span className={styles.exemple}>Exemple</span>}
+          </p>
+          {a.resume && <p className={`lead ${styles.resume}`}>{a.resume}</p>}
+        </div>
       </div>
       {a.image && (
         <div className="conteneur">
@@ -67,7 +70,7 @@ export default async function Page({ params }: Props) {
         </div>
       )}
       <div className="conteneur">
-        <div className={styles.corps} dangerouslySetInnerHTML={{ __html: a.html ?? "" }} />
+        <CorpsArticle html={a.html ?? ""} className={styles.corps} pret={styles.pret} visible={styles.visible} />
       </div>
     </article>
   );

@@ -1,6 +1,16 @@
+/* Mise en page « presse » : une colonne de lecture centrée (≈ 70 caractères),
+   même marge à gauche et à droite ; images et encadrés débordent un peu de la
+   colonne, la couverture occupe presque toute la largeur. */
 .entete {
   padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem));
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.colonne {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.colonne p {
+  max-width: none;
 }
 .retour {
   display: inline-block;
@@ -8,7 +18,6 @@
   font-size: var(--t-small);
 }
 .entete h1 {
-  max-width: 22ch;
   text-wrap: balance;
 }
 /* Signature : auteur · date · temps de lecture */
@@ -32,16 +41,63 @@
   margin-top: 1.75rem;
 }
 .image {
+  display: block;
   width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   border-radius: 2px;
 }
+/* Grille à trois largeurs : texte au centre, « large » pour images et encadrés. */
 .corps {
+  --texte: 42rem;
+  --debord: clamp(0rem, 6vw, 7rem);
+  display: grid;
+  grid-template-columns:
+    [plein-start] minmax(0, 1fr)
+    [large-start] var(--debord)
+    [texte-start] min(var(--texte), 100% - 2 * var(--debord))
+    [texte-end] var(--debord)
+    [large-end] minmax(0, 1fr) [plein-end];
   padding-block: clamp(3rem, 6vw, 5rem) var(--section);
-  max-width: var(--mesure);
-  font-size: 1.05rem;
+  font-size: 1.075rem;
+  line-height: 1.8;
+}
+.corps > * {
+  grid-column: texte;
+  min-width: 0;
+  max-width: none; /* la colonne fixe déjà la largeur de lecture */
+}
+.corps > p:has(> img),
+.corps > p:has(> img) + p:has(> em:only-child),
+.corps > blockquote {
+  grid-column: large;
+}
+@media (max-width: 700px) {
+  .corps {
+    --debord: 0rem;
+  }
+}
+/* Apparition au défilement (classe posée par CorpsArticle, sans effet sans JS) */
+.pret > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+.pret > .visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pret > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 .corps > * + * {
   margin-top: 1.25rem;
@@ -131,7 +187,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 34rem;
+  max-height: 40rem;
   object-fit: cover;
   border-radius: 2px;
 }

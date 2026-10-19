@@ -34,7 +34,7 @@ export const RESULTATS_MESURES: ResultatMesure[] = [
     theme: "Éco-concevoir tout un catalogue",
     chiffre: "−25 %",
     libelle: "de CO₂ visés sur les produits éco-conçus",
-    preuve: "Des milliers d'analyses de cycle de vie générées en une journée chez Radiall ; contrat signé avec Hermès.",
+    preuve: "Des milliers d'analyses de cycle de vie générées en une journée chez un fabricant de composants électroniques ; contrat signé avec une grande maison du luxe.",
     image: "impact-sapiologie.webp",
     alt: "Logiciel Sapiologie : analyse environnementale d'une gamme de produits",
     ancre: "sapiologie",

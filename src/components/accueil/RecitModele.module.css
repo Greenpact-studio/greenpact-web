@@ -139,3 +139,19 @@
     margin-top: 1rem;
   }
 }
+
+/* Sans animation (réglage système) : les étapes s'empilent, comme sur mobile. */
+@media (prefers-reduced-motion: reduce) {
+  .recit {
+    min-height: 0;
+  }
+  .pile {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .etape {
+    position: static;
+  }
+}

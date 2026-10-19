@@ -51,14 +51,16 @@ export function Chiffres() {
         { threshold: 0.3 },
       );
       io.observe(racine.current!);
-      gsap.from(`.${styles.item}`, {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power3.out",
-        scrollTrigger: { trigger: racine.current, start: "top 75%", once: true },
-      });
+      if (!reduce) {
+        gsap.from(`.${styles.item}`, {
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.12,
+          ease: "power3.out",
+          scrollTrigger: { trigger: racine.current, start: "top 75%", once: true },
+        });
+      }
       return () => io.disconnect();
     }, racine);
     return () => ctx.revert();

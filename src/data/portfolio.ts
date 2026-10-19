@@ -70,10 +70,10 @@ export const STUDIOS: Studio[] = [
       { nom: "Nepsis", description: "Gestion financière et administrative de projets énergétiques.", url: "https://nepsis.co/en", logo: "nepsis.png" },
       { nom: "Revalue", description: "Valorisation des produits en fin de vie.", url: "https://revalue.eco", logo: "revalue.png" },
       { nom: "Fyxe", description: "Gestion de maintenance et d'exploitation par capitalisation de connaissances.", url: "https://www.linkedin.com/company/fyxe/", logo: "fyxe.png" },
-      { nom: "Mina", description: "Gestion de la supply chain et des transports.", url: "https://www.linkedin.com/company/minaflow/" }, // TODO logo
+      { nom: "Mina", description: "Gestion de la supply chain et des transports.", url: "https://www.linkedin.com/company/minaflow/", logo: "mina.png" },
       { nom: "Sapiologie", description: "Éco-conception des produits.", url: "https://www.sapiologie.com", logo: "sapiologie.png" },
       { nom: "Reflect", description: "Achats d'énergie : factures, contrats, ordres d'achat, équilibrage.", url: "https://reflectenergy.com", logo: "reflect.png" },
-      { nom: "Neutrogen", description: "Production de neutrons pour la fusion nucléaire, la transmutation de déchets nucléaires et les radio-isotopes médicaux." }, // TODO URL et logo
+      { nom: "Neutrogen", description: "Production de neutrons pour la fusion nucléaire, la transmutation de déchets nucléaires et les radio-isotopes médicaux.", logo: "neutrogen.png" }, // TODO URL
     ],
   },
   {

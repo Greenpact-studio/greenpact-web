@@ -15,6 +15,8 @@ export type Article = {
   date: string;
   image?: string;
   resume: string;
+  auteur?: string; // ex. « L'équipe Greenpact »
+  lecture?: string; // ex. « 5 min de lecture »
   exemple?: boolean;
   html?: string;
 };
@@ -51,6 +53,8 @@ export async function lireArticle(slug: string): Promise<Article | null> {
     date: toISO(data.date),
     image: data.image ? String(data.image) : undefined,
     resume: String(data.resume ?? ""),
+    auteur: data.auteur ? String(data.auteur) : undefined,
+    lecture: data.lecture ? String(data.lecture) : undefined,
     exemple: Boolean(data.exemple),
     html: String(rendu),
   };

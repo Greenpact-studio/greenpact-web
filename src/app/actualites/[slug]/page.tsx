@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
           datePublished: a.date,
           inLanguage: "fr-FR",
           image: a.image ? `${SITE.url}${a.image}` : undefined,
-          author: { "@type": "Organization", name: "Greenpact", url: `${SITE.url}/` },
+          author: { "@type": "Organization", name: a.auteur ?? "Greenpact", url: `${SITE.url}/` },
           publisher: { "@id": `${SITE.url}/#organisation` },
           mainEntityOfPage: `${SITE.url}/actualites/${a.slug}/`,
         }}
@@ -52,11 +52,13 @@ export default async function Page({ params }: Props) {
         <Link href="/actualites/" className={`lien ${styles.retour}`}>
           ← Toutes les actualités
         </Link>
-        <span className={styles.date}>
-          {dateFR(a.date)}
-          {a.exemple && <span className={styles.exemple}>Exemple</span>}
-        </span>
         <h1>{a.titre}</h1>
+        <p className={styles.signature}>
+          {a.auteur && <span className={styles.auteur}>{a.auteur}</span>}
+          <span>{dateFR(a.date)}</span>
+          {a.lecture && <span>{a.lecture}</span>}
+          {a.exemple && <span className={styles.exemple}>Exemple</span>}
+        </p>
         {a.resume && <p className={`lead ${styles.resume}`}>{a.resume}</p>}
       </div>
       {a.image && (

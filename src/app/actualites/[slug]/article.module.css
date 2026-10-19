@@ -7,14 +7,26 @@
   margin-bottom: 2.5rem;
   font-size: var(--t-small);
 }
-.date {
-  display: block;
-  margin-bottom: 1.25rem;
+.entete h1 {
+  max-width: 22ch;
+  text-wrap: balance;
+}
+/* Signature : auteur · date · temps de lecture */
+.signature {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0;
+  margin-top: 1.5rem;
   font-size: var(--t-small);
   color: var(--vert-70);
 }
-.entete h1 {
-  max-width: 20ch;
+.signature > span + span::before {
+  content: "·";
+  margin-inline: 0.6rem;
+}
+.auteur {
+  color: var(--vert);
+  font-weight: 500;
 }
 .resume {
   margin-top: 1.75rem;
@@ -34,9 +46,31 @@
 .corps > * + * {
   margin-top: 1.25rem;
 }
+/* Sections numérotées automatiquement : 01, 02… au-dessus de chaque titre */
+.corps {
+  counter-reset: section;
+}
 .corps h2 {
-  font-size: var(--t-h3);
-  margin-top: 2.5rem;
+  counter-increment: section;
+  font-size: var(--t-h2);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-top: clamp(3.5rem, 7vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vert-30);
+  text-wrap: balance;
+}
+.corps h2::before {
+  content: counter(section, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.9rem;
+  font-size: var(--t-small);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--vert-70);
+}
+.corps > h2:first-child {
+  margin-top: 0;
 }
 .corps h3 {
   font-size: 1.1rem;
@@ -64,14 +98,52 @@
 .corps a:hover {
   text-decoration-color: var(--vert);
 }
+/* Chiffre clé : « > **26×** » puis le texte, puis « > *source* » */
 .corps blockquote {
-  border-left: 2px solid var(--vert);
-  padding-left: 1.25rem;
-  font-size: var(--t-lead);
-  line-height: 1.5;
+  margin-block: 2.5rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: var(--vert);
+  color: var(--clair);
+  border-radius: 2px;
+  font-size: var(--t-body);
+  line-height: 1.6;
+}
+.corps blockquote > * + * {
+  margin-top: 0.9rem;
+}
+.corps blockquote p:first-child strong {
+  display: block;
+  font-size: clamp(3rem, 7vw, 4.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.corps blockquote p:last-child em {
+  font-style: normal;
+  font-size: var(--t-small);
+  color: var(--clair-60);
+}
+/* Image : « ![alt](src) » puis la légende en italique juste en dessous */
+.corps p:has(> img) {
+  margin-top: 2.5rem;
 }
 .corps img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 34rem;
+  object-fit: cover;
   border-radius: 2px;
+}
+.corps p:has(> img) + p > em:only-child {
+  display: block;
+  margin-top: -0.4rem;
+  font-style: normal;
+  font-size: var(--t-small);
+  color: var(--vert-70);
+}
+.corps h3 {
+  margin-top: 3rem;
 }
 .corps hr {
   border: 0;

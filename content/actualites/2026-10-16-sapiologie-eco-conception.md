@@ -3,7 +3,7 @@ titre: "80 % de l'empreinte d'un produit se décide avant l'usine. Qui la mesure
 date: 2026-10-16
 auteur: "L'équipe Greenpact"
 lecture: "5 min de lecture"
-image: /images/impact-sapiologie.webp
+image: /images/article-sapiologie-acier.webp
 resume: "Chez Greenpact, nous prenons le temps de comprendre un problème avant de regarder les solutions. Sapiologie fait partie du portefeuille de Hoji, l'un de nos deux studios. Voici le raisonnement qui nous a convaincus qu'elle répond à un vrai verrou de l'industrie. Avec nos chiffres, nos sources et nos doutes."
 ---
 

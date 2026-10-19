@@ -26,8 +26,8 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 
 | Fichier | Page | Contenu |
 | --- | --- | --- |
-| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Capture du logiciel Sapiologie |
-| `article-sapiologie-acier.webp` | Article Sapiologie | Bobines d'acier en halle industrielle |
+| `impact-sapiologie.webp` | Thèse d'impact | Capture du logiciel Sapiologie |
+| `article-sapiologie-acier.webp` | Article Sapiologie (couverture et section 02) | Bobines d'acier en halle industrielle |
 | `article-sapiologie-textile.webp` | Article Sapiologie | Rouleaux de textile |
 | `article-sapiologie-equipe.webp` | Article Sapiologie | L'équipe de Sapiologie |
 | `condition-energie.webp` | Thèse d'investissement, condition 01 | Parc éolien |

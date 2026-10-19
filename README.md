@@ -31,7 +31,7 @@ Tout se fait sans toucher au code. Les entrées marquées `exemple: true` porten
 **Article.** Dupliquer un article existant (par exemple
 `content/actualites/2026-10-16-sapiologie-eco-conception.md`), le renommer
 `AAAA-MM-JJ-mon-titre.md` (le nom de fichier devient l'URL `/actualites/AAAA-MM-JJ-mon-titre/`),
-remplir l'en-tête (`titre`, `date`, `image`, `resume`) et écrire le corps en Markdown.
+remplir l'en-tête (`titre`, `date`, `image` pour la couverture, `vignette` facultative pour les listes et le partage, `resume`) et écrire le corps en Markdown.
 L'image va dans `public/images/` (WebP 1600 px).
 
 **Podcast REGEN.** Automatique : le flux RSS (`src/data/config.ts`, `podcast.rss`) est lu à

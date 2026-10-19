@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: a.titre,
     description: a.resume,
     alternates: { canonical: `/actualites/${slug}/` },
-    openGraph: a.image ? { images: [a.image] } : undefined,
+    openGraph: a.vignette ? { images: [a.vignette] } : undefined,
   };
 }
 
@@ -43,7 +43,7 @@ export default async function Page({ params }: Props) {
           description: a.resume,
           datePublished: a.date,
           inLanguage: "fr-FR",
-          image: a.image ? `${SITE.url}${a.image}` : undefined,
+          image: a.vignette ? `${SITE.url}${a.vignette}` : undefined,
           author: { "@type": "Organization", name: a.auteur ?? "Greenpact", url: `${SITE.url}/` },
           publisher: { "@id": `${SITE.url}/#organisation` },
           mainEntityOfPage: `${SITE.url}/actualites/${a.slug}/`,

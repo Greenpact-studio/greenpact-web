@@ -13,7 +13,8 @@ export type Article = {
   slug: string;
   titre: string;
   date: string;
-  image?: string;
+  image?: string; // couverture, en tête de l'article
+  vignette?: string; // image des listes et du partage ; par défaut, la couverture
   resume: string;
   auteur?: string; // ex. « L'équipe Greenpact »
   lecture?: string; // ex. « 5 min de lecture »
@@ -35,6 +36,7 @@ export function listerArticles(): Article[] {
         titre: String(data.titre ?? ""),
         date: toISO(data.date),
         image: data.image ? String(data.image) : undefined,
+        vignette: data.vignette ? String(data.vignette) : data.image ? String(data.image) : undefined,
         resume: String(data.resume ?? ""),
         exemple: Boolean(data.exemple),
       };
@@ -52,6 +54,7 @@ export async function lireArticle(slug: string): Promise<Article | null> {
     titre: String(data.titre ?? ""),
     date: toISO(data.date),
     image: data.image ? String(data.image) : undefined,
+    vignette: data.vignette ? String(data.vignette) : data.image ? String(data.image) : undefined,
     resume: String(data.resume ?? ""),
     auteur: data.auteur ? String(data.auteur) : undefined,
     lecture: data.lecture ? String(data.lecture) : undefined,

@@ -40,7 +40,7 @@ export default async function Page() {
             {articles.map((a) => (
               <Link key={a.slug} href={`/actualites/${a.slug}/`} className={styles.article}>
                 <span className={styles.articleCadre}>
-                  {a.image && <Image src={a.image} alt="" width={1600} height={1200} className={styles.articleImage} loading="lazy" />}
+                  {a.vignette && <Image src={a.vignette} alt="" width={1600} height={1200} className={styles.articleImage} loading="lazy" />}
                 </span>
                 <span className={styles.articleTexte}>
                   <span className={styles.date}>

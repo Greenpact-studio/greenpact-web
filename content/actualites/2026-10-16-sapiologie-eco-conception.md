@@ -82,7 +82,7 @@ Tout est là. La règle porte sur le produit. L'impact se décide à la concepti
 
 Sapiologie part exactement de ce verrou. Son logiciel automatise l'analyse de cycle de vie et la relie aux décisions qui comptent : la conception en R&D, le choix des fournisseurs aux achats, le bilan carbone pour la RSE. Là où une ACV prenait des semaines, l'outil en produit des milliers par jour.
 
-Chez Radiall, fabricant de composants électroniques, plusieurs milliers d'ACV ont été générées en une seule journée. Hermès a signé. Deux mondes qui n'ont presque rien en commun, avec le même besoin : savoir avant de décider.
+Chez un fabricant de composants électroniques, plusieurs milliers d'ACV ont été générées en une seule journée. Une grande maison du luxe a signé. Deux mondes qui n'ont presque rien en commun, avec le même besoin : savoir avant de décider.
 
 ![L'équipe de Sapiologie en montagne](/images/article-sapiologie-equipe.webp)
 

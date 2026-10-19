@@ -12,7 +12,6 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `modele-industrie.webp` | Le Modèle | Peter Herrmann | https://unsplash.com/photos/ObYNcuJgrXI |
 | `these-economie-reelle.webp` | Thèse d'investissement | Bernd Dittrich | https://unsplash.com/photos/5rKyHGdcKaA |
 | `these-europe.webp` | Thèse d'investissement | Ant Rozetsky | https://unsplash.com/photos/SLIFI67jv5k |
-| `these-convictions.webp` | Thèse d'investissement | Andrew Dawes | https://unsplash.com/photos/3sbLZ8_w04c |
 | `impact-paysage.webp` | Thèse d'impact | Sam Burrough | https://unsplash.com/photos/sbz_GEl-K7o |
 | `impact-systemique.webp` | Thèse d'impact | Pascal Kiefer | https://unsplash.com/photos/zS6wQZIUysA |
 | `portfolio-bluefins.webp` | Portfolio | Gary Walker-Jones | https://unsplash.com/photos/E2E95q5_tvM |
@@ -23,17 +22,17 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `entree-portfolio-2.webp` | Accueil, renvoi Portfolio | TruckRun | https://unsplash.com/photos/XBWF6_TEsFM |
 | `entree-investir.webp` | Accueil, renvoi Devenir investisseur | Erfan Soltani | https://unsplash.com/photos/Mvqe0B6TINM |
 
-## Choix de la photo d'accueil
+### Visuels fournis par Greenpact
 
-Parmi les trois candidates proposées, **Maciek Sulkowski (qkAqJuX6DVI)** a été retenue :
-la brume dans la moitié basse de l'image laisse un large espace calme pour le titre,
-le soleil levant apporte la lumière demandée et les tons chauds s'accordent au beige `#edeae4`.
-La photo de Mitchell Kmetz (d7Qn3lHTn24) n'a ni soleil ni zone calme ; celle de
-Jacek Pobłocki (Z-TQVnJxcCc) est dominée par un ciel orange qui jure avec la charte.
-
-## Remplacer une photo
-
-1. Choisir une photo Unsplash **gratuite** (mention « Free to use under the Unsplash License »).
-2. La convertir en WebP à la bonne largeur, par exemple :
-   `npx sharp-cli -i photo.jpg -o public/images/nom.webp resize 1600 -f webp -q 78`
-3. Mettre à jour la ligne correspondante de ce fichier.
+| Fichier | Page | Contenu |
+| --- | --- | --- |
+| `impact-sapiologie.webp` | Thèse d'impact | Capture du logiciel Sapiologie |
+| `article-sapiologie-acier.webp` | Article Sapiologie (couverture et section 02) | Bobines d'acier en halle industrielle |
+| `article-sapiologie-textile.webp` | Article Sapiologie | Rouleaux de textile |
+| `article-sapiologie-equipe.webp` | Article Sapiologie | L'équipe de Sapiologie |
+| `condition-energie.webp` | Thèse d'investissement, condition 01 | Parc éolien |
+| `condition-ressources.webp` | Thèse d'investissement, condition 02 | Toit solaire vu du ciel |
+| `condition-matiere.webp` | Thèse d'investissement, condition 03 | Roche couverte de sel |
+| `condition-savoir-faire.webp` | Thèse d'investissement, condition 04 | Ponçage du bois en atelier |
+| `condition-climat.webp` | Thèse d'investissement, condition 05 | Toits végétalisés |
+| `condition-modeles.webp` | Thèse d'investissement, condition 06 | Drapeaux |

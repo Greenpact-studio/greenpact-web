@@ -41,6 +41,7 @@ export function Bascule() {
         // Projections : jauges + compteurs scrubbés sur le défilement
         const jauges = q<HTMLElement>("[data-jauge]");
         const nombres = q<HTMLElement>("[data-nombre]");
+        nombres.forEach((n) => (n.textContent = "0"));
         const tl = gsap.timeline({
           scrollTrigger: { trigger: q(`.${styles.projections}`)[0], start: "top 70%", end: "bottom 60%", scrub: 0.5 },
         });
@@ -83,7 +84,8 @@ export function Bascule() {
               <li key={p.label} className={styles.projection}>
                 <p className={styles.chiffre}>
                   {p.signe}
-                  <span data-nombre={p.valeur}>0</span>
+                  {/* Valeur réelle par défaut : l'animation repart de 0 seulement si elle est active. */}
+                  <span data-nombre={p.valeur}>{p.valeur}</span>
                   {p.unite}
                 </p>
                 <p className={styles.label}>{p.label}</p>

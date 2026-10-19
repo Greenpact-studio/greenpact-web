@@ -28,10 +28,11 @@ Puis ouvrir http://localhost:3000. `npm run build` génère le site statique dan
 Tout se fait sans toucher au code. Les entrées marquées `exemple: true` portent un badge
 « Exemple » : les supprimer avant la mise en ligne.
 
-**Article.** Dupliquer `content/actualites/2026-01-15-exemple-article.md`, le renommer
+**Article.** Dupliquer un article existant (par exemple
+`content/actualites/2026-10-16-sapiologie-eco-conception.md`), le renommer
 `AAAA-MM-JJ-mon-titre.md` (le nom de fichier devient l'URL `/actualites/AAAA-MM-JJ-mon-titre/`),
-remplir l'en-tête (`titre`, `date`, `image`, `resume`), écrire le corps en Markdown, retirer
-`exemple: true`. L'image va dans `public/images/` (WebP 1600 px).
+remplir l'en-tête (`titre`, `date`, `image` pour la couverture, `vignette` facultative pour les listes et le partage, `resume`) et écrire le corps en Markdown.
+L'image va dans `public/images/` (WebP 1600 px).
 
 **Podcast REGEN.** Automatique : le flux RSS (`src/data/config.ts`, `podcast.rss`) est lu à
 chaque build ; le build planifié toutes les 6 h met la liste à jour. Si le flux est injoignable
@@ -42,7 +43,8 @@ au build, la page affiche le lecteur Apple Podcasts à la place.
 
 **Post LinkedIn.** Sur le post, menu « … » → « Intégrer ce post », copier le code `<iframe …>`
 et l'ajouter dans `data/linkedin.json` : `{ "titre", "date", "iframe" }`. Ne coller que des
-codes provenant de LinkedIn.
+codes provenant de LinkedIn. À défaut de code d'intégration, mettre simplement le lien du post :
+`{ "titre", "date", "lien" }` (une carte « Voir la publication sur LinkedIn » s'affiche).
 
 ## Déploiement
 

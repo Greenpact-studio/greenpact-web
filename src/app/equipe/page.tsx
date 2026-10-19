@@ -47,7 +47,7 @@ function Carte({ personne: p }: { personne: Personne }) {
   const contenu = (
     <>
       <span className={styles.cadre}>
-        <Image src={`/team/${p.photo}`} alt={`${p.prenom} ${p.nom}`} width={240} height={240} className={styles.photo} loading="lazy" />
+        <Image src={`/team/${p.photo}`} alt={`${p.prenom} ${p.nom}`} width={240} height={240} sizes="10.5rem" className={styles.photo} loading="lazy" />
       </span>
       <span className={styles.nom}>
         {p.prenom} <strong>{p.nom}</strong>

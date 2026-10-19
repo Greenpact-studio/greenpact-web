@@ -125,6 +125,19 @@ export default function Page() {
               </div>
             </div>
           </Reveal>
+          <Reveal className={`${styles.carte} ${styles.carteSeconde}`}>
+            <Image src="/team/emmanuel-gonon.jpg" alt="Emmanuel Gonon" width={240} height={240} className={styles.portrait} loading="lazy" />
+            <div className={styles.carteTexte}>
+              <p className={styles.carteNom}>Emmanuel Gonon</p>
+              <p className={styles.carteRole}>Président Greenpact</p>
+              <EmailProtege email={SITE.contact.emailEmmanuel} className={`lien ${styles.carteEmail}`} />
+              <div className={styles.carteBoutons}>
+                <EmailProtege email={SITE.contact.emailEmmanuel} sujet="Rejoindre les Greenpacters" className="btn btn-secondaire">
+                  Écrire à Emmanuel
+                </EmailProtege>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

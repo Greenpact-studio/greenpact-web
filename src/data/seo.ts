@@ -1,7 +1,7 @@
 // Référencement : données structurées (schema.org) et FAQ. Aucune donnée
 // financière confidentielle ici (cf. règle 8.8 : ni TVPI, MOIC, valorisation,
 // montants levés, ticket minimum, TRI cible, trajectoire de distribution).
-import { SITE, NAV } from "./config";
+import { SITE, NAV, ESPACE_INVESTISSEUR } from "./config";
 
 export const ORGANISATION = {
   "@context": "https://schema.org",
@@ -56,7 +56,7 @@ export const SITE_WEB = {
 
 /** Fil d'Ariane : accueil puis la page courante. */
 export function filAriane(href: string) {
-  const page = NAV.find((n) => n.href === href);
+  const page = [...NAV, ESPACE_INVESTISSEUR].find((n) => n.href === href);
   const items = [{ name: "Accueil", item: `${SITE.url}/` }];
   if (page && href !== "/") items.push({ name: page.label, item: `${SITE.url}${href}` });
   return {
@@ -86,7 +86,7 @@ export const FAQ = [
   },
   {
     q: "Comment devenir actionnaire de Greenpact ?",
-    r: "En prenant contact avec Laurent Geray, directeur général, pour un premier échange sur le modèle, le portefeuille et les modalités. Greenpact est une holding evergreen : c'est un investissement de long terme, sans liquidité immédiate, qui comporte un risque de perte en capital.",
+    r: "En prenant contact avec Laurent Geray, directeur général, ou Emmanuel Gonon, président, pour un premier échange sur le modèle, le portefeuille et les modalités. Greenpact est une holding evergreen : c'est un investissement de long terme, sans liquidité immédiate, qui comporte un risque de perte en capital.",
   },
   {
     q: "Comment Greenpact mesure-t-elle son impact ?",

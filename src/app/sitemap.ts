@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { NAV, SITE } from "@/data/config";
+import { NAV, SITE, ESPACE_INVESTISSEUR } from "@/data/config";
 import { listerArticles } from "@/lib/actualites";
 
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = NAV.map((n) => ({
+  const pages = [...NAV, ESPACE_INVESTISSEUR].map((n) => ({
     url: `${SITE.url}${n.href}`,
     changeFrequency: (n.href === "/actualites/" ? "weekly" : "monthly") as "weekly" | "monthly",
     priority: n.href === "/" ? 1 : 0.7,

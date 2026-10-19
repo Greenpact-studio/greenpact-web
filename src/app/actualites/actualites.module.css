@@ -188,6 +188,29 @@ a.ligne:hover {
   border-radius: 2px;
   background: var(--clair);
 }
+/* Post sans code d'intégration : une carte qui ouvre le post sur LinkedIn */
+.postLien {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 1.75rem;
+  border: 1px solid var(--vert-30);
+  border-radius: 2px;
+  background: var(--clair);
+  transition:
+    background 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+.postLien:hover,
+.postLien:focus-visible {
+  background: var(--vert-08);
+  border-color: var(--vert);
+}
+.postLienTitre {
+  font-size: var(--t-lead);
+  font-weight: 500;
+}
 .postMeta {
   display: flex;
   justify-content: space-between;

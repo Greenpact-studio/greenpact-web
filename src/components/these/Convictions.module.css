@@ -1,44 +1,52 @@
 .convictions {
   background: var(--clair);
-  /* Les items arrivent décalés de 24 px vers la droite : on coupe sans créer de zone de défilement
-     (clip, pas hidden, pour ne pas casser la photo collante). */
   overflow-x: clip;
 }
-.grille {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: clamp(2rem, 6vw, 6rem);
-  align-items: start;
-}
-.collant {
-  position: sticky;
-  top: calc(var(--header-h) + 1.5rem);
+.entete {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
 }
-.collant h2 {
-  max-width: 14ch;
-}
-.photo {
-  margin-top: 1.5rem;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: 2px;
+.entete h2 {
+  max-width: 16ch;
 }
 .liste {
   display: flex;
   flex-direction: column;
-  padding-top: 20vh;
-  padding-bottom: 20vh;
 }
+/* Une ligne par condition : image à gauche, texte à droite, même hauteur. */
 .item {
-  padding: clamp(2rem, 5vh, 3.5rem) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: stretch;
+  padding-block: clamp(1.75rem, 4vh, 2.75rem);
   border-top: 1px solid var(--vert-30);
 }
 .item:last-child {
   border-bottom: 1px solid var(--vert-30);
+}
+/* L'image remplit exactement la hauteur du texte : ses bords haut et bas
+   s'alignent sur ceux du texte, elle ne dépasse jamais. */
+.visuel {
+  position: relative;
+  display: block;
+  min-height: 9rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.visuel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.texte {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 .condition {
   font-size: var(--t-small);
@@ -58,14 +66,13 @@
   max-width: 18ch;
 }
 @media (max-width: 900px) {
-  .grille {
+  .item {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
-  .collant {
-    position: static;
-  }
-  .liste {
-    padding-top: 2rem;
-    padding-bottom: 0;
+  .visuel {
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    min-height: 0;
   }
 }

@@ -6,6 +6,7 @@ import { listerArticles, lireArticle, dateFR } from "@/lib/actualites";
 import styles from "./article.module.css";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE } from "@/data/config";
+import { CorpsArticle } from "@/components/actualites/CorpsArticle";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: a.titre,
     description: a.resume,
     alternates: { canonical: `/actualites/${slug}/` },
-    openGraph: a.image ? { images: [a.image] } : undefined,
+    openGraph: a.vignette ? { images: [a.vignette] } : undefined,
   };
 }
 
@@ -33,7 +34,7 @@ export default async function Page({ params }: Props) {
   if (!a) notFound();
 
   return (
-    <article>
+    <article className={styles.article}>
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -42,22 +43,26 @@ export default async function Page({ params }: Props) {
           description: a.resume,
           datePublished: a.date,
           inLanguage: "fr-FR",
-          image: a.image ? `${SITE.url}${a.image}` : undefined,
-          author: { "@type": "Organization", name: "Greenpact", url: `${SITE.url}/` },
+          image: a.vignette ? `${SITE.url}${a.vignette}` : undefined,
+          author: { "@type": "Organization", name: a.auteur ?? "Greenpact", url: `${SITE.url}/` },
           publisher: { "@id": `${SITE.url}/#organisation` },
           mainEntityOfPage: `${SITE.url}/actualites/${a.slug}/`,
         }}
       />
       <div className={`conteneur ${styles.entete}`}>
-        <Link href="/actualites/" className={`lien ${styles.retour}`}>
-          ← Toutes les actualités
-        </Link>
-        <span className={styles.date}>
-          {dateFR(a.date)}
-          {a.exemple && <span className={styles.exemple}>Exemple</span>}
-        </span>
-        <h1>{a.titre}</h1>
-        {a.resume && <p className={`lead ${styles.resume}`}>{a.resume}</p>}
+        <div className={styles.colonne}>
+          <Link href="/actualites/" className={`lien ${styles.retour}`}>
+            ← Toutes les actualités
+          </Link>
+          <h1>{a.titre}</h1>
+          <p className={styles.signature}>
+            {a.auteur && <span className={styles.auteur}>{a.auteur}</span>}
+            <span>{dateFR(a.date)}</span>
+            {a.lecture && <span>{a.lecture}</span>}
+            {a.exemple && <span className={styles.exemple}>Exemple</span>}
+          </p>
+          {a.resume && <p className={`lead ${styles.resume}`}>{a.resume}</p>}
+        </div>
       </div>
       {a.image && (
         <div className="conteneur">
@@ -65,7 +70,7 @@ export default async function Page({ params }: Props) {
         </div>
       )}
       <div className="conteneur">
-        <div className={styles.corps} dangerouslySetInnerHTML={{ __html: a.html ?? "" }} />
+        <CorpsArticle html={a.html ?? ""} className={styles.corps} pret={styles.pret} visible={styles.visible} />
       </div>
     </article>
   );

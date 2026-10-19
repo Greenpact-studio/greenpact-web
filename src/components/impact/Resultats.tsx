@@ -4,7 +4,7 @@ import { RESULTATS_MESURES } from "@/data/impact";
 import { Reveal } from "@/components/Reveal";
 import styles from "./Resultats.module.css";
 
-/** Ce que les startups changent déjà : les deux résultats mesurés, chacun menant à sa carte du portfolio. */
+/** Ce que les startups changent déjà : Bluefins et Sapiologie, avec leur niveau de preuve, chacune menant à sa carte du portfolio. */
 export function Resultats() {
   return (
     <section className="conteneur section" aria-labelledby="res-titre">
@@ -12,7 +12,7 @@ export function Resultats() {
         <h2 id="res-titre" style={{ maxWidth: "18ch" }}>
           Ce que les startups changent déjà, chez des industriels.
         </h2>
-        <p className="lead">Deux résultats mesurés chez des clients, sur des navires et des produits réels.</p>
+        <p className="lead">Deux résultats chez des clients, sur des navires et des produits réels, chacun avec son niveau de preuve.</p>
       </div>
 
       <Reveal cascade className={styles.cartes} y={24}>
@@ -21,7 +21,7 @@ export function Resultats() {
             <Image src={`/images/${r.image}`} alt={r.alt} width={1600} height={1067} className={styles.photo} loading="lazy" />
             <span className={styles.voile} aria-hidden />
             <span className={styles.contenu}>
-              <span className={styles.badge}>Mesuré</span>
+              <span className={`${styles.badge} ${r.niveau === "Estimé" ? styles.estime : ""}`}>{r.niveau}</span>
               <span className={styles.theme}>{r.theme}</span>
               <span className={styles.chiffre}>{r.chiffre}</span>
               <span className={styles.libelle}>{r.libelle}</span>

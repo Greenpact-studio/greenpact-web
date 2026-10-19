@@ -35,7 +35,7 @@
 .voile {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.92) 0%, rgba(var(--vert-rgb), 0.45) 45%, rgba(var(--vert-rgb), 0.05) 100%);
+  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.96) 0%, rgba(var(--vert-rgb), 0.82) 45%, rgba(var(--vert-rgb), 0.2) 100%);
 }
 .contenu {
   position: absolute;
@@ -56,6 +56,11 @@
   border-radius: 999px;
   background: var(--clair);
   color: var(--vert);
+}
+.badge.estime {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 .theme {
   font-size: var(--t-small);

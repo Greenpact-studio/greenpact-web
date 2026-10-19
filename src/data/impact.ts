@@ -1,9 +1,12 @@
-// Résultats d'impact mesurés : seules les startups dont le résultat est constaté
-// chez des clients figurent ici (aujourd'hui Bluefins et Sapiologie).
-// `ancre` renvoie vers la carte de la startup sur la page Portfolio.
+// Résultats d'impact mis en avant sur la Thèse d'impact : Bluefins et Sapiologie.
+// Niveau de preuve : "Mesuré" (constaté chez des clients) ou "Estimé" (calculé à
+// partir de données réelles). `ancre` renvoie vers la carte de la startup sur /portfolio/.
+
+export type NiveauPreuve = "Mesuré" | "Estimé";
 
 export type ResultatMesure = {
   startup: string;
+  niveau: NiveauPreuve;
   theme: string;
   chiffre: string;
   libelle: string;
@@ -16,6 +19,7 @@ export type ResultatMesure = {
 export const RESULTATS_MESURES: ResultatMesure[] = [
   {
     startup: "Bluefins",
+    niveau: "Mesuré",
     theme: "Décarboner le transport maritime",
     chiffre: "−20 %",
     libelle: "de carburant et de CO₂ par navire équipé",
@@ -26,13 +30,13 @@ export const RESULTATS_MESURES: ResultatMesure[] = [
   },
   {
     startup: "Sapiologie",
+    niveau: "Estimé",
     theme: "Éco-concevoir tout un catalogue",
     chiffre: "−25 %",
-    libelle: "de CO₂ sur les produits éco-conçus",
+    libelle: "de CO₂ visés sur les produits éco-conçus",
     preuve: "Des milliers d'analyses de cycle de vie générées en une journée chez Radiall ; contrat signé avec Hermès.",
-    // TODO : remplacer par une capture du logiciel Sapiologie (WebP 1600 px, même nom de fichier).
     image: "impact-sapiologie.webp",
-    alt: "Logiciel Sapiologie",
+    alt: "Logiciel Sapiologie : analyse environnementale d'une gamme de produits",
     ancre: "sapiologie",
   },
 ];

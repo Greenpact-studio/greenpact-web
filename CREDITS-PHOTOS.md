@@ -34,23 +34,8 @@ Origine et licence à confirmer avant mise en ligne (photos déjà utilisées da
 | `condition-climat.webp` | Thèse d'investissement, six conditions (05) | `assets/impact/adapter.jpg` |
 | `condition-modeles.webp` | Thèse d'investissement, six conditions (06) | `assets/impact/decarboner.jpg` |
 
-### Visuel provisoire
+### Visuel fourni par Greenpact
 
-| Fichier | Page | À faire |
+| Fichier | Page | Source |
 | --- | --- | --- |
-| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Logo Sapiologie sur fond vert : remplacer par une capture du logiciel (WebP 1600 × 1067, même nom). |
-
-## Choix de la photo d'accueil
-
-Parmi les trois candidates proposées, **Maciek Sulkowski (qkAqJuX6DVI)** a été retenue :
-la brume dans la moitié basse de l'image laisse un large espace calme pour le titre,
-le soleil levant apporte la lumière demandée et les tons chauds s'accordent au beige `#edeae4`.
-La photo de Mitchell Kmetz (d7Qn3lHTn24) n'a ni soleil ni zone calme ; celle de
-Jacek Pobłocki (Z-TQVnJxcCc) est dominée par un ciel orange qui jure avec la charte.
-
-## Remplacer une photo
-
-1. Choisir une photo Unsplash **gratuite** (mention « Free to use under the Unsplash License »).
-2. La convertir en WebP à la bonne largeur, par exemple :
-   `npx sharp-cli -i photo.jpg -o public/images/nom.webp resize 1600 -f webp -q 78`
-3. Mettre à jour la ligne correspondante de ce fichier.
+| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Capture du logiciel Sapiologie, fournie par Greenpact |

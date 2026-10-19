@@ -3,6 +3,7 @@
 }
 .groupeTete {
   display: flex;
+  flex-wrap: wrap; /* sur mobile, le titre passe sous un logo large (4Elements) */
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
@@ -12,6 +13,9 @@
 .logo {
   height: 2rem;
   width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
 }
 .logo.greenpact {
   height: 1.1rem;

@@ -34,7 +34,7 @@ export default async function Page({ params }: Props) {
   if (!a) notFound();
 
   return (
-    <article>
+    <article className={styles.article}>
       <JsonLd
         data={{
           "@context": "https://schema.org",

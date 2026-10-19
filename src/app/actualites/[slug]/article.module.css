@@ -1,12 +1,14 @@
-/* Mise en page « presse » : une colonne de lecture centrée (≈ 70 caractères),
-   même marge à gauche et à droite ; images et encadrés débordent un peu de la
-   colonne, la couverture occupe presque toute la largeur. */
+/* Mise en page « presse » : une seule colonne centrée, même marge à gauche et
+   à droite. Texte, images, encadrés et couverture ont exactement la même largeur. */
+.article {
+  --colonne: 44rem;
+}
 .entete {
   padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem));
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 .colonne {
-  max-width: 46rem;
+  max-width: var(--colonne);
   margin-inline: auto;
 }
 .colonne p {
@@ -39,46 +41,29 @@
 }
 .resume {
   margin-top: 1.75rem;
+  font-size: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  line-height: 1.6;
 }
 .image {
   display: block;
   width: 100%;
-  max-width: 72rem;
+  max-width: var(--colonne);
   margin-inline: auto;
   height: auto;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
+  object-position: top;
   border-radius: 2px;
 }
-/* Grille à trois largeurs : texte au centre, « large » pour images et encadrés. */
 .corps {
-  --texte: 42rem;
-  --debord: clamp(0rem, 6vw, 7rem);
-  display: grid;
-  grid-template-columns:
-    [plein-start] minmax(0, 1fr)
-    [large-start] var(--debord)
-    [texte-start] min(var(--texte), 100% - 2 * var(--debord))
-    [texte-end] var(--debord)
-    [large-end] minmax(0, 1fr) [plein-end];
-  padding-block: clamp(3rem, 6vw, 5rem) var(--section);
-  font-size: 1.075rem;
+  max-width: var(--colonne);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 6vw, 4.5rem) var(--section);
+  font-size: clamp(1.1rem, 1.05rem + 0.3vw, 1.25rem);
   line-height: 1.8;
 }
 .corps > * {
-  grid-column: texte;
-  min-width: 0;
   max-width: none; /* la colonne fixe déjà la largeur de lecture */
-}
-.corps > p:has(> img),
-.corps > p:has(> img) + p:has(> em:only-child),
-.corps > blockquote {
-  grid-column: large;
-}
-@media (max-width: 700px) {
-  .corps {
-    --debord: 0rem;
-  }
 }
 /* Apparition au défilement (classe posée par CorpsArticle, sans effet sans JS) */
 .pret > * {
@@ -100,7 +85,7 @@
   }
 }
 .corps > * + * {
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 /* Sections numérotées automatiquement : 01, 02… au-dessus de chaque titre */
 .corps {
@@ -161,8 +146,8 @@
   background: var(--vert);
   color: var(--clair);
   border-radius: 2px;
-  font-size: var(--t-body);
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 .corps blockquote > * + * {
   margin-top: 0.9rem;

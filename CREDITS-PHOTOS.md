@@ -12,7 +12,6 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `modele-industrie.webp` | Le Modèle | Peter Herrmann | https://unsplash.com/photos/ObYNcuJgrXI |
 | `these-economie-reelle.webp` | Thèse d'investissement | Bernd Dittrich | https://unsplash.com/photos/5rKyHGdcKaA |
 | `these-europe.webp` | Thèse d'investissement | Ant Rozetsky | https://unsplash.com/photos/SLIFI67jv5k |
-| `these-convictions.webp` | Thèse d'investissement | Andrew Dawes | https://unsplash.com/photos/3sbLZ8_w04c |
 | `impact-paysage.webp` | Thèse d'impact | Sam Burrough | https://unsplash.com/photos/sbz_GEl-K7o |
 | `impact-systemique.webp` | Thèse d'impact | Pascal Kiefer | https://unsplash.com/photos/zS6wQZIUysA |
 | `portfolio-bluefins.webp` | Portfolio | Gary Walker-Jones | https://unsplash.com/photos/E2E95q5_tvM |
@@ -23,19 +22,17 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `entree-portfolio-2.webp` | Accueil, renvoi Portfolio | TruckRun | https://unsplash.com/photos/XBWF6_TEsFM |
 | `entree-investir.webp` | Accueil, renvoi Devenir investisseur | Erfan Soltani | https://unsplash.com/photos/Mvqe0B6TINM |
 
-### Visuels repris de l'Espace actionnaires (dépôt `greenpact-investisseurs`, `assets/impact/`)
+### Visuels fournis par Greenpact
 
-Origine et licence à confirmer avant mise en ligne (photos déjà utilisées dans l'espace actionnaires).
-
-| Fichier | Page | Source |
+| Fichier | Page | Contenu |
 | --- | --- | --- |
-| `condition-energie.webp` | Thèse d'investissement, six conditions (01) | `assets/impact/consommer.jpg` |
-| `condition-matiere.webp` | Thèse d'investissement, six conditions (03) | `assets/impact/boucler.jpg` |
-| `condition-climat.webp` | Thèse d'investissement, six conditions (05) | `assets/impact/adapter.jpg` |
-| `condition-modeles.webp` | Thèse d'investissement, six conditions (06) | `assets/impact/decarboner.jpg` |
-
-### Visuel fourni par Greenpact
-
-| Fichier | Page | Source |
-| --- | --- | --- |
-| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Capture du logiciel Sapiologie, fournie par Greenpact |
+| `impact-sapiologie.webp` | Thèse d'impact, article Sapiologie | Capture du logiciel Sapiologie |
+| `article-sapiologie-acier.webp` | Article Sapiologie | Bobines d'acier en halle industrielle |
+| `article-sapiologie-textile.webp` | Article Sapiologie | Rouleaux de textile |
+| `article-sapiologie-equipe.webp` | Article Sapiologie | L'équipe de Sapiologie |
+| `condition-energie.webp` | Thèse d'investissement, condition 01 | Parc éolien |
+| `condition-ressources.webp` | Thèse d'investissement, condition 02 | Toit solaire vu du ciel |
+| `condition-matiere.webp` | Thèse d'investissement, condition 03 | Roche couverte de sel |
+| `condition-savoir-faire.webp` | Thèse d'investissement, condition 04 | Ponçage du bois en atelier |
+| `condition-climat.webp` | Thèse d'investissement, condition 05 | Toits végétalisés |
+| `condition-modeles.webp` | Thèse d'investissement, condition 06 | Drapeaux |

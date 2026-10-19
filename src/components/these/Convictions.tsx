@@ -9,14 +9,13 @@ import styles from "./Convictions.module.css";
 gsap.registerPlugin(ScrollTrigger);
 
 // Une image par condition, dans le même ordre (fichiers dans /public/images/).
-// TODO conditions 03 à 06 : images provisoires, à remplacer par celles fournies par Greenpact.
 const CONVICTIONS = [
   { condition: "Sans dépendre d'une énergie carbonée", conviction: "L'énergie la moins chère est la moins carbonée.", image: "condition-energie.webp", alt: "Parc éolien sur des collines au soleil couchant" },
   { condition: "Sans épuiser les ressources", conviction: "La meilleure source de compétitivité est la sobriété.", image: "condition-ressources.webp", alt: "Toit couvert de panneaux solaires vu du ciel" },
-  { condition: "Sans dépendre d'une matière critique importée", conviction: "La matière la plus sûre est celle qu'on a déjà.", image: "condition-matiere.webp", alt: "Bacs de tri sélectif" },
-  { condition: "Sans dépendre d'une compétence qui disparaît", conviction: "Le savoir-faire le plus compétitif est celui qui est déjà là.", image: "entree-portfolio-2.webp", alt: "Opérateurs sur une ligne de production" },
-  { condition: "Sans être impacté par le climat", conviction: "L'adaptation est la meilleure sécurité d'exploitation.", image: "condition-climat.webp", alt: "Végétation qui reprend sur un versant rocheux" },
-  { condition: "Sans dépendre des modèles des autres", conviction: "Pour sortir de la guerre des prix, changeons les règles.", image: "condition-modeles.webp", alt: "Atelier de production industrielle" },
+  { condition: "Sans dépendre d'une matière critique importée", conviction: "La matière la plus sûre est celle qu'on a déjà.", image: "condition-matiere.webp", alt: "Roche couverte de cristaux de sel au bord d'un lac salé" },
+  { condition: "Sans dépendre d'une compétence qui disparaît", conviction: "Le savoir-faire le plus compétitif est celui qui est déjà là.", image: "condition-savoir-faire.webp", alt: "Artisan ponçant une pièce de bois à l'atelier" },
+  { condition: "Sans être impacté par le climat", conviction: "L'adaptation est la meilleure sécurité d'exploitation.", image: "condition-climat.webp", alt: "Toits végétalisés vus du ciel" },
+  { condition: "Sans dépendre des modèles des autres", conviction: "Pour sortir de la guerre des prix, changeons les règles.", image: "condition-modeles.webp", alt: "Drapeaux de différents pays alignés" },
 ];
 
 /**

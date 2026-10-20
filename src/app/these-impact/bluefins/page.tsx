@@ -24,18 +24,21 @@ const filAriane = {
   ],
 };
 
-// Uniquement des informations publiques : presse, Ifremer, Bureau Veritas, registre du commerce.
+// Uniquement des informations publiques : site de Bluefins, Ifremer, Bureau Veritas (sept. 2026),
+// L'Essentiel de l'Éco (mars 2026), France 3 Bretagne, registre du commerce.
 const MECANISME = [
   { titre: "Le navire tangue", texte: "En mer, la houle fait monter et descendre la poupe du navire, en permanence." },
   { titre: "La nageoire bat", texte: "Un hydrofoil articulé, fixé à l'arrière par des bras mécaniques, suit ce mouvement comme la nageoire caudale d'une baleine." },
   { titre: "La houle pousse", texte: "Le battement produit une poussée horizontale qui s'ajoute à celle du moteur, sans aucune source d'énergie extérieure." },
+  { titre: "Le système s'adapte", texte: "Un pilotage ajuste en temps réel le mouvement du foil à la houle et au vent. Par mer trop forte, le foil se relève hors de l'eau." },
 ];
 
 const ETAPES = [
-  { date: "2021", titre: "Création à Brest", texte: "Fondée par Olivier Giusti, à partir d'un concept développé avec l'Ifremer." },
-  { date: "2025", titre: "Premiers essais en mer", texte: "Démonstrateur installé sur le TSM Alizé, navire de service d'environ 45 mètres, en rade de Brest puis en mer d'Iroise." },
-  { date: "2026", titre: "Approbation de principe", texte: "Bureau Veritas délivre une Approval in Principle à WaveDrive, après revue de la conception mécanique, hydraulique et électrique." },
-  { date: "Prochaine étape", titre: "Les navires commerciaux", texte: "Ingénierie détaillée et intégration à bord des premiers navires de commerce, en vue d'un déploiement.", avenir: true },
+  { date: "2021", titre: "Création à Brest", texte: "Bluefins naît d'une technologie co-développée avec l'Ifremer." },
+  { date: "2022", titre: "Validation en bassin", texte: "Une maquette au 1/35 confirme les performances dans le bassin d'essais de l'Ifremer." },
+  { date: "2025", titre: "Premiers essais en mer", texte: "Un démonstrateur est installé sur le TSM Alizé, navire de service d'environ 45 mètres, en rade de Brest puis en mer d'Iroise." },
+  { date: "Septembre 2026", titre: "Approbation de Bureau Veritas", texte: "WaveDrive obtient une approbation de principe et est présenté au salon SMM de Hambourg." },
+  { date: "Prochaine étape", titre: "Les navires commerciaux", texte: "Ingénierie détaillée et intégration à bord des premiers navires de commerce.", avenir: true },
 ];
 
 export default function Page() {
@@ -67,7 +70,10 @@ export default function Page() {
               Le transport maritime achemine l&apos;essentiel des marchandises échangées dans le monde, et presque tous les navires brûlent encore du fioul. Les rendre plus sobres sans attendre une nouvelle flotte est l&apos;un des leviers les plus rapides de la décarbonation.
             </p>
             <p>
-              Bluefins, startup brestoise, développe WaveDrive : un système d&apos;assistance à la propulsion qui se monte à l&apos;arrière d&apos;un navire, neuf ou existant. Il récupère une énergie gratuite et inépuisable, celle de la houle.
+              Bluefins, startup brestoise fondée en 2021, développe WaveDrive : un système d&apos;assistance à la propulsion qui récupère une énergie gratuite et inépuisable, celle de la houle.
+            </p>
+            <p>
+              Il est conçu d&apos;abord pour équiper les navires existants, lors d&apos;un passage en chantier : vraquiers, pétroliers et chimiquiers, méthaniers.
             </p>
           </div>
           <div className={s.video}>
@@ -104,7 +110,6 @@ export default function Page() {
                 </li>
               ))}
             </Reveal>
-            <p className="small sobre">Plus la mer est formée, plus la nageoire travaille : le système tire parti des conditions qui, d&apos;ordinaire, font consommer davantage.</p>
           </div>
         </div>
       </section>
@@ -117,12 +122,12 @@ export default function Page() {
             <p>
               Le transport maritime pèse environ 3 % des émissions mondiales de gaz à effet de serre. L&apos;Organisation maritime internationale vise la neutralité carbone du secteur vers 2050 : chaque tonne de carburant économisée compte, dès aujourd&apos;hui.
             </p>
-            <p>Moins de carburant, c&apos;est aussi moins d&apos;oxydes de soufre et d&apos;azote rejetés en mer, et des coûts d&apos;exploitation plus bas pour les armateurs.</p>
+            <p>Pour les armateurs, chaque point de carburant économisé est aussi un point de coût d&apos;exploitation en moins.</p>
           </div>
           <div className={s.chiffre}>
             <span className={s.chiffreValeur}>−20 %</span>
             <span className={s.chiffreLibelle}>de carburant et de CO₂ en moyenne par navire équipé</span>
-            <span className="small sobre">Économie moyenne annoncée par Bluefins, d&apos;après ses simulations et ses essais en bassin.</span>
+            <span className="small sobre">Économie moyenne de carburant annoncée par Bluefins et l&apos;Ifremer.</span>
           </div>
         </div>
       </section>
@@ -144,7 +149,7 @@ export default function Page() {
               </li>
               <li>
                 <span className={s.nom}>Philippe Ruffin</span>
-                <span className="small sobre">Directeur général.</span>
+                <span className="small sobre">Cofondateur et directeur général.</span>
               </li>
             </ul>
           </div>

@@ -228,23 +228,18 @@ p {
 }
 
 /* ─── Liens texte ─── */
+/* Soulignement natif : il suit exactement la longueur du texte, même sur
+   plusieurs lignes ou dans un conteneur flex qui étire le lien. */
 .lien {
-  position: relative;
   font-weight: 400;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color 0.3s var(--ease);
 }
-.lien::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.4;
-  transition: opacity 0.3s var(--ease);
-}
-.lien:hover::after {
-  opacity: 1;
+.lien:hover {
+  text-decoration-color: currentColor;
 }
 
 /* ─── Accessibilité ─── */

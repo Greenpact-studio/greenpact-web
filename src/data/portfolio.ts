@@ -73,7 +73,7 @@ export const STUDIOS: Studio[] = [
       { nom: "Fyxe", description: "Gestion de maintenance et d'exploitation par capitalisation de connaissances.", url: "https://www.linkedin.com/company/fyxe/", logo: "fyxe.png" },
       { nom: "Mina", description: "Gestion de la supply chain et des transports.", url: "https://www.linkedin.com/company/minaflow/", logo: "mina.png" },
       { nom: "Sapiologie", description: "Éco-conception des produits.", url: "https://www.sapiologie.com", logo: "sapiologie.png" },
-      { nom: "Reflect", description: "Achats d'énergie : factures, contrats, ordres d'achat, équilibrage.", url: "https://reflectenergy.com", logo: "reflect.png" },
+      { nom: "Reflect", description: "Achats d'énergie : factures, contrats, ordres d'achat, équilibrage.", url: "https://reflectenergy.com", logo: "reflect-v2.png" },
       { nom: "Neutrogen", description: "Production de neutrons pour la fusion nucléaire, la transmutation de déchets nucléaires et les radio-isotopes médicaux.", logo: "neutrogen.png" }, // TODO URL
     ],
   },
@@ -88,8 +88,8 @@ export const STUDIOS: Studio[] = [
       { nom: "Bluefins", description: "Foil auto-propulsif pour le transport maritime.", url: "https://bluefins-systems.com", logo: "bluefins.png" },
       { nom: "Aqua Green Protect", description: "Gel bio pour protéger les exploitations agricoles et produire des engrais naturels.", logo: "aqua-green-protect.png", logoTaille: 1.5 }, // TODO URL
       { nom: "CaliCO₂", description: "Captation des émissions carbone dans les fumées industrielles.", url: "https://www.linkedin.com/company/calico2company/", logo: "calico2.png" },
-      { nom: "Thermal AI", description: "Fluides thermiques pour réduire la consommation énergétique des datacenters.", logo: "thermal-ai.png" }, // TODO URL
-      { nom: "Ayakem", description: "Mousses et isolants biosourcés à partir de résidus de bois.", url: "https://www.linkedin.com/company/ayakem/", logo: "ayakem.png" },
+      { nom: "Thermal AI", description: "Fluides thermiques pour réduire la consommation énergétique des datacenters.", logo: "thermal-ai-v2.png" }, // TODO URL
+      { nom: "Ayakem", description: "Mousses et isolants biosourcés à partir de résidus de bois.", url: "https://www.linkedin.com/company/ayakem/", logo: "ayakem-v2.png" },
       { nom: "WatAO", description: "Destruction des PFAS dans l'eau.", url: "https://www.linkedin.com/company/watao/", logo: "watao.png" },
       { nom: "Cedrus", description: "Audit et étude énergétiques de bâtiments.", url: "https://cedrus.solutions", logo: "cedrus.png" },
       { nom: "NetCarbon", description: "Optimisation et certification de captation carbone.", url: "https://www.netcarbon.fr", logo: "netcarbon.png" },

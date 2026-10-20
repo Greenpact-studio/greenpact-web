@@ -91,7 +91,7 @@ export const STUDIOS: Studio[] = [
       { nom: "Thermal AI", description: "Fluides thermiques pour réduire la consommation énergétique des datacenters.", logo: "thermal-ai-v2.png" }, // TODO URL
       { nom: "Ayakem", description: "Mousses et isolants biosourcés à partir de résidus de bois.", url: "https://www.linkedin.com/company/ayakem/", logo: "ayakem-v2.png" },
       { nom: "WatAO", description: "Destruction des PFAS dans l'eau.", url: "https://www.linkedin.com/company/watao/", logo: "watao.png" },
-      { nom: "Cedrus", description: "Audit et étude énergétiques de bâtiments.", url: "https://cedrus.solutions", logo: "cedrus.png" },
+      { nom: "Cedrus", description: "Audit et étude énergétiques de bâtiments.", url: "https://cedrus.solutions", logo: "cedrus-v2.png" },
       { nom: "NetCarbon", description: "Optimisation et certification de captation carbone.", url: "https://www.netcarbon.fr", logo: "netcarbon.png" },
     ],
   },

@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { EmailProtege } from "@/components/EmailProtege";
-import { ESPACE_INVESTISSEUR, SITE } from "@/data/config";
+import { ESPACE_INVESTISSEUR, CONNEXION_ESPACE_INVESTISSEUR, SITE } from "@/data/config";
 import styles from "./espace.module.css";
 
 export const metadata: Metadata = {
@@ -38,13 +38,27 @@ export default function Page() {
               </svg>
             </span>
             <h2 id="connexion-titre">Accéder à mon espace</h2>
-            <p className="lead">Connectez-vous avec l&apos;adresse e-mail que vous avez communiquée à Greenpact.</p>
-            <a href={ESPACE_INVESTISSEUR.connexion} target="_blank" rel="noopener noreferrer" className={`btn ${styles.bouton}`}>
-              Se connecter ↗
-            </a>
-            <p className={`small ${styles.aide}`}>
-              Pas encore d&apos;accès, ou une difficulté pour vous connecter ? Écrivez à <EmailProtege email={SITE.contact.email} className="lien" />.
-            </p>
+            {ESPACE_INVESTISSEUR.ouvert ? (
+              <>
+                <p className="lead">Connectez-vous avec l&apos;adresse e-mail que vous avez communiquée à Greenpact.</p>
+                <a href={CONNEXION_ESPACE_INVESTISSEUR} target="_blank" rel="noopener noreferrer" className={`btn ${styles.bouton}`}>
+                  Se connecter ↗
+                </a>
+                <p className={`small ${styles.aide}`}>
+                  Pas encore d&apos;accès, ou une difficulté pour vous connecter ? Écrivez à <EmailProtege email={SITE.contact.email} className="lien" />.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="lead">L&apos;espace investisseur ouvrira prochainement pour les actionnaires de Greenpact.</p>
+                <span className={`btn ${styles.bouton} ${styles.inactif}`} aria-disabled="true">
+                  Bientôt disponible
+                </span>
+                <p className={`small ${styles.aide}`}>
+                  Une question d&apos;ici là ? Écrivez à <EmailProtege email={SITE.contact.email} className="lien" />.
+                </p>
+              </>
+            )}
           </Reveal>
 
           <div className={styles.contenu}>

@@ -31,6 +31,14 @@
   padding: 1rem 2rem;
   font-size: var(--t-body);
 }
+.inactif {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+.inactif:hover {
+  transform: none;
+}
 .aide {
   color: var(--clair-60);
 }

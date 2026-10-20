@@ -57,11 +57,6 @@
   border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
   line-height: 2rem;
 }
-.effectif {
-  margin-left: auto;
-  font-size: var(--t-small);
-  color: var(--vert-70);
-}
 
 /* Portraits volontairement petits : les fichiers sources font 240 px, on ne les
    agrandit pas au-delà de ~170 px pour qu'ils restent nets. */
@@ -151,9 +146,6 @@ a.carte:focus-visible .linkedin {
     padding-left: 0;
     border-left: 0;
     line-height: 1.4;
-  }
-  .effectif {
-    margin-left: 0;
   }
 }
 @media (max-width: 520px) {

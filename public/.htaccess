@@ -14,9 +14,11 @@ ErrorDocument 404 /404.html
   <FilesMatch "\.(html|txt|xml)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
-  # Images : cache d'un mois (remplacer une image = changer son nom).
+  # Images : le navigateur garde sa copie mais redemande au serveur si elle a
+  # changé (réponse 304 légère sinon). Une image remplacée sous le même nom
+  # apparaît donc dès le déploiement suivant.
   <FilesMatch "\.(webp|jpe?g|png|svg|ico)$">
-    Header set Cache-Control "public, max-age=2592000"
+    Header set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
 

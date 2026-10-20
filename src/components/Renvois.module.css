@@ -1,8 +1,6 @@
 .renvois {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--vert);
 }
 .entree {
   position: relative;

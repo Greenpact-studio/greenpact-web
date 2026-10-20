@@ -27,7 +27,6 @@ export default function Page() {
                 <Image src={g.logo} alt={g.nom} width={520} height={160} className={styles.logo} loading="lazy" />
               </h2>
               <p className={styles.sousTitre}>{g.sousTitre}</p>
-              <span className={styles.effectif}>{g.membres.length} personnes</span>
             </div>
             <Reveal cascade as="ul" className={styles.grille} y={20}>
               {g.membres.map((m) => (

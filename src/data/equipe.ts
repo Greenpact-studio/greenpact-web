@@ -62,7 +62,7 @@ export const EQUIPE: Groupe[] = [
       { prenom: "Stéphane", nom: "Folliet", role: "Associé", photo: "stephane-folliet.jpg", linkedin: li("stephane-folliet-a281534") },
       { prenom: "Jean-Christophe", nom: "Berne", role: "Associé", photo: "jean-christophe-berne.jpg", linkedin: li("jeanchristopheberne") },
       { prenom: "Didier", nom: "Pradeilles", role: "Senior Advisor", photo: "didier-pradeilles.jpg", linkedin: li("didier-pradeilles-7410966") },
-      { prenom: "Ugo", nom: "Tarricone", role: "Venture & Impact Management", photo: "ugo-tarricone.jpg", linkedin: li("ugo-tarricone-304608193") },
+      { prenom: "Ugo", nom: "Tarricone", role: "Venture & Impact Management", photo: "ugo-tarricone-v2.jpg", linkedin: li("ugo-tarricone-304608193") },
       { prenom: "Pauline", nom: "Juvigny", role: "Marketing & Communication", photo: "pauline-juvigny.jpg", linkedin: li("paulinejuvigny") },
       { prenom: "Florian", nom: "Gauthier", role: "Product Manager", photo: "florian-gauthier.jpg", linkedin: li("florian-gauthier-38760b49") },
       { prenom: "Thomas", nom: "Joët", role: "Product Manager", photo: "thomas-joet.jpg", linkedin: li("thomasjoet") },

@@ -1,0 +1,22 @@
+.fleche {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1.5rem;
+  overflow: visible;
+}
+.trait {
+  fill: none;
+  stroke: #2f7a52;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.point {
+  fill: #2f7a52;
+}
+@media (max-width: 900px) {
+  .fleche {
+    display: none;
+  }
+}

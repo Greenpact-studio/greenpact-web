@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { Barres } from "@/components/Barres";
 import { Bascule } from "@/components/these/Bascule";
 import { Convictions } from "@/components/these/Convictions";
+import { Picto, type Domaine } from "@/components/these/Pictos";
 import s from "@/components/these/Blocs.module.css";
 
 export const metadata: Metadata = {
@@ -66,7 +67,7 @@ export default function Page() {
               </div>
               <div className={s.fait}>
                 <p className={s.faitChiffre}>× 5</p>
-                <p>Main-d'œuvre 5 fois plus coûteuse qu'en Asie du Sud-Est.</p>
+                <p className={s.uneLigne}>Main-d&apos;œuvre 5 fois plus coûteuse qu&apos;en Asie du Sud-Est.</p>
               </div>
             </div>
             <p>
@@ -137,9 +138,10 @@ export default function Page() {
           </div>
         </Reveal>
         <Reveal cascade as="ul" className={s.domaines}>
-          {["Performance industrielle", "Transition énergétique", "Circularité et chaînes de valeur", "Résilience et adaptation"].map((d) => (
-            <li key={d} className={s.domaine}>
-              {d}
+          {(["Performance industrielle", "Transition énergétique", "Circularité et chaînes de valeur", "Résilience et adaptation"] as Domaine[]).map((d) => (
+            <li key={d} className={`${s.domaine} ${s.domaineAvecPicto}`}>
+              <span>{d}</span>
+              <Picto domaine={d} className={s.picto} />
             </li>
           ))}
         </Reveal>
@@ -173,7 +175,7 @@ export default function Page() {
               max={100}
               barres={[
                 { label: "Série A atteinte", valeur: 60, affichage: "60 %", fort: true },
-                { label: "Projets arrêtés avant investissement", valeur: 90, affichage: "90 %" },
+                { label: "Projets arrêtés avant investissement", valeur: 90, affichage: "90 %", fort: true },
               ]}
               note="Nous n'investissons que si nous avons des premiers clients. Nous tuons les dossiers avant d'investir, pas après."
             />
@@ -184,7 +186,7 @@ export default function Page() {
               barres={[
                 { label: "Seed, studio", valeur: 11, affichage: "11 mois", fort: true },
                 { label: "Seed, « solo »", valeur: 36, affichage: "36 mois" },
-                { label: "Série A, studio", valeur: 25, affichage: "25 mois", fort: true },
+                { label: "Série A, studio", valeur: 25, affichage: "25 mois", fort: true, separe: true },
                 { label: "Série A, « solo »", valeur: 56, affichage: "56 mois" },
               ]}
             />
@@ -196,11 +198,10 @@ export default function Page() {
       {/* Approche du portefeuille */}
       <section className="conteneur section" aria-labelledby="pf-titre">
         <Reveal className={s.deuxCol}>
-          <div className={s.texte}>
+          <div className={`${s.texte} ${s.texteAere}`}>
             <h2 id="pf-titre">Notre approche du portefeuille.</h2>
             <p>Des participations minoritaires, pour motiver les co-fondateurs et pouvoir financer les startups sur le marché.</p>
             <p>Un modèle basé sur la cession d'entreprises en croissance, avec un parcours visant 5 à 15 M€ d'ARR et l'équilibre financier.</p>
-            <p>Nous ne parions pas sur d'éventuelles licornes dans nos projections.</p>
           </div>
           <Image src="/images/modele-industrie.webp" alt="Hall industriel baigné de lumière naturelle" width={1600} height={1064} className={s.photo} loading="lazy" />
         </Reveal>

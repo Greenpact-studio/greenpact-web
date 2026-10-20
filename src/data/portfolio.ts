@@ -7,6 +7,7 @@ export type Startup = {
   description: string;
   url?: string;
   logo?: string; // fichier dans /public/logos/
+  logoTaille?: number; // agrandit un logo trop compact (1 = taille normale)
 };
 
 export type ParticipationDirecte = Startup & {
@@ -85,7 +86,7 @@ export const STUDIOS: Studio[] = [
     positionnement: "Venture studio deeptech climat, avec 50 laboratoires R&D partenaires.",
     startups: [
       { nom: "Bluefins", description: "Foil auto-propulsif pour le transport maritime.", url: "https://bluefins-systems.com", logo: "bluefins.png" },
-      { nom: "Aqua Green Protect", description: "Gel bio pour protéger les exploitations agricoles et produire des engrais naturels.", logo: "aqua-green-protect.png" }, // TODO URL
+      { nom: "Aqua Green Protect", description: "Gel bio pour protéger les exploitations agricoles et produire des engrais naturels.", logo: "aqua-green-protect.png", logoTaille: 1.5 }, // TODO URL
       { nom: "CaliCO₂", description: "Captation des émissions carbone dans les fumées industrielles.", url: "https://www.linkedin.com/company/calico2company/", logo: "calico2.png" },
       { nom: "Thermal AI", description: "Fluides thermiques pour réduire la consommation énergétique des datacenters.", logo: "thermal-ai.png" }, // TODO URL
       { nom: "Ayakem", description: "Mousses et isolants biosourcés à partir de résidus de bois.", url: "https://www.linkedin.com/company/ayakem/", logo: "ayakem.png" },

@@ -18,5 +18,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.5,
     }));
-  return [...pages, ...articles];
+  const etudes = [{ url: `${SITE.url}/these-impact/bluefins/`, changeFrequency: "monthly" as const, priority: 0.6 }];
+  return [...pages, ...etudes, ...articles];
 }

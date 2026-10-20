@@ -17,7 +17,7 @@
 }
 .ligne {
   display: grid;
-  grid-template-columns: 9rem 1fr 4.5rem;
+  grid-template-columns: 9rem 1fr 5.75rem;
   gap: 1rem;
   align-items: center;
   font-size: var(--t-small);
@@ -55,7 +55,16 @@
 .valeur {
   font-weight: 500;
   text-align: right;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
+}
+.separe {
+  margin-top: 0.9rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--vert-15);
+}
+:global(.sur-vert) .separe {
+  border-top-color: var(--clair-15);
 }
 .note {
   margin-top: 1.25rem;
@@ -65,7 +74,7 @@
     padding: 1.25rem;
   }
   .ligne {
-    grid-template-columns: 1fr 3.5rem;
+    grid-template-columns: 1fr 5.5rem;
   }
   .label {
     grid-column: 1 / -1;

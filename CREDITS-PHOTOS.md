@@ -36,3 +36,5 @@ Aucune image Unsplash+ (payante). Fichiers convertis en WebP dans `public/images
 | `condition-savoir-faire.webp` | Thèse d'investissement, condition 04 | Ponçage du bois en atelier |
 | `condition-climat.webp` | Thèse d'investissement, condition 05 | Toits végétalisés |
 | `condition-modeles.webp` | Thèse d'investissement, condition 06 | Drapeaux |
+| `bluefins-equipe.webp` | Thèse d'impact, page Bluefins | L'équipe de Bluefins |
+| `bluefins-infographie.webp` | Thèse d'impact, page Bluefins | Infographie Le Parisien (27 février 2025, source : Bluefins), bas de l'image recadré ; crédit affiché sous l'image |

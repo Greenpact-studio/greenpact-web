@@ -20,14 +20,14 @@ export default function Page() {
       <EnTetePage titre="Équipe" intro={TRACK_RECORD} />
 
       {EQUIPE.map((g) => (
-        <section key={g.id} className={styles.groupe} aria-labelledby={`g-${g.id}`}>
+        <section key={g.id} className={`${styles.groupe} ${styles[g.id]}`} aria-labelledby={`g-${g.id}`}>
           <div className="conteneur">
             <div className={styles.groupeTete}>
-              <Image src={g.logo} alt="" width={520} height={160} className={`${styles.logo} ${styles[g.id]}`} loading="lazy" />
-              <div>
-                <h2 id={`g-${g.id}`}>{g.nom}</h2>
-                <p className="sobre">{g.sousTitre}</p>
-              </div>
+              <h2 id={`g-${g.id}`} className={styles.titreLogo}>
+                <Image src={g.logo} alt={g.nom} width={520} height={160} className={styles.logo} loading="lazy" />
+              </h2>
+              <p className={styles.sousTitre}>{g.sousTitre}</p>
+              <span className={styles.effectif}>{g.membres.length} personnes</span>
             </div>
             <Reveal cascade as="ul" className={styles.grille} y={20}>
               {g.membres.map((m) => (

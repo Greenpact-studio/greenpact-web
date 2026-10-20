@@ -39,7 +39,7 @@ export const EQUIPE: Groupe[] = [
   {
     id: "4elements",
     nom: "4Elements",
-    logo: "/logos/logo-4elements.png",
+    logo: "/logos/logo-4elements-noir.png",
     sousTitre: "Venture studio deeptech climat",
     membres: [
       { prenom: "Cédric", nom: "Favier", role: "Associé", photo: "cedric-favier.jpg", linkedin: li("cfavier") },

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { CycleImpact } from "@/components/impact/CycleImpact";
 import { Resultats } from "@/components/impact/Resultats";
 import { Systemique } from "@/components/impact/Systemique";
+import { FlechePrincipes } from "@/components/impact/FlechePrincipes";
 import s from "@/components/these/Blocs.module.css";
 
 export const metadata: Metadata = {
@@ -78,6 +79,7 @@ export default function Page() {
             </li>
           ))}
         </Reveal>
+        <FlechePrincipes />
       </section>
 
       <Resultats />

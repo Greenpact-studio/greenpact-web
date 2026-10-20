@@ -7,7 +7,8 @@ import styles from "./Barres.module.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export type Barre = { label: string; valeur: number; affichage: string; fort?: boolean };
+// `separe` : un filet fin et plus d'espace au-dessus de la barre (pour séparer deux groupes).
+export type Barre = { label: string; valeur: number; affichage: string; fort?: boolean; separe?: boolean };
 
 /**
  * Comparaison en barres horizontales qui se remplissent au défilement.
@@ -45,7 +46,7 @@ export function Barres({ barres, max, titre, note, inverse = false }: { barres: 
       {titre && <h3 className={styles.titre}>{titre}</h3>}
       <ul className={styles.liste}>
         {barres.map((b) => (
-          <li key={b.label} className={styles.ligne}>
+          <li key={b.label} className={`${styles.ligne} ${b.separe ? styles.separe : ""}`}>
             <span className={styles.label}>{b.label}</span>
             <span className={styles.piste}>
               <span data-barre className={`${styles.barre} ${b.fort ? styles.fort : ""}`} style={{ width: `${Math.min(100, (b.valeur / max) * 100)}%` }} />

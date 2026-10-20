@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EnTetePage } from "@/components/EnTetePage";
@@ -67,7 +68,7 @@ export default function Page() {
                 {st.startups.map((su) => {
                   const contenu = (
                     <>
-                      <span className={styles.suLogo}>
+                      <span className={styles.suLogo} style={su.logoTaille ? ({ "--taille": su.logoTaille } as CSSProperties) : undefined}>
                         {su.logo ? <Image src={`/logos/${su.logo}`} alt="" width={360} height={120} loading="lazy" /> : <span className={styles.suMot}>{su.nom}</span>}
                       </span>
                       <span className={styles.suTexte}>

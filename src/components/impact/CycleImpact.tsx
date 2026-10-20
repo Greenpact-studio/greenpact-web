@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./CycleImpact.module.css";
@@ -87,7 +88,7 @@ export function CycleImpact() {
             ))}
           </ol>
           <div className={styles.consolidation}>
-            <p className={styles.meta}>Greenpact</p>
+            <Image src="/logo-greenpact-blanc.png" alt="Greenpact" width={1200} height={138} className={styles.consolidationLogo} loading="lazy" />
             <p>Consolidation : les données des studios sont agrégées par levier d'impact et publiées aux actionnaires dans l'observatoire.</p>
           </div>
         </div>

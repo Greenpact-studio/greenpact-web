@@ -1,6 +1,6 @@
 // Résultats d'impact mis en avant sur la Thèse d'impact : Bluefins et Sapiologie.
 // Niveau de preuve : "Mesuré" (constaté chez des clients) ou "Estimé" (calculé à
-// partir de données réelles). `ancre` renvoie vers la carte de la startup sur /portfolio/.
+// partir de données réelles). `lien` mène à la page qui raconte le résultat en détail.
 
 export type NiveauPreuve = "Mesuré" | "Estimé";
 
@@ -13,7 +13,8 @@ export type ResultatMesure = {
   preuve: string;
   image: string; // fichier dans /public/images/
   alt: string;
-  ancre: string; // id de la carte sur /portfolio/
+  lien: string;
+  libelleLien: string;
 };
 
 export const RESULTATS_MESURES: ResultatMesure[] = [
@@ -26,7 +27,8 @@ export const RESULTATS_MESURES: ResultatMesure[] = [
     preuve: "Essais en mer de mars 2026 : gains à deux chiffres, validés par Bureau Veritas.",
     image: "portfolio-bluefins.webp",
     alt: "Porte-conteneurs en mer au lever du jour",
-    ancre: "bluefins",
+    lien: "/these-impact/bluefins/",
+    libelleLien: "Découvrir Bluefins",
   },
   {
     startup: "Sapiologie",
@@ -37,7 +39,8 @@ export const RESULTATS_MESURES: ResultatMesure[] = [
     preuve: "Des milliers d'analyses de cycle de vie générées en une journée chez un fabricant de composants électroniques ; contrat signé avec une grande maison du luxe.",
     image: "impact-sapiologie.webp",
     alt: "Logiciel Sapiologie : analyse environnementale d'une gamme de produits",
-    ancre: "sapiologie",
+    lien: "/actualites/2026-10-16-sapiologie-eco-conception/",
+    libelleLien: "Lire l'article sur Sapiologie",
   },
 ];
 

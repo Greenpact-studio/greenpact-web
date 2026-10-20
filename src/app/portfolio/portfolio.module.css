@@ -161,7 +161,7 @@
 .startup {
   flex: 1;
   display: grid;
-  grid-template-columns: 8.5rem minmax(0, 1fr) 1.25rem;
+  grid-template-columns: 10rem minmax(0, 1fr) 1.25rem;
   gap: 1.25rem;
   align-items: center;
   min-height: 5.25rem;
@@ -177,7 +177,7 @@ a.startup:focus-visible {
 .suLogo {
   display: flex;
   align-items: center;
-  height: 2.75rem;
+  height: calc(2.75rem * var(--taille, 1));
 }
 .suLogo img {
   width: 100%;

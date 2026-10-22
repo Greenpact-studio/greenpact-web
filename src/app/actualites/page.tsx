@@ -147,21 +147,28 @@ export default async function Page() {
           ) : (
             <ul className={styles.posts}>
               {posts.map((p) => (
-                <li key={p.titre + p.date} className={styles.post}>
-                  <span className={styles.postMeta}>
-                    <span>
-                      {p.titre}
-                      <Exemple si={p.exemple} />
+                <li key={p.titre} className={styles.post}>
+                  {(p.date || p.exemple) && (
+                    <span className={styles.postMeta}>
+                      <span>
+                        <Exemple si={p.exemple} />
+                      </span>
+                      {p.date && <span>{dateFR(p.date)}</span>}
                     </span>
-                    <span>{dateFR(p.date)}</span>
-                  </span>
+                  )}
                   {/* Code d'intégration copié depuis LinkedIn (« Intégrer ce post »), voir data/linkedin.json */}
                   {p.iframe ? (
                     <span dangerouslySetInnerHTML={{ __html: p.iframe }} />
                   ) : p.lien ? (
-                    <a href={p.lien} {...externe} className={styles.postLien} aria-label={`${p.titre}, voir sur LinkedIn dans un nouvel onglet`}>
-                      <span className={styles.postLienTitre}>Voir la publication sur LinkedIn</span>
-                      <span aria-hidden>↗</span>
+                    <a href={p.lien} {...externe} className={styles.postLien} aria-label={`${p.titre}, voir la publication sur LinkedIn dans un nouvel onglet`}>
+                      {p.image && <Image src={p.image} alt="" width={800} height={533} className={styles.postImage} loading="lazy" />}
+                      <span className={styles.postCorps}>
+                        <span className={styles.postLienTitre}>{p.titre}</span>
+                        {p.resume && <span className={styles.postResume}>{p.resume}</span>}
+                        <span className={styles.postVoir}>
+                          Voir la publication sur LinkedIn <span aria-hidden>↗</span>
+                        </span>
+                      </span>
                     </a>
                   ) : null}
                 </li>

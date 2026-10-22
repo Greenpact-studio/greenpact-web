@@ -1,7 +1,20 @@
 [
   {
-    "titre": "Dernière publication de Greenpact",
-    "date": "2026-10-19",
+    "titre": "Bluefins",
+    "resume": "La nageoire inspirée des baleines qui fait avancer les navires grâce à la houle.",
+    "image": "/images/portfolio-bluefins.webp",
+    "lien": "https://lnkd.in/p/evUP79qg"
+  },
+  {
+    "titre": "Sapiologie",
+    "resume": "Mesurer l'empreinte des produits dès la conception, à l'échelle d'un catalogue.",
+    "image": "/images/impact-sapiologie.webp",
+    "lien": "https://lnkd.in/p/ecf73b85"
+  },
+  {
+    "titre": "Greenpact, par Éric Angelier",
+    "resume": "Le regard d'Éric Angelier, administrateur, sur Greenpact.",
+    "image": "/images/entree-these.webp",
     "lien": "https://lnkd.in/p/e2_HMKD2"
   }
 ]

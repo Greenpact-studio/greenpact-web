@@ -7,7 +7,8 @@
 
 /* ─── Participations directes : grands panneaux ─── */
 .directes {
-  padding-bottom: var(--section);
+  /* Écart réduit : les studios arrivent juste sous les panneaux. */
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .panneaux {
   /* Les trois panneaux se touchent : aucun filet entre les photos. */
@@ -19,6 +20,7 @@
   position: relative;
   display: block;
   aspect-ratio: 3 / 4;
+  max-height: 78vh; /* sur grand écran, laisse apparaître la suite de la page */
   overflow: hidden;
   color: #fff;
 }
@@ -83,13 +85,13 @@
 }
 
 /* ─── Studios ─── */
-/* Deux tableaux de même hauteur. Couleurs froides et douces, tirées des logos :
-   ardoise pour Hoji (noir et orange), vert d'eau profond pour 4Elements. */
+/* Deux tableaux de même hauteur. En-têtes tirés des logos : ardoise et orange
+   pour Hoji, noir et blanc pour 4Elements. Lignes des startups sur un gris doux. */
 .studio {
   --studio-fonce: #2b3640;
-  --studio-teinte: #eef1f3;
+  --studio-teinte: #e4e4e1;
   --studio-accent: #e8875f;
-  --studio-filet: rgba(43, 54, 64, 0.12);
+  --studio-filet: rgba(30, 30, 30, 0.1);
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -97,10 +99,10 @@
   background: var(--studio-teinte);
 }
 .studio.\34 elements {
-  --studio-fonce: #26433f;
-  --studio-teinte: #ebf1ee;
-  --studio-accent: #8fb9ad;
-  --studio-filet: rgba(38, 67, 63, 0.12);
+  --studio-fonce: #1e1e1e;
+  --studio-teinte: #e4e4e1;
+  --studio-accent: #ffffff;
+  --studio-filet: rgba(30, 30, 30, 0.1);
 }
 .studios {
   display: grid;
@@ -128,6 +130,12 @@
   max-width: 100%;
   align-self: flex-start;
   object-fit: contain;
+}
+/* 4Elements : le filet blanc est posé à l'intérieur du noir pour rester visible
+   sur le fond clair de la page. */
+.\34 elements .studioEntete {
+  border-top: 5px solid var(--studio-fonce);
+  box-shadow: inset 0 3px 0 0 var(--studio-accent);
 }
 .\34 elements .studioLogo {
   filter: brightness(0) invert(1);

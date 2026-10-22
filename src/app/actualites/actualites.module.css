@@ -172,9 +172,9 @@ a.ligne:hover {
 /* ─── LinkedIn : iframes ─── */
 .posts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
   gap: 2rem;
-  align-items: start;
+  align-items: stretch;
 }
 .post {
   display: flex;
@@ -191,10 +191,9 @@ a.ligne:hover {
 /* Post sans code d'intégration : une carte qui ouvre le post sur LinkedIn */
 .postLien {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem 1.75rem;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
   border: 1px solid var(--vert-30);
   border-radius: 2px;
   background: var(--clair);
@@ -207,8 +206,35 @@ a.ligne:hover {
   background: var(--vert-08);
   border-color: var(--vert);
 }
+.postImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.postLien:hover .postImage {
+  transform: scale(1.03);
+}
+.postCorps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.4rem 1.6rem 1.6rem;
+  flex: 1;
+}
 .postLienTitre {
   font-size: var(--t-lead);
+  font-weight: 500;
+}
+.postResume {
+  font-size: var(--t-small);
+  color: var(--vert-70);
+}
+.postVoir {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: var(--t-small);
   font-weight: 500;
 }
 .postMeta {

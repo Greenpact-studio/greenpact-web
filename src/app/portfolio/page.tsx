@@ -49,7 +49,7 @@ export default function Page() {
       </section>
 
       {/* 7.2 Venture studios */}
-      <section className="conteneur section" aria-labelledby="studios-titre">
+      <section className="conteneur" style={{ paddingBottom: "var(--section)" }} aria-labelledby="studios-titre">
         <h2 id="studios-titre" className={styles.titreSection}>
           Nos deux venture studios
         </h2>

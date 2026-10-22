@@ -40,9 +40,9 @@ export default function Page() {
             <h2 id="connexion-titre">Accéder à mon espace</h2>
             {ESPACE_INVESTISSEUR.ouvert ? (
               <>
-                <p className="lead">Connectez-vous avec l&apos;adresse e-mail que vous avez communiquée à Greenpact.</p>
-                <a href={CONNEXION_ESPACE_INVESTISSEUR} target="_blank" rel="noopener noreferrer" className={`btn ${styles.bouton}`}>
-                  Se connecter ↗
+                <p className="lead">Connectez-vous avec l&apos;adresse e-mail que vous avez communiquée à Greenpact : vous recevrez un lien de connexion.</p>
+                <a href={CONNEXION_ESPACE_INVESTISSEUR} className={`btn ${styles.bouton}`}>
+                  Se connecter →
                 </a>
                 <p className={`small ${styles.aide}`}>
                   Pas encore d&apos;accès, ou une difficulté pour vous connecter ? Écrivez à <EmailProtege email={SITE.contact.email} className="lien" />.

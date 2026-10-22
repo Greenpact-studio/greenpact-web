@@ -10,15 +10,29 @@
   grid-template-columns: 1fr 1fr;
   gap: clamp(1rem, 2vw, 1.5rem);
 }
+/* Carte : la photo au naturel en haut, le résultat sur un panneau clair en dessous. */
 .carte {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  background: color-mix(in srgb, #fff 55%, var(--clair));
+  border: 1px solid var(--vert-15);
+  color: var(--vert);
+  transition:
+    box-shadow 0.5s var(--ease),
+    transform 0.5s var(--ease);
+}
+.carte:hover,
+.carte:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -28px rgba(var(--vert-rgb), 0.45);
+}
+.visuel {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 5;
-  max-height: 44rem;
-  width: 100%;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 2px;
-  color: #fff;
 }
 .photo {
   position: absolute;
@@ -26,73 +40,99 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 70%;
   transition: transform 1.2s var(--ease);
 }
 .carte:hover .photo,
 .carte:focus-visible .photo {
   transform: scale(1.04);
 }
-.voile {
+/* Léger dégradé en bas de la photo, seulement pour le nom de la startup. */
+.visuel::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.96) 0%, rgba(var(--vert-rgb), 0.82) 45%, rgba(var(--vert-rgb), 0.2) 100%);
+  inset: 55% 0 0 0;
+  background: linear-gradient(to top, rgba(10, 20, 15, 0.55), transparent);
+  pointer-events: none;
 }
-.contenu {
+.startup {
   position: absolute;
-  inset: 0;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.4rem;
+  z-index: 1;
+  left: clamp(1.25rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  font-size: var(--t-h3);
+  font-weight: 500;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.3);
 }
 .badge {
   position: absolute;
-  top: clamp(1.5rem, 3vw, 2.5rem);
-  left: clamp(1.5rem, 3vw, 2.5rem);
+  z-index: 1;
+  top: clamp(1rem, 2vw, 1.5rem);
+  left: clamp(1.25rem, 2.5vw, 2rem);
   font-size: 0.75rem;
   font-weight: 500;
-  padding: 0.25rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
+  background: var(--vert);
+  color: var(--clair);
+}
+.badge.estime {
   background: var(--clair);
   color: var(--vert);
 }
-.badge.estime {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+.contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.25rem, 2.5vw, 2rem) clamp(1.5rem, 3vw, 2rem);
 }
 .theme {
   font-size: var(--t-small);
-  opacity: 0.85;
+  color: var(--vert-70);
 }
 .chiffre {
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.04em;
+  margin-top: 0.25rem;
 }
 .libelle {
   font-size: var(--t-lead);
-  max-width: 24ch;
+  max-width: 28ch;
 }
 .preuve {
   margin-top: 0.5rem;
   font-size: var(--t-small);
-  opacity: 0.85;
-  max-width: 40ch;
+  color: var(--vert-70);
+  max-width: 46ch;
+  margin-bottom: 1.5rem;
 }
+/* Appel à découvrir : bouton plein, en bas de carte. */
 .lien {
-  margin-top: 1rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: var(--vert);
+  color: var(--clair);
   font-size: var(--t-small);
   font-weight: 500;
+  transition: background 0.3s var(--ease);
+}
+.lien span {
+  display: inline-block;
+  transition: transform 0.4s var(--ease);
+}
+.carte:hover .lien span,
+.carte:focus-visible .lien span {
+  transform: translateX(4px);
 }
 @media (max-width: 900px) {
   .tete,
   .cartes {
     grid-template-columns: 1fr;
-  }
-  .carte {
-    aspect-ratio: 4 / 4.4;
   }
 }

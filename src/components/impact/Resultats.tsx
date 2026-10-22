@@ -17,11 +17,13 @@ export function Resultats() {
 
       <Reveal cascade className={styles.cartes} y={24}>
         {RESULTATS_MESURES.map((r) => (
-          <Link key={r.startup} href={r.lien} className={`sur-photo ${styles.carte}`} aria-label={`${r.startup} : ${r.chiffre} ${r.libelle}. ${r.libelleLien}`}>
-            <Image src={`/images/${r.image}`} alt={r.alt} width={1600} height={1067} className={styles.photo} loading="lazy" />
-            <span className={styles.voile} aria-hidden />
-            <span className={styles.contenu}>
+          <Link key={r.startup} href={r.lien} className={styles.carte} aria-label={`${r.startup} : ${r.chiffre} ${r.libelle}. ${r.libelleLien}`}>
+            <span className={styles.visuel}>
+              <Image src={`/images/${r.image}`} alt={r.alt} width={1200} height={900} className={styles.photo} loading="lazy" />
               <span className={`${styles.badge} ${r.niveau === "Estimé" ? styles.estime : ""}`}>{r.niveau}</span>
+              <span className={styles.startup}>{r.startup}</span>
+            </span>
+            <span className={styles.contenu}>
               <span className={styles.theme}>{r.theme}</span>
               <span className={styles.chiffre}>{r.chiffre}</span>
               <span className={styles.libelle}>{r.libelle}</span>

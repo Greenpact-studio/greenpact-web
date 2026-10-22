@@ -48,22 +48,45 @@ p{margin:0}
 .num{font-variant-numeric:tabular-nums}
 
 /* Curtain — single entrance moment */
-/* Connexion (mode Supabase) */
-#login{position:fixed;inset:0;z-index:40;background:var(--forest);color:var(--linen);display:grid;place-items:center;padding:24px}
+/* Connexion (mode Supabase) : photo à gauche, formulaire à droite */
+#login{position:fixed;inset:0;z-index:40;display:grid;grid-template-columns:minmax(0,1fr) minmax(620px,1fr);background:var(--linen);color:var(--forest)}
 #login[hidden]{display:none}
-#login .box{width:min(420px,100%);display:flex;flex-direction:column;gap:16px}
-#login img{width:200px;margin-bottom:12px}
-#login h1{font-size:1.5rem;font-weight:500;margin:0;line-height:1.3}
-#login p{margin:0;color:rgba(237,234,228,.75);font-size:.9rem}
-#login label{font-size:.8rem;color:rgba(237,234,228,.75)}
-#login input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(237,234,228,.3);background:rgba(237,234,228,.06);color:var(--linen);font-size:1rem}
-#login input:focus{outline:2px solid var(--linen);outline-offset:2px}
-#login button{padding:12px 18px;border-radius:99px;border:0;background:var(--linen);color:var(--forest);font-weight:500;cursor:pointer}
+#login .visuel{position:relative;background:#0e2018 url("assets/impact/hero.jpg") center/cover no-repeat;color:var(--linen);display:flex;flex-direction:column;justify-content:space-between;padding:48px 56px}
+#login .visuel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.55) 0%,rgba(14,32,24,.05) 40%,rgba(14,32,24,.6) 100%)}
+#login .visuel>*{position:relative}
+#login .visuel img{width:190px}
+#login .visuel p{margin:0;font-size:1.35rem;font-weight:300;line-height:1.4;max-width:22ch}
+#login .panneau{display:grid;place-items:center;padding:48px 36px;overflow:auto}
+#login .box{width:min(33.5rem,100%);display:flex;flex-direction:column}
+#login .sur-titre{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+#login h1{font-size:2.3rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 16px}
+#login .intro{margin:0 0 36px;color:var(--muted);font-size:.95rem;line-height:1.7}
+#login .intro span{display:block}
+#login label{font-size:.82rem;font-weight:500;margin-bottom:8px}
+#login input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid rgba(28,58,43,.22);background:#fff;color:var(--forest);font-size:1rem;transition:border-color .2s,box-shadow .2s}
+#login input:focus{outline:0;border-color:var(--forest);box-shadow:0 0 0 4px rgba(28,58,43,.1)}
+#login button.envoyer{width:100%;margin-top:14px;padding:15px 20px;border-radius:12px;border:0;background:var(--forest);color:var(--linen);font-size:1rem;font-weight:500;cursor:pointer;transition:background .2s}
+#login button.envoyer:hover{background:#264d39}
 #login button[disabled]{opacity:.6;cursor:default}
-#login .msg{min-height:1.4em;font-size:.86rem}
-#login .msg.ok{color:#b9e4c9}
-#login .msg.err{color:#f3c4b5}
-#login .note{font-size:.76rem;color:rgba(237,234,228,.55)}
+#login .msg{margin-top:14px;font-size:.88rem;color:#a04a2c}
+#login .msg:empty{display:none}
+#login .acces{margin:40px 0 0;padding-top:22px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+#login .acces a{color:var(--forest);font-weight:500;text-underline-offset:3px}
+#login .envoye{display:flex;flex-direction:column}
+#login .envoye[hidden]{display:none}
+#login .envoye .pastille{width:52px;height:52px;border-radius:50%;background:rgba(28,58,43,.08);display:grid;place-items:center;margin-bottom:24px}
+#login .envoye b{font-weight:500;color:var(--forest)}
+#login .lien-retour{align-self:flex-start;background:none;border:0;padding:0;color:var(--forest);font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-size:.95rem}
+@media (min-width:640px){ #login .intro span,#login .acces{white-space:nowrap} }
+@media (max-width:999px){
+  #login{grid-template-columns:1fr;grid-template-rows:auto 1fr;overflow:auto}
+  #login .visuel{min-height:200px;padding:28px 24px}
+  #login .visuel img{width:150px}
+  #login .visuel{min-height:150px}
+  #login .visuel p{display:none}
+  #login .panneau{place-items:start center;padding:36px 24px 48px}
+  #login h1{font-size:1.9rem}
+}
 .seal-card .logout{margin-top:10px;background:transparent;border:1px solid rgba(237,234,228,.3);color:var(--linen);border-radius:99px;padding:4px 12px;font-size:.74rem;cursor:pointer}
 .seal-card .logout[hidden]{display:none}
 #curtain{position:fixed;inset:0;z-index:50;background:var(--forest);display:grid;place-items:center;color:var(--linen);transition:transform 1s var(--ease)}
@@ -608,16 +631,31 @@ label textarea{min-height:96px;resize:vertical}
 <div id="curtain" aria-hidden="true"><div class="inner"><img id="curtain-logo" alt=""><div class="bar"><i></i></div><div class="seal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Espace actionnaires, accès réservé</div></div></div>
 
 <div id="login" hidden>
-  <form class="box" id="login-form">
+  <div class="visuel">
     <img id="login-logo" alt="Greenpact">
-    <h1>Espace actionnaires</h1>
-    <p>Saisissez l'adresse e-mail que vous avez communiquée à Greenpact. Vous recevrez un lien de connexion, valable une heure.</p>
-    <label for="login-email">Adresse e-mail</label>
-    <input id="login-email" type="email" autocomplete="email" required placeholder="prenom.nom@exemple.fr">
-    <button type="submit" id="login-btn">Recevoir mon lien de connexion</button>
-    <div class="msg" id="login-msg" role="status" aria-live="polite"></div>
-    <p class="note">Accès réservé aux actionnaires de Greenpact. Pas encore d'accès ? Écrivez à Laurent Geray.</p>
-  </form>
+    <p>Investir dans la transformation durable des entreprises.</p>
+  </div>
+  <div class="panneau">
+    <div class="box">
+      <form id="login-form">
+        <p class="sur-titre">Espace actionnaires</p>
+        <h1>Connexion</h1>
+        <p class="intro"><span>Saisissez l'adresse e-mail que vous avez communiquée à Greenpact.</span> <span>Vous recevrez un lien de connexion, valable une heure.</span></p>
+        <label for="login-email">Adresse e-mail</label>
+        <input id="login-email" type="email" autocomplete="email" required placeholder="prenom.nom@exemple.fr">
+        <button type="submit" class="envoyer" id="login-btn">Recevoir mon lien de connexion</button>
+        <div class="msg" id="login-msg" role="alert"></div>
+      </form>
+      <div class="envoye" id="login-envoye" hidden>
+        <span class="pastille" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <p class="sur-titre">Espace actionnaires</p>
+        <h1>Vérifiez votre boîte mail</h1>
+        <p class="intro">Un lien de connexion a été envoyé à <b id="login-adresse"></b>. Il est valable une heure. S'il n'apparaît pas, regardez dans les indésirables.</p>
+        <button type="button" class="lien-retour" id="login-retour">Utiliser une autre adresse</button>
+      </div>
+      <p class="acces">Pas encore d'accès ? Écrivez à <a href="mailto:Laurent@greenpact.fr">Laurent Geray</a>.</p>
+    </div>
+  </div>
 </div>
 
 <div class="shell">
@@ -1318,21 +1356,21 @@ async function loadSupabase(sb){
 }
 function showLogin(sb){
   const box=$("#login"); box.hidden=false; $("#login-logo").src=ASSETS.logo_light;
-  const msg=$("#login-msg"), btn=$("#login-btn");
+  const msg=$("#login-msg"), btn=$("#login-btn"), form=$("#login-form"), envoye=$("#login-envoye");
   const err=new URLSearchParams(location.hash.slice(1)).get("error_description");
-  if(err){ msg.className="msg err"; msg.textContent="Ce lien de connexion n'est plus valable. Demandez-en un nouveau."; history.replaceState(null,"",location.pathname); }
+  if(err){ msg.textContent="Ce lien n'est plus valable. Demandez-en un nouveau."; history.replaceState(null,"",location.pathname); }
+  $("#login-retour").addEventListener("click", ()=>{ envoye.hidden=true; form.hidden=false; $("#login-email").focus(); });
   $("#login-form").addEventListener("submit", async e=>{
     e.preventDefault();
     const email=$("#login-email").value.trim(); if(!email) return;
-    btn.disabled=true; msg.className="msg"; msg.textContent="Envoi en cours…";
+    btn.disabled=true; btn.textContent="Envoi en cours…"; msg.textContent="";
     const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:false, emailRedirectTo: location.origin+location.pathname } });
-    btn.disabled=false;
+    btn.disabled=false; btn.textContent="Recevoir mon lien de connexion";
     if(error){
-      msg.className="msg err";
-      msg.textContent = /signup|not allowed|not found/i.test(error.message) ? "Cette adresse n'a pas encore d'accès. Écrivez à Laurent Geray pour l'obtenir." : /rate|seconds/i.test(error.message) ? "Un lien vient déjà d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans quelques instants.";
+      msg.textContent = /signup|not allowed|not found/i.test(error.message) ? "Cette adresse n'a pas encore d'accès." : /rate|seconds/i.test(error.message) ? "Un lien vient d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans un instant.";
       return;
     }
-    msg.className="msg ok"; msg.textContent="C'est envoyé. Ouvrez l'e-mail reçu et cliquez sur le lien (pensez à regarder les indésirables).";
+    $("#login-adresse").textContent=email; form.hidden=true; envoye.hidden=false;
   });
 }
 async function initEnLigne(){

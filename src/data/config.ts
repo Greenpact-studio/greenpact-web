@@ -23,18 +23,18 @@ export const SITE = {
 
 // Espace investisseur : la page publique /espace-investisseur/ présente l'espace
 // privé ; le bouton « Se connecter » ouvre l'application des actionnaires
-// (publiée sur Claude), dont l'accès est réservé aux personnes invitées.
+// (/actionnaires/, connexion par lien e-mail), réservée aux personnes invitées
+// depuis Supabase (Authentication → Users).
 // `ouvert: false` : le bouton affiche « Bientôt disponible » et ne mène nulle part
 // (le lien de connexion n'apparaît pas dans la page). Passer à `true` pour ouvrir l'accès.
 export const ESPACE_INVESTISSEUR = {
   href: "/espace-investisseur/",
   label: "Espace investisseur",
-  ouvert: false,
+  ouvert: true,
 };
-// Adresse de l'application des actionnaires (sur Claude). Constante à part : elle
-// n'est lue que par la page /espace-investisseur/, rendue au build, et n'est donc
-// jamais envoyée au navigateur tant que l'espace est fermé.
-export const CONNEXION_ESPACE_INVESTISSEUR = "https://claude.ai/artifact/HAZBk2GEnsAjWPtBh4hbxi";
+// Adresse de l'application des actionnaires (dossier public/actionnaires/, code
+// source dans le dépôt greenpact-investisseurs).
+export const CONNEXION_ESPACE_INVESTISSEUR = "/actionnaires/";
 
 // Les 7 pages du site, dans l'ordre de l'en-tête.
 export const NAV = [

@@ -30,28 +30,26 @@ export default function Page() {
           <h2 id="dir-titre" className={styles.titreSection}>
             Nos 3 participations directes
           </h2>
-          <Reveal cascade className={styles.panneaux} y={20}>
-            {DIRECTES.map((p, i) => (
-              <a key={p.nom} id={ancre(p.nom)} href={p.url} {...externe} className={styles.panneau} aria-label={`${p.nom}, ouvrir le site dans un nouvel onglet`}>
-                <span className={`sur-photo ${styles.panneauVisuel}`}>
-                  <Image src={`/images/${p.photo}`} alt="" width={1600} height={1067} className={styles.panneauPhoto} loading={i === 0 ? "eager" : "lazy"} />
-                  <span className={styles.panneauVoile} aria-hidden />
-                  {p.logoClair && <Image src={`/logos/clair/${p.logoClair}`} alt={p.nom} width={360} height={120} className={styles.logo} loading="lazy" />}
-                </span>
-                <span className={styles.panneauContenu}>
-                  <span className={styles.secteur}>{p.secteur}</span>
-                  <span className={styles.panneauNom}>{p.nom}</span>
-                  <span className={styles.panneauTexte}>{p.description}</span>
-                  <span className={styles.panneauLien}>{p.url.replace(/^https?:\/\//, "")} ↗</span>
-                </span>
-              </a>
-            ))}
-          </Reveal>
+        </div>
+        <div className={styles.panneaux}>
+          {DIRECTES.map((p, i) => (
+            <a key={p.nom} id={ancre(p.nom)} href={p.url} {...externe} className={`sur-photo ${styles.panneau}`} aria-label={`${p.nom}, ouvrir le site dans un nouvel onglet`}>
+              <Image src={`/images/${p.photo}`} alt="" width={1600} height={1067} className={styles.panneauPhoto} loading={i === 0 ? "eager" : "lazy"} />
+              <span className={styles.panneauVoile} aria-hidden />
+              <span className={styles.panneauContenu}>
+                {p.logoClair && <Image src={`/logos/clair/${p.logoClair}`} alt={p.nom} width={360} height={120} className={styles.logo} loading="lazy" />}
+                <span className={styles.secteur}>{p.secteur}</span>
+                <span className={styles.panneauNom}>{p.nom}</span>
+                <span className={styles.panneauTexte}>{p.description}</span>
+                <span className={styles.panneauLien}>{p.url.replace(/^https?:\/\//, "")} ↗</span>
+              </span>
+            </a>
+          ))}
         </div>
       </section>
 
       {/* 7.2 Venture studios */}
-      <section className="conteneur section" aria-labelledby="studios-titre">
+      <section className="conteneur" style={{ paddingBottom: "var(--section)" }} aria-labelledby="studios-titre">
         <h2 id="studios-titre" className={styles.titreSection}>
           Nos deux venture studios
         </h2>

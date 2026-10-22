@@ -5,34 +5,24 @@
   margin-bottom: 2rem;
 }
 
-/* ─── Participations directes : trois cartes, même gabarit que les studios ─── */
+/* ─── Participations directes : grands panneaux ─── */
 .directes {
-  padding-bottom: 0;
+  /* Écart réduit : les studios arrivent juste sous les panneaux. */
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .panneaux {
+  /* Les trois panneaux se touchent : aucun filet entre les photos. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.25rem, 2.5vw, 2rem);
+  gap: 0;
 }
 .panneau {
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-  overflow: hidden;
-  background: #eef1ef;
-  color: var(--vert);
-  scroll-margin-top: calc(var(--header-h) + 1rem);
-  transition: box-shadow 0.4s var(--ease);
-}
-.panneau:hover,
-.panneau:focus-visible {
-  box-shadow: 0 18px 40px -24px rgba(var(--vert-rgb), 0.55);
-}
-.panneauVisuel {
   position: relative;
   display: block;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 3 / 4;
+  max-height: 78vh; /* sur grand écran, laisse apparaître la suite de la page */
   overflow: hidden;
+  color: #fff;
 }
 .panneauPhoto {
   position: absolute;
@@ -49,56 +39,59 @@
 .panneauVoile {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.75) 0%, rgba(var(--vert-rgb), 0.15) 55%, rgba(var(--vert-rgb), 0) 100%);
+  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.9) 0%, rgba(var(--vert-rgb), 0.35) 50%, rgba(var(--vert-rgb), 0.08) 100%);
 }
-/* Logo en version claire, posé sur la photo. */
-.logo {
+.panneauContenu {
   position: absolute;
-  left: clamp(1.25rem, 2.5vw, 1.75rem);
-  bottom: 1.1rem;
-  height: 2.4rem;
+  inset: 0;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.panneau {
+  scroll-margin-top: var(--header-h);
+}
+/* Logo en version claire, posé directement sur la photo (pas de fond blanc). */
+.logo {
+  height: 2.6rem;
   width: auto;
   max-width: 11rem;
   object-fit: contain;
   object-position: left center;
+  margin-bottom: 0.75rem;
   filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.25));
-}
-.panneauContenu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  flex: 1;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 .secteur {
   font-size: var(--t-small);
-  color: var(--vert-70);
+  opacity: 0.8;
 }
 .panneauNom {
-  font-size: var(--t-h3);
+  font-size: var(--t-h2);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 .panneauTexte {
   font-size: var(--t-small);
-  color: var(--vert-70);
-  max-width: 40ch;
+  opacity: 0.9;
+  max-width: 34ch;
 }
 .panneauLien {
-  margin-top: auto;
-  padding-top: 0.75rem;
+  margin-top: 0.5rem;
   font-size: var(--t-small);
-  color: var(--vert-70);
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 /* ─── Studios ─── */
-/* Deux tableaux de même hauteur. Couleurs froides et douces, tirées des logos :
-   ardoise pour Hoji (noir et orange), vert d'eau profond pour 4Elements. */
+/* Deux tableaux de même hauteur. En-têtes tirés des logos : ardoise et orange
+   pour Hoji, noir et blanc pour 4Elements. Lignes des startups sur un gris doux. */
 .studio {
   --studio-fonce: #2b3640;
-  --studio-teinte: #eef1f3;
+  --studio-teinte: #e4e4e1;
   --studio-accent: #e8875f;
-  --studio-filet: rgba(43, 54, 64, 0.12);
+  --studio-filet: rgba(30, 30, 30, 0.1);
   display: flex;
   flex-direction: column;
   border-radius: 4px;
@@ -106,10 +99,10 @@
   background: var(--studio-teinte);
 }
 .studio.\34 elements {
-  --studio-fonce: #26433f;
-  --studio-teinte: #ebf1ee;
-  --studio-accent: #8fb9ad;
-  --studio-filet: rgba(38, 67, 63, 0.12);
+  --studio-fonce: #1e1e1e;
+  --studio-teinte: #e4e4e1;
+  --studio-accent: #ffffff;
+  --studio-filet: rgba(30, 30, 30, 0.1);
 }
 .studios {
   display: grid;
@@ -137,6 +130,12 @@
   max-width: 100%;
   align-self: flex-start;
   object-fit: contain;
+}
+/* 4Elements : le filet blanc est posé à l'intérieur du noir pour rester visible
+   sur le fond clair de la page. */
+.\34 elements .studioEntete {
+  border-top: 5px solid var(--studio-fonce);
+  box-shadow: inset 0 3px 0 0 var(--studio-accent);
 }
 .\34 elements .studioLogo {
   filter: brightness(0) invert(1);
@@ -235,27 +234,11 @@ a.startup:focus-visible {
   .studios {
     grid-template-columns: 1fr;
   }
-  /* Tablette : photo à gauche, texte à droite, pour garder des cartes basses. */
   .panneau {
-    flex-direction: row;
-  }
-  .panneauVisuel {
-    flex: 0 0 44%;
-    aspect-ratio: auto;
-    min-height: 13rem;
+    aspect-ratio: 16 / 10;
   }
   .startup {
     grid-template-columns: 6.5rem minmax(0, 1fr) 1rem;
     gap: 1rem;
-  }
-}
-@media (max-width: 600px) {
-  .panneau {
-    flex-direction: column;
-  }
-  .panneauVisuel {
-    flex: none;
-    aspect-ratio: 16 / 10;
-    min-height: 0;
   }
 }

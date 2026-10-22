@@ -47,7 +47,7 @@ export const EQUIPE: Groupe[] = [
       { prenom: "Cédric", nom: "Boisart", role: "Associé", photo: "cedric-boisart-v2.jpg", linkedin: li("cédric-boisart-07b6a622") },
       { prenom: "Olivier", nom: "Flechon", role: "Venture Director", photo: "olivier-flechon-v2.jpg", linkedin: li("olivier-fléchon-a5342322") },
       { prenom: "Sylvain", nom: "Pont", role: "CFO", photo: "sylvain-pont-v2.jpg", linkedin: li("sylvain-pont") },
-      { prenom: "Ambre", nom: "Vivet-Gros", role: "Gestion administrative", photo: "ambre-vivet-gros.jpg", linkedin: li("ambre-vivet-gros-55988b30") },
+      { prenom: "Ambre", nom: "Vivet-Gros", role: "Gestion administrative", photo: "ambre-vivet-gros-v2.jpg", linkedin: li("ambre-vivet-gros-55988b30") },
     ],
   },
   {

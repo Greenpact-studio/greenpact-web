@@ -18,17 +18,18 @@ export function Resultats() {
       <Reveal cascade className={styles.cartes} y={24}>
         {RESULTATS_MESURES.map((r) => (
           <Link key={r.startup} href={r.lien} className={`sur-photo ${styles.carte}`} aria-label={`${r.startup} : ${r.chiffre} ${r.libelle}. ${r.libelleLien}`}>
-            <Image src={`/images/${r.image}`} alt={r.alt} width={1600} height={1067} className={styles.photo} loading="lazy" />
+            <Image src={`/images/${r.image}`} alt={r.alt} width={960} height={1200} className={styles.photo} loading="lazy" />
             <span className={styles.voile} aria-hidden />
             <span className={styles.contenu}>
-              <span className={`${styles.badge} ${r.niveau === "Estimé" ? styles.estime : ""}`}>{r.niveau}</span>
-              <span className={styles.theme}>{r.theme}</span>
+              <span className={styles.entete}>
+                <span className={styles.startup}>{r.startup}</span>
+                <span className={`${styles.badge} ${r.niveau === "Estimé" ? styles.estime : ""}`}>{r.niveau}</span>
+              </span>
               <span className={styles.chiffre}>{r.chiffre}</span>
               <span className={styles.libelle}>{r.libelle}</span>
-              <span className={styles.preuve}>{r.preuve}</span>
-              <span className={styles.lien}>
-                {r.libelleLien} <span aria-hidden>→</span>
-              </span>
+            </span>
+            <span className={styles.lien}>
+              {r.libelleLien} <span aria-hidden>→</span>
             </span>
           </Link>
         ))}

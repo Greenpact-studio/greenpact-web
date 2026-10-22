@@ -5,22 +5,34 @@
   margin-bottom: 2rem;
 }
 
-/* ─── Participations directes : grands panneaux ─── */
+/* ─── Participations directes : trois cartes, même gabarit que les studios ─── */
 .directes {
-  padding-bottom: var(--section);
+  padding-bottom: 0;
 }
 .panneaux {
-  /* Les trois panneaux se touchent : aucun filet entre les photos. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
 }
 .panneau {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #eef1ef;
+  color: var(--vert);
+  scroll-margin-top: calc(var(--header-h) + 1rem);
+  transition: box-shadow 0.4s var(--ease);
+}
+.panneau:hover,
+.panneau:focus-visible {
+  box-shadow: 0 18px 40px -24px rgba(var(--vert-rgb), 0.55);
+}
+.panneauVisuel {
   position: relative;
   display: block;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
-  color: #fff;
 }
 .panneauPhoto {
   position: absolute;
@@ -37,49 +49,46 @@
 .panneauVoile {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.9) 0%, rgba(var(--vert-rgb), 0.35) 50%, rgba(var(--vert-rgb), 0.08) 100%);
+  background: linear-gradient(to top, rgba(var(--vert-rgb), 0.75) 0%, rgba(var(--vert-rgb), 0.15) 55%, rgba(var(--vert-rgb), 0) 100%);
 }
-.panneauContenu {
-  position: absolute;
-  inset: 0;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-.panneau {
-  scroll-margin-top: var(--header-h);
-}
-/* Logo en version claire, posé directement sur la photo (pas de fond blanc). */
+/* Logo en version claire, posé sur la photo. */
 .logo {
-  height: 2.6rem;
+  position: absolute;
+  left: clamp(1.25rem, 2.5vw, 1.75rem);
+  bottom: 1.1rem;
+  height: 2.4rem;
   width: auto;
   max-width: 11rem;
   object-fit: contain;
   object-position: left center;
-  margin-bottom: 0.75rem;
   filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.25));
+}
+.panneauContenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 .secteur {
   font-size: var(--t-small);
-  opacity: 0.8;
+  color: var(--vert-70);
 }
 .panneauNom {
-  font-size: var(--t-h2);
+  font-size: var(--t-h3);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 .panneauTexte {
   font-size: var(--t-small);
-  opacity: 0.9;
-  max-width: 34ch;
+  color: var(--vert-70);
+  max-width: 40ch;
 }
 .panneauLien {
-  margin-top: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
   font-size: var(--t-small);
-  font-weight: 400;
-  opacity: 0.75;
+  color: var(--vert-70);
 }
 
 /* ─── Studios ─── */
@@ -226,11 +235,27 @@ a.startup:focus-visible {
   .studios {
     grid-template-columns: 1fr;
   }
+  /* Tablette : photo à gauche, texte à droite, pour garder des cartes basses. */
   .panneau {
-    aspect-ratio: 16 / 10;
+    flex-direction: row;
+  }
+  .panneauVisuel {
+    flex: 0 0 44%;
+    aspect-ratio: auto;
+    min-height: 13rem;
   }
   .startup {
     grid-template-columns: 6.5rem minmax(0, 1fr) 1rem;
     gap: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .panneau {
+    flex-direction: column;
+  }
+  .panneauVisuel {
+    flex: none;
+    aspect-ratio: 16 / 10;
+    min-height: 0;
   }
 }

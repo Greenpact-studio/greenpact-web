@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Greenpact · Espace actionnaires</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#1c3a2b; --linen:#edeae4;
+  --bg:#edeae4; --surface:#f6f4f0; --surface-2:#e4e0d8; --ink:#1c3a2b;
+  --muted:rgba(28,58,43,.64); --faint:rgba(28,58,43,.38); --line:rgba(28,58,43,.14); --wash:rgba(28,58,43,.06);
+  --band:#1c3a2b; --on-band:#edeae4; --on-band-muted:rgba(237,234,228,.66); --chip:#ffffff;
+  --font:"Poppins", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --ease:cubic-bezier(.22,.8,.2,1);
+  box-sizing:border-box; color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#132a1f; --surface:#1c3a2b; --surface-2:#24483a; --ink:#edeae4;
+    --muted:rgba(237,234,228,.68); --faint:rgba(237,234,228,.4); --line:rgba(237,234,228,.14); --wash:rgba(237,234,228,.06);
+    --band:#0e2018; --on-band:#edeae4; --on-band-muted:rgba(237,234,228,.66); --chip:#f6f4f0;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#132a1f; --surface:#1c3a2b; --surface-2:#24483a; --ink:#edeae4;
+  --muted:rgba(237,234,228,.68); --faint:rgba(237,234,228,.4); --line:rgba(237,234,228,.14); --wash:rgba(237,234,228,.06);
+  --band:#0e2018; --on-band:#edeae4; --on-band-muted:rgba(237,234,228,.66); --chip:#f6f4f0;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-.015em;line-height:1.15}
+h1{font-size:clamp(1.7rem,2.8vw,2.3rem)}
+h2{font-size:1.3rem}
+h3{font-size:1.02rem}
+p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+
+/* Curtain — single entrance moment */
+/* Connexion (mode Supabase) */
+#login{position:fixed;inset:0;z-index:40;background:var(--forest);color:var(--linen);display:grid;place-items:center;padding:24px}
+#login[hidden]{display:none}
+#login .box{width:min(420px,100%);display:flex;flex-direction:column;gap:16px}
+#login img{width:200px;margin-bottom:12px}
+#login h1{font-size:1.5rem;font-weight:500;margin:0;line-height:1.3}
+#login p{margin:0;color:rgba(237,234,228,.75);font-size:.9rem}
+#login label{font-size:.8rem;color:rgba(237,234,228,.75)}
+#login input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(237,234,228,.3);background:rgba(237,234,228,.06);color:var(--linen);font-size:1rem}
+#login input:focus{outline:2px solid var(--linen);outline-offset:2px}
+#login button{padding:12px 18px;border-radius:99px;border:0;background:var(--linen);color:var(--forest);font-weight:500;cursor:pointer}
+#login button[disabled]{opacity:.6;cursor:default}
+#login .msg{min-height:1.4em;font-size:.86rem}
+#login .msg.ok{color:#b9e4c9}
+#login .msg.err{color:#f3c4b5}
+#login .note{font-size:.76rem;color:rgba(237,234,228,.55)}
+.seal-card .logout{margin-top:10px;background:transparent;border:1px solid rgba(237,234,228,.3);color:var(--linen);border-radius:99px;padding:4px 12px;font-size:.74rem;cursor:pointer}
+.seal-card .logout[hidden]{display:none}
+#curtain{position:fixed;inset:0;z-index:50;background:var(--forest);display:grid;place-items:center;color:var(--linen);transition:transform 1s var(--ease)}
+#curtain.up{transform:translateY(-100%)}
+#curtain .inner{display:flex;flex-direction:column;align-items:center;gap:18px;opacity:0;animation:fadein .7s .1s var(--ease) forwards}
+#curtain img{width:min(260px,60vw)}
+#curtain .seal{display:flex;align-items:center;gap:8px;font-size:.82rem;color:rgba(237,234,228,.7);letter-spacing:.02em}
+#curtain .bar{width:140px;height:1px;background:rgba(237,234,228,.25);overflow:hidden}
+#curtain .bar i{display:block;height:100%;width:100%;background:var(--linen);transform:translateX(-100%);animation:load 1.1s .2s var(--ease) forwards}
+@keyframes fadein{to{opacity:1}}
+@keyframes load{to{transform:none}}
+
+/* Watermark */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.045;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260'%3E%3Ctext x='0' y='150' transform='rotate(-24 210 130)' font-family='Arial' font-size='22' letter-spacing='6' fill='%231c3a2b'%3ECONFIDENTIEL%3C/text%3E%3C/svg%3E")}
+
+/* Shell */
+.shell{position:relative;display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;background:var(--forest);color:var(--linen);display:flex;flex-direction:column;padding:30px 22px 24px;overflow:hidden}
+.side::after{content:"";position:absolute;right:-120px;top:-40px;width:240px;height:130%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(237,234,228,.045) 46px 84px);pointer-events:none}
+.side .brand-logo{display:block;width:178px;height:auto;max-width:100%;margin:2px 4px 6px}
+.side .tag{font-size:.78rem;color:rgba(237,234,228,.6);margin:0 4px 34px}
+.nav{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
+.nav a{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;text-decoration:none;color:rgba(237,234,228,.78);font-weight:500;font-size:.93rem;transition:background .2s,color .2s}
+.nav a:hover{color:var(--linen);background:rgba(237,234,228,.07)}
+.nav a[aria-current="page"]{background:var(--linen);color:var(--forest)}
+.nav a small{font-size:.72rem;font-weight:500;opacity:.7}
+.seal-card{margin-top:auto;position:relative;z-index:1;border:1px solid rgba(237,234,228,.18);border-radius:14px;padding:14px 14px 12px;font-size:.78rem;color:rgba(237,234,228,.72);line-height:1.5}
+.seal-card .who{display:flex;align-items:center;gap:8px;color:var(--linen);font-weight:500;font-size:.84rem;margin-bottom:6px}
+.seal-card .role{display:inline-block;margin-top:8px;padding:2px 9px;border-radius:99px;background:rgba(237,234,228,.12);color:var(--linen);font-size:.72rem}
+main{min-width:0;padding:0 clamp(18px,3.4vw,52px) 80px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 18px;border-bottom:1px solid var(--line);margin-bottom:34px;position:sticky;top:0;z-index:4;background:var(--bg)}
+.topbar .stamp{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--muted)}
+.topbar .stamp b{font-weight:600;color:var(--ink)}
+.lockdot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--forest);color:var(--linen);flex:none}
+.btn.menu-btn{display:none}
+.view{animation:viewin .45s var(--ease)}
+.view.still,.view.still *{animation:none!important;transition:none!important}
+@keyframes viewin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Buttons & chips */
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--forest);background:var(--forest);color:var(--linen);padding:9px 16px;border-radius:99px;cursor:pointer;font-weight:500;font-size:.86rem;text-decoration:none;transition:transform .15s,opacity .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.small{padding:5px 12px;font-size:.8rem}
+.btn.danger{background:transparent;border-color:#9b2c2c;color:#9b2c2c}
+.btn.on-band{background:var(--linen);color:var(--forest);border-color:var(--linen)}
+.btn:disabled{opacity:.5;cursor:default;transform:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn:not(.ghost):not(.danger){background:var(--linen);color:var(--forest);border-color:var(--linen)}}
+:root[data-theme="dark"] .btn:not(.ghost):not(.danger){background:var(--linen);color:var(--forest);border-color:var(--linen)}
+.edit-only{display:none!important}
+body.can-edit .edit-only{display:revert!important}
+body.can-edit .edit-only.flex{display:flex!important}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:500;padding:2px 10px;border-radius:99px;background:var(--wash);color:var(--ink);white-space:nowrap}
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:99px;background:var(--wash)}
+.seg button{border:0;background:transparent;padding:6px 14px;border-radius:99px;cursor:pointer;font-size:.84rem;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(28,58,43,.12)}
+
+/* Section headers */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.head p{color:var(--muted);margin-top:8px;max-width:60ch}
+.head p.une-ligne{max-width:none}
+@media (min-width:760px){.head p.une-ligne{white-space:nowrap}}
+.sec{margin-top:56px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
+.sec-h p{color:var(--muted);font-size:.88rem}
+.empty{border:1px dashed var(--line);border-radius:14px;padding:26px;color:var(--muted);text-align:center;font-size:.9rem}
+
+/* Hero band */
+.band{position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:22px;padding:clamp(26px,3.4vw,44px)}
+.band::before{content:"";position:absolute;inset:-40% -10% -40% 45%;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(237,234,228,.05) 60px 110px);animation:drift 40s linear infinite}
+@keyframes drift{to{background-position:400px 0}}
+.band > *{position:relative}
+.letter-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);gap:clamp(24px,4vw,56px);align-items:stretch}
+.letter h2{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;margin:6px 0 18px;max-width:20ch}
+.letter .kicker{font-size:.82rem;color:var(--on-band-muted)}
+.letter .body{color:rgba(237,234,228,.86);font-size:.95rem;display:flex;flex-direction:column;gap:12px;max-width:62ch}
+.letter .body b{color:var(--linen);font-weight:600}
+.sign{display:flex;align-items:center;gap:14px;margin-top:24px}
+.faces{display:flex}
+.faces img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--band)}
+.faces img + img{margin-left:-12px}
+.sign b{display:block;font-weight:600;font-size:.9rem}
+.sign span{font-size:.8rem;color:var(--on-band-muted)}
+.board{display:flex;flex-direction:column;justify-content:center;gap:0;border-left:1px solid rgba(237,234,228,.16);padding-left:clamp(20px,3vw,40px)}
+.board .row{padding:16px 0;border-bottom:1px solid rgba(237,234,228,.14);display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:baseline}
+.board .row:last-child{border-bottom:0}
+.board .big{font-size:clamp(2.1rem,3.6vw,3rem);font-weight:600;letter-spacing:-.03em;line-height:1}
+.board .lab{font-size:.84rem;color:var(--on-band-muted)}
+.board .lab b{display:block;color:var(--linen);font-weight:500;font-size:.88rem}
+
+/* Structure diagram */
+.tree{background:var(--surface);border-radius:22px;padding:clamp(22px,3vw,36px);border:1px solid var(--line)}
+.tree-top{display:flex;justify-content:center}
+.node-top{background:var(--forest);color:var(--linen);border-radius:16px;padding:14px 22px;text-align:center;min-width:240px}
+.node-top img{width:150px;margin:0 auto 6px}
+.node-top span{font-size:.78rem;color:rgba(237,234,228,.7)}
+.tree-branches{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-top:44px;margin-top:0}
+.tree-branches::before{content:"";position:absolute;top:22px;left:16.66%;right:16.66%;height:1px;background:var(--forest);opacity:.35;transform:scaleX(0);transform-origin:center;transition:transform .9s .2s var(--ease)}
+.tree-stem{position:relative;height:22px;display:flex;justify-content:center}
+.tree-stem::before{content:"";width:1px;height:100%;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
+.branch{position:relative;display:flex;flex-direction:column;gap:12px}
+.branch::before{content:"";position:absolute;top:-22px;left:50%;width:1px;height:22px;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s 1s var(--ease)}
+.in .tree-stem::before,.in .tree-branches::before,.in .branch::before{transform:none}
+.branch-h{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg);text-align:center}
+.branch-h b{display:block;font-size:.95rem}
+.branch-h span{font-size:.76rem;color:var(--muted)}
+.logos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.lchip{border:1px solid var(--line);background:transparent;border-radius:12px;height:48px;min-width:86px;padding:8px 14px;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .2s var(--ease),box-shadow .2s;opacity:0;transform:translateY(6px)}
+.in .lchip{opacity:1;transform:none;transition:opacity .5s var(--d,0s) var(--ease),transform .5s var(--d,0s) var(--ease),box-shadow .2s}
+.lchip:hover{background:var(--surface);border-color:var(--ink);transform:translateY(-2px)}
+.lchip .logo{--lh:24px;--lw:100px}
+.lchip .txt{font-weight:600;font-size:.82rem}
+.lchip.dim{opacity:.45}
+
+/* Split */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:22px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,2.6vw,30px)}
+.donut-wrap{display:grid;grid-template-columns:180px 1fr;gap:22px;align-items:center}
+.donut circle{fill:none;stroke-width:22;transition:stroke-dasharray 1.1s var(--ease)}
+.legend-list{list-style:none;margin:0;padding:0;font-size:.86rem}
+.legend-list li{display:grid;grid-template-columns:12px 1fr auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line)}
+.legend-list li:last-child{border-bottom:0}
+.legend-list i{width:12px;height:12px;border-radius:4px}
+.feed{list-style:none;margin:0;padding:0}
+.feed li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.feed li:last-child{border-bottom:0}
+.feed .flogo{width:76px;height:46px;border-radius:12px;background:var(--wash);display:grid;place-items:center;padding:6px 8px;overflow:hidden}
+.feed .flogo .logo{--lh:24px;--lw:64px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .fcol .lchip .logo,:root:not([data-theme="light"]) .feed .flogo .logo{background:var(--srcd) center/contain no-repeat;-webkit-mask:none;mask:none}}
+:root[data-theme="dark"] .fcol .lchip .logo,:root[data-theme="dark"] .feed .flogo .logo{background:var(--srcd) center/contain no-repeat;-webkit-mask:none;mask:none}
+.feed .flogo .txt{font-size:.66rem;font-weight:600;text-align:center;line-height:1.1;max-width:100%;overflow-wrap:anywhere}
+.feed .meta{font-size:.76rem;color:var(--muted)}
+.feed h3{font-size:.95rem;font-weight:600;margin:2px 0 3px}
+.feed p{font-size:.86rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.feed li.open p{-webkit-line-clamp:unset}
+.strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:22px}
+.strip .panel{display:flex;gap:18px;align-items:center}
+.cal{flex:none;width:64px;border-radius:14px;overflow:hidden;text-align:center;background:var(--forest);color:var(--linen)}
+.cal .m{font-size:.72rem;padding:4px 0;background:rgba(0,0,0,.18)}
+.cal .d{font-size:1.6rem;font-weight:600;line-height:1.6}
+
+/* Portfolio */
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(264px,1fr));gap:18px}
+.co{text-align:left;padding:0;border:1px solid var(--line);background:var(--surface);border-radius:20px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.co:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(28,58,43,.14)}
+.cover{position:relative;height:172px;background:var(--forest);display:flex;align-items:flex-end;justify-content:space-between;padding:16px 18px;overflow:hidden;color:var(--linen)}
+.cover .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1.2s var(--ease)}
+.cover.photo::before{content:"";position:absolute;inset:0;z-index:1;background:#1c3a2b;mix-blend-mode:color;opacity:.22;pointer-events:none}
+.cover.photo::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,32,24,.28) 0%,rgba(14,32,24,0) 32%,rgba(14,32,24,.05) 50%,rgba(14,32,24,.82) 100%);pointer-events:none}
+.co:hover .cover .ph{transform:scale(1.05)}
+.cover > :not(.ph){position:relative;z-index:2}
+.cover .lg{display:flex;align-items:center}
+.cover .lg .logo{--lh:26px;--lw:150px;background:currentColor;-webkit-mask:var(--src) left center/contain no-repeat;mask:var(--src) left center/contain no-repeat}
+.cover .lg .txt{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+.cover .stage{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:500;color:var(--linen);background:rgba(14,32,24,.38);border:1px solid rgba(237,234,228,.3);padding:2px 10px;border-radius:99px;backdrop-filter:blur(6px)}
+.cover.stripes,.cover.light{background-color:var(--surface-2);background-image:repeating-linear-gradient(115deg,transparent 0 30px,rgba(28,58,43,.045) 30px 54px);justify-content:center;align-items:center;color:var(--ink)}
+.cover.light .lg .logo,.cover.stripes .lg .logo{--lh:40px;--lw:180px;background:var(--src) center/contain no-repeat;filter:none}
+.cover.light .stage,.cover.stripes .stage{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.dr-cover{height:240px}
+.dr-cover .lg .logo{--lh:30px;--lw:180px}
+.logo{display:block;height:calc(var(--lh,28px) * (0.7 + 0.9 / var(--r,3)));aspect-ratio:var(--r,3);max-width:var(--lw,120px);background:var(--src) center/contain no-repeat}
+.logo.mono{background:currentColor;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo{background:currentColor;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}}
+:root[data-theme="dark"] .logo{background:currentColor;-webkit-mask:var(--src) center/contain no-repeat;mask:var(--src) center/contain no-repeat}
+/* Teams strip */
+.teams{position:relative;overflow:hidden;border-radius:22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.teams-track{display:flex;gap:14px;width:max-content;animation:marquee 70s linear infinite}
+.teams:hover .teams-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(calc(-50% - 7px))}}
+.team{position:relative;width:300px;height:200px;border-radius:18px;overflow:hidden;border:0;padding:0;cursor:pointer;flex:none;color:var(--linen);text-align:left;background:var(--forest)}
+.team .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1s var(--ease)}
+.team:hover .ph{transform:scale(1.06)}
+.team::before{content:"";position:absolute;inset:0;z-index:1;background:#1c3a2b;mix-blend-mode:color;opacity:.22}
+.team::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,32,24,0) 45%,rgba(14,32,24,.85))}
+.team .cap{position:absolute;left:16px;right:16px;bottom:14px;z-index:2;display:flex;flex-direction:column;gap:4px}
+.team .cap .logo{--lh:26px;--lw:130px;background:currentColor;-webkit-mask:var(--src) left center/contain no-repeat;mask:var(--src) left center/contain no-repeat}
+.team .cap span{font-size:.74rem;color:rgba(237,234,228,.75)}
+.team .cap b{font-weight:600}
+@media (prefers-reduced-motion:reduce){.teams{overflow-x:auto}.teams-track{animation:none}}
+.co{background:color-mix(in srgb,var(--brand) 8%,var(--surface))}
+.co:hover{box-shadow:0 14px 34px color-mix(in srgb,var(--brand) 22%,transparent)}
+.co-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1;border-top:3px solid color-mix(in srgb,var(--brand) 60%,transparent)}
+.cover.light{background-color:color-mix(in srgb,var(--brand) 14%,var(--surface-2))!important}
+.co-body .via{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.005em}
+.co-body h3{font-size:1.08rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-body p{font-size:.86rem;line-height:1.6;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;height:calc(1.6em * 3);margin-bottom:6px}
+.co-impact{margin-top:auto;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--brand) 28%,var(--line));display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;align-items:start;min-height:calc(2.9em + 13px)}
+.co-impact b{font-size:1.2rem;font-weight:600;letter-spacing:-.02em;white-space:nowrap;line-height:1.2}
+.co-impact > span:not(.proof){font-size:.76rem;line-height:1.45;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.co-impact .proof{margin-top:2px}
+.frise{--p0:#c4d0bd;--p1:#8fac97;--p2:#4f7664;--p3:#1c3a2b;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px 26px 22px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .frise{--p0:#4a6656;--p1:#6f9580;--p2:#9cc0aa;--p3:#d4e6d9}}
+:root[data-theme="dark"] .frise{--p0:#4a6656;--p1:#6f9580;--p2:#9cc0aa;--p3:#d4e6d9}
+.frise .s0{--c:var(--p0)}.frise .s1{--c:var(--p1)}.frise .s2{--c:var(--p2)}.frise .s3{--c:var(--p3)}
+.frise-track{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;height:8px;margin:6px 14px 0 0}
+.fseg{position:relative;border-radius:8px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .7s calc(.15s + var(--i)*.4s) var(--ease)}
+.frise.in .fseg{transform:none}
+.fseg::before{content:"";position:absolute;left:-2px;top:50%;width:18px;height:18px;margin-top:-9px;border-radius:50%;background:var(--c);box-shadow:0 0 0 5px var(--surface)}
+.frise-arrow{position:absolute;right:-14px;top:50%;margin-top:-8px;width:0;height:0;border-left:14px solid var(--p3);border-top:8px solid transparent;border-bottom:8px solid transparent;opacity:0;transition:opacity .4s 1.8s}
+.frise.in .frise-arrow{opacity:1}
+.frise-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:20px}
+.fcol{padding-right:14px;opacity:0;transform:translateY(8px);transition:opacity .6s calc(.3s + var(--i)*.4s) var(--ease),transform .6s calc(.3s + var(--i)*.4s) var(--ease)}
+.frise.in .fcol{opacity:1;transform:none}
+.fcol h3{font-size:.98rem;display:flex;align-items:center;gap:8px}
+.fcol h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+.fcol p{font-size:.76rem;color:var(--muted);margin:4px 0 14px;min-height:2.6em}
+.fcol .logos{justify-content:flex-start;gap:7px}
+.fcol .lchip{background:color-mix(in srgb,var(--c) 11%,transparent);border-color:color-mix(in srgb,var(--c) 50%,transparent);height:44px;min-width:0;padding:8px 12px}
+.fcol .lchip:hover{background:color-mix(in srgb,var(--c) 30%,transparent);border-color:var(--c)}
+.fcol .lchip .logo{--lh:22px;--lw:92px}
+/* Drawer */
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(14,32,24,.5);backdrop-filter:blur(2px)}
+#drawer{margin:0 0 0 auto;height:100%;max-height:100%;width:min(560px,100vw);border-radius:22px 0 0 22px;animation:slidein .45s var(--ease)}
+@keyframes slidein{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.dr-cover{height:200px;border-radius:0}
+.dr-close{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(237,234,228,.92);color:#1c3a2b;cursor:pointer;font-size:1.1rem}
+.dr-body{padding:24px 28px 40px;display:flex;flex-direction:column;gap:22px}
+.dr-body .via{font-size:.8rem;color:var(--muted)}
+.dr-body h2{font-size:1.6rem;margin-top:2px}
+.dr-body .lead{color:var(--muted);margin-top:8px}
+.impact-hero{background:var(--forest);color:var(--linen);border-radius:16px;padding:18px 20px}
+.impact-hero b{display:block;font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.impact-hero span{font-size:.86rem;color:rgba(237,234,228,.78)}
+.impact-hero p{margin-top:10px;font-size:.88rem;color:rgba(237,234,228,.86)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.facts div{padding:12px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.facts div:nth-child(2n){border-right:0}
+.facts dt{font-size:.74rem;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:500;font-size:.9rem}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:1px solid var(--line)}
+.timeline li{position:relative;padding:0 0 14px 6px;font-size:.88rem}
+.timeline li::before{content:"";position:absolute;left:-24px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--forest)}
+:root[data-theme="dark"] .timeline li::before{border-color:var(--linen)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+
+/* Proof badges */
+.proof{display:inline-flex;align-items:center;font-size:.68rem;font-weight:600;padding:1px 8px;border-radius:99px;border:1px solid currentColor;line-height:1.6;white-space:nowrap}
+.proof-m{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proof-e{color:var(--ink)}
+.proof-i{color:var(--muted);border-style:dashed}
+.impact-hero .proof-m{background:var(--linen);color:var(--forest);border-color:var(--linen)}
+.impact-hero .proof-e{color:var(--linen)}
+.impact-hero .proof-i{color:rgba(237,234,228,.8)}
+
+/* Impact */
+.manifest{font-size:clamp(1.25rem,2.1vw,1.7rem);font-weight:500;line-height:1.35;max-width:34ch;letter-spacing:-.01em}
+.manifest em{font-style:normal;color:var(--on-band-muted)}
+.family{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;padding:30px 0;border-top:1px solid var(--line)}
+.family h2{font-size:1.15rem;position:sticky;top:96px}
+.family .count{display:block;font-size:.8rem;color:var(--muted);font-weight:400;margin-top:6px}
+.fig-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.fig{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:18px;padding:18px;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:transform .25s var(--ease),border-color .2s}
+.fig:hover{transform:translateY(-2px);border-color:var(--ink)}
+.fig b{font-size:1.9rem;font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.fig > span:not(.who){font-size:.84rem;color:var(--muted)}
+.fig .who{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.8rem;font-weight:500;padding-top:10px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;counter-reset:s}
+.step{padding:22px 22px 22px 0;border-top:2px solid var(--ink);margin-right:22px}
+.step h3{margin:10px 0 8px}
+.step .n{font-size:.8rem;color:var(--muted)}
+.step ul{margin:0;padding-left:16px;font-size:.86rem;color:var(--muted)}
+.principles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:22px}
+.principles div{background:var(--wash);border-radius:16px;padding:16px}
+.principles b{display:block;margin-bottom:4px}
+.principles p{font-size:.84rem;color:var(--muted)}
+
+/* Impact page */
+.imp-hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:stretch;min-height:520px}
+.imp-photo{border-radius:22px;background-size:cover;background-position:center;min-height:420px}
+@keyframes kenburns{from{background-size:108%}to{background-size:118%}}
+.imp-copy{display:flex;flex-direction:column;justify-content:center;gap:18px;padding:10px 0}
+.kicker{font-size:.82rem;color:var(--muted);font-weight:500}
+.imp-copy h1{font-size:clamp(2rem,3.4vw,2.9rem);line-height:1.08;letter-spacing:-.03em;font-weight:600;max-width:19ch;opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.imp-hero.in .imp-copy h1{opacity:1;transform:none}
+.imp-copy > p{color:var(--muted);font-size:1.02rem;max-width:46ch}
+.imp-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:10px 0 0;border-top:1px solid var(--line)}
+.imp-facts div{padding:16px 16px 0 0}
+.imp-facts div + div{padding-left:16px;border-left:1px solid var(--line)}
+.imp-facts dt{font-size:1.7rem;font-weight:600;letter-spacing:-.03em}
+.imp-facts dd{margin:4px 0 0;font-size:.8rem;color:var(--muted);line-height:1.45}
+.imp-part{padding-top:44px;border-top:1px solid var(--line)}
+.part-h{margin-bottom:22px}
+.part-h h2{font-size:clamp(1.4rem,2.2vw,1.8rem)}
+.part-h p{color:var(--muted);margin-top:6px;font-size:.92rem}
+.imp-filters{display:flex;flex-direction:column;gap:14px;margin:4px 0 32px}
+.fgroup{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flab{font-size:.78rem;color:var(--muted);width:130px;flex:none;font-weight:500}
+.fchip{border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 14px;font-size:.82rem;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:8px;color:var(--ink);transition:background .2s,border-color .2s}
+.fchip:hover{border-color:var(--ink)}
+.fchip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.fchip[aria-pressed="true"] .proof{border-color:var(--bg);color:var(--bg);background:transparent}
+.fchip span:not(.proof){font-weight:400}
+.fchip em{font-style:normal;font-size:.72rem;opacity:.6}
+.fam{display:grid;grid-template-columns:minmax(260px,.82fr) minmax(0,1.5fr);gap:18px;margin-bottom:40px}
+.tone-decarboner{--tone:#34514b}.tone-consommer{--tone:#2c4d5a}.tone-boucler{--tone:#5c4b37}.tone-adapter{--tone:#45532f}
+.fam .fig{background:var(--tone);border-color:transparent;color:var(--linen)}
+.fam .fig .fl{color:rgba(237,234,228,.78)}
+.fam .fig:hover{border-color:rgba(237,234,228,.55)}
+.fam .fig .who{padding-top:14px}
+.fam .fig .logo{--lh:25px;--lw:130px;color:var(--linen);background:currentColor;-webkit-mask-position:left center;mask-position:left center}
+.fam .fig .nm{font-weight:600;font-size:.9rem}
+.fam .fig .proof-m{background:var(--linen);color:var(--forest);border-color:var(--linen)}
+.fam .fig .proof-e{color:var(--linen)}
+.fam .fig .proof-i{color:rgba(237,234,228,.78)}
+.fam.rev{grid-template-columns:minmax(0,1.5fr) minmax(260px,.82fr)}
+.fam.rev .fam-img{order:2}
+.fam-img{position:relative;border-radius:20px;overflow:hidden;background-size:cover;background-position:center;min-height:300px;clip-path:inset(0 100% 0 0 round 20px);transition:clip-path 1.1s var(--ease)}
+.fam.rev .fam-img{clip-path:inset(0 0 0 100% round 20px)}
+.fam.in .fam-img{clip-path:inset(0 0 0 0 round 20px)}
+.fam-img::before{content:"";position:absolute;inset:0;background:#1c3a2b;mix-blend-mode:color;opacity:.18}
+.fam-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.05) 30%,rgba(14,32,24,.85))}
+.fam-cap{position:absolute;left:22px;right:22px;bottom:20px;z-index:1;color:var(--linen);display:flex;flex-direction:column;gap:6px}
+.fam-n{font-size:.78rem;opacity:.7}
+.fam-cap h2{font-size:1.45rem;line-height:1.15}
+.fam-cap p{font-size:.86rem;color:rgba(237,234,228,.82)}
+.fam-c{font-size:.74rem;opacity:.7;margin-top:2px}
+.fam-grid{display:flex;flex-direction:column;gap:14px;min-width:0}
+.frow{display:flex;gap:14px;flex:1}
+.frow .fig{flex:1 1 0;min-width:0}
+.fam-grid .fig{opacity:0;transform:translateY(10px);transition:opacity .6s var(--d) var(--ease),transform .6s var(--d) var(--ease),border-color .2s;min-height:150px}
+.fam.in .fam-grid .fig{opacity:1;transform:none}
+.fam.in .fam-grid .fig:hover{transform:translateY(-3px)}
+.fig .fl{font-size:.84rem;color:var(--muted)}
+/* track */
+.track{position:relative;padding:8px 0 4px}
+.track-line{position:absolute;left:calc(16.66% - 0px);right:16.66%;top:30px;height:2px;background:var(--line);border-radius:2px}
+.track-line i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 1.6s .2s var(--ease)}
+.track.in .track-line i{transform:none}
+.runner{position:absolute;top:-4px;left:0;width:10px;height:10px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 6px var(--wash);opacity:0}
+.track.in .runner{opacity:1;animation:run 6s 1.8s ease-in-out infinite}
+@keyframes run{0%{left:0}50%{left:calc(100% - 10px)}100%{left:0}}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.phase{display:flex;flex-direction:column;align-items:flex-start;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:0 22px 22px;margin-top:8px;opacity:0;transform:translateY(12px);transition:opacity .7s var(--d) var(--ease),transform .7s var(--d) var(--ease)}
+.track.in .phase{opacity:1;transform:none}
+.node{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-weight:600;margin:-1px auto 6px;transform:translateY(-1px);box-shadow:0 0 0 8px var(--bg);position:relative;z-index:1;align-self:center}
+.phase .when{font-size:.76rem;color:var(--muted)}
+.phase h3{font-size:1.15rem}
+.phase ul{margin:4px 0 0;padding-left:16px;font-size:.86rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.viz{width:100%;background:var(--wash);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;align-items:center;margin:6px 0}
+.viz-cap{font-size:.82rem;color:var(--muted);text-align:center}
+.viz-cap b{color:var(--ink);font-weight:600}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;width:100%;max-width:240px}
+.dots i{aspect-ratio:1;border-radius:50%;background:var(--ink);opacity:.9;transition:opacity .5s calc(1s + var(--i)*.12s),transform .5s calc(1s + var(--i)*.12s)}
+.track.in .dots i:not(.keep){opacity:.14;transform:scale(.7)}
+.track.in .dots i.keep{animation:pulse 2.4s 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px var(--wash)}}
+.mini{width:100%;max-width:240px;height:auto;overflow:visible}
+.mini .thr{stroke:var(--muted);stroke-dasharray:4 4;stroke-width:1}
+.mini text{font-family:var(--font);font-size:10px;fill:var(--muted)}
+.mini .grow{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s 1s var(--ease)}
+.track.in .mini .grow{stroke-dashoffset:0}
+.mini .tip-dot{fill:var(--ink);opacity:0;transition:opacity .3s 2.5s}
+.track.in .mini .tip-dot{opacity:1}
+.cycle{position:relative;width:84px;height:84px;display:grid;place-items:center}
+.cycle svg{position:absolute;inset:0;width:100%;height:100%}
+.cycle .ring{fill:none;stroke:var(--line);stroke-width:3}
+.cycle .arc{fill:none;stroke:var(--ink);stroke-width:3;stroke-dasharray:.28 1;transform-origin:center;transform:rotate(-90deg)}
+.cycle .spin-dot{fill:var(--ink)}
+.cycle svg{animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.cycle span{font-weight:600;font-size:.95rem;position:relative}
+.commit{margin-top:22px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:26px;align-items:center;background:var(--band);color:var(--on-band);border-radius:22px;padding:20px 28px}
+.commit-ring{position:relative;width:88px;height:88px;display:grid;place-items:center}
+.commit-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.commit-ring .bg{fill:none;stroke:rgba(237,234,228,.16);stroke-width:9}
+.commit-ring .fg{fill:none;stroke:var(--linen);stroke-width:9;stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray 1.6s .3s var(--ease)}
+.commit.in .commit-ring .fg{stroke-dasharray:50 100}
+.commit-ring b{font-size:1.5rem;font-weight:600;position:relative}
+.commit h3{font-size:1.1rem;margin-bottom:6px}
+.commit p{font-size:.88rem;color:var(--on-band-muted);max-width:none;text-wrap:balance}
+.commit-side{display:flex;flex-direction:column;gap:10px;font-size:.84rem;color:var(--on-band-muted);border-left:1px solid rgba(237,234,228,.16);padding-left:24px}
+.commit-side b{color:var(--linen);font-weight:600}
+/* flips */
+.flips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.flip{perspective:1200px;height:330px;outline:none;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .8s var(--ease);transform-style:preserve-3d}
+.flip:hover .flip-in,.flip:focus-visible .flip-in,.flip.on .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:20px;padding:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;gap:10px}
+.front{background:var(--surface);border:1px solid var(--line)}
+.front .fn{font-size:.78rem;color:var(--muted)}
+.ficon{width:46px;height:46px;border-radius:14px;background:var(--wash);display:grid;place-items:center;margin:6px 0}
+.ficon svg{width:24px;height:24px}
+.front h3{font-size:1.2rem}
+.front p{font-size:.88rem;color:var(--muted)}
+.front .hint{margin-top:auto;font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+.front .hint::after{content:"↻";font-size:.9rem}
+.back{background:var(--forest);color:var(--linen);transform:rotateY(180deg)}
+.back h3{font-size:1rem;color:rgba(237,234,228,.7);font-weight:500}
+.back ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;font-size:.88rem;line-height:1.45}
+.back li{padding-left:14px;border-left:2px solid rgba(237,234,228,.35)}
+@media (max-width:1100px){
+  .flips{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .imp-hero{grid-template-columns:1fr}
+  .imp-photo{min-height:320px}
+  .commit{grid-template-columns:auto minmax(0,1fr)}
+  .commit-side{grid-column:1 / -1;border-left:0;padding-left:0;flex-direction:row;flex-wrap:wrap;gap:18px}
+}
+@media (max-width:860px){
+  .fam,.fam.rev{grid-template-columns:1fr}
+  .fam.rev .fam-img{order:0}
+  .fam-img{min-height:220px}
+  .frow{flex-wrap:wrap}
+  .frow .fig{flex:1 1 40%}
+  .phases{grid-template-columns:1fr}
+  .track-line{display:none}
+  .imp-facts{grid-template-columns:1fr}
+  .imp-facts div + div{padding-left:0;border-left:0}
+  .flab{width:100%}
+  .flips{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .fam-img{clip-path:none}
+  .fam-grid .fig,.phase,.imp-copy h1{opacity:1;transform:none}
+  .imp-photo{animation:none}
+}
+
+/* Performance */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;position:relative}
+.kpi.dark{background:var(--forest);color:var(--linen);border-color:var(--forest)}
+.kpi .v{font-size:1.85rem;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.kpi .l{font-size:.82rem;color:var(--muted);margin-top:6px;display:flex;gap:6px;align-items:center}
+.kpi.dark .l{color:rgba(237,234,228,.72)}
+.kpi small{display:block;font-size:.74rem;color:var(--faint);margin-top:2px}
+.kpi.dark small{color:rgba(237,234,228,.5)}
+.kpi.empty .v{font-size:1rem;font-weight:500;color:var(--faint)}
+.tip{position:relative;width:18px;height:18px;border-radius:50%;border:1px solid currentColor;background:transparent;display:inline-grid;place-items:center;font-size:.66rem;font-weight:600;cursor:help;padding:0;opacity:.7;flex:none}
+.tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);width:240px;background:var(--forest);color:var(--linen);font-size:.78rem;font-weight:400;line-height:1.45;padding:10px 12px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;text-align:left;z-index:10;box-shadow:0 10px 30px rgba(14,32,24,.3)}
+.tip:hover::after,.tip:focus::after{opacity:1;transform:translateX(-50%)}
+.chart-card{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr);gap:28px;align-items:center}
+.line-chart{width:100%;height:auto;overflow:visible}
+.line-chart .area{fill:var(--wash)}
+.line-chart .ln{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease)}
+.in .line-chart .ln{stroke-dashoffset:0}
+.line-chart text{font-family:var(--font);font-size:12px;fill:var(--muted)}
+.line-chart .pt{fill:var(--bg);stroke:var(--ink);stroke-width:2}
+.line-chart .vl{fill:var(--ink);font-weight:600;font-size:12.5px}
+.read{font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:10px}
+.read b{color:var(--ink);font-weight:600}
+.pos{display:flex;flex-direction:column;gap:4px}
+.pos-row{display:grid;grid-template-columns:minmax(150px,210px) minmax(0,1fr) 92px;gap:18px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pos-row:last-child{border-bottom:0}
+.pos-row .nm{display:flex;flex-direction:column}
+.pos-row .nm b{font-weight:600;font-size:.92rem}
+.pos-row .nm span{font-size:.74rem;color:var(--muted)}
+.bars2{display:flex;flex-direction:column;gap:5px}
+.b{height:10px;border-radius:6px;width:0;transition:width 1.1s var(--ease)}
+.b.cost{background:var(--surface-2)}
+.b.val{background:var(--ink)}
+.bars2 small{font-size:.72rem;color:var(--muted)}
+.moic{text-align:right;font-weight:600;font-size:1.05rem}
+.moic span{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
+.keys{display:flex;gap:18px;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+.keys i{display:inline-block;width:14px;height:8px;border-radius:4px;margin-right:6px;vertical-align:middle}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:500;color:var(--muted);font-size:.78rem}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+.note{font-size:.8rem;color:var(--muted);margin-top:12px;max-width:80ch}
+.studios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+
+/* Lectures */
+.reads{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.read-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.read-card .src{font-size:.76rem;color:var(--muted)}
+.read-card h3 a{text-decoration:none}
+.read-card h3 a:hover{text-decoration:underline}
+.read-card p{font-size:.88rem;color:var(--muted)}
+.memo{margin-top:6px;border-radius:12px;background:var(--wash);padding:12px 14px;font-size:.86rem}
+.memo b{display:block;font-size:.74rem;font-weight:600;margin-bottom:2px}
+.search{width:min(320px,100%);padding:9px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
+
+/* Agenda */
+.event{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:20px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
+.event h3{font-size:1rem}
+.event p{color:var(--muted);font-size:.88rem;margin-top:4px}
+.past{opacity:.55}
+
+/* Lettres */
+.nl-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:22px;align-items:start}
+.preview{width:100%;height:600px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.check{list-style:none;padding:0;margin:10px 0 0;font-size:.88rem}
+.check li{padding:8px 0;border-bottom:1px solid var(--line)}
+.check b{font-weight:600}
+
+/* Forms */
+#modal{width:min(580px,94vw);border-radius:22px;margin:auto}
+#modal form{padding:26px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow:auto}
+label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:500}
+label input,label textarea,label select{padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-weight:400;font-size:.9rem}
+label textarea{min-height:96px;resize:vertical}
+.hint{font-weight:400;color:var(--muted);font-size:.76rem}
+.form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(10px);background:var(--forest);color:var(--linen);padding:10px 18px;border-radius:99px;font-size:.86rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.foot{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);font-size:.74rem;color:var(--faint);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* Responsive */
+@media (max-width:1100px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .letter-grid,.split,.chart-card,.nl-grid{grid-template-columns:1fr}
+  .board{border-left:0;padding-left:0;border-top:1px solid rgba(237,234,228,.16)}
+  .principles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;inset:0 auto 0 0;width:min(300px,86vw);z-index:30;transform:translateX(-105%);transition:transform .35s var(--ease);padding-top:calc(30px + env(safe-area-inset-top,0px))}
+  body.nav-open .side{transform:none}
+  #scrim{display:none;position:fixed;inset:0;background:rgba(14,32,24,.45);z-index:20;border:0;padding:0;cursor:pointer}
+  body.nav-open #scrim{display:block}
+  .btn.menu-btn{display:inline-flex}
+  .topbar{top:env(safe-area-inset-top,0px)}
+  .tree-branches{grid-template-columns:1fr;padding-top:18px}
+  .tree-branches::before,.branch::before{display:none}
+  .frise-track{display:none}
+  .frise-cols{grid-template-columns:1fr 1fr;gap:18px}
+  .family{grid-template-columns:1fr;gap:14px}
+  .family h2{position:static}
+  .steps{grid-template-columns:1fr}
+  .strip{grid-template-columns:1fr}
+  .donut-wrap{grid-template-columns:1fr;justify-items:center}
+  .pos-row{grid-template-columns:1fr 70px}
+  .pos-row .bars2{grid-column:1 / -1;order:3}
+  .studios{grid-template-columns:1fr}
+  .event{grid-template-columns:56px minmax(0,1fr)}
+  .event .acts{grid-column:2}
+  #drawer{border-radius:0;width:100vw}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .lchip{opacity:1;transform:none}
+  .line-chart .ln{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<div id="curtain" aria-hidden="true"><div class="inner"><img id="curtain-logo" alt=""><div class="bar"><i></i></div><div class="seal"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Espace actionnaires, accès réservé</div></div></div>
+
+<div id="login" hidden>
+  <form class="box" id="login-form">
+    <img id="login-logo" alt="Greenpact">
+    <h1>Espace actionnaires</h1>
+    <p>Saisissez l'adresse e-mail que vous avez communiquée à Greenpact. Vous recevrez un lien de connexion, valable une heure.</p>
+    <label for="login-email">Adresse e-mail</label>
+    <input id="login-email" type="email" autocomplete="email" required placeholder="prenom.nom@exemple.fr">
+    <button type="submit" id="login-btn">Recevoir mon lien de connexion</button>
+    <div class="msg" id="login-msg" role="status" aria-live="polite"></div>
+    <p class="note">Accès réservé aux actionnaires de Greenpact. Pas encore d'accès ? Écrivez à Laurent Geray.</p>
+  </form>
+</div>
+
+<div class="shell">
+  <aside class="side" aria-label="Navigation">
+    <img class="brand-logo" id="side-logo" alt="Greenpact">
+    <div class="tag">Holding d'investissement à impact</div>
+    <nav class="nav" id="nav"></nav>
+    <div class="seal-card">
+      <div class="who"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="viewer">Accès réservé</span></div>
+      Informations confidentielles destinées aux seuls actionnaires de Greenpact. Merci de ne pas les diffuser.
+      <div><span class="role" id="role">Lecture</span></div>
+      <button type="button" class="logout" id="logout" hidden>Se déconnecter</button>
+    </div>
+  </aside>
+  <main>
+    <div class="topbar">
+      <div class="stamp"><button class="btn ghost small menu-btn" data-act="menu" aria-label="Ouvrir le menu">Menu</button><span class="lockdot" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><span id="stamp">Espace confidentiel</span></div>
+      <div class="edit-only flex" style="gap:8px"><button class="btn ghost small" data-act="new-news">Publier une nouvelle</button></div>
+    </div>
+    <div id="app"></div>
+    <div class="foot"><span>Greenpact SAS, Lyon. Document marketing non réglementaire. Les performances passées ne préjugent pas des performances futures ; tout investissement comporte un risque de perte en capital.</span><span>Confidentiel</span></div>
+  </main>
+</div>
+
+<dialog id="drawer" aria-label="Fiche participation"></dialog>
+<dialog id="modal"><form method="dialog" id="modal-form"></form></dialog>
+<input type="file" id="photo-input" accept="image/*" hidden>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<button id="scrim" data-act="menu" aria-label="Fermer le menu"></button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+(function(){
+"use strict";
+const ASSETS = {"logo_light": "assets/brand/greenpact-light.png", "logo_dark": "assets/brand/greenpact-dark.png", "logos": {"bluefins": "assets/logos/bluefins.png", "enerpact": "assets/logos/enerpact.png", "solarcare": "assets/logos/solarcare.png", "nepsis": "assets/logos/nepsis.png", "revalue": "assets/logos/revalue.png", "sapiologie": "assets/logos/sapiologie.png", "reflect": "assets/logos/reflect.png", "fyxe": "assets/logos/fyxe.png", "netcarbon": "assets/logos/netcarbon.png", "cedrus": "assets/logos/cedrus.png", "calico2": "assets/logos/calico2.png", "aqua-green-protect": "assets/logos/aqua-green-protect.png", "ayakem": "assets/logos/ayakem.png", "watao": "assets/logos/watao.png", "thermia": "assets/logos/thermia.png", "hoji": "assets/logos/hoji.png", "4elements": "assets/logos/4elements.png", "greenpact": "assets/brand/greenpact-dark.png", "mina": "assets/logos/mina.png", "neutrogen": "assets/logos/neutrogen.png"}, "logosDark": {"bluefins": "assets/logos-dark/bluefins.png", "enerpact": "assets/logos-dark/enerpact.png", "solarcare": "assets/logos-dark/solarcare.png", "nepsis": "assets/logos-dark/nepsis.png", "revalue": "assets/logos-dark/revalue.png", "sapiologie": "assets/logos-dark/sapiologie.png", "reflect": "assets/logos-dark/reflect.png", "fyxe": "assets/logos-dark/fyxe.png", "netcarbon": "assets/logos-dark/netcarbon.png", "cedrus": "assets/logos-dark/cedrus.png", "calico2": "assets/logos-dark/calico2.png", "aqua-green-protect": "assets/logos-dark/aqua-green-protect.png", "ayakem": "assets/logos-dark/ayakem.png", "watao": "assets/logos-dark/watao.png", "thermia": "assets/logos-dark/thermia.png", "hoji": "assets/logos-dark/hoji.png", "4elements": "assets/logos-dark/4elements.png", "greenpact": "assets/logos-dark/greenpact.png", "mina": "assets/logos-dark/mina.png", "neutrogen": "assets/logos-dark/neutrogen.png"}, "ratio": {"bluefins": 2.951, "enerpact": 1.246, "solarcare": 5.806, "nepsis": 3.417, "revalue": 3.6, "sapiologie": 4.286, "reflect": 3.83, "fyxe": 3.158, "netcarbon": 5.0, "cedrus": 4.5, "calico2": 2.506, "aqua-green-protect": 2.054, "ayakem": 1.685, "watao": 2.812, "thermia": 4.475, "hoji": 3.243, "4elements": 1.343, "greenpact": 7.99, "mina": 3.025, "neutrogen": 7.826}, "photos": {"sapiologie": "assets/photos/sapiologie.jpg", "nepsis": "assets/photos/nepsis.jpg", "bluefins": "assets/photos/bluefins.jpg", "revalue": "assets/photos/revalue.jpg", "netcarbon": "assets/photos/netcarbon.jpg", "cedrus": "assets/photos/cedrus.jpg", "aqua-green-protect": "assets/photos/aqua-green-protect.jpg", "calico2": "assets/photos/calico2.jpg", "enerpact": "assets/photos/enerpact.jpg", "solarcare": "assets/photos/solarcare.jpg", "fyxe": "assets/photos/fyxe.jpg", "neutrogen": "assets/photos/neutrogen.jpg", "mina": "assets/photos/mina.jpg", "ayakem": "assets/photos/ayakem.jpg", "reflect": "assets/photos/reflect.jpg", "thermia": "assets/photos/thermia.jpg", "watao": "assets/photos/watao.jpg"}, "impact": {"decarboner": "assets/impact/decarboner.jpg", "boucler": "assets/impact/boucler.jpg", "adapter": "assets/impact/adapter.jpg", "hero": "assets/impact/hero.jpg", "consommer": "assets/impact/consommer.jpg"}, "people": {"laurent": "assets/people/laurent.jpg", "emmanuel": "assets/people/emmanuel.jpg"}};
+
+const SECTIONS = [
+  {id:"apercu", label:"Vue d'ensemble"},
+  {id:"portefeuille", label:"Portefeuille"},
+  {id:"impact", label:"Impact"},
+  {id:"performance", label:"Performance"},
+  {id:"lectures", label:"Lectures"},
+  {id:"agenda", label:"Agenda"},
+  {id:"lettres", label:"Lettres"}
+];
+const CADENCE_DAYS = 14;
+const PHASES = [
+  ["creation","Création","Société constituée, premiers clients ou preuves de concept"],
+  ["preseed","Pré-seed","Premier financement, produit en construction"],
+  ["seed","Seed","Financée par le marché, en accélération commerciale"],
+  ["growth","Croissance","Chiffre d'affaires établi, rentabilité en vue ou atteinte"]
+];
+const GLOSS = {
+  nav:"Valeur nette des actifs de Greenpact : participations, trésorerie et créances.",
+  tvpi:"Valeur totale rapportée aux sommes levées. À 1,42x, chaque euro apporté par les actionnaires vaut 1,42 € sur la base de la NAV indicative.",
+  moic:"Valeur du portefeuille rapportée aux sommes investies dans les entreprises.",
+  dpi:"Sommes déjà distribuées aux actionnaires, rapportées aux sommes levées. Les distributions sont attendues à partir de 2028.",
+  part:"La valeur d'une part découle de la NAV divisée par le nombre de parts.",
+  tri:"Taux de rendement annuel visé, net de frais, sur la durée de vie de la holding."
+};
+
+const S = {
+  db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
+  holdings:[], news:[], articles:[], events:[], editions:[], kpis:null, cashflow:null, settings:null, letter:null,
+  view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
+};
+
+/* Utils */
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const has = v => v!==undefined && v!==null && v!=="";
+const eur = n => !has(n)||isNaN(Number(n)) ? null : new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR",maximumFractionDigits:0}).format(Number(n));
+const eurC = n => { if(!has(n)||isNaN(Number(n))) return null; n=Number(n); if(Math.abs(n)>=1e6) return (n/1e6).toLocaleString("fr-FR",{maximumFractionDigits:2})+" M€"; if(Math.abs(n)>=1e4) return Math.round(n/1e3).toLocaleString("fr-FR")+" k€"; return eur(n); };
+const fx = v => has(v) ? Number(v).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+"x" : null;
+const dFmt = (iso,o) => { if(!iso) return ""; const d=new Date(iso); return isNaN(d)?"":d.toLocaleDateString("fr-FR",o||{day:"numeric",month:"short",year:"numeric"}); };
+const todayISO = () => new Date().toISOString().slice(0,10);
+const addDays = (iso,n) => { const d=new Date(iso); d.setDate(d.getDate()+n); return d.toISOString(); };
+const safeUrl = u => /^https?:\/\//i.test(u||"") ? u : "";
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2600); }
+const H = id => S.holdings.find(h=>h.id===id);
+const holdingName = id => (H(id)||{}).name || "Greenpact";
+const logoOf = id => ASSETS.logos[id] || null;
+const hasPhoto = h => !!(h && (h.photoId || (ASSETS.photos||{})[h.id]));
+const photoUrl = h => h && h.photoId ? "/_blob/"+h.photoId : null;
+const phEl = h => !hasPhoto(h) ? "" : (h.photoId ? `<span class="ph" style="background-image:url('/_blob/${esc(h.photoId)}')"></span>` : `<span class="ph ph-${esc(h.id)}"></span>`);
+(function(){ const st=document.createElement("style"); st.textContent = Object.entries(ASSETS.logos).map(([k,u])=>`.lg-${k}{--src:url("${u}");--srcd:url("${(ASSETS.logosDark||{})[k]||u}");--r:${(ASSETS.ratio||{})[k]||3}}`).join("\n") + "\n" + Object.entries(ASSETS.photos||{}).map(([k,u])=>`.ph-${k}{background-image:url("${u}")}`).join("\n") + "\n" + Object.entries(ASSETS.impact||{}).map(([k,u])=>`.ph-imp-${k}{background-image:url("${u}")}`).join("\n"); document.head.appendChild(st); })();
+const logoChip = id => ASSETS.logos[id] ? `<i class="logo lg-${esc(id)}" role="img" aria-label="${esc(holdingName(id))}"></i>` : `<span class="txt">${esc(holdingName(id))}</span>`;
+function proofBadge(p){ if(!p) return ""; const k={"Mesuré":"m","Estimé":"e","Intention":"i"}[p]||"e"; return `<span class="proof proof-${k}">${esc(p)}</span>`; }
+const tip = k => `<button type="button" class="tip" data-tip="${esc(GLOSS[k])}" aria-label="${esc(GLOSS[k])}">?</button>`;
+
+/* Nav */
+function renderNav(){
+  $("#nav").innerHTML = SECTIONS.map(s=>`<a href="#${s.id}" ${S.view===s.id?'aria-current="page"':""}>${s.label}</a>`).join("");
+}
+function route(){
+  const h=(location.hash||"#apercu").slice(1);
+  S.view = SECTIONS.some(s=>s.id===h) ? h : "apercu";
+  S.animate = true; document.body.classList.remove("nav-open");
+  renderNav(); render(); window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route);
+
+function render(){
+  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lectures:vLectures,agenda:vAgenda,lettres:vLettres};
+  const k=S.kpis||{};
+  $("#stamp").innerHTML = k.asOf ? `Données au <b>${esc(dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
+  const banner = S.ready && !S.db && !S.static ? `<div class="empty" style="margin-bottom:24px">Les données ne sont pas disponibles dans cette vue. Ouvrez l'espace depuis son lien en étant connecté.</div>` : "";
+  $("#app").innerHTML = `<div class="view${S.animate?"":" still"}">${banner}${views[S.view]()}</div>`;
+  afterRender();
+}
+
+/* Animations */
+function afterRender(){
+  const anim = S.animate && !matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const targets = document.querySelectorAll("[data-reveal]");
+  if (!anim){ targets.forEach(el=>{ el.classList.add("in"); finish(el); }); document.querySelectorAll("[data-count]").forEach(el=>el.textContent=el.dataset.final); }
+  else {
+    const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); finish(e.target); io.unobserve(e.target);} }),{threshold:.15});
+    targets.forEach(el=>io.observe(el));
+    document.querySelectorAll("[data-count]").forEach(countUp);
+  }
+  S.animate = false;
+}
+function finish(el){
+  el.querySelectorAll("[data-w]").forEach(b=>{ requestAnimationFrame(()=>b.style.width=b.dataset.w); });
+  el.querySelectorAll("[data-dash]").forEach(c=>{ requestAnimationFrame(()=>c.style.strokeDasharray=c.dataset.dash); });
+}
+function countUp(el){
+  const to=parseFloat(el.dataset.count), dec=+(el.dataset.dec||0), pre=el.dataset.pre||"", suf=el.dataset.suf||"";
+  const t0=performance.now(), dur=1300;
+  const step=t=>{ const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3), v=to*e;
+    el.textContent = pre + v.toLocaleString("fr-FR",{minimumFractionDigits:dec,maximumFractionDigits:dec}) + suf;
+    if(p<1) requestAnimationFrame(step); else el.textContent=el.dataset.final; };
+  requestAnimationFrame(step);
+}
+const counter = (v,dec,pre,suf) => { const fin = pre + Number(v).toLocaleString("fr-FR",{minimumFractionDigits:dec,maximumFractionDigits:dec}) + suf; return `<span data-count="${v}" data-dec="${dec}" data-pre="${esc(pre)}" data-suf="${esc(suf)}" data-final="${esc(fin)}">${esc(fin)}</span>`; };
+
+/* Helpers on data */
+const active = () => S.holdings.filter(h=>h.active!==false);
+const companies = () => active().filter(h=>h.vehicle==="direct"||h.vehicle==="startup");
+const studios = () => active().filter(h=>h.vehicle==="fonds");
+function viaLabel(h){ if(h.vehicle==="direct") return h.parent ? `En direct et via ${holdingName(h.parent)}` : "Participation directe"; if(h.parent) return `Via ${holdingName(h.parent)}`; return ""; }
+function lastEdition(){ return S.editions[0]||null; }
+function nextNewsletterDate(){ const l=lastEdition(); return l?addDays(l.sentAt,CADENCE_DAYS):null; }
+function upcoming(){ const t=todayISO(); return S.events.filter(e=>(e.date||"")>=t); }
+
+/* ---------- Vue d'ensemble ---------- */
+function vApercu(){
+  const k=S.kpis||{}, L=S.letter;
+  const paras = L && L.body ? L.body.split(/\n+/).filter(Boolean) : [];
+  const excerpt = paras.slice(0,2);
+  const people = (L && L.signedBy) || "Laurent Geray et Emmanuel Gonon";
+  const letter = `
+  <section class="band" data-reveal>
+    <div class="letter-grid">
+      <div class="letter">
+        <div class="kicker">${esc((L&&L.label)||"Lettre aux actionnaires")}</div>
+        <h2>${esc((L&&L.title)||"Lettre aux actionnaires")}</h2>
+        <div class="body">${excerpt.length?excerpt.map(p=>`<p>${md(p)}</p>`).join(""):`<p>La prochaine lettre sera publiée ici.</p>`}</div>
+        <div class="sign">
+          <div class="faces"><img src="${ASSETS.people.laurent}" alt="Laurent Geray"><img src="${ASSETS.people.emmanuel}" alt="Emmanuel Gonon"></div>
+          <div><b>${esc(people)}</b><span>${esc((L&&L.signedRole)||"CEO et Chairman, Greenpact")}</span></div>
+          ${paras.length>2?`<button class="btn on-band small" data-act="letter" style="margin-left:auto">Lire la lettre</button>`:""}
+          <button class="btn on-band small edit-only" data-act="edit-letter">Modifier</button>
+        </div>
+      </div>
+      <div class="board">
+        <div class="row"><span class="big">${has(k.moic)?counter(k.moic,2,"x ",""):"—"}</span><span class="lab"><b>MOIC</b>Valeur rapportée aux montants investis</span></div>
+        <div class="row"><span class="big">${has(k.tvpi)?counter(k.tvpi,2,"x ",""):"—"}</span><span class="lab"><b>TVPI</b>Valeur rapportée aux montants levés</span></div>
+        <div class="row"><span class="big">${has(k.nav)?counter(k.nav/1e6,1,"","\u00a0M€"):"—"}</span><span class="lab"><b>Valeur des actifs</b>${k.sharePriceChange?`Prix de la part ${esc(k.sharePriceChange)} sur un an`:"NAV indicative"}</span></div>
+      </div>
+    </div>
+  </section>`;
+  return letter + treeBlock() + teamsBlock() + `
+  <div class="split sec">
+    <section class="panel" data-reveal>
+      <div class="sec-h"><h2>Où est investi le capital</h2></div>
+      ${donut()}
+    </section>
+    <section class="panel" data-reveal>
+      <div class="sec-h"><h2>Faits marquants</h2><a href="#portefeuille" class="pill" style="text-decoration:none">Tout le portefeuille</a></div>
+      ${feedList(S.news.slice(0,5))}
+    </section>
+  </div>
+  <div class="strip">${nextEventPanel()}${lastLetterPanel()}</div>`;
+}
+function teamsBlock(){
+  const list = companies().filter(hasPhoto);
+  if(list.length<3) return "";
+  const card = h => `<button class="team" data-act="detail" data-id="${esc(h.id)}" tabindex="-1">${phEl(h)}<span class="cap">${ASSETS.logos[h.id]?logoChip(h.id):`<b>${esc(h.name)}</b>`}<span>${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span></span></button>`;
+  return `<section class="sec"><div class="sec-h"><h2>Les équipes</h2><p>Les fondateurs et les équipes que Greenpact accompagne</p></div>
+    <div class="teams"><div class="teams-track">${list.map(card).join("")}${list.map(card).join("")}</div></div></section>`;
+}
+function md(t){ return esc(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>"); }
+function treeBlock(){
+  const st = studios(), dir = active().filter(h=>h.vehicle==="direct");
+  if(!st.length && !dir.length) return "";
+  const kids = id => active().filter(h=>h.vehicle==="startup"&&h.parent===id);
+  const k = S.kpis||{};
+  let d=0;
+  const chips = list => `<div class="logos">${list.map(h=>`<button class="lchip" style="--d:${(1.2+(d++)*0.05).toFixed(2)}s" data-act="detail" data-id="${esc(h.id)}" title="${esc(h.name)}">${logoChip(h.id)}</button>`).join("")}</div>`;
+  const branch = (title, sub, list, id) => `<div class="branch"><button class="branch-h" ${id?`data-act="pf" data-id="${esc(id)}"`:`data-act="pf" data-id="direct"`} style="cursor:pointer;font:inherit;color:inherit"><b>${esc(title)}</b><span>${esc(sub)}</span></button>${chips(list)}</div>`;
+  return `
+  <section class="sec">
+    <div class="sec-h"><h2>De la holding aux entreprises</h2><p>Cliquez sur une entreprise pour ouvrir sa fiche.</p></div>
+    <div class="tree" data-reveal>
+      <div class="tree-top"><div class="node-top"><img src="${ASSETS.logo_light}" alt="Greenpact"><span>${has(k.raised)?`${esc(eurC(k.raised))} levés auprès des actionnaires`:"Holding d'investissement"}</span></div></div>
+      <div class="tree-stem"></div>
+      <div class="tree-branches">
+        ${branch("En direct", `${dir.length} participations`, dir)}
+        ${st.map(s=>branch(s.name, `${s.kind||"Venture studio"} · ${s.stake||""}`, kids(s.id), s.id)).join("")}
+      </div>
+    </div>
+  </section>`;
+}
+function donut(){
+  const pos = S.holdings.filter(h=>["fonds","direct","gestion"].includes(h.vehicle) && h.active!==false && Number(h.invested)>0);
+  const groups = {}; pos.forEach(h=>{ const key = h.vehicle==="gestion" ? (h.parent||"hoji") : h.id; groups[key]=(groups[key]||0)+Number(h.invested); });
+  const items = Object.entries(groups).map(([id,v])=>({id,v,name:holdingName(id)})).sort((a,b)=>b.v-a.v);
+  if(!items.length) return `<div class="empty">Montants investis à renseigner.</div>`;
+  const tot = items.reduce((s,i)=>s+i.v,0), R=70, C=2*Math.PI*R;
+  const shades = ["#1c3a2b","#3d5c4c","#6b8576","#9fb1a5","#cfd6cc","#e4e0d8"];
+  let acc=0;
+  const segs = items.map((it,i)=>{ const len=it.v/tot*C; const s=`<circle r="${R}" cx="90" cy="90" stroke="${shades[i%shades.length]}" stroke-dasharray="0 ${C}" data-dash="${Math.max(0,len-2).toFixed(1)} ${C}" stroke-dashoffset="${(-acc).toFixed(1)}" transform="rotate(-90 90 90)"></circle>`; acc+=len; return s; }).join("");
+  return `<div class="donut-wrap">
+    <svg class="donut" viewBox="0 0 180 180" width="180" height="180" role="img" aria-label="Répartition des montants investis">${segs}<text x="90" y="86" text-anchor="middle" font-family="Poppins" font-size="20" font-weight="600" fill="currentColor">${esc(eurC(tot))}</text><text x="90" y="106" text-anchor="middle" font-family="Poppins" font-size="10.5" fill="currentColor" opacity=".6">investis</text></svg>
+    <ul class="legend-list">${items.map((it,i)=>`<li><i style="background:${shades[i%shades.length]}"></i><span>${esc(it.name)}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>`).join("")}</ul>
+  </div>
+  <p class="note">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`;
+}
+function feedList(list){
+  if(!list.length) return `<div class="empty">Aucune nouvelle publiée.</div>`;
+  return `<ul class="feed">${list.map(n=>`<li data-act="toggle-news" data-id="${esc(n.id)}">
+    <div class="flogo">${logoChip(n.holdingId)}</div>
+    <div><div class="meta">${esc(holdingName(n.holdingId))} · ${esc(dFmt(n.date,{day:"numeric",month:"long"}))}</div><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:""}
+    <button class="btn ghost small edit-only" style="margin-top:8px" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button></div>
+  </li>`).join("")}</ul>`;
+}
+function nextEventPanel(){
+  const e=upcoming()[0];
+  if(!e) return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Agenda</div><div class="d" style="font-size:1.1rem;line-height:2.6">—</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>Pas encore de date fixée</h3><p class="note" style="margin-top:2px">Les rencontres et assemblées apparaîtront ici.</p></div></a>`;
+  const d=new Date(e.date);
+  return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>${esc(e.title)}</h3><p class="note" style="margin-top:2px">${e.time?esc(e.time)+", ":""}${esc(e.place||"")}</p></div></a>`;
+}
+function lastLetterPanel(){
+  const l=lastEdition(), n=nextNewsletterDate();
+  return `<a class="panel" href="#lettres" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Lettre</div><div class="d">${l?esc(l.number):"1"}</div></div><div><div class="note" style="margin:0">Lettre de la quinzaine</div><h3>${l?esc(l.title||"Dernière lettre"):"Première lettre en préparation"}</h3><p class="note" style="margin-top:2px">${l?`Envoyée le ${esc(dFmt(l.sentAt,{day:"numeric",month:"long"}))}${n?`, prochaine vers le ${esc(dFmt(n,{day:"numeric",month:"long"}))}`:""}`:"Envoyée toutes les deux semaines"}</p></div></a>`;
+}
+
+/* ---------- Portefeuille ---------- */
+function coverClass(h){ return hasPhoto(h) ? "photo" : "light"; }
+function coverStyle(h){ const p=photoUrl(h); return p ? `class="cover photo" style="background-image:url('${p}')"` : `class="cover ${coverClass(h)}"`; }
+function phaseLabel(p){ return (PHASES.find(x=>x[0]===p)||[])[1] || ""; }
+function coCard(h){
+  return `<button class="co" style="--brand:${BRAND[h.id]||"#1c3a2b"}" data-act="detail" data-id="${esc(h.id)}">
+    <div class="cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
+    <div class="co-body">
+      <span class="via" title="${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}">${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span>
+      <h3>${esc(h.name)}</h3>
+      <p>${esc(h.description||"")}</p>
+      <div class="co-impact">${h.impactFigure?`<b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span>${proofBadge(h.proof)}`:""}</div>
+    </div>
+  </button>`;
+}
+const BRAND={bluefins:"#1b6fc9",enerpact:"#6cb33f",solarcare:"#e8a917",netcarbon:"#6a9b3c",cedrus:"#3b5b4f","aqua-green-protect":"#169a6e",calico2:"#3f9a3a",ayakem:"#2a9d7c",watao:"#1f7fe6",thermia:"#e9772e",nepsis:"#3aa34f",revalue:"#3a6df0",sapiologie:"#2a8f8a",reflect:"#2a3570",fyxe:"#5a46e0",neutrogen:"#5b6f80",mina:"#c27a3e"};
+function vPortefeuille(){
+  const all = companies();
+  const f = S.pf;
+  const list = all.filter(h => f==="all" || (f==="direct" ? h.vehicle==="direct" : h.parent===f && h.vehicle==="startup"));
+  const opts = [["all","Toutes",all.length],["direct","En direct",all.filter(h=>h.vehicle==="direct").length], ...studios().map(s=>[s.id,s.name,all.filter(h=>h.parent===s.id&&h.vehicle==="startup").length])];
+  const byPhase = PHASES.map(([id,lab,desc])=>({id,lab,desc,items:all.filter(h=>h.phase===id)}));
+  const max = Math.max(1,...byPhase.map(p=>p.items.length));
+  return `
+  <div class="head"><div><h1>Portefeuille</h1><p class="une-ligne">${all.length} entreprises, détenues en direct ou co-créées par nos deux venture studios.</p></div>
+    <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="new-holdings">Ajouter une participation</button></div></div>
+  <section>
+    <div class="sec-h"><h2>Où en sont les entreprises</h2><p>Du lancement à la croissance</p></div>
+    <div class="frise" data-reveal>
+      <div class="frise-track" aria-hidden="true">${PHASES.map((p,i)=>`<span class="fseg s${i}" style="--i:${i}"></span>`).join("")}<span class="frise-arrow"></span></div>
+      <div class="frise-cols">${byPhase.map((p,i)=>`<div class="fcol s${i}" style="--i:${i}"><h3>${esc(p.lab)}</h3><p>${esc(p.desc)}</p><div class="logos">${p.items.map((h,j)=>`<button class="lchip" style="--d:${(0.5+i*0.4+j*0.06).toFixed(2)}s" data-act="detail" data-id="${esc(h.id)}" title="${esc(h.name)}">${logoChip(h.id)}</button>`).join("")}</div></div>`).join("")}</div>
+    </div>
+  </section>
+  <section class="sec">
+    <div class="toolbar"><div class="seg" role="group" aria-label="Filtrer">${opts.map(o=>`<button data-act="pf" data-id="${esc(o[0])}" aria-pressed="${f===o[0]}">${esc(o[1])} <span style="opacity:.55">${o[2]}</span></button>`).join("")}</div></div>
+    ${list.length?`<div class="grid">${list.map(coCard).join("")}</div>`:`<div class="empty">Aucune entreprise dans cette sélection.</div>`}
+  </section>
+  <section class="sec"><div class="sec-h"><h2>Nouvelles du portefeuille</h2></div><div class="panel">${feedList(S.news.filter(n=>f==="all"||n.holdingId===f||(H(n.holdingId)||{}).parent===f||(f==="direct"&&(H(n.holdingId)||{}).vehicle==="direct")))}</div></section>`;
+}
+function openDetail(id){
+  const h=H(id); if(!h) return;
+  if(h.vehicle==="fonds"){ S.pf=id; location.hash="#portefeuille"; if(S.view==="portefeuille") render(); return; }
+  const facts=[["Stade",h.stage],["Activité",h.revenue],["Équipe",h.team],["Création",h.year],["Détention",h.stake],
+    [h.parent&&h.vehicle==="startup"?`Investi par ${holdingName(h.parent)}`:"Investi par Greenpact", has(h.invested)?eur(h.invested):""],
+    ["Valeur retenue",has(h.marketValue)?eur(h.marketValue):""],["Multiple",h.moic]].filter(f=>f[1]);
+  const nws=S.news.filter(n=>n.holdingId===h.id);
+  const dr=$("#drawer");
+  dr.innerHTML = `
+    <button class="dr-close" data-act="close-drawer" aria-label="Fermer">×</button>
+    <div class="cover dr-cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
+    <div class="dr-body">
+      <div><span class="via">${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span><h2>${esc(h.name)}</h2>${h.description?`<p class="lead">${esc(h.description)}</p>`:""}</div>
+      ${h.impactFigure?`<div class="impact-hero"><b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span> ${proofBadge(h.proof)}${h.mission?`<p>${esc(h.mission)}</p>`:""}</div>`:(h.mission?`<div class="memo"><b>Impact recherché</b>${esc(h.mission)}</div>`:"")}
+      ${facts.length?`<dl class="facts" style="margin:0">${facts.map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>`:""}
+      ${(h.highlights||[]).length?`<div><h3 style="margin-bottom:14px">Dernières avancées</h3><ul class="timeline">${h.highlights.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+      ${(h.kpis||[]).length?`<div><h3 style="margin-bottom:10px">Indicateurs d'impact suivis</h3><div class="chips">${h.kpis.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`:""}
+      ${h.founders?`<div><h3 style="margin-bottom:6px">Fondateurs</h3><p style="color:var(--muted);font-size:.9rem">${esc(h.founders)}</p></div>`:""}
+      ${nws.length?`<div><h3 style="margin-bottom:6px">Nouvelles</h3>${feedList(nws)}</div>`:""}
+      ${h.dataAsOf?`<p class="note" style="margin:0">Données au ${esc(dFmt(h.dataAsOf,{day:"numeric",month:"long",year:"numeric"}))}${h.method?`. Valorisation : ${esc(h.method)}`:""}.</p>`:""}
+      <div class="edit-only flex" style="gap:8px;flex-wrap:wrap">
+        ${S.assets?`<button class="btn ghost small" data-act="photo" data-id="${esc(h.id)}">${h.photoId?"Changer la photo":"Ajouter une photo"}</button>`:""}
+        <button class="btn ghost small" data-act="edit-holdings" data-id="${esc(h.id)}">Modifier la fiche</button>
+      </div>
+      ${safeUrl(h.website)?`<a class="btn ghost" href="${esc(h.website)}" target="_blank" rel="noopener">Site de l'entreprise</a>`:""}
+    </div>`;
+  if(!dr.open) dr.showModal();
+}
+
+/* ---------- Impact ---------- */
+const FAMILIES = [
+  {key:"Décarboner la production", img:"decarboner", line:"Réduire les émissions là où elles naissent : dans les procédés et les flottes."},
+  {key:"Consommer moins d'énergie", img:"consommer", line:"L'énergie la moins chère est la moins carbonée.", order:["cedrus","thermia","reflect","enerpact","solarcare"]},
+  {key:"Boucler les cycles", img:"boucler", line:"La matière la plus sûre est celle qu'on a déjà.", order:["sapiologie","revalue","ayakem"]},
+  {key:"Adapter, transitionner", img:"adapter", line:"L'adaptation est la meilleure sécurité d'exploitation."}
+];
+const PROOFS = [["Mesuré","constaté et vérifié"],["Estimé","calculé sur données réelles"],["Intention","objectif visé, à démontrer"]];
+const rank=(f,h)=>{ const i=(f.order||[]).indexOf(h.id); return i<0?99:i; };
+function spread(n){ if(n<=3) return [n]; const rows=Math.max(2,Math.ceil(n/4)), base=Math.floor(n/rows), extra=n%rows; return Array.from({length:rows},(_,i)=>base+(i<extra?1:0)); }
+function vImpact(){
+  const all = companies().filter(h=>h.impactFigure);
+  const fams = S.impFam||[], pf = S.impProof||"all";
+  const shown = FAMILIES.filter(f=>!fams.length||fams.includes(f.key));
+  let side=0;
+  const blocks = shown.map((f,fi)=>{
+    const hs = all.filter(h=>h.impactTheme===f.key && (pf==="all"||h.proof===pf)).sort((a,b)=>rank(f,a)-rank(f,b));
+    if(!hs.length) return "";
+    const rows = spread(hs.length); let k=0;
+    const cells = rows.map(c=>{ return `<div class="frow">`+hs.slice(k,k+=c).map((h,j)=>`<button class="fig" style="--d:${(0.15+(k-c+j)*0.07).toFixed(2)}s" data-act="detail" data-id="${esc(h.id)}"><b>${esc(h.impactFigure)}</b><span class="fl">${esc(h.impactLabel||"")}</span><span class="who">${ASSETS.logos[h.id]?`<i class="logo mono lg-${esc(h.id)}" role="img" aria-label="${esc(h.name)}"></i>`:`<span class="nm">${esc(h.name)}</span>`}${proofBadge(h.proof)}</span></button>`).join("")+`</div>`; }).join("");
+    const rev = (side++)%2===1;
+    return `<section class="fam ${rev?"rev":""} tone-${f.img}" data-reveal>
+      <div class="fam-img ph-imp-${f.img}"><div class="fam-cap"><span class="fam-n">${String(FAMILIES.indexOf(f)+1).padStart(2,"0")}</span><h2>${esc(f.key)}</h2><p>${esc(f.line)}</p><span class="fam-c">${hs.length} entreprise${hs.length>1?"s":""}</span></div></div>
+      <div class="fam-grid">${cells}</div>
+    </section>`;
+  }).join("");
+  const count = p => all.filter(h=>h.proof===p).length;
+  return `
+  <section class="imp-hero" data-reveal>
+    <div class="imp-photo ph-imp-hero" role="img" aria-label="Éoliennes au coucher du soleil"></div>
+    <div class="imp-copy">
+      <span class="kicker">Impact</span>
+      <h1>L'impact au cœur du modèle de chaque participation</h1>
+      <p>La solution vendue aux clients et le bénéfice pour la planète reposent sur le même levier. Plus l'entreprise grandit, plus son impact grandit avec elle.</p>
+    </div>
+  </section>
+
+  <section class="sec imp-part">
+    <div class="part-h"><h2>Ce que les entreprises changent</h2><p>Un chiffre clé par entreprise, avec son niveau de preuve.</p></div>
+    <div class="imp-filters">
+      <div class="fgroup"><span class="flab">Familles</span>
+        <button class="fchip" data-act="imp-fam" data-id="" aria-pressed="${!fams.length}">Toutes</button>
+        ${FAMILIES.map(f=>`<button class="fchip" data-act="imp-fam" data-id="${esc(f.key)}" aria-pressed="${fams.includes(f.key)}">${esc(f.key)}</button>`).join("")}
+      </div>
+      <div class="fgroup"><span class="flab">Niveau de preuve</span>
+        <button class="fchip" data-act="imp-proof" data-id="all" aria-pressed="${pf==="all"}">Tous</button>
+        ${PROOFS.map(([p,d])=>`<button class="fchip" data-act="imp-proof" data-id="${p}" aria-pressed="${pf===p}" title="${d}">${p}</button>`).join("")}
+      </div>
+    </div>
+    ${blocks || `<div class="empty">Aucune entreprise ne correspond à cette sélection.</div>`}
+  </section>
+
+  <section class="sec imp-part">
+    <div class="part-h"><h2>Comment l'impact est suivi</h2><p>Trois étapes portées par les studios, consolidées chaque année par Greenpact.</p></div>
+    <div class="track" data-reveal>
+      <div class="track-line" aria-hidden="true"><i></i><span class="runner"></span></div>
+      <div class="phases">
+        <div class="phase" style="--d:.2s">
+          <div class="node">1</div><span class="when">Studios · avant d'investir</span><h3>Sélection</h3>
+          <div class="viz"><div class="dots" aria-hidden="true">${Array.from({length:10},(_,i)=>`<i style="--i:${i}" class="${i===9?"keep":""}"></i>`).join("")}</div><p class="viz-cap"><b>9 projets sur 10</b> sont arrêtés avant tout investissement.</p></div>
+          <ul><li>Exclusions sectorielles et critères DNSH</li><li>Fiche impact remplie par les fondateurs</li><li>Scoring sur 4 thématiques, puis go ou no go en comité</li></ul>
+        </div>
+        <div class="phase" style="--d:.6s">
+          <div class="node">2</div><span class="when">Studios · pendant l'accompagnement</span><h3>Construction</h3>
+          <div class="viz"><svg class="mini" viewBox="0 0 220 90" aria-hidden="true"><line x1="10" y1="34" x2="210" y2="34" class="thr"/><text x="10" y="27" text-anchor="start">seuil déclencheur</text><path class="grow" pathLength="1" d="M10 80 C 60 76, 90 62, 120 48 S 180 22, 210 14"/><circle cx="210" cy="14" r="4" class="tip-dot"/></svg><p class="viz-cap">Un <b>business plan d'impact</b> avec des seuils à atteindre.</p></div>
+          <ul><li>Indicateurs reliés au cœur de l'activité</li><li>Premiers clients industriels comme terrains de mesure</li><li>Effets rebonds identifiés dès le départ</li></ul>
+        </div>
+        <div class="phase" style="--d:1s">
+          <div class="node">3</div><span class="when">Studios et Greenpact · chaque année</span><h3>Suivi et reporting</h3>
+          <div class="viz"><div class="cycle" aria-hidden="true"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" class="ring"/><circle cx="40" cy="40" r="32" class="arc" pathLength="1"/><circle cx="40" cy="8" r="4" class="spin-dot"/></svg><span>1 an</span></div><p class="viz-cap">Données collectées, <b>validées en comité indépendant</b>, publiées aux actionnaires.</p></div>
+          <ul><li>Collecte annuelle par les studios</li><li>Agrégation par levier d'impact</li><li>Observatoire publié aux actionnaires</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="commit" data-reveal>
+      <div class="commit-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="50" class="bg"/><circle cx="60" cy="60" r="50" class="fg" pathLength="100"/></svg><b>50 %</b></div>
+      <div><h3>Un engagement qui engage les gérants</h3><p>La moitié du carried des studios dépend de l'atteinte des objectifs d'impact. S'ils ne sont pas atteints, cette part est reversée à des ONG.</p></div>
+      <div class="commit-side"><span><b>Article 9</b> SFDR pour les deux studios</span><span><b>Comités indépendants</b> pour valider les résultats</span></div>
+    </div>
+  </section>
+
+  <section class="sec imp-part">
+    <div class="part-h"><h2>Les questions que nous nous posons</h2><p>Survolez une carte pour voir les questions posées à chaque entreprise du portefeuille.</p></div>
+    <div class="flips">${PRINCIPLES.map((p,i)=>`<div class="flip" tabindex="0" data-act="flip" style="--d:${(i*0.1).toFixed(1)}s"><div class="flip-in">
+      <div class="face front"><span class="fn">${String(i+1).padStart(2,"0")}</span><div class="ficon" aria-hidden="true">${p.icon}</div><h3>${p.name}</h3><p>${p.def}</p><span class="hint">Nos questions</span></div>
+      <div class="face back"><h3>${p.name}</h3><ul>${p.q.map(q=>`<li>${q}</li>`).join("")}</ul></div>
+    </div></div>`).join("")}</div>
+  </section>`;
+}
+const PRINCIPLES = [
+  {name:"Intentionnalité", def:"L'impact est la finalité du modèle économique, pas un effet de bord.",
+   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>`,
+   q:["Le problème résolu est-il au cœur du modèle économique, ou un bénéfice secondaire ?","Si l'entreprise réussit commercialement, son impact grandit-il mécaniquement avec elle ?","Les fondateurs se sont-ils fixé des objectifs d'impact chiffrés dès le départ ?"]},
+  {name:"Additionnalité", def:"Ce qui n'aurait pas eu lieu si l'entreprise n'existait pas.",
+   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 5v14M5 12h14"/><circle cx="12" cy="12" r="9"/></svg>`,
+   q:["Sans cette entreprise, une solution existante ferait-elle aussi bien ?","La solution remplace-t-elle une pratique plus polluante, ou s'ajoute-t-elle à l'existant ?","Notre capital et notre accompagnement changent-ils réellement sa trajectoire ?"]},
+  {name:"Mesurabilité", def:"Des indicateurs liés à l'activité, suivis dans la durée.",
+   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>`,
+   q:["Quel indicateur prouve l'impact, et peut-il être mesuré chez le client plutôt qu'estimé ?","Les données sont-elles collectées dans la durée et vérifiables par un tiers ?","Quel est son niveau de preuve aujourd'hui : mesuré, estimé ou intention ?"]},
+  {name:"Effets rebonds", def:"Les externalités négatives sont identifiées et suivies.",
+   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M21 12a9 9 0 0 1-15.5 6.2L3 16M3 21v-5h5"/></svg>`,
+   q:["Les gains obtenus risquent-ils d'augmenter la consommation ailleurs ?","Quelles externalités la solution crée-t-elle : matières, énergie, emploi, territoires ?","Comment ces risques sont-ils suivis et réduits au fil du temps ?"]}
+];
+
+/* ---------- Performance ---------- */
+function vPerformance(){
+  const k=S.kpis||{};
+  const kpi=(v,lab,key,sub,dark)=>`<div class="kpi ${dark?"dark":""} ${v?"":"empty"}"><div class="v">${v||"À renseigner"}</div><div class="l">${esc(lab)}${key?tip(key):""}</div>${sub?`<small>${esc(sub)}</small>`:""}</div>`;
+  const kp = [
+    kpi(has(k.nav)?counter(k.nav/1e6,2,"","\u00a0M€"):null,"Valeur des actifs (NAV)","nav","Indicative, certifiée en fin d'année",true),
+    kpi(has(k.tvpi)?counter(k.tvpi,2,"","x"):null,"TVPI","tvpi",has(k.raised)?`Sur ${eurC(k.raised)} levés`:""),
+    kpi(has(k.moic)?counter(k.moic,2,"","x"):null,"MOIC","moic",has(k.invested)?`Sur ${eurC(k.invested)} investis`:""),
+    kpi(has(k.dpi)?counter(k.dpi,2,"","x"):null,"DPI","dpi","Premières liquidités visées en 2028"),
+    kpi(has(k.sharePriceNow)?counter(k.sharePriceNow,2,"","\u00a0€"):null,"Prix de la part","part",k.sharePriceChange?`${k.sharePriceChange} sur un an`:""),
+    kpi(has(k.raised)?esc(eurC(k.raised)):null,"Capital levé",null,has(k.raisedTarget)?`Objectif ${eurC(k.raisedTarget)}`:""),
+    kpi(has(k.targetIrr)?esc(k.targetIrr)+" %":null,"TRI net cible","tri","Médian, sur la durée de vie"),
+    kpi(has(k.cash)?esc(eurC(k.cash)):null,"Trésorerie disponible",null,k.cashNote||"")
+  ].join("");
+  return `
+  <div class="head"><div><h1>Performance</h1><p>Valeur de la holding, de chaque ligne du portefeuille et de la trésorerie.</p></div>
+    <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="edit-kpis">Mettre à jour les chiffres</button><button class="btn" data-act="new-cash">Ajouter une période</button></div></div>
+  <div class="kpis">${kp}</div>
+  ${k.note?`<p class="note">${esc(k.note)}</p>`:""}
+  ${sharePriceBlock()}
+  ${positionsBlock()}
+  ${cashBlock()}`;
+}
+function sharePriceBlock(){
+  const k=S.kpis||{}, sp=k.sharePrice||[]; if(sp.length<2) return "";
+  const W=620,Hh=230,pl=10,pr=40,pt=30,pb=34;
+  const vals=sp.map(p=>Number(p.price)), mn=Math.min(...vals)*0.85, mx=Math.max(...vals)*1.08;
+  const x=i=>pl+i*(W-pl-pr)/(sp.length-1), y=v=>pt+(1-(v-mn)/(mx-mn))*(Hh-pt-pb);
+  const d=sp.map((p,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(p.price).toFixed(1)}`).join(" ");
+  const area=d+` L${x(sp.length-1).toFixed(1)},${Hh-pb} L${x(0).toFixed(1)},${Hh-pb} Z`;
+  return `<section class="sec panel" data-reveal><div class="chart-card">
+    <div><div class="sec-h" style="margin-bottom:6px"><h2>Prix de la part</h2>${k.sharePriceChange?`<span class="pill">${esc(k.sharePriceChange)} en ${esc(sp[sp.length-1].year)}</span>`:""}</div>
+    <svg class="line-chart" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Évolution du prix de la part de ${esc(sp[0].year)} à ${esc(sp[sp.length-1].year)}">
+      <path class="area" d="${area}"/><path class="ln" pathLength="1" d="${d}"/>
+      ${sp.map((p,i)=>`<circle class="pt" cx="${x(i).toFixed(1)}" cy="${y(p.price).toFixed(1)}" r="4.5"/><text class="vl" x="${x(i).toFixed(1)}" y="${(y(p.price)-12).toFixed(1)}" text-anchor="middle">${esc(String(p.price).replace(".",","))} €</text><text x="${x(i).toFixed(1)}" y="${Hh-10}" text-anchor="middle">${esc(p.year)}</text>`).join("")}
+    </svg></div>
+    <div class="read"><p><b>Comment lire ce chiffre.</b> Le prix de la part découle de la valeur des actifs (NAV), divisée par le nombre de parts. Il progresse quand les entreprises du portefeuille prennent de la valeur lors de levées, de cessions ou grâce à leur chiffre d'affaires.</p>${k.sharePriceOutlook?`<p>${esc(k.sharePriceOutlook)}</p>`:""}</div>
+  </div></section>`;
+}
+function positionsBlock(){
+  const pos=S.holdings.filter(h=>["fonds","direct","gestion"].includes(h.vehicle)).sort((a,b)=>(Number(b.marketValue)||0)-(Number(a.marketValue)||0));
+  if(!pos.length) return "";
+  const mx=Math.max(1,...pos.map(h=>Math.max(Number(h.marketValue)||0,Number(h.invested)||0)));
+  const sum=f=>pos.reduce((s,h)=>s+(Number(h[f])||0),0), ti=sum("invested"), tv=sum("marketValue");
+  const st=studios().filter(s=>s.fundMoic||s.fundTvpi);
+  return `<section class="sec" data-reveal>
+    <div class="sec-h"><h2>Ce que vaut chaque ligne</h2><p>${esc(eurC(ti))} investis, ${esc(eurC(tv))} de valeur retenue</p></div>
+    <div class="panel"><div class="keys"><span><i style="background:var(--surface-2)"></i>Montant investi</span><span><i style="background:var(--ink)"></i>Valeur retenue</span></div>
+    <div class="pos">${pos.map(h=>`<div class="pos-row ${h.active===false?"past":""}">
+      <div class="nm"><b>${esc(h.name)}</b><span>${esc([h.year?`depuis ${h.year}`:"",h.stake].filter(Boolean).join(" · "))}</span></div>
+      <div class="bars2"><div class="b cost" data-w="${((Number(h.invested)||0)/mx*100).toFixed(1)}%"></div><div class="b val" data-w="${((Number(h.marketValue)||0)/mx*100).toFixed(1)}%"></div><small>${esc(eur(h.invested)||"—")} → ${esc(eur(h.marketValue)||"—")}${h.method?` · ${esc(h.method)}`:""}</small></div>
+      <div class="moic">${esc(h.moic||"")}<span>multiple</span></div>
+    </div>`).join("")}</div></div>
+    <p class="note">La valeur du portefeuille n'est qu'une composante de la NAV, qui inclut aussi la trésorerie et les créances. Valorisation selon les lignes directrices IPEV ; les intérêts dans les studios sont retenus à leur quote-part de NAV.</p>
+    ${st.length?`<div class="studios">${st.map(s=>`<div class="kpi"><div class="v num">${esc(s.fundMoic||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">MOIC</span> · ${esc(s.fundTvpi||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">TVPI</span></div><div class="l">Studio ${esc(s.name)}</div>${s.fundNote?`<small>${esc(s.fundNote)}</small>`:""}</div>`).join("")}</div>`:""}
+  </section>`;
+}
+function cashBlock(){
+  const rows=(S.cashflow&&S.cashflow.rows)||[];
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>Trésorerie de la holding</h2></div>
+    ${rows.length?`<div class="table-wrap"><table><thead><tr><th>Période</th><th class="r">Entrées</th><th class="r">Sorties</th><th class="r">Solde</th><th>Détail</th><th class="edit-only"></th></tr></thead>
+    <tbody>${rows.map((r,i)=>{const n=(Number(r.inflows)||0)-(Number(r.outflows)||0);return `<tr><td><b style="font-weight:600">${esc(r.period)}</b></td><td class="r">${esc(eur(r.inflows)||"—")}</td><td class="r">${esc(eur(r.outflows)||"—")}</td><td class="r" style="font-weight:600">${n>=0?"+":""}${esc(eur(n))}</td><td style="white-space:normal;min-width:260px;color:var(--muted)">${esc(r.comment||"")}</td><td class="edit-only"><button class="btn ghost small" data-act="edit-cash" data-id="${i}">Modifier</button></td></tr>`;}).join("")}</tbody></table></div>`:`<div class="empty">Aucun flux renseigné.</div>`}
+    <p class="note">${esc((S.cashflow&&S.cashflow.note)||"")}</p></section>`;
+}
+
+/* ---------- Lectures ---------- */
+function vLectures(){
+  const tags=[...new Set(S.articles.flatMap(a=>a.tags||[]))];
+  const q=S.search.toLowerCase();
+  const list=S.articles.filter(a=>(S.tag==="all"||(a.tags||[]).includes(S.tag)) && (!q||[a.title,a.source,a.summary,a.memo].join(" ").toLowerCase().includes(q)));
+  return `<div class="head"><div><h1>Lectures</h1><p>Ce que l'équipe lit, et ce qu'elle en retient pour Greenpact.</p></div><button class="btn edit-only" data-act="new-articles">Ajouter une lecture</button></div>
+  <div class="toolbar"><div class="seg" role="group" aria-label="Thèmes"><button data-act="tag" data-id="all" aria-pressed="${S.tag==="all"}">Tout</button>${tags.map(t=>`<button data-act="tag" data-id="${esc(t)}" aria-pressed="${S.tag===t}">${esc(t)}</button>`).join("")}</div>
+  <input class="search" id="search" type="search" placeholder="Rechercher" value="${esc(S.search)}" aria-label="Rechercher"></div>
+  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${safeUrl(a.url)?`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
+}
+
+/* ---------- Agenda ---------- */
+function vAgenda(){
+  const t=todayISO(), up=S.events.filter(e=>(e.date||"")>=t), past=S.events.filter(e=>(e.date||"")<t).reverse().slice(0,6);
+  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${e.place?` · ${esc(e.place)}`:""}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
+  return `<div class="head"><div><h1>Agenda</h1><p>Assemblées, rencontres avec les fondateurs et événements du club.</p></div><button class="btn edit-only" data-act="new-events">Ajouter un événement</button></div>
+  <div class="panel">${up.length?up.map(e=>row(e,false)).join(""):`<div class="empty" style="border:0">Aucun rendez-vous programmé pour le moment.</div>`}</div>
+  ${past.length?`<section class="sec"><div class="sec-h"><h2>Passés</h2></div>${past.map(e=>row(e,true)).join("")}</section>`:""}`;
+}
+
+/* ---------- Lettres ---------- */
+function sinceLast(){ const l=lastEdition(), s=l?l.sentAt:""; const a=x=>(x.createdAt||"")>s; return {news:S.news.filter(a),articles:S.articles.filter(a),events:upcoming()}; }
+function defaultType(){ const l=lastEdition(); return !l?"courte":(l.type==="courte"?"complète":"courte"); }
+function buildEmail(type,intro,c){
+  const set=S.settings||{}, k=S.kpis||{};
+  const F="font-family:Poppins,Arial,Helvetica,sans-serif;";
+  const p=t=>`<p style="margin:0 0 6px;${F}font-size:15px;line-height:1.6;color:#1c3a2b">${t}</p>`;
+  const sm=t=>`<p style="margin:0 0 18px;${F}font-size:13.5px;line-height:1.55;color:#5b6e63">${t}</p>`;
+  const sec=(t,b)=>b?`<tr><td style="padding:26px 36px 0"><p style="margin:0 0 14px;${F}font-size:12px;font-weight:600;color:#1c3a2b;border-bottom:1px solid #dcd7cd;padding-bottom:8px">${t}</p>${b}</td></tr>`:"";
+  const news=c.news.map(n=>p(`<b>${esc(holdingName(n.holdingId))}</b> · ${esc(n.title)}`)+sm(esc(n.body||""))).join("");
+  const arts=c.articles.map(a=>p(`${safeUrl(a.url)?`<a href="${esc(a.url)}" style="color:#1c3a2b">${esc(a.title)}</a>`:esc(a.title)} <span style="color:#5b6e63">${esc(a.source||"")}</span>`)+sm(esc(a.memo||a.summary||""))).join("");
+  const evs=c.events.slice(0,4).map(e=>p(`<b>${esc(dFmt(e.date,{day:"numeric",month:"long"}))}</b> · ${esc(e.title)}${e.place?`, ${esc(e.place)}`:""}`)).join("");
+  const figs=type==="complète"&&has(k.nav)?`<tr><td style="padding:26px 36px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1c3a2b;border-radius:14px"><tr>${[[eurC(k.nav),"Valeur des actifs"],[fx(k.tvpi),"TVPI"],[k.sharePriceChange||"","Prix de la part"]].map(f=>`<td style="padding:18px 16px;${F}color:#edeae4"><div style="font-size:22px;font-weight:600">${esc(f[0])}</div><div style="font-size:12px;opacity:.7">${f[1]}</div></td>`).join("")}</tr></table></td></tr>`:"";
+  const portal=safeUrl(set.portalUrl), rdv=safeUrl(set.rdvUrl);
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Greenpact, lettre aux actionnaires</title></head><body style="margin:0;padding:0;background:#edeae4">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edeae4"><tr><td align="center" style="padding:28px 12px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#f6f4f0;border-radius:18px;overflow:hidden">
+<tr><td style="background:#1c3a2b;padding:28px 36px"><div style="${F}font-size:26px;letter-spacing:2px;color:#edeae4"><span style="font-weight:300">GREEN</span><span style="font-weight:700">PACT</span></div><div style="${F}font-size:12px;color:#edeae4;opacity:.7;margin-top:6px">Lettre aux actionnaires · ${esc(dFmt(new Date().toISOString(),{day:"numeric",month:"long",year:"numeric"}))} · Confidentiel</div></td></tr>
+${intro?`<tr><td style="padding:28px 36px 0">${intro.split(/\n+/).map(x=>p(esc(x))).join("")}</td></tr>`:""}
+${figs}${sec("Portefeuille",news)}${sec("Lectures",arts)}${sec("Rendez-vous",evs)}
+<tr><td style="padding:30px 36px">${portal?`<a href="${esc(portal)}" style="display:inline-block;background:#1c3a2b;color:#edeae4;padding:12px 22px;border-radius:99px;text-decoration:none;${F}font-size:14px">Ouvrir l'espace actionnaires</a>`:""}
+<p style="margin:18px 0 0;${F}font-size:13.5px;color:#5b6e63">${rdv?`<a href="${esc(rdv)}" style="color:#1c3a2b">Prendre rendez-vous avec Emmanuel Gonon ou Laurent Geray</a>`:"Une question ? Répondez simplement à ce message."}</p></td></tr>
+<tr><td style="padding:16px 36px;background:#e4e0d8;${F}font-size:11px;color:#5b6e63">Information confidentielle réservée aux actionnaires de Greenpact. Merci de ne pas la transférer. Les performances passées ne préjugent pas des performances futures.</td></tr>
+</table></td></tr></table></body></html>`;
+}
+function currentEmail(){ return buildEmail(S.nlType||defaultType(),S.nlIntro,sinceLast()); }
+function updatePreview(){ const f=$("#nl-preview"); if(f) f.srcdoc=currentEmail(); }
+function vLettres(){
+  const c=sinceLast(), type=S.nlType||defaultType(), next=nextNewsletterDate();
+  const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))} · ${esc(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
+  setTimeout(updatePreview,0);
+  return `<div class="head"><div><h1>Lettres</h1><p>La lettre envoyée aux actionnaires toutes les deux semaines.</p></div></div>
+  <section class="edit-only" style="margin-bottom:46px"><div class="nl-grid">
+    <div class="panel"><h2>Prochaine lettre</h2><p class="note" style="margin-top:4px">${next?`À envoyer vers le ${esc(dFmt(next,{weekday:"long",day:"numeric",month:"long"}))}.`:"Première édition : elle reprend tout ce qui est publié."} Format court et format mensuel en alternance.</p>
+      <ul class="check"><li><b>${c.news.length}</b> nouvelle${c.news.length>1?"s":""} du portefeuille</li><li><b>${c.articles.length}</b> lecture${c.articles.length>1?"s":""}</li><li><b>${Math.min(c.events.length,4)}</b> rendez-vous</li></ul>
+      <div style="margin-top:18px" class="seg" role="group" aria-label="Format"><button data-act="nltype" data-id="courte" aria-pressed="${type==="courte"}">Courte</button><button data-act="nltype" data-id="complète" aria-pressed="${type==="complète"}">Mensuelle</button></div>
+      <label style="margin-top:16px">Édito<textarea id="nl-intro" placeholder="Quelques lignes, signées Emmanuel et Laurent.">${esc(S.nlIntro)}</textarea></label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">${S.sample?`<button class="btn ghost small" data-act="draft-intro">Proposer un édito</button>`:""}<button class="btn ghost small" data-act="nl-settings">Liens de la lettre</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid var(--line)"><button class="btn ghost" data-act="copy-html">Copier le HTML</button>${S.downloads?`<button class="btn ghost" data-act="dl-html">Télécharger</button>`:""}<button class="btn" data-act="mark-sent">Marquer comme envoyée</button></div>
+    </div>
+    <iframe class="preview" id="nl-preview" title="Aperçu de la lettre" sandbox=""></iframe>
+  </div></section>
+  <section><div class="sec-h"><h2>Lettres envoyées</h2></div><div class="panel">${archive}</div></section>`;
+}
+
+/* ---------- Forms ---------- */
+const FORMS = {
+  holdings:{title:"Participation",fields:[
+    ["name","Nom","text",true],["vehicle","Type","select",true,[["startup","Startup d'un studio"],["direct","Participation directe"],["fonds","Studio"],["gestion","Société de gestion"]]],
+    ["parent","Studio","select",false,[["",""],["4elements","4Elements"],["hoji","Hoji Ventures"]]],
+    ["phase","Phase","select",false,[["",""],...PHASES.map(p=>[p[0],p[1]])]],
+    ["theme","Thème","text"],["description","Ce qu'elle fait","textarea"],["mission","Ce qu'elle change","textarea"],
+    ["impactFigure","Chiffre d'impact","text",false,null,"Ex. −20 %"],["impactLabel","Libellé du chiffre","text"],
+    ["proof","Niveau de preuve","select",false,[["",""],["Mesuré","Mesuré"],["Estimé","Estimé"],["Intention","Intention"]]],
+    ["impactTheme","Famille d'impact","select",false,[["",""],["Décarboner la production","Décarboner la production"],["Consommer moins d'énergie","Consommer moins d'énergie"],["Boucler les cycles","Boucler les cycles"],["Adapter, transitionner","Adapter, transitionner"]]],
+    ["stage","Stade (détail)","text"],["year","Année","text"],["revenue","Activité","text"],["team","Équipe","text"],["founders","Fondateurs","text"],
+    ["stake","Détention","text"],["invested","Montant investi (€)","number"],["marketValue","Valeur retenue (€)","number"],["moic","Multiple","text"],["method","Méthode de valorisation","text"],
+    ["kind","Description courte du studio","text"],["fundMoic","MOIC du studio","text"],["fundTvpi","TVPI du studio","text"],["fundNote","Précision","text"],
+    ["highlights","Dernières avancées","lines",false,null,"Une par ligne"],["kpis","Indicateurs suivis","lines",false,null,"Un par ligne"],
+    ["dataAsOf","Données au","date"],["website","Site web","url"],["order","Ordre","number"]]},
+  news:{title:"Nouvelle",fields:[["holdingId","Entreprise","holding",true],["title","Titre","text",true],["date","Date","date",true],["body","Texte","textarea"]]},
+  articles:{title:"Lecture",fields:[["title","Titre","text",true],["url","Lien","url"],["source","Source","text"],["date","Date","date",true],["summary","Résumé","textarea"],["memo","Notre lecture","textarea",false,null,"Ce que cela change pour Greenpact ou ses participations"],["tags","Thèmes","text",false,null,"Séparés par des virgules"]]},
+  events:{title:"Événement",fields:[["title","Intitulé","text",true],["date","Date","date",true],["time","Heure","text"],["place","Lieu","text"],["description","Description","textarea"],["link","Lien d'inscription","url"]]},
+  kpis:{title:"Chiffres clés",fields:[["nav","NAV (€)","number"],["tvpi","TVPI","number"],["moic","MOIC","number"],["dpi","DPI","number"],["raised","Capital levé (€)","number"],["raisedTarget","Objectif de levée (€)","number"],["invested","Montant investi (€)","number"],["sharePriceNow","Prix de la part (€)","number"],["sharePriceChange","Évolution sur un an","text"],["sharePriceOutlook","Perspective","text"],["targetIrr","TRI cible (%)","number"],["minTicket","Ticket minimum (€)","number"],["nbParticipations","Nombre de participations","number"],["cash","Trésorerie disponible (€)","number"],["cashNote","Précision trésorerie","text"],["asOf","Date d'arrêté","date"],["note","Remarque","text"]]},
+  cash:{title:"Période",fields:[["period","Période","text",true],["inflows","Entrées (€)","number"],["outflows","Sorties (€)","number"],["comment","Détail","text"]]},
+  settings:{title:"Liens de la lettre",fields:[["portalUrl","Lien de l'espace","url"],["rdvUrl","Lien de prise de rendez-vous","url"]]},
+  letter:{title:"Lettre aux actionnaires",fields:[["label","Libellé","text",false,null,"Ex. Lettre aux actionnaires, septembre 2026"],["title","Titre","text",true],["body","Texte","textarea",true,null,"Un paragraphe par ligne ; **gras** possible"],["signedBy","Signataires","text"],["signedRole","Fonctions","text"]]}
+};
+function openForm(kind,record,onSave,onDelete){
+  const def=FORMS[kind], r=record||{};
+  const field=([key,label,type,req,opts,hint])=>{
+    const v = key==="tags"?(r.tags||[]).join(", "):type==="lines"?(r[key]||[]).join("\n"):(r[key]??"");
+    let input;
+    if(type==="textarea"||type==="lines") input=`<textarea name="${key}" ${req?"required":""} ${key==="body"&&kind==="letter"?'style="min-height:260px"':""}>${esc(v)}</textarea>`;
+    else if(type==="select") input=`<select name="${key}">${opts.map(o=>`<option value="${esc(o[0])}" ${String(v)===o[0]?"selected":""}>${esc(o[1])}</option>`).join("")}</select>`;
+    else if(type==="holding") input=`<select name="${key}" required><option value="greenpact" ${v==="greenpact"?"selected":""}>Greenpact</option>${S.holdings.filter(h=>h.vehicle!=="gestion").map(h=>`<option value="${esc(h.id)}" ${v===h.id?"selected":""}>${esc(h.name)}</option>`).join("")}</select>`;
+    else input=`<input name="${key}" type="${type}" ${type==="number"?'step="any"':""} value="${esc(type==="date"&&!v&&req?todayISO():v)}" ${req?"required":""}>`;
+    return `<label>${label}${hint?` <span class="hint">${esc(hint)}</span>`:""}${input}</label>`;
+  };
+  const form=$("#modal-form");
+  form.innerHTML=`<h2>${record?"Modifier":"Ajouter"} : ${def.title.toLowerCase()}</h2>${def.fields.map(field).join("")}<div class="form-actions"><div>${onDelete?`<button type="button" class="btn danger" id="f-del">Supprimer</button>`:""}</div><div style="display:flex;gap:8px"><button type="button" class="btn ghost" id="f-cancel">Annuler</button><button type="submit" class="btn" id="f-save">Enregistrer</button></div></div>`;
+  const dlg=$("#modal");
+  form.onsubmit=async e=>{ e.preventDefault(); const fd=new FormData(form), out={};
+    for(const [key,,type] of def.fields){ let v=fd.get(key); v=typeof v==="string"?v.trim():v;
+      if(type==="number") v=v===""?null:Number(v);
+      if(key==="tags") v=v?v.split(",").map(s=>s.trim()).filter(Boolean):[];
+      if(type==="lines") v=v?v.split("\n").map(s=>s.trim()).filter(Boolean):[];
+      out[key]=v; }
+    $("#f-save").disabled=true;
+    try{ await onSave(out); dlg.close(); toast("Enregistré"); }catch(err){ $("#f-save").disabled=false; toast(errMsg(err)); } };
+  $("#f-cancel").onclick=()=>dlg.close();
+  if(onDelete) $("#f-del").onclick=async()=>{ if(!confirm("Supprimer définitivement cet élément ?")) return; try{ await onDelete(); dlg.close(); toast("Supprimé"); }catch(err){ toast(errMsg(err)); } };
+  dlg.showModal();
+}
+function errMsg(e){ const c=e&&e.code; if(c==="invalid_argument") return "Modification réservée aux éditeurs."; if(c==="quota_exceeded") return "Espace de stockage plein."; return "L'enregistrement n'a pas abouti. Réessayez."; }
+function crud(coll,id){
+  const rec=id?S[coll].find(x=>x.id===id):null; const strip=r=>{const o={...r}; delete o.id; return o;};
+  openForm(coll,rec,async d=>{ if(rec) await S.db.collection(coll).doc(rec.id).set({...strip(rec),...d,updatedAt:new Date().toISOString()}); else await S.db.collection(coll).add({...d,createdAt:new Date().toISOString()}); },
+    rec?async()=>{ await S.db.collection(coll).doc(rec.id).delete(); }:null);
+}
+
+/* ---------- Actions ---------- */
+document.addEventListener("click", async e=>{
+  const b=e.target.closest("[data-act]"); if(!b) return;
+  const act=b.dataset.act, id=b.dataset.id;
+  const needDb=()=>{ if(!S.db){ toast("Données indisponibles dans cette vue."); return false;} return true; };
+  if(act==="menu"){ document.body.classList.toggle("nav-open"); return; }
+  if(act==="detail"){ e.stopPropagation(); openDetail(id); return; }
+  if(act==="close-drawer"){ $("#drawer").close(); return; }
+  if(act==="toggle-news"){ if(e.target.closest("button")) return; b.classList.toggle("open"); return; }
+  if(act==="pf"){ S.pf=id; if(S.view!=="portefeuille"){ location.hash="#portefeuille"; } else { render(); } return; }
+  if(act==="tag"){ S.tag=id; render(); return; }
+  if(act==="imp-fam"){ const f=S.impFam||[]; S.impFam = !id ? [] : (f.includes(id) ? f.filter(x=>x!==id) : [...f,id]); if(S.impFam.length===4) S.impFam=[]; S.animate=true; render(); return; }
+  if(act==="imp-proof"){ S.impProof=id; S.animate=true; render(); return; }
+  if(act==="flip"){ b.classList.toggle("on"); return; }
+  if(act==="nltype"){ S.nlType=id; render(); return; }
+  if(act==="letter"){ const L=S.letter||{}; $("#modal-form").innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${esc(L.label||"")}</div><h2>${esc(L.title||"")}</h2><div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem">${(L.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${md(p)}</p>`).join("")}</div><div class="sign" style="margin-top:8px"><div class="faces"><img src="${ASSETS.people.laurent}" alt=""><img src="${ASSETS.people.emmanuel}" alt=""></div><div><b>${esc(L.signedBy||"")}</b><span style="color:var(--muted);font-size:.8rem">${esc(L.signedRole||"")}</span></div></div><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#f-cancel").onclick=()=>$("#modal").close(); $("#modal").showModal(); return; }
+  if(act==="photo"){ S.photoFor=id; $("#photo-input").value=""; $("#photo-input").click(); return; }
+  if(act.startsWith("new-")||act.startsWith("edit-")){
+    if(!needDb()) return;
+    const coll=act.replace(/^(new|edit)-/,"");
+    if(coll==="letter") return openForm("letter",S.letter,d=>S.db.doc("content/letter").set({...(S.letter||{}),...d,updatedAt:new Date().toISOString()}));
+    if(coll==="kpis") return openForm("kpis",S.kpis,d=>S.db.doc("finance/kpis").set({...(S.kpis||{}),...d,updatedAt:new Date().toISOString()}));
+    if(coll==="cash"){ const rows=((S.cashflow&&S.cashflow.rows)||[]).slice(), i=id!==undefined?Number(id):-1;
+      return openForm("cash",i>=0?rows[i]:null,async d=>{ if(i>=0) rows[i]=d; else rows.push(d); await S.db.doc("finance/cashflow").set({...(S.cashflow||{}),rows}); },
+        i>=0?async()=>{ rows.splice(i,1); await S.db.doc("finance/cashflow").set({...(S.cashflow||{}),rows}); }:null); }
+    if($("#drawer").open) $("#drawer").close();
+    return crud(coll, act.startsWith("edit-")?id:null);
+  }
+  if(act==="nl-settings"){ if(!needDb()) return; return openForm("settings",S.settings,d=>S.db.doc("config/newsletter").set(d)); }
+  if(act==="copy-html"){ try{ await navigator.clipboard.writeText(currentEmail()); toast("HTML copié"); }catch{ toast("Copie impossible ici : utilisez Télécharger."); } return; }
+  if(act==="dl-html"){ try{ const r=await S.downloads.save({filename:`lettre-greenpact-${todayISO()}.html`,data:currentEmail()}); if(r&&r.status==="saved") toast("Fichier enregistré"); }catch{} return; }
+  if(act==="mark-sent"){ if(!needDb()) return; const c=sinceLast();
+    if(!confirm("Archiver cette lettre comme envoyée aujourd'hui ?")) return;
+    try{ await S.db.collection("editions").add({number:(S.editions[0]?.number||0)+1,type:S.nlType||defaultType(),sentAt:new Date().toISOString(),title:`Lettre du ${dFmt(new Date().toISOString(),{day:"numeric",month:"long"})}`,counts:`${c.news.length} nouvelle(s), ${c.articles.length} lecture(s), ${Math.min(c.events.length,4)} rendez-vous`,html:currentEmail()}); S.nlIntro=""; S.nlType=null; toast("Lettre archivée"); }catch(err){ toast(errMsg(err)); } return; }
+  if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; $("#modal-form").innerHTML=`<h2>${esc(ed.title||"")}</h2><iframe class="preview" sandbox="" title="Lettre archivée"></iframe><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#modal-form iframe").srcdoc=ed.html||""; $("#f-cancel").onclick=()=>$("#modal").close(); $("#modal").showModal(); return; }
+  if(act==="draft-intro"){ const c=sinceLast(), ta=$("#nl-intro"); b.disabled=true;
+    const facts=[...c.news.map(n=>`Portefeuille, ${holdingName(n.holdingId)} : ${n.title}. ${n.body||""}`),...c.articles.map(a=>`Lecture : ${a.title}. ${a.memo||a.summary||""}`),...c.events.slice(0,3).map(e=>`Rendez-vous : ${e.title}, le ${dFmt(e.date)}`)].join("\n");
+    const prompt=`Rédige l'édito d'une lettre envoyée aux actionnaires de Greenpact, holding d'investissement à impact. Signataires : Emmanuel Gonon (président) et Laurent Geray (directeur général). Lecteurs : investisseurs exigeants de 40 à 60 ans. Ton : sobre, direct, factuel. Interdits : superlatifs, formules creuses (« nous sommes ravis », « environnement stimulant », « dans un monde en mutation »), emoji, questions rhétoriques. Format : ${(S.nlType||defaultType())==="complète"?"100 à 140 mots, deux paragraphes":"50 à 80 mots, un paragraphe"}, en français, sans titre ni signature. N'invente aucun fait ni chiffre absent de la liste.\n\nNouveautés :\n${facts||"(aucune nouveauté : écris deux phrases brèves annonçant la suite)"}\n\nRéponds uniquement par le texte.`;
+    try{ const r=await S.sample(prompt,{modelTier:"default",onText:({text})=>{ ta.value=text; }}); ta.value=r.text.trim(); S.nlIntro=ta.value; updatePreview(); }
+    catch(err){ toast(err&&err.code==="not_granted"?"Rédaction automatique non autorisée.":"La proposition n'a pas abouti."); } finally{ b.disabled=false; } return; }
+});
+$("#drawer").addEventListener("click",e=>{ if(e.target===$("#drawer")) $("#drawer").close(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.body.classList.remove("nav-open"); });
+document.addEventListener("input",e=>{
+  if(e.target.id==="search"){ S.search=e.target.value; const p=e.target.selectionStart; render(); const s=$("#search"); s.focus(); s.setSelectionRange(p,p); }
+  if(e.target.id==="nl-intro"){ S.nlIntro=e.target.value; clearTimeout(S._pv); S._pv=setTimeout(updatePreview,300); }
+});
+$("#photo-input").addEventListener("change", async e=>{
+  const f=e.target.files&&e.target.files[0]; if(!f||!S.photoFor||!S.assets) return;
+  toast("Envoi de la photo…");
+  try{ const blob=await shrink(f); const res=await S.assets.upload(blob); await S.db.doc("holdings/"+S.photoFor).update({photoId:res.id}); toast("Photo ajoutée"); setTimeout(()=>openDetail(S.photoFor),300); }
+  catch(err){ toast("La photo n'a pas pu être ajoutée."); }
+});
+async function shrink(file){
+  try{ const bmp=await createImageBitmap(file); const sc=Math.min(1,1600/Math.max(bmp.width,bmp.height)); const c=document.createElement("canvas"); c.width=Math.round(bmp.width*sc); c.height=Math.round(bmp.height*sc); c.getContext("2d").drawImage(bmp,0,0,c.width,c.height); return await new Promise(r=>c.toBlob(b=>r(b||file),"image/jpeg",.84)); }catch{ return file; }
+}
+
+/* ---------- Data ---------- */
+let _rt; function scheduleRender(){ clearTimeout(_rt); _rt=setTimeout(()=>{ if(document.activeElement&&document.activeElement.id==="nl-intro"){ updatePreview(); return; } render(); if($("#drawer").open && $("#drawer").dataset.id){} },80); }
+function sub(q,cb){ q.onSnapshot(s=>{ cb(s.docs.map(d=>({id:d.id,...d.data()}))); scheduleRender(); },()=>{}); }
+function docSub(path,cb){ S.db.doc(path).onSnapshot(s=>{ cb(s.exists?s.data():null); scheduleRender(); },()=>{}); }
+
+/* Mode autonome (hors claude.ai) : lecture seule depuis data/seed.json */
+/* Remplit l'état à partir d'un objet { collection: { id: données } } (seed.json ou Supabase). */
+function applyData(d){
+    const arr=o=>Object.entries(o||{}).map(([id,v])=>({id,...v}));
+    const by=(f,dir)=>(a,b)=>String(a[f]||"").localeCompare(String(b[f]||""))*(dir==="desc"?-1:1);
+    S.holdings=arr(d.holdings).sort((a,b)=>(a.order||0)-(b.order||0));
+    S.news=arr(d.news).sort(by("date","desc")); S.articles=arr(d.articles).sort(by("date","desc"));
+    S.events=arr(d.events).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
+    S.kpis=(d.finance||{}).kpis||null; S.cashflow=(d.finance||{}).cashflow||null;
+    S.settings=(d.config||{}).newsletter||null; S.letter=(d.content||{}).letter||null; S.static=true;
+}
+async function loadSeed(){
+  try{
+    const r=await fetch("data/seed.json",{cache:"no-store"}); if(!r.ok) throw new Error(r.status);
+    applyData(await r.json());
+  }catch(e){ console.warn("Données locales indisponibles", e); }
+}
+
+/* Mode en ligne (www.greenpact.fr/actionnaires/) : connexion par lien e-mail et
+   données lues dans Supabase. La clé ci-dessous est la clé publique « anon » :
+   elle ne donne accès à rien sans connexion (règles d'accès dans supabase/schema.sql). */
+const SUPABASE = { url: "https://ceqqfmngceqowefdttxc.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlcXFmbW5nY2Vxb3dlZmR0dHhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1Njg3NjgsImV4cCI6MjEwODE0NDc2OH0.8ahzfh8mEUlVYRGoIS7gs018XyOMb9nREGoTyn9YcnU" };
+const enLigne = () => /^https?:$/.test(location.protocol) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && window.supabase;
+async function loadSupabase(sb){
+  const { data, error } = await sb.from("documents").select("collection,id,data");
+  if(error) throw error;
+  const d={}; (data||[]).forEach(r=>{ (d[r.collection] ||= {})[r.id]=r.data; });
+  applyData(d);
+}
+function showLogin(sb){
+  const box=$("#login"); box.hidden=false; $("#login-logo").src=ASSETS.logo_light;
+  const msg=$("#login-msg"), btn=$("#login-btn");
+  const err=new URLSearchParams(location.hash.slice(1)).get("error_description");
+  if(err){ msg.className="msg err"; msg.textContent="Ce lien de connexion n'est plus valable. Demandez-en un nouveau."; history.replaceState(null,"",location.pathname); }
+  $("#login-form").addEventListener("submit", async e=>{
+    e.preventDefault();
+    const email=$("#login-email").value.trim(); if(!email) return;
+    btn.disabled=true; msg.className="msg"; msg.textContent="Envoi en cours…";
+    const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:false, emailRedirectTo: location.origin+location.pathname } });
+    btn.disabled=false;
+    if(error){
+      msg.className="msg err";
+      msg.textContent = /signup|not allowed|not found/i.test(error.message) ? "Cette adresse n'a pas encore d'accès. Écrivez à Laurent Geray pour l'obtenir." : /rate|seconds/i.test(error.message) ? "Un lien vient déjà d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans quelques instants.";
+      return;
+    }
+    msg.className="msg ok"; msg.textContent="C'est envoyé. Ouvrez l'e-mail reçu et cliquez sur le lien (pensez à regarder les indésirables).";
+  });
+}
+async function initEnLigne(){
+  const sb=window.supabase.createClient(SUPABASE.url, SUPABASE.key, { auth:{ persistSession:true, detectSessionInUrl:true, flowType:"implicit" } });
+  const { data:{ session } } = await sb.auth.getSession();
+  if(location.hash.includes("access_token")) history.replaceState(null,"",location.pathname);
+  if(!session){ $("#curtain")?.remove(); showLogin(sb); return; }
+  $("#viewer").textContent=session.user.email; $("#role").textContent="Lecture seule";
+  const lo=$("#logout"); lo.hidden=false; lo.addEventListener("click", async ()=>{ await sb.auth.signOut(); location.replace(location.pathname); });
+  try{ await loadSupabase(sb); }catch(e){ console.warn("Données Supabase indisponibles", e); toast("Les données n'ont pas pu être chargées."); }
+  S.ready=true; S.animate=true; render();
+}
+async function init(){
+  $("#side-logo").src=ASSETS.logo_light; $("#curtain-logo").src=ASSETS.logo_light;
+  let seen=false; try{ seen=sessionStorage.getItem("gp-curtain")==="1"; sessionStorage.setItem("gp-curtain","1"); }catch{}
+  const cur=$("#curtain");
+  if(seen||matchMedia("(prefers-reduced-motion: reduce)").matches){ cur.remove(); }
+  else { setTimeout(()=>cur.classList.add("up"),1500); setTimeout(()=>cur.remove(),2700); setTimeout(()=>{ S.animate=true; render(); },1500); }
+  if(enLigne() && !(window.claude && typeof window.claude.use==="function")){ await initEnLigne(); renderNav(); route(); return; }
+  renderNav(); route();
+  const cl=window.claude;
+  if(!cl||typeof cl.use!=="function"){ await loadSeed(); S.ready=true; S.animate=true; render(); return; }
+  const [db,user,sample,downloads,assets]=await Promise.all(["db","user","sample","downloads","assets"].map(n=>cl.use(n)));
+  Object.assign(S,{db,user,sample,downloads,assets,ready:true});
+  S.canEdit = user ? !!(await user.canEdit()) : false;
+  document.body.classList.toggle("can-edit",S.canEdit);
+  $("#role").textContent = S.canEdit?"Mode éditeur":"Lecture seule";
+  if(user){ try{ const me=await user.me(); if(me&&me.name) $("#viewer").textContent=me.name; }catch{} }
+  if(db){
+    sub(db.collection("holdings").orderBy("order","asc"),r=>S.holdings=r);
+    sub(db.collection("news").orderBy("date","desc").limit(300),r=>S.news=r);
+    sub(db.collection("articles").orderBy("date","desc").limit(300),r=>S.articles=r);
+    sub(db.collection("events").orderBy("date","asc").limit(200),r=>S.events=r);
+    sub(db.collection("editions").orderBy("sentAt","desc").limit(100),r=>S.editions=r);
+    docSub("finance/kpis",d=>S.kpis=d); docSub("finance/cashflow",d=>S.cashflow=d); docSub("config/newsletter",d=>S.settings=d); docSub("content/letter",d=>S.letter=d);
+    setTimeout(()=>{ S.animate=true; render(); },900);
+  }
+  render();
+}
+init();
+})();
+</script>
+</body>
+</html>

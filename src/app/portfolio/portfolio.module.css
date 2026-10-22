@@ -11,10 +11,11 @@
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .panneaux {
-  /* Les trois panneaux se touchent : aucun filet entre les photos. */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  /* Un fin espace entre les panneaux et sur les bords de l'écran. */
+  gap: 8px;
+  padding-inline: 8px;
 }
 .panneau {
   position: relative;
@@ -90,7 +91,7 @@
 .studio {
   --studio-fonce: #2b3640;
   --studio-teinte: #e4e4e1;
-  --studio-accent: #e8875f;
+  --studio-accent: #ffffff;
   --studio-filet: rgba(30, 30, 30, 0.1);
   display: flex;
   flex-direction: column;
@@ -131,9 +132,9 @@
   align-self: flex-start;
   object-fit: contain;
 }
-/* 4Elements : le filet blanc est posé à l'intérieur du noir pour rester visible
-   sur le fond clair de la page. */
-.\34 elements .studioEntete {
+/* Filet blanc posé à l'intérieur de l'en-tête foncé, pour rester visible sur
+   le fond clair de la page (Hoji et 4Elements). */
+.studio .studioEntete {
   border-top: 5px solid var(--studio-fonce);
   box-shadow: inset 0 3px 0 0 var(--studio-accent);
 }

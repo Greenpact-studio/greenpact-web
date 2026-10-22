@@ -22,7 +22,7 @@ export function Resultats() {
             <span className={styles.voile} aria-hidden />
             <span className={styles.contenu}>
               <span className={styles.entete}>
-                <span className={styles.startup}>{r.startup}</span>
+                <Image src={`/logos/blanc-${r.startup.toLowerCase()}.png`} alt={r.startup} width={360} height={120} className={styles.logo} loading="lazy" />
                 <span className={`${styles.badge} ${r.niveau === "Estimé" ? styles.estime : ""}`}>{r.niveau}</span>
               </span>
               <span className={styles.chiffre}>{r.chiffre}</span>

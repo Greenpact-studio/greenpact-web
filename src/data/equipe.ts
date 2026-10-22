@@ -27,7 +27,7 @@ export const EQUIPE: Groupe[] = [
     logo: "/logo-greenpact.png",
     sousTitre: "Gouvernance",
     membres: [
-      { prenom: "Emmanuel", nom: "Gonon", role: "Président", photo: "emmanuel-gonon.jpg", linkedin: li("emmanuelgonon") },
+      { prenom: "Emmanuel", nom: "Gonon", role: "Président", photo: "emmanuel-gonon-v2.jpg", linkedin: li("emmanuelgonon") },
       { prenom: "Laurent", nom: "Geray", role: "Directeur général", photo: "laurent-geray.jpg", linkedin: li("laurentgeray") },
       { prenom: "Eric", nom: "Angelier", role: "Administrateur", photo: "eric-angelier.jpg", linkedin: li("ericangelier") },
       { prenom: "Thierry", nom: "Rouquet", role: "Administrateur", photo: "thierry-rouquet-v2.jpg", linkedin: li("thierryrouquet") },
@@ -58,7 +58,7 @@ export const EQUIPE: Groupe[] = [
     membres: [
       { prenom: "Stéphane", nom: "Folliet", role: "Associé", photo: "stephane-folliet-v2.jpg", linkedin: li("stephane-folliet-a281534") },
       { prenom: "Jean-Christophe", nom: "Berne", role: "Associé", photo: "jean-christophe-berne-v2.jpg", linkedin: li("jeanchristopheberne") },
-      { prenom: "Emmanuel", nom: "Gonon", role: "Associé", photo: "emmanuel-gonon.jpg", linkedin: li("emmanuelgonon") },
+      { prenom: "Emmanuel", nom: "Gonon", role: "Associé", photo: "emmanuel-gonon-v2.jpg", linkedin: li("emmanuelgonon") },
       { prenom: "Laurent", nom: "Geray", role: "Associé", photo: "laurent-geray.jpg", linkedin: li("laurentgeray") },
       { prenom: "Didier", nom: "Pradeilles", role: "Senior Advisor", photo: "didier-pradeilles-v2.jpg", linkedin: li("didier-pradeilles-7410966") },
       { prenom: "Ugo", nom: "Tarricone", role: "Venture & Impact Management", photo: "ugo-tarricone-v3.jpg", linkedin: li("ugo-tarricone-304608193") },
@@ -69,7 +69,7 @@ export const EQUIPE: Groupe[] = [
       { prenom: "Guillaume", nom: "Salès", role: "Growth", photo: "guillaume-sales-v2.jpg", linkedin: li("guillaume-sales") },
       { prenom: "Dany", nom: "Badr", role: "IA Developer", photo: "dany-badr.jpg", linkedin: li("danybadr") },
       { prenom: "Valentine", nom: "Ducharme", role: "Product Designer", photo: "valentine-ducharme.jpg", linkedin: li("valentine-d-810a5175") },
-      { prenom: "Martin", nom: "Cousseau", role: "Product Designer", photo: "martin-cousseau.jpg", linkedin: li("martin-cousseau-358189114") },
+      { prenom: "Martin", nom: "Cousseau", role: "Product Designer", photo: "martin-cousseau-v2.jpg", linkedin: li("martin-cousseau-358189114") },
       { prenom: "Corentin", nom: "Trosseille", role: "Talent Acquisition", photo: "corentin-trosseille.jpg", linkedin: li("corentintrosseille") },
     ],
   },

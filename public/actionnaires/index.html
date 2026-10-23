@@ -504,40 +504,7 @@ dialog::backdrop{background:rgba(14,32,24,.5);backdrop-filter:blur(2px)}
   .imp-photo{animation:none}
 }
 
-/* Vue d'ensemble : l'essentiel en trois chiffres */
-.brefs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.bref{display:flex;flex-direction:column;gap:6px;padding:22px 22px 20px;border-radius:18px;background:var(--surface);border:1px solid var(--line);color:inherit;text-decoration:none;transition:border-color .2s,transform .2s var(--ease)}
-.bref:first-child{background:var(--forest);border-color:var(--forest);color:var(--linen)}
-.bref:hover{border-color:var(--ink);transform:translateY(-2px)}
-.bref-l{display:flex;align-items:center;gap:8px;font-size:.84rem;font-weight:500;color:var(--muted)}
-.bref:first-child .bref-l{color:rgba(237,234,228,.72)}
-.bref-v{font-size:clamp(2rem,3.4vw,2.7rem);font-weight:600;letter-spacing:-.03em;line-height:1.05}
-.bref-s{font-size:.82rem;color:var(--muted)}
-.bref:first-child .bref-s{color:rgba(237,234,228,.66)}
-.band.sec{margin-top:22px}
-.avenir{padding-top:6px;padding-bottom:6px}
-.avenir .event:last-child{border-bottom:0}
-.lettre-entiere .letter h2{max-width:28ch}
-.lettre-entiere .body{max-width:70ch}
 /* Performance */
-.kpis.trois{grid-template-columns:repeat(3,minmax(0,1fr))}
-.kpi.grand{padding:22px 22px 20px}
-.kpi.grand .l{margin:0 0 8px;font-weight:500}
-.kpi.grand .v{font-size:clamp(2rem,3.4vw,2.7rem)}
-.kpi.grand small{font-size:.8rem;margin-top:6px}
-.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
-.detail-l{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:16px 0;border-top:1px solid var(--line)}
-.detail-l span{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--muted)}
-.detail-l b{font-size:1.15rem;font-weight:600;text-align:right}
-.detail-l small{grid-column:1/-1;font-size:.78rem;color:var(--faint)}
-@media (max-width:900px){ .brefs,.kpis.trois,.details{grid-template-columns:1fr} }
-.faces{flex:none}
-@media (max-width:600px){
-  .sign{flex-wrap:wrap}
-  .sign .btn{margin-left:0!important}
-  .detail-l{grid-template-columns:1fr}
-  .detail-l b{text-align:left}
-}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;position:relative}
 .kpi.dark{background:var(--forest);color:var(--linen);border-color:var(--forest)}
@@ -696,8 +663,8 @@ label textarea{min-height:96px;resize:vertical}
     <nav class="nav" id="nav"></nav>
     <div class="seal-card">
       <div class="who"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="viewer">Accès réservé</span></div>
-      Espace confidentiel, réservé aux actionnaires.
-      <div class="edit-only"><span class="role" id="role">Mode éditeur</span></div>
+      Informations confidentielles destinées aux seuls actionnaires de Greenpact. Merci de ne pas les diffuser.
+      <div><span class="role" id="role">Lecture</span></div>
       <button type="button" class="logout" id="logout" hidden>Se déconnecter</button>
     </div>
   </aside>
@@ -730,8 +697,8 @@ const SECTIONS = [
   {id:"performance", label:"Performance"},
   {id:"lettres", label:"Lettres et lectures"}
 ];
-// Anciennes adresses (#agenda, #lectures) : l'agenda vit dans la vue d'ensemble,
-// les lectures avec les lettres.
+// 5 rubriques : l'agenda est en bas de la vue d'ensemble, les lectures avec les
+// lettres. Les anciennes adresses mènent au bon endroit.
 const ALIAS = { agenda:"apercu", lectures:"lettres" };
 const CADENCE_DAYS = 14;
 const PHASES = [
@@ -741,14 +708,13 @@ const PHASES = [
   ["growth","Croissance","Chiffre d'affaires établi, rentabilité en vue ou atteinte"]
 ];
 const GLOSS = {
-  nav:"Valeur nette des actifs (NAV) : participations, trésorerie et créances de Greenpact, moins ses dettes. Indicative, certifiée en fin d'année.",
-  tvpi:"TVPI : valeur totale de la holding rapportée aux sommes apportées par les actionnaires. 1,42 signifie que 1 € apporté vaut aujourd'hui 1,42 €.",
-  moic:"MOIC : valeur des participations rapportée aux sommes que Greenpact y a investies.",
-  dpi:"DPI : sommes déjà reversées aux actionnaires, rapportées aux sommes apportées. Les premières distributions sont visées à partir de 2028.",
-  part:"La valeur d'une part est la valeur nette des actifs (NAV) divisée par le nombre de parts.",
-  tri:"TRI : rendement annuel moyen visé, net de frais, sur toute la durée de vie de la holding."
+  nav:"Valeur nette des actifs de Greenpact : participations, trésorerie et créances.",
+  tvpi:"Valeur totale rapportée aux sommes levées. À 1,42x, chaque euro apporté par les actionnaires vaut 1,42 € sur la base de la NAV indicative.",
+  moic:"Valeur du portefeuille rapportée aux sommes investies dans les entreprises.",
+  dpi:"Sommes déjà distribuées aux actionnaires, rapportées aux sommes levées. Les distributions sont attendues à partir de 2028.",
+  part:"La valeur d'une part découle de la NAV divisée par le nombre de parts.",
+  tri:"Taux de rendement annuel visé, net de frais, sur la durée de vie de la holding."
 };
-const euro2 = n => has(n) ? Number(n).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+"\u00a0€" : null;
 
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
@@ -788,6 +754,8 @@ function route(){
   S.view = SECTIONS.some(s=>s.id===h) ? h : "apercu";
   S.animate = true; document.body.classList.remove("nav-open");
   renderNav(); render(); window.scrollTo(0,0);
+  const cible = {agenda:"bloc-agenda", lectures:"bloc-lectures"}[brut];
+  if(cible) setTimeout(()=>{ const el=document.getElementById(cible); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); },120);
 }
 window.addEventListener("hashchange", route);
 
@@ -836,56 +804,45 @@ function nextNewsletterDate(){ const l=lastEdition(); return l?addDays(l.sentAt,
 function upcoming(){ const t=todayISO(); return S.events.filter(e=>(e.date||"")>=t); }
 
 /* ---------- Vue d'ensemble ---------- */
-/* Pour l'actionnaire pressé : trois chiffres en clair, la lettre, ce qui a bougé,
-   la structure, et ce qui arrive. Le détail est dans les autres rubriques. */
-function enBref(){
-  const k=S.kpis||{}, co=companies().filter(h=>h.active!==false), croissance=co.filter(h=>h.phase==="growth").length;
-  const carte=(lab,v,sub,key,href)=>`<a class="bref" href="${href}"><span class="bref-l">${esc(lab)}${key?tip(key):""}</span><span class="bref-v">${v||"—"}</span><span class="bref-s">${sub||""}</span></a>`;
-  return `<section class="brefs" data-reveal>
-    ${carte("Valeur d'une part", has(k.sharePriceNow)?counter(k.sharePriceNow,2,"","\u00a0€"):null, k.sharePriceChange?`${esc(k.sharePriceChange)} sur un an`:"", "part", "#performance")}
-    ${carte("Ce que vaut 1 € apporté", has(k.tvpi)?counter(k.tvpi,2,"","\u00a0€"):null, "Aujourd'hui, valeur indicative", "tvpi", "#performance")}
-    ${carte("Entreprises accompagnées", co.length?counter(co.length,0,"",""):null, croissance?`dont ${croissance} déjà en croissance`:"", null, "#portefeuille")}
-  </section>`;
-}
 function vApercu(){
-  const L=S.letter;
+  const k=S.kpis||{}, L=S.letter;
   const paras = L && L.body ? L.body.split(/\n+/).filter(Boolean) : [];
+  const excerpt = paras.slice(0,2);
   const people = (L && L.signedBy) || "Laurent Geray et Emmanuel Gonon";
-  const lettre = `
-  <section class="band sec" data-reveal>
-    <div class="letter">
-      <div class="kicker">${esc((L&&L.label)||"Lettre aux actionnaires")}</div>
-      <h2>${esc((L&&L.title)||"Lettre aux actionnaires")}</h2>
-      <div class="body">${paras.length?`<p>${md(paras[0])}</p>${paras[1]?`<p>${md(paras[1])}</p>`:""}`:`<p>La prochaine lettre sera publiée ici.</p>`}</div>
-      <div class="sign">
-        <div class="faces"><img src="${ASSETS.people.laurent}" alt="Laurent Geray"><img src="${ASSETS.people.emmanuel}" alt="Emmanuel Gonon"></div>
-        <div><b>${esc(people)}</b><span>${esc((L&&L.signedRole)||"CEO et Chairman, Greenpact")}</span></div>
-        ${paras.length>2?`<a class="btn on-band small" href="#lettres" style="margin-left:auto;text-decoration:none">Lire la lettre</a>`:""}
-        <button class="btn on-band small edit-only" data-act="edit-letter">Modifier</button>
+  const letter = `
+  <section class="band" data-reveal>
+    <div class="letter-grid">
+      <div class="letter">
+        <div class="kicker">${esc((L&&L.label)||"Lettre aux actionnaires")}</div>
+        <h2>${esc((L&&L.title)||"Lettre aux actionnaires")}</h2>
+        <div class="body">${excerpt.length?excerpt.map(p=>`<p>${md(p)}</p>`).join(""):`<p>La prochaine lettre sera publiée ici.</p>`}</div>
+        <div class="sign">
+          <div class="faces"><img src="${ASSETS.people.laurent}" alt="Laurent Geray"><img src="${ASSETS.people.emmanuel}" alt="Emmanuel Gonon"></div>
+          <div><b>${esc(people)}</b><span>${esc((L&&L.signedRole)||"CEO et Chairman, Greenpact")}</span></div>
+          ${paras.length>2?`<button class="btn on-band small" data-act="letter" style="margin-left:auto">Lire la lettre</button>`:""}
+          <button class="btn on-band small edit-only" data-act="edit-letter">Modifier</button>
+        </div>
+      </div>
+      <div class="board">
+        <div class="row"><span class="big">${has(k.moic)?counter(k.moic,2,"x ",""):"—"}</span><span class="lab"><b>MOIC</b>Valeur rapportée aux montants investis</span></div>
+        <div class="row"><span class="big">${has(k.tvpi)?counter(k.tvpi,2,"x ",""):"—"}</span><span class="lab"><b>TVPI</b>Valeur rapportée aux montants levés</span></div>
+        <div class="row"><span class="big">${has(k.nav)?counter(k.nav/1e6,1,"","\u00a0M€"):"—"}</span><span class="lab"><b>Valeur des actifs</b>${k.sharePriceChange?`Prix de la part ${esc(k.sharePriceChange)} sur un an`:"NAV indicative"}</span></div>
       </div>
     </div>
   </section>`;
-  return `
-  <div class="head"><div><h1>Vue d'ensemble</h1><p>L'essentiel en deux minutes : ce que vaut votre investissement, ce qui a bougé et ce qui arrive.</p></div></div>
-  ${enBref()}
-  ${lettre}
-  <section class="sec" data-reveal>
-    <div class="sec-h"><h2>Ce qui a bougé</h2><a href="#portefeuille" class="pill" style="text-decoration:none">Tout le portefeuille</a></div>
-    <div class="panel">${feedList(S.news.slice(0,4))}</div>
-  </section>
-  ${treeBlock()}
-  ${aVenir()}`;
-}
-function aVenir(){
-  const evs=upcoming().slice(0,3), l=lastEdition(), n=nextNewsletterDate();
-  const ev=e=>{const d=new Date(e.date);return `<div class="event"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${e.place?` · ${esc(e.place)}`:""}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div style="display:flex;gap:8px">${safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
-  return `<section class="sec" data-reveal>
-    <div class="sec-h"><h2>À venir</h2><button class="btn ghost small edit-only" data-act="new-events">Ajouter un rendez-vous</button></div>
-    <div class="panel avenir">
-      ${evs.length?evs.map(ev).join(""):`<div class="event"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Agenda</div><div class="d">—</div></div><div><h3>Pas encore de date fixée</h3><p>Les rencontres et assemblées apparaîtront ici.</p></div><div></div></div>`}
-      <div class="event"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Lettre</div><div class="d">${l?esc((Number(l.number)||0)+1):"1"}</div></div><div><h3>${l?"Prochaine lettre aux actionnaires":"Première lettre en préparation"}</h3><p>${n?`Vers le ${esc(dFmt(n,{day:"numeric",month:"long"}))}. `:""}Envoyée toutes les deux semaines.</p></div><div><a class="btn ghost small" href="#lettres" style="text-decoration:none">Les lettres</a></div></div>
-    </div>
-  </section>`;
+  return letter + treeBlock() + teamsBlock() + `
+  <div class="split sec">
+    <section class="panel" data-reveal>
+      <div class="sec-h"><h2>Où est investi le capital</h2></div>
+      ${donut()}
+    </section>
+    <section class="panel" data-reveal>
+      <div class="sec-h"><h2>Faits marquants</h2><a href="#portefeuille" class="pill" style="text-decoration:none">Tout le portefeuille</a></div>
+      ${feedList(S.news.slice(0,5))}
+    </section>
+  </div>
+  <div class="strip">${nextEventPanel()}${lastLetterPanel()}</div>
+  ${agendaBlock()}`;
 }
 function teamsBlock(){
   const list = companies().filter(hasPhoto);
@@ -939,6 +896,17 @@ function feedList(list){
     <button class="btn ghost small edit-only" style="margin-top:8px" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button></div>
   </li>`).join("")}</ul>`;
 }
+function nextEventPanel(){
+  const e=upcoming()[0];
+  if(!e) return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Agenda</div><div class="d" style="font-size:1.1rem;line-height:2.6">—</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>Pas encore de date fixée</h3><p class="note" style="margin-top:2px">Les rencontres et assemblées apparaîtront ici.</p></div></a>`;
+  const d=new Date(e.date);
+  return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>${esc(e.title)}</h3><p class="note" style="margin-top:2px">${e.time?esc(e.time)+", ":""}${esc(e.place||"")}</p></div></a>`;
+}
+function lastLetterPanel(){
+  const l=lastEdition(), n=nextNewsletterDate();
+  return `<a class="panel" href="#lettres" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Lettre</div><div class="d">${l?esc(l.number):"1"}</div></div><div><div class="note" style="margin:0">Lettre de la quinzaine</div><h3>${l?esc(l.title||"Dernière lettre"):"Première lettre en préparation"}</h3><p class="note" style="margin-top:2px">${l?`Envoyée le ${esc(dFmt(l.sentAt,{day:"numeric",month:"long"}))}${n?`, prochaine vers le ${esc(dFmt(n,{day:"numeric",month:"long"}))}`:""}`:"Envoyée toutes les deux semaines"}</p></div></a>`;
+}
+
 /* ---------- Portefeuille ---------- */
 function coverClass(h){ return hasPhoto(h) ? "photo" : "light"; }
 function coverStyle(h){ const p=photoUrl(h); return p ? `class="cover photo" style="background-image:url('${p}')"` : `class="cover ${coverClass(h)}"`; }
@@ -1112,33 +1080,27 @@ const PRINCIPLES = [
 ];
 
 /* ---------- Performance ---------- */
-/* Trois réponses en clair, puis le détail pour ceux qui veulent comprendre. */
 function vPerformance(){
   const k=S.kpis||{};
-  const grand=(lab,v,sub,key,dark)=>`<div class="kpi grand ${dark?"dark":""}"><div class="l">${esc(lab)}${key?tip(key):""}</div><div class="v">${v||"—"}</div>${sub?`<small>${sub}</small>`:""}</div>`;
-  const ligne=(lab,v,sub,key)=>v?`<div class="detail-l"><span>${esc(lab)}${key?tip(key):""}</span><b>${v}</b><small>${sub||""}</small></div>`:"";
+  const kpi=(v,lab,key,sub,dark)=>`<div class="kpi ${dark?"dark":""} ${v?"":"empty"}"><div class="v">${v||"À renseigner"}</div><div class="l">${esc(lab)}${key?tip(key):""}</div>${sub?`<small>${esc(sub)}</small>`:""}</div>`;
+  const kp = [
+    kpi(has(k.nav)?counter(k.nav/1e6,2,"","\u00a0M€"):null,"Valeur des actifs (NAV)","nav","Indicative, certifiée en fin d'année",true),
+    kpi(has(k.tvpi)?counter(k.tvpi,2,"","x"):null,"TVPI","tvpi",has(k.raised)?`Sur ${eurC(k.raised)} levés`:""),
+    kpi(has(k.moic)?counter(k.moic,2,"","x"):null,"MOIC","moic",has(k.invested)?`Sur ${eurC(k.invested)} investis`:""),
+    kpi(has(k.dpi)?counter(k.dpi,2,"","x"):null,"DPI","dpi","Premières liquidités visées en 2028"),
+    kpi(has(k.sharePriceNow)?counter(k.sharePriceNow,2,"","\u00a0€"):null,"Prix de la part","part",k.sharePriceChange?`${k.sharePriceChange} sur un an`:""),
+    kpi(has(k.raised)?esc(eurC(k.raised)):null,"Capital levé",null,has(k.raisedTarget)?`Objectif ${eurC(k.raisedTarget)}`:""),
+    kpi(has(k.targetIrr)?esc(k.targetIrr)+" %":null,"TRI net cible","tri","Médian, sur la durée de vie"),
+    kpi(has(k.cash)?esc(eurC(k.cash)):null,"Trésorerie disponible",null,k.cashNote||"")
+  ].join("");
   return `
-  <div class="head"><div><h1>Performance</h1><p>Ce que vaut votre investissement, et d'où vient cette valeur.</p></div>
+  <div class="head"><div><h1>Performance</h1><p>Valeur de la holding, de chaque ligne du portefeuille et de la trésorerie.</p></div>
     <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="edit-kpis">Mettre à jour les chiffres</button><button class="btn" data-act="new-cash">Ajouter une période</button></div></div>
-  <div class="kpis trois">
-    ${grand("Valeur d'une part", has(k.sharePriceNow)?counter(k.sharePriceNow,2,"","\u00a0€"):null, k.sharePriceChange?`${esc(k.sharePriceChange)} sur un an`:"", "part", true)}
-    ${grand("Ce que vaut 1 € apporté", has(k.tvpi)?counter(k.tvpi,2,"","\u00a0€"):null, has(k.raised)?`Sur ${esc(eurC(k.raised))} apportés par les actionnaires`:"", "tvpi")}
-    ${grand("Valeur totale de la holding", has(k.nav)?counter(k.nav/1e6,1,"","\u00a0M€"):null, "Valeur nette des actifs, indicative", "nav")}
-  </div>
-  <section class="sec panel" data-reveal>
-    <div class="sec-h" style="margin-bottom:8px"><h2>En détail</h2></div>
-    <div class="details">
-      ${ligne("Investi dans les entreprises", has(k.invested)?esc(eurC(k.invested)):null, has(k.moic)?`Elles valent aujourd'hui ${esc(fx(k.moic))} leur prix d'achat`:"", "moic")}
-      ${ligne("Déjà reversé aux actionnaires", has(k.dpi)?(Number(k.dpi)>0?esc(euro2(k.dpi))+" pour 1 € apporté":"Pas encore"):null, "Premières distributions visées à partir de 2028", "dpi")}
-      ${ligne("Rendement annuel visé", has(k.targetIrr)?esc(k.targetIrr)+"\u00a0%":null, "Net de frais, sur la durée de vie de la holding", "tri")}
-      ${ligne("Trésorerie disponible", has(k.cash)?esc(eurC(k.cash)):null, k.cashNote||"")}
-    </div>
-    ${k.note?`<p class="note">${esc(k.note)}</p>`:""}
-  </section>
+  <div class="kpis">${kp}</div>
+  ${k.note?`<p class="note">${esc(k.note)}</p>`:""}
   ${sharePriceBlock()}
-  <section class="sec panel" data-reveal><div class="sec-h"><h2>Où est investi le capital</h2></div>${donut()}</section>
   ${positionsBlock()}
-  ${(S.cashflow&&S.cashflow.rows||[]).length?cashBlock():""}`;
+  ${cashBlock()}`;
 }
 function sharePriceBlock(){
   const k=S.kpis||{}, sp=k.sharePrice||[]; if(sp.length<2) return "";
@@ -1163,15 +1125,15 @@ function positionsBlock(){
   const sum=f=>pos.reduce((s,h)=>s+(Number(h[f])||0),0), ti=sum("invested"), tv=sum("marketValue");
   const st=studios().filter(s=>s.fundMoic||s.fundTvpi);
   return `<section class="sec" data-reveal>
-    <div class="sec-h"><h2>Ce que vaut chaque participation</h2><p>${esc(eurC(ti))} investis, ${esc(eurC(tv))} de valeur retenue</p></div>
+    <div class="sec-h"><h2>Ce que vaut chaque ligne</h2><p>${esc(eurC(ti))} investis, ${esc(eurC(tv))} de valeur retenue</p></div>
     <div class="panel"><div class="keys"><span><i style="background:var(--surface-2)"></i>Montant investi</span><span><i style="background:var(--ink)"></i>Valeur retenue</span></div>
     <div class="pos">${pos.map(h=>`<div class="pos-row ${h.active===false?"past":""}">
       <div class="nm"><b>${esc(h.name)}</b><span>${esc([h.year?`depuis ${h.year}`:"",h.stake].filter(Boolean).join(" · "))}</span></div>
       <div class="bars2"><div class="b cost" data-w="${((Number(h.invested)||0)/mx*100).toFixed(1)}%"></div><div class="b val" data-w="${((Number(h.marketValue)||0)/mx*100).toFixed(1)}%"></div><small>${esc(eur(h.invested)||"—")} → ${esc(eur(h.marketValue)||"—")}${h.method?` · ${esc(h.method)}`:""}</small></div>
-      <div class="moic">${esc(h.moic||"")}<span>sa mise</span></div>
+      <div class="moic">${esc(h.moic||"")}<span>multiple</span></div>
     </div>`).join("")}</div></div>
     <p class="note">La valeur du portefeuille n'est qu'une composante de la NAV, qui inclut aussi la trésorerie et les créances. Valorisation selon les lignes directrices IPEV ; les intérêts dans les studios sont retenus à leur quote-part de NAV.</p>
-    ${st.length?`<div class="studios">${st.map(s=>{const x=v=>esc(String(v||"—").replace(/x$/i,"").trim().replace(".",","));return `<div class="kpi"><div class="l" style="margin:0 0 6px">Dans le studio ${esc(s.name)}</div><div class="v num">${x(s.fundMoic)} €</div><small>de valeur pour 1 € investi dans ses startups ; ${x(s.fundTvpi)} € pour 1 € apporté au studio${s.fundNote?`. ${esc(s.fundNote)}`:""}</small></div>`;}).join("")}</div>`:""}
+    ${st.length?`<div class="studios">${st.map(s=>`<div class="kpi"><div class="v num">${esc(s.fundMoic||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">MOIC</span> · ${esc(s.fundTvpi||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">TVPI</span></div><div class="l">Studio ${esc(s.name)}</div>${s.fundNote?`<small>${esc(s.fundNote)}</small>`:""}</div>`).join("")}</div>`:""}
   </section>`;
 }
 function cashBlock(){
@@ -1182,16 +1144,27 @@ function cashBlock(){
     <p class="note">${esc((S.cashflow&&S.cashflow.note)||"")}</p></section>`;
 }
 
-/* ---------- Lectures (affichées dans « Lettres et lectures ») ---------- */
-function lecturesBlock(){
+/* ---------- Lectures ---------- */
+function vLectures(){
   const tags=[...new Set(S.articles.flatMap(a=>a.tags||[]))];
   const q=S.search.toLowerCase();
   const list=S.articles.filter(a=>(S.tag==="all"||(a.tags||[]).includes(S.tag)) && (!q||[a.title,a.source,a.summary,a.memo].join(" ").toLowerCase().includes(q)));
-  return `<section class="sec"><div class="sec-h"><h2>Nos lectures</h2><button class="btn ghost small edit-only" data-act="new-articles">Ajouter une lecture</button></div>
-  <p class="note" style="margin:-8px 0 16px">Ce que l'équipe lit, et ce qu'elle en retient pour Greenpact.</p>
+  return `<div class="head"><div><h1>Lectures</h1><p>Ce que l'équipe lit, et ce qu'elle en retient pour Greenpact.</p></div><button class="btn edit-only" data-act="new-articles">Ajouter une lecture</button></div>
   <div class="toolbar"><div class="seg" role="group" aria-label="Thèmes"><button data-act="tag" data-id="all" aria-pressed="${S.tag==="all"}">Tout</button>${tags.map(t=>`<button data-act="tag" data-id="${esc(t)}" aria-pressed="${S.tag===t}">${esc(t)}</button>`).join("")}</div>
   <input class="search" id="search" type="search" placeholder="Rechercher" value="${esc(S.search)}" aria-label="Rechercher"></div>
-  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${safeUrl(a.url)?`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}</section>`;
+  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${safeUrl(a.url)?`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
+}
+
+/* ---------- Agenda (en bas de la vue d'ensemble) ---------- */
+function agendaBlock(){
+  return `<section class="sec" id="bloc-agenda">${vAgenda().replace('<div class="head"><div><h1>Agenda</h1>','<div class="head"><div><h2>Agenda</h2>')}</section>`;
+}
+function vAgenda(){
+  const t=todayISO(), up=S.events.filter(e=>(e.date||"")>=t), past=S.events.filter(e=>(e.date||"")<t).reverse().slice(0,6);
+  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${e.place?` · ${esc(e.place)}`:""}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
+  return `<div class="head"><div><h1>Agenda</h1><p>Assemblées, rencontres avec les fondateurs et événements du club.</p></div><button class="btn edit-only" data-act="new-events">Ajouter un événement</button></div>
+  <div class="panel">${up.length?up.map(e=>row(e,false)).join(""):`<div class="empty" style="border:0">Aucun rendez-vous programmé pour le moment.</div>`}</div>
+  ${past.length?`<section class="sec"><div class="sec-h"><h2>Passés</h2></div>${past.map(e=>row(e,true)).join("")}</section>`:""}`;
 }
 
 /* ---------- Lettres ---------- */
@@ -1225,15 +1198,8 @@ function vLettres(){
   const c=sinceLast(), type=S.nlType||defaultType(), next=nextNewsletterDate();
   const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))} · ${esc(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
   setTimeout(updatePreview,0);
-  const L=S.letter, paras=L&&L.body?L.body.split(/\n+/).filter(Boolean):[];
-  const lettre = paras.length ? `<section class="band lettre-entiere" data-reveal><div class="letter">
-      <div class="kicker">${esc(L.label||"Lettre aux actionnaires")}</div><h2>${esc(L.title||"")}</h2>
-      <div class="body">${paras.map(x=>`<p>${md(x)}</p>`).join("")}</div>
-      <div class="sign"><div class="faces"><img src="${ASSETS.people.laurent}" alt="Laurent Geray"><img src="${ASSETS.people.emmanuel}" alt="Emmanuel Gonon"></div><div><b>${esc(L.signedBy||"Laurent Geray et Emmanuel Gonon")}</b><span>${esc(L.signedRole||"CEO et Chairman, Greenpact")}</span></div></div>
-    </div></section>` : "";
-  return `<div class="head"><div><h1>Lettres et lectures</h1><p>La dernière lettre des dirigeants, les lettres de la quinzaine et nos lectures.</p></div></div>
-  ${lettre}
-  <section class="edit-only sec"><div class="nl-grid">
+  return `<div class="head"><div><h1>Lettres et lectures</h1><p>La lettre envoyée aux actionnaires toutes les deux semaines, et nos lectures.</p></div></div>
+  <section class="edit-only" style="margin-bottom:46px"><div class="nl-grid">
     <div class="panel"><h2>Prochaine lettre</h2><p class="note" style="margin-top:4px">${next?`À envoyer vers le ${esc(dFmt(next,{weekday:"long",day:"numeric",month:"long"}))}.`:"Première édition : elle reprend tout ce qui est publié."} Format court et format mensuel en alternance.</p>
       <ul class="check"><li><b>${c.news.length}</b> nouvelle${c.news.length>1?"s":""} du portefeuille</li><li><b>${c.articles.length}</b> lecture${c.articles.length>1?"s":""}</li><li><b>${Math.min(c.events.length,4)}</b> rendez-vous</li></ul>
       <div style="margin-top:18px" class="seg" role="group" aria-label="Format"><button data-act="nltype" data-id="courte" aria-pressed="${type==="courte"}">Courte</button><button data-act="nltype" data-id="complète" aria-pressed="${type==="complète"}">Mensuelle</button></div>
@@ -1243,8 +1209,8 @@ function vLettres(){
     </div>
     <iframe class="preview" id="nl-preview" title="Aperçu de la lettre" sandbox=""></iframe>
   </div></section>
-  <section class="sec"><div class="sec-h"><h2>Lettres de la quinzaine</h2></div><div class="panel">${archive}</div></section>
-  ${lecturesBlock()}`;
+  <section><div class="sec-h"><h2>Lettres envoyées</h2></div><div class="panel">${archive}</div></section>
+  <section class="sec" id="bloc-lectures">${vLectures().replace('<div class="head"><div><h1>Lectures</h1>','<div class="head"><div><h2>Lectures</h2>')}</section>`;
 }
 
 /* ---------- Forms ---------- */

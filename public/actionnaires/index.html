@@ -586,6 +586,7 @@ th{font-weight:500;color:var(--muted);font-size:.78rem}
 td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
 tr:last-child td{border-bottom:0}
 .note{font-size:.8rem;color:var(--muted);margin-top:12px;max-width:80ch}
+@media (min-width:1100px){ .note.une-ligne{max-width:none;white-space:nowrap} }
 .studios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
 
 /* Lectures */
@@ -931,7 +932,7 @@ function donut(){
     </div>
     <ul class="capital-legende">${items.map((it,i)=>`<li data-seg="${i}" tabindex="0"><i style="background:${shades[i%shades.length]}"></i><span class="nm">${esc(it.name)}</span><span class="mt">${esc(eurC(it.v))}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>`).join("")}</ul>
   </div>
-  <p class="note">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`;
+  <p class="note une-ligne">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`;
 }
 function capitalSurvol(e){
   const el=e.target instanceof Element?e.target:null;

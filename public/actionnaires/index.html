@@ -947,9 +947,12 @@ function capitalSurvol(e){
 }
 document.addEventListener("mouseover", capitalSurvol);
 document.addEventListener("focusin", capitalSurvol);
+/* Actualités affichées partout dans l'espace : celles marquées « une » (les
+   faits marquants du moment). Sans aucune marquée, toutes les nouvelles. */
+function actus(){ const une=S.news.filter(n=>n.une); return une.length?une:S.news; }
 /* Faits marquants : les quatre actualités choisies (champ « une »), en cartes. */
 function faitsMarquants(){
-  const une=S.news.filter(n=>n.une), list=(une.length?une:S.news).slice(0,4);
+  const list=actus().slice(0,4);
   if(!list.length) return `<div class="empty">Aucune nouvelle publiée.</div>`;
   return `<div class="faits">${list.map(n=>`<article class="fait" data-act="detail" data-id="${esc(n.holdingId)}">
     <div class="fait-t"><div class="flogo">${logoChip(n.holdingId)}</div><span class="meta">${esc(holdingName(n.holdingId))} · ${esc(dFmt(n.date,{day:"numeric",month:"long"}))}</span></div>
@@ -1002,7 +1005,7 @@ function vPortefeuille(){
     <div class="toolbar"><div class="seg" role="group" aria-label="Filtrer">${opts.map(o=>`<button data-act="pf" data-id="${esc(o[0])}" aria-pressed="${f===o[0]}">${esc(o[1])} <span style="opacity:.55">${o[2]}</span></button>`).join("")}</div></div>
     ${list.length?`<div class="grid">${list.map(coCard).join("")}</div>`:`<div class="empty">Aucune entreprise dans cette sélection.</div>`}
   </section>
-  <section class="sec"><div class="sec-h"><h2>Nouvelles du portefeuille</h2></div><div class="panel">${feedList(S.news.filter(n=>f==="all"||n.holdingId===f||(H(n.holdingId)||{}).parent===f||(f==="direct"&&(H(n.holdingId)||{}).vehicle==="direct")))}</div></section>`;
+  <section class="sec"><div class="sec-h"><h2>Nouvelles du portefeuille</h2></div><div class="panel">${feedList(actus().filter(n=>f==="all"||n.holdingId===f||(H(n.holdingId)||{}).parent===f||(f==="direct"&&(H(n.holdingId)||{}).vehicle==="direct")))}</div></section>`;
 }
 function openDetail(id){
   const h=H(id); if(!h) return;
@@ -1010,7 +1013,7 @@ function openDetail(id){
   const facts=[["Stade",h.stage],["Activité",h.revenue],["Équipe",h.team],["Création",h.year],["Détention",h.stake],
     [h.parent&&h.vehicle==="startup"?`Investi par ${holdingName(h.parent)}`:"Investi par Greenpact", has(h.invested)?eur(h.invested):""],
     ["Valeur retenue",has(h.marketValue)?eur(h.marketValue):""],["Multiple",h.moic]].filter(f=>f[1]);
-  const nws=S.news.filter(n=>n.holdingId===h.id);
+  const nws=actus().filter(n=>n.holdingId===h.id);
   const dr=$("#drawer");
   dr.innerHTML = `
     <button class="dr-close" data-act="close-drawer" aria-label="Fermer">×</button>
@@ -1222,7 +1225,7 @@ function vAgenda(){
 }
 
 /* ---------- Lettres ---------- */
-function sinceLast(){ const l=lastEdition(), s=l?l.sentAt:""; const a=x=>(x.createdAt||"")>s; return {news:S.news.filter(a),articles:S.articles.filter(a),events:upcoming()}; }
+function sinceLast(){ const l=lastEdition(), s=l?l.sentAt:""; const a=x=>(x.createdAt||"")>s; return {news:actus().filter(a),articles:S.articles.filter(a),events:upcoming()}; }
 function defaultType(){ const l=lastEdition(); return !l?"courte":(l.type==="courte"?"complète":"courte"); }
 function buildEmail(type,intro,c){
   const set=S.settings||{}, k=S.kpis||{};

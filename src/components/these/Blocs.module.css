@@ -24,6 +24,29 @@
 .texte h2 {
   max-width: 16ch;
 }
+/* Phrase de conviction mise en avant : plus grande, plus grasse, décalée par un
+   filet vert, après une respiration ; le paragraphe courant reste en retrait. */
+.conviction {
+  margin: 2.5rem 0 0;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  border-left: 3px solid var(--vert);
+}
+.conviction p {
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  max-width: 26ch;
+}
+.convictionLabel {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--vert-70);
+}
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

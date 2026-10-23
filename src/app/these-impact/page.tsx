@@ -43,7 +43,10 @@ export default function Page() {
             <h2 id="ibd-titre">Impact by design.</h2>
             <p>Les studios sont des fonds Article 9 SFDR, le plus haut niveau d'exigence en matière d'impact. 50 % du carried des studios est conditionné à l'impact et reversé à des ONG si les objectifs ne sont pas atteints.</p>
             <p>La démarche est déclinée dans chaque startup, et une gouvernance impact indépendante (comité impact) l'encadre.</p>
-            <p className="lead">Nous croyons en la force de l'investissement à impact, car la rentabilité viendra de la création de valeur durable.</p>
+            <blockquote className={s.conviction}>
+              <span className={s.convictionLabel}>Notre conviction</span>
+              <p>Nous croyons en la force de l'investissement à impact, car la rentabilité viendra de la création de valeur durable.</p>
+            </blockquote>
           </div>
           <Image src="/images/impact-paysage.webp" alt="Lever du soleil sur une rivière sinueuse et des champs" width={1600} height={1067} className={`${s.photo} ${s.photoHaute}`} loading="lazy" />
         </Reveal>

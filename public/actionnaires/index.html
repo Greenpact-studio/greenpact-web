@@ -99,14 +99,9 @@ p{margin:0}
 @keyframes fadein{to{opacity:1}}
 @keyframes load{to{transform:none}}
 
-/* Watermark */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.045;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260'%3E%3Ctext x='0' y='150' transform='rotate(-24 210 130)' font-family='Arial' font-size='22' letter-spacing='6' fill='%231c3a2b'%3ECONFIDENTIEL%3C/text%3E%3C/svg%3E")}
-
 /* Shell */
 .shell{position:relative;display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
 .side{position:sticky;top:0;height:100vh;background:var(--forest);color:var(--linen);display:flex;flex-direction:column;padding:30px 22px 24px;overflow:hidden}
-.side::after{content:"";position:absolute;right:-120px;top:-40px;width:240px;height:130%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(237,234,228,.045) 46px 84px);pointer-events:none}
 .side .brand-logo{display:block;width:178px;height:auto;max-width:100%;margin:2px 4px 6px}
 .side .tag{font-size:.78rem;color:rgba(237,234,228,.6);margin:0 4px 34px}
 .nav{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
@@ -157,8 +152,6 @@ body.can-edit .edit-only.flex{display:flex!important}
 
 /* Hero band */
 .band{position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:22px;padding:clamp(26px,3.4vw,44px)}
-.band::before{content:"";position:absolute;inset:-40% -10% -40% 45%;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(237,234,228,.05) 60px 110px);animation:drift 40s linear infinite}
-@keyframes drift{to{background-position:400px 0}}
 .band > *{position:relative}
 .letter-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);gap:clamp(24px,4vw,56px);align-items:stretch}
 .letter h2{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;margin:6px 0 18px;max-width:20ch}
@@ -184,13 +177,18 @@ body.can-edit .edit-only.flex{display:flex!important}
 .node-top{background:var(--forest);color:var(--linen);border-radius:16px;padding:14px 22px;text-align:center;min-width:240px}
 .node-top img{width:150px;margin:0 auto 6px}
 .node-top span{font-size:.78rem;color:rgba(237,234,228,.7)}
-.tree-branches{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-top:44px;margin-top:0}
-.tree-branches::before{content:"";position:absolute;top:22px;left:16.66%;right:16.66%;height:1px;background:var(--forest);opacity:.35;transform:scaleX(0);transform-origin:center;transition:transform .9s .2s var(--ease)}
-.tree-stem{position:relative;height:22px;display:flex;justify-content:center}
-.tree-stem::before{content:"";width:1px;height:100%;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
+/* Arbre holding → studios → entreprises : un tronc, une barre horizontale
+   qui relie exactement le centre des trois colonnes, et une descente par colonne.
+   Chaque colonne trace sa part de barre, d'un demi-écart à l'autre. */
+.tree{--trait:rgba(28,58,43,.5);--h:26px;--gap:18px}
+.tree-stem{height:var(--h);display:flex;justify-content:center}
+.tree-stem::before{content:"";width:1.5px;height:100%;background:var(--trait)}
+.tree-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);padding-top:var(--h)}
 .branch{position:relative;display:flex;flex-direction:column;gap:12px}
-.branch::before{content:"";position:absolute;top:-22px;left:50%;width:1px;height:22px;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s 1s var(--ease)}
-.in .tree-stem::before,.in .tree-branches::before,.in .branch::before{transform:none}
+.branch::before{content:"";position:absolute;top:calc(-1 * var(--h));left:calc(50% - .75px);width:1.5px;height:var(--h);background:var(--trait)}
+.branch::after{content:"";position:absolute;top:calc(-1 * var(--h));left:calc(-1 * var(--gap) / 2);right:calc(-1 * var(--gap) / 2);height:1.5px;background:var(--trait)}
+.branch:first-child::after{left:50%}
+.branch:last-child::after{right:50%}
 .branch-h{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg);text-align:center}
 .branch-h b{display:block;font-size:.95rem}
 .branch-h span{font-size:.76rem;color:var(--muted)}
@@ -244,7 +242,7 @@ body.can-edit .edit-only.flex{display:flex!important}
 .cover .lg .logo{--lh:26px;--lw:150px;background:currentColor;-webkit-mask:var(--src) left center/contain no-repeat;mask:var(--src) left center/contain no-repeat}
 .cover .lg .txt{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
 .cover .stage{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:500;color:var(--linen);background:rgba(14,32,24,.38);border:1px solid rgba(237,234,228,.3);padding:2px 10px;border-radius:99px;backdrop-filter:blur(6px)}
-.cover.stripes,.cover.light{background-color:var(--surface-2);background-image:repeating-linear-gradient(115deg,transparent 0 30px,rgba(28,58,43,.045) 30px 54px);justify-content:center;align-items:center;color:var(--ink)}
+.cover.stripes,.cover.light{background-color:var(--surface-2);justify-content:center;align-items:center;color:var(--ink)}
 .cover.light .lg .logo,.cover.stripes .lg .logo{--lh:40px;--lw:180px;background:var(--src) center/contain no-repeat;filter:none}
 .cover.light .stage,.cover.stripes .stage{background:var(--surface);color:var(--ink);border-color:var(--line)}
 .dr-cover{height:240px}
@@ -565,6 +563,9 @@ tr:last-child td{border-bottom:0}
 .search{width:min(320px,100%);padding:9px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
 
 /* Agenda */
+#bloc-agenda .panel{padding-top:6px;padding-bottom:6px}
+#bloc-agenda .panel .event:last-child{border-bottom:0}
+#bloc-agenda .event{align-items:center}
 .event{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:20px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
 .event h3{font-size:1rem}
 .event p{color:var(--muted);font-size:.88rem;margin-top:4px}
@@ -605,7 +606,7 @@ label textarea{min-height:96px;resize:vertical}
   .btn.menu-btn{display:inline-flex}
   .topbar{top:env(safe-area-inset-top,0px)}
   .tree-branches{grid-template-columns:1fr;padding-top:18px}
-  .tree-branches::before,.branch::before{display:none}
+  .tree-stem,.branch::before,.branch::after{display:none}
   .frise-track{display:none}
   .frise-cols{grid-template-columns:1fr 1fr;gap:18px}
   .family{grid-template-columns:1fr;gap:14px}
@@ -697,10 +698,11 @@ const SECTIONS = [
   {id:"portefeuille", label:"Portefeuille"},
   {id:"impact", label:"Impact"},
   {id:"performance", label:"Performance"},
-  {id:"lectures", label:"Lectures"},
-  {id:"agenda", label:"Agenda"},
-  {id:"lettres", label:"Lettres"}
+  {id:"lettres", label:"Lettres et lectures"}
 ];
+// 5 rubriques : l'agenda est en bas de la vue d'ensemble, les lectures avec les
+// lettres. Les anciennes adresses mènent au bon endroit.
+const ALIAS = { agenda:"apercu", lectures:"lettres" };
 const CADENCE_DAYS = 14;
 const PHASES = [
   ["creation","Création","Société constituée, premiers clients ou preuves de concept"],
@@ -751,15 +753,17 @@ function renderNav(){
   $("#nav").innerHTML = SECTIONS.map(s=>`<a href="#${s.id}" ${S.view===s.id?'aria-current="page"':""}>${s.label}</a>`).join("");
 }
 function route(){
-  const h=(location.hash||"#apercu").slice(1);
+  const brut=(location.hash||"#apercu").slice(1), h=ALIAS[brut]||brut;
   S.view = SECTIONS.some(s=>s.id===h) ? h : "apercu";
   S.animate = true; document.body.classList.remove("nav-open");
   renderNav(); render(); window.scrollTo(0,0);
+  const cible = {agenda:"bloc-agenda", lectures:"bloc-lectures"}[brut];
+  if(cible) setTimeout(()=>{ const el=document.getElementById(cible); if(el) el.scrollIntoView({behavior:"smooth",block:"start"}); },120);
 }
 window.addEventListener("hashchange", route);
 
 function render(){
-  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lectures:vLectures,agenda:vAgenda,lettres:vLettres};
+  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres};
   const k=S.kpis||{};
   $("#stamp").innerHTML = k.asOf ? `Données au <b>${esc(dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
   const banner = S.ready && !S.db && !S.static ? `<div class="empty" style="margin-bottom:24px">Les données ne sont pas disponibles dans cette vue. Ouvrez l'espace depuis son lien en étant connecté.</div>` : "";
@@ -840,7 +844,7 @@ function vApercu(){
       ${feedList(S.news.slice(0,5))}
     </section>
   </div>
-  <div class="strip">${nextEventPanel()}${lastLetterPanel()}</div>`;
+  ${agendaBlock()}`;
 }
 function teamsBlock(){
   const list = companies().filter(hasPhoto);
@@ -894,17 +898,6 @@ function feedList(list){
     <button class="btn ghost small edit-only" style="margin-top:8px" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button></div>
   </li>`).join("")}</ul>`;
 }
-function nextEventPanel(){
-  const e=upcoming()[0];
-  if(!e) return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Agenda</div><div class="d" style="font-size:1.1rem;line-height:2.6">—</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>Pas encore de date fixée</h3><p class="note" style="margin-top:2px">Les rencontres et assemblées apparaîtront ici.</p></div></a>`;
-  const d=new Date(e.date);
-  return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>${esc(e.title)}</h3><p class="note" style="margin-top:2px">${e.time?esc(e.time)+", ":""}${esc(e.place||"")}</p></div></a>`;
-}
-function lastLetterPanel(){
-  const l=lastEdition(), n=nextNewsletterDate();
-  return `<a class="panel" href="#lettres" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Lettre</div><div class="d">${l?esc(l.number):"1"}</div></div><div><div class="note" style="margin:0">Lettre de la quinzaine</div><h3>${l?esc(l.title||"Dernière lettre"):"Première lettre en préparation"}</h3><p class="note" style="margin-top:2px">${l?`Envoyée le ${esc(dFmt(l.sentAt,{day:"numeric",month:"long"}))}${n?`, prochaine vers le ${esc(dFmt(n,{day:"numeric",month:"long"}))}`:""}`:"Envoyée toutes les deux semaines"}</p></div></a>`;
-}
-
 /* ---------- Portefeuille ---------- */
 function coverClass(h){ return hasPhoto(h) ? "photo" : "light"; }
 function coverStyle(h){ const p=photoUrl(h); return p ? `class="cover photo" style="background-image:url('${p}')"` : `class="cover ${coverClass(h)}"`; }
@@ -1153,7 +1146,10 @@ function vLectures(){
   ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${safeUrl(a.url)?`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
 }
 
-/* ---------- Agenda ---------- */
+/* ---------- Agenda (en bas de la vue d'ensemble) ---------- */
+function agendaBlock(){
+  return `<section class="sec" id="bloc-agenda">${vAgenda().replace('<div class="head"><div><h1>Agenda</h1>','<div class="head"><div><h2>Agenda</h2>')}</section>`;
+}
 function vAgenda(){
   const t=todayISO(), up=S.events.filter(e=>(e.date||"")>=t), past=S.events.filter(e=>(e.date||"")<t).reverse().slice(0,6);
   const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${e.place?` · ${esc(e.place)}`:""}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
@@ -1193,7 +1189,7 @@ function vLettres(){
   const c=sinceLast(), type=S.nlType||defaultType(), next=nextNewsletterDate();
   const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))} · ${esc(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
   setTimeout(updatePreview,0);
-  return `<div class="head"><div><h1>Lettres</h1><p>La lettre envoyée aux actionnaires toutes les deux semaines.</p></div></div>
+  return `<div class="head"><div><h1>Lettres et lectures</h1><p>La lettre envoyée aux actionnaires toutes les deux semaines, et nos lectures.</p></div></div>
   <section class="edit-only" style="margin-bottom:46px"><div class="nl-grid">
     <div class="panel"><h2>Prochaine lettre</h2><p class="note" style="margin-top:4px">${next?`À envoyer vers le ${esc(dFmt(next,{weekday:"long",day:"numeric",month:"long"}))}.`:"Première édition : elle reprend tout ce qui est publié."} Format court et format mensuel en alternance.</p>
       <ul class="check"><li><b>${c.news.length}</b> nouvelle${c.news.length>1?"s":""} du portefeuille</li><li><b>${c.articles.length}</b> lecture${c.articles.length>1?"s":""}</li><li><b>${Math.min(c.events.length,4)}</b> rendez-vous</li></ul>
@@ -1204,7 +1200,8 @@ function vLettres(){
     </div>
     <iframe class="preview" id="nl-preview" title="Aperçu de la lettre" sandbox=""></iframe>
   </div></section>
-  <section><div class="sec-h"><h2>Lettres envoyées</h2></div><div class="panel">${archive}</div></section>`;
+  <section><div class="sec-h"><h2>Lettres envoyées</h2></div><div class="panel">${archive}</div></section>
+  <section class="sec" id="bloc-lectures">${vLectures().replace('<div class="head"><div><h1>Lectures</h1>','<div class="head"><div><h2>Lectures</h2>')}</section>`;
 }
 
 /* ---------- Forms ---------- */
@@ -1364,10 +1361,10 @@ function showLogin(sb){
     e.preventDefault();
     const email=$("#login-email").value.trim(); if(!email) return;
     btn.disabled=true; btn.textContent="Envoi en cours…"; msg.textContent="";
-    const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:false, emailRedirectTo: location.origin+location.pathname } });
+    const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true, emailRedirectTo: location.origin+location.pathname } });
     btn.disabled=false; btn.textContent="Recevoir mon lien de connexion";
     if(error){
-      msg.textContent = /signup|not allowed|not found/i.test(error.message) ? "Cette adresse n'a pas encore d'accès." : /rate|seconds/i.test(error.message) ? "Un lien vient d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans un instant.";
+      msg.textContent = /autoris|signup|not allowed|not found|hook/i.test(error.message) ? "Cette adresse n'a pas encore d'accès." : /rate|seconds/i.test(error.message) ? "Un lien vient d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans un instant.";
       return;
     }
     $("#login-adresse").textContent=email; form.hidden=true; envoye.hidden=false;
@@ -1381,6 +1378,8 @@ async function initEnLigne(){
   $("#viewer").textContent=session.user.email; $("#role").textContent="Lecture seule";
   const lo=$("#logout"); lo.hidden=false; lo.addEventListener("click", async ()=>{ await sb.auth.signOut(); location.replace(location.pathname); });
   try{ await loadSupabase(sb); }catch(e){ console.warn("Données Supabase indisponibles", e); toast("Les données n'ont pas pu être chargées."); }
+  // Connecté mais absent de la liste des actionnaires : aucune donnée n'est lisible.
+  if(!S.holdings.length){ await sb.auth.signOut(); $("#curtain")?.remove(); showLogin(sb); $("#login-msg").textContent="Cette adresse n'a pas encore d'accès."; return; }
   S.ready=true; S.animate=true; render();
 }
 async function init(){

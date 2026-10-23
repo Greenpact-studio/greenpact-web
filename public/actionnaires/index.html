@@ -1364,10 +1364,10 @@ function showLogin(sb){
     e.preventDefault();
     const email=$("#login-email").value.trim(); if(!email) return;
     btn.disabled=true; btn.textContent="Envoi en cours…"; msg.textContent="";
-    const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:false, emailRedirectTo: location.origin+location.pathname } });
+    const { error } = await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true, emailRedirectTo: location.origin+location.pathname } });
     btn.disabled=false; btn.textContent="Recevoir mon lien de connexion";
     if(error){
-      msg.textContent = /signup|not allowed|not found/i.test(error.message) ? "Cette adresse n'a pas encore d'accès." : /rate|seconds/i.test(error.message) ? "Un lien vient d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans un instant.";
+      msg.textContent = /autoris|signup|not allowed|not found|hook/i.test(error.message) ? "Cette adresse n'a pas encore d'accès." : /rate|seconds/i.test(error.message) ? "Un lien vient d'être envoyé. Patientez une minute avant de réessayer." : "L'envoi n'a pas abouti. Réessayez dans un instant.";
       return;
     }
     $("#login-adresse").textContent=email; form.hidden=true; envoye.hidden=false;
@@ -1381,6 +1381,8 @@ async function initEnLigne(){
   $("#viewer").textContent=session.user.email; $("#role").textContent="Lecture seule";
   const lo=$("#logout"); lo.hidden=false; lo.addEventListener("click", async ()=>{ await sb.auth.signOut(); location.replace(location.pathname); });
   try{ await loadSupabase(sb); }catch(e){ console.warn("Données Supabase indisponibles", e); toast("Les données n'ont pas pu être chargées."); }
+  // Connecté mais absent de la liste des actionnaires : aucune donnée n'est lisible.
+  if(!S.holdings.length){ await sb.auth.signOut(); $("#curtain")?.remove(); showLogin(sb); $("#login-msg").textContent="Cette adresse n'a pas encore d'accès."; return; }
   S.ready=true; S.animate=true; render();
 }
 async function init(){

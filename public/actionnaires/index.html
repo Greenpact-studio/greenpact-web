@@ -563,6 +563,9 @@ tr:last-child td{border-bottom:0}
 .search{width:min(320px,100%);padding:9px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
 
 /* Agenda */
+#bloc-agenda .panel{padding-top:6px;padding-bottom:6px}
+#bloc-agenda .panel .event:last-child{border-bottom:0}
+#bloc-agenda .event{align-items:center}
 .event{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:20px;align-items:start;padding:20px 0;border-bottom:1px solid var(--line)}
 .event h3{font-size:1rem}
 .event p{color:var(--muted);font-size:.88rem;margin-top:4px}
@@ -841,7 +844,6 @@ function vApercu(){
       ${feedList(S.news.slice(0,5))}
     </section>
   </div>
-  <div class="strip">${nextEventPanel()}${lastLetterPanel()}</div>
   ${agendaBlock()}`;
 }
 function teamsBlock(){
@@ -896,17 +898,6 @@ function feedList(list){
     <button class="btn ghost small edit-only" style="margin-top:8px" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button></div>
   </li>`).join("")}</ul>`;
 }
-function nextEventPanel(){
-  const e=upcoming()[0];
-  if(!e) return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Agenda</div><div class="d" style="font-size:1.1rem;line-height:2.6">—</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>Pas encore de date fixée</h3><p class="note" style="margin-top:2px">Les rencontres et assemblées apparaîtront ici.</p></div></a>`;
-  const d=new Date(e.date);
-  return `<a class="panel" href="#agenda" style="text-decoration:none"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><div class="note" style="margin:0">Prochain rendez-vous</div><h3>${esc(e.title)}</h3><p class="note" style="margin-top:2px">${e.time?esc(e.time)+", ":""}${esc(e.place||"")}</p></div></a>`;
-}
-function lastLetterPanel(){
-  const l=lastEdition(), n=nextNewsletterDate();
-  return `<a class="panel" href="#lettres" style="text-decoration:none"><div class="cal" aria-hidden="true" style="background:var(--surface-2);color:var(--ink)"><div class="m">Lettre</div><div class="d">${l?esc(l.number):"1"}</div></div><div><div class="note" style="margin:0">Lettre de la quinzaine</div><h3>${l?esc(l.title||"Dernière lettre"):"Première lettre en préparation"}</h3><p class="note" style="margin-top:2px">${l?`Envoyée le ${esc(dFmt(l.sentAt,{day:"numeric",month:"long"}))}${n?`, prochaine vers le ${esc(dFmt(n,{day:"numeric",month:"long"}))}`:""}`:"Envoyée toutes les deux semaines"}</p></div></a>`;
-}
-
 /* ---------- Portefeuille ---------- */
 function coverClass(h){ return hasPhoto(h) ? "photo" : "light"; }
 function coverStyle(h){ const p=photoUrl(h); return p ? `class="cover photo" style="background-image:url('${p}')"` : `class="cover ${coverClass(h)}"`; }

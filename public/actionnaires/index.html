@@ -99,14 +99,9 @@ p{margin:0}
 @keyframes fadein{to{opacity:1}}
 @keyframes load{to{transform:none}}
 
-/* Watermark */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.045;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260'%3E%3Ctext x='0' y='150' transform='rotate(-24 210 130)' font-family='Arial' font-size='22' letter-spacing='6' fill='%231c3a2b'%3ECONFIDENTIEL%3C/text%3E%3C/svg%3E")}
-
 /* Shell */
 .shell{position:relative;display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
 .side{position:sticky;top:0;height:100vh;background:var(--forest);color:var(--linen);display:flex;flex-direction:column;padding:30px 22px 24px;overflow:hidden}
-.side::after{content:"";position:absolute;right:-120px;top:-40px;width:240px;height:130%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(237,234,228,.045) 46px 84px);pointer-events:none}
 .side .brand-logo{display:block;width:178px;height:auto;max-width:100%;margin:2px 4px 6px}
 .side .tag{font-size:.78rem;color:rgba(237,234,228,.6);margin:0 4px 34px}
 .nav{display:flex;flex-direction:column;gap:2px;position:relative;z-index:1}
@@ -157,8 +152,6 @@ body.can-edit .edit-only.flex{display:flex!important}
 
 /* Hero band */
 .band{position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:22px;padding:clamp(26px,3.4vw,44px)}
-.band::before{content:"";position:absolute;inset:-40% -10% -40% 45%;background:repeating-linear-gradient(115deg,transparent 0 60px,rgba(237,234,228,.05) 60px 110px);animation:drift 40s linear infinite}
-@keyframes drift{to{background-position:400px 0}}
 .band > *{position:relative}
 .letter-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);gap:clamp(24px,4vw,56px);align-items:stretch}
 .letter h2{font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;margin:6px 0 18px;max-width:20ch}
@@ -184,13 +177,18 @@ body.can-edit .edit-only.flex{display:flex!important}
 .node-top{background:var(--forest);color:var(--linen);border-radius:16px;padding:14px 22px;text-align:center;min-width:240px}
 .node-top img{width:150px;margin:0 auto 6px}
 .node-top span{font-size:.78rem;color:rgba(237,234,228,.7)}
-.tree-branches{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-top:44px;margin-top:0}
-.tree-branches::before{content:"";position:absolute;top:22px;left:16.66%;right:16.66%;height:1px;background:var(--forest);opacity:.35;transform:scaleX(0);transform-origin:center;transition:transform .9s .2s var(--ease)}
-.tree-stem{position:relative;height:22px;display:flex;justify-content:center}
-.tree-stem::before{content:"";width:1px;height:100%;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease)}
+/* Arbre holding → studios → entreprises : un tronc, une barre horizontale
+   qui relie exactement le centre des trois colonnes, et une descente par colonne.
+   Chaque colonne trace sa part de barre, d'un demi-écart à l'autre. */
+.tree{--trait:rgba(28,58,43,.5);--h:26px;--gap:18px}
+.tree-stem{height:var(--h);display:flex;justify-content:center}
+.tree-stem::before{content:"";width:1.5px;height:100%;background:var(--trait)}
+.tree-branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap);padding-top:var(--h)}
 .branch{position:relative;display:flex;flex-direction:column;gap:12px}
-.branch::before{content:"";position:absolute;top:-22px;left:50%;width:1px;height:22px;background:var(--forest);opacity:.35;transform:scaleY(0);transform-origin:top;transition:transform .4s 1s var(--ease)}
-.in .tree-stem::before,.in .tree-branches::before,.in .branch::before{transform:none}
+.branch::before{content:"";position:absolute;top:calc(-1 * var(--h));left:calc(50% - .75px);width:1.5px;height:var(--h);background:var(--trait)}
+.branch::after{content:"";position:absolute;top:calc(-1 * var(--h));left:calc(-1 * var(--gap) / 2);right:calc(-1 * var(--gap) / 2);height:1.5px;background:var(--trait)}
+.branch:first-child::after{left:50%}
+.branch:last-child::after{right:50%}
 .branch-h{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--bg);text-align:center}
 .branch-h b{display:block;font-size:.95rem}
 .branch-h span{font-size:.76rem;color:var(--muted)}
@@ -244,7 +242,7 @@ body.can-edit .edit-only.flex{display:flex!important}
 .cover .lg .logo{--lh:26px;--lw:150px;background:currentColor;-webkit-mask:var(--src) left center/contain no-repeat;mask:var(--src) left center/contain no-repeat}
 .cover .lg .txt{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
 .cover .stage{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:500;color:var(--linen);background:rgba(14,32,24,.38);border:1px solid rgba(237,234,228,.3);padding:2px 10px;border-radius:99px;backdrop-filter:blur(6px)}
-.cover.stripes,.cover.light{background-color:var(--surface-2);background-image:repeating-linear-gradient(115deg,transparent 0 30px,rgba(28,58,43,.045) 30px 54px);justify-content:center;align-items:center;color:var(--ink)}
+.cover.stripes,.cover.light{background-color:var(--surface-2);justify-content:center;align-items:center;color:var(--ink)}
 .cover.light .lg .logo,.cover.stripes .lg .logo{--lh:40px;--lw:180px;background:var(--src) center/contain no-repeat;filter:none}
 .cover.light .stage,.cover.stripes .stage{background:var(--surface);color:var(--ink);border-color:var(--line)}
 .dr-cover{height:240px}
@@ -605,7 +603,7 @@ label textarea{min-height:96px;resize:vertical}
   .btn.menu-btn{display:inline-flex}
   .topbar{top:env(safe-area-inset-top,0px)}
   .tree-branches{grid-template-columns:1fr;padding-top:18px}
-  .tree-branches::before,.branch::before{display:none}
+  .tree-stem,.branch::before,.branch::after{display:none}
   .frise-track{display:none}
   .frise-cols{grid-template-columns:1fr 1fr;gap:18px}
   .family{grid-template-columns:1fr;gap:14px}

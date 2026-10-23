@@ -106,35 +106,38 @@ export default function Page() {
           <h2 id="contact-titre" className={styles.contactTitre}>
             Rejoindre les Greenpacters
           </h2>
-          <Reveal className={styles.carte}>
-            <Image src="/team/laurent-geray-v2.jpg" alt="Laurent Geray" width={240} height={240} className={styles.portrait} loading="lazy" />
-            <div className={styles.carteTexte}>
-              <p className={styles.carteNom}>Laurent Geray</p>
-              <p className={styles.carteRole}>CEO Greenpact</p>
-              <p>
-                Un échange de trente minutes suffit pour comprendre le modèle, le portefeuille et les modalités pour rejoindre l'actionnariat.
-              </p>
-              <EmailProtege email={SITE.contact.email} className={`lien ${styles.carteEmail}`} />
-              <div className={styles.carteBoutons}>
-                <a href={SITE.contact.rendezVous} target="_blank" rel="noopener noreferrer" className="btn">
-                  Prendre rendez-vous ↗
-                </a>
-                <EmailProtege email={SITE.contact.email} sujet="Demande deck Greenpact" className="btn btn-secondaire">
-                  Demander le deck complet
-                </EmailProtege>
+          <p className={styles.contactIntro}>
+            Un échange de trente minutes suffit pour comprendre le modèle, le portefeuille et les modalités pour rejoindre l'actionnariat.
+          </p>
+          {/* Deux cartes de même gabarit : aucune hiérarchie entre les deux interlocuteurs. */}
+          <Reveal cascade className={styles.cartes} y={20}>
+            <div className={styles.carte}>
+              <Image src="/team/laurent-geray-v2.jpg" alt="Laurent Geray" width={480} height={480} className={styles.portrait} loading="lazy" />
+              <div className={styles.carteTexte}>
+                <p className={styles.carteNom}>Laurent Geray</p>
+                <p className={styles.carteRole}>CEO Greenpact</p>
+                <EmailProtege email={SITE.contact.email} className={`lien ${styles.carteEmail}`} />
+                <div className={styles.carteBoutons}>
+                  <a href={SITE.contact.rendezVous} target="_blank" rel="noopener noreferrer" className="btn">
+                    Prendre rendez-vous ↗
+                  </a>
+                  <EmailProtege email={SITE.contact.email} sujet="Demande deck Greenpact" className="btn btn-secondaire">
+                    Demander le deck complet
+                  </EmailProtege>
+                </div>
               </div>
             </div>
-          </Reveal>
-          <Reveal className={`${styles.carte} ${styles.carteSeconde}`}>
-            <Image src="/team/emmanuel-gonon-v2.jpg" alt="Emmanuel Gonon" width={240} height={240} className={styles.portrait} loading="lazy" />
-            <div className={styles.carteTexte}>
-              <p className={styles.carteNom}>Emmanuel Gonon</p>
-              <p className={styles.carteRole}>Président Greenpact</p>
-              <EmailProtege email={SITE.contact.emailEmmanuel} className={`lien ${styles.carteEmail}`} />
-              <div className={styles.carteBoutons}>
-                <EmailProtege email={SITE.contact.emailEmmanuel} sujet="Rejoindre les Greenpacters" className="btn btn-secondaire">
-                  Écrire à Emmanuel
-                </EmailProtege>
+            <div className={styles.carte}>
+              <Image src="/team/emmanuel-gonon-v2.jpg" alt="Emmanuel Gonon" width={480} height={480} className={styles.portrait} loading="lazy" />
+              <div className={styles.carteTexte}>
+                <p className={styles.carteNom}>Emmanuel Gonon</p>
+                <p className={styles.carteRole}>Président Greenpact</p>
+                <EmailProtege email={SITE.contact.emailEmmanuel} className={`lien ${styles.carteEmail}`} />
+                <div className={styles.carteBoutons}>
+                  <EmailProtege email={SITE.contact.emailEmmanuel} sujet="Rejoindre les Greenpacters" className="btn">
+                    Écrire à Emmanuel
+                  </EmailProtege>
+                </div>
               </div>
             </div>
           </Reveal>

@@ -6,7 +6,7 @@ import { filAriane, FAQ, FAQ_JSONLD } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
 import { EmailProtege } from "@/components/EmailProtege";
 import { Diversification } from "@/components/investir/Diversification";
-import { SITE, MENTIONS_REGLEMENTAIRES } from "@/data/config";
+import { SITE } from "@/data/config";
 import styles from "./investir.module.css";
 
 export const metadata: Metadata = {
@@ -107,7 +107,7 @@ export default function Page() {
             Rejoindre les Greenpacters
           </h2>
           <Reveal className={styles.carte}>
-            <Image src="/team/laurent-geray.jpg" alt="Laurent Geray" width={240} height={240} className={styles.portrait} loading="lazy" />
+            <Image src="/team/laurent-geray-v2.jpg" alt="Laurent Geray" width={240} height={240} className={styles.portrait} loading="lazy" />
             <div className={styles.carteTexte}>
               <p className={styles.carteNom}>Laurent Geray</p>
               <p className={styles.carteRole}>CEO Greenpact</p>
@@ -126,7 +126,7 @@ export default function Page() {
             </div>
           </Reveal>
           <Reveal className={`${styles.carte} ${styles.carteSeconde}`}>
-            <Image src="/team/emmanuel-gonon.jpg" alt="Emmanuel Gonon" width={240} height={240} className={styles.portrait} loading="lazy" />
+            <Image src="/team/emmanuel-gonon-v2.jpg" alt="Emmanuel Gonon" width={240} height={240} className={styles.portrait} loading="lazy" />
             <div className={styles.carteTexte}>
               <p className={styles.carteNom}>Emmanuel Gonon</p>
               <p className={styles.carteRole}>Président Greenpact</p>
@@ -155,11 +155,6 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Mentions réglementaires (identiques au pied de page) */}
-      <section className={`conteneur ${styles.mentions}`} aria-labelledby="mentions-titre">
-        <h2 id="mentions-titre">Mentions réglementaires</h2>
-        <p>{MENTIONS_REGLEMENTAIRES}</p>
-      </section>
     </>
   );
 }

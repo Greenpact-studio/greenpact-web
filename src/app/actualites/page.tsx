@@ -48,7 +48,7 @@ export default async function Page() {
                     <Exemple si={a.exemple} />
                   </span>
                   <span className={`${styles.articleTitre}`} style={{ display: "block" }}>
-                    {a.titre}
+                    <TitreDerniereLigne titre={a.titre} />
                   </span>
                   <span style={{ display: "block" }}>{a.resume}</span>
                 </span>
@@ -192,6 +192,18 @@ export default async function Page() {
       <section className="conteneur" style={{ paddingBottom: "var(--section)" }}>
         <Onglets onglets={onglets} styles={styles} />
       </section>
+    </>
+  );
+}
+
+/** Titre dont la dernière phrase (souvent une question) reste groupée sur une seule ligne, avec la flèche. */
+function TitreDerniereLigne({ titre }: { titre: string }) {
+  const i = titre.lastIndexOf(". ");
+  if (i < 0 || titre.length - i > 32) return <>{titre}</>;
+  return (
+    <>
+      {titre.slice(0, i + 2)}
+      <span className={styles.insecable}>{titre.slice(i + 2)}</span>
     </>
   );
 }

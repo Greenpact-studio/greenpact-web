@@ -101,7 +101,13 @@
 }
 .articleTitre {
   font-size: var(--t-h2);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   max-width: 18ch;
+}
+/* La dernière phrase et la flèche ne se coupent pas. */
+.insecable {
+  white-space: nowrap;
 }
 .articleTitre::after {
   content: " →";

@@ -185,22 +185,6 @@
 }
 
 /* ─── Mentions ─── */
-.mentions {
-  padding-block: clamp(3rem, 6vw, 5rem);
-}
-.mentions h2 {
-  font-size: var(--t-small);
-  font-weight: 500;
-  letter-spacing: 0;
-  margin-bottom: 1rem;
-}
-.mentions p {
-  max-width: 60rem;
-  font-size: 0.8rem;
-  line-height: 1.65;
-  color: var(--vert-70);
-}
-
 @media (max-width: 900px) {
   .pourquoi,
   .vehicule {

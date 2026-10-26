@@ -664,6 +664,184 @@ label textarea{min-height:96px;resize:vertical}
   .lchip{opacity:1;transform:none}
   .line-chart .ln{stroke-dashoffset:0}
 }
+/* Performance */
+.pf-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.t-vert,.pf-carte{--ton:#2f6b4f;--ton-bg:#dfe9df}
+.t-bleu{--ton:#2c5a78;--ton-bg:#dce6ee}
+.t-sable{--ton:#86602a;--ton-bg:#efe4d0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .t-vert,:root:not([data-theme="light"]) .pf-carte{--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}:root:not([data-theme="light"]) .t-bleu{--ton:#a7c6dd;--ton-bg:rgba(167,198,221,.14)}:root:not([data-theme="light"]) .t-sable{--ton:#e2c38f;--ton-bg:rgba(226,195,143,.14)}}
+:root[data-theme="dark"] .t-vert,:root[data-theme="dark"] .pf-carte{--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}:root[data-theme="dark"] .t-bleu{--ton:#a7c6dd;--ton-bg:rgba(167,198,221,.14)}:root[data-theme="dark"] .t-sable{--ton:#e2c38f;--ton-bg:rgba(226,195,143,.14)}
+.pf-pastille{width:42px;height:42px;border-radius:13px;background:var(--ton-bg);color:var(--ton);display:grid;place-items:center;flex:none}
+.pf-pastille .pf-ico{width:22px;height:22px}
+details>summary{list-style:none;cursor:pointer}
+details>summary::-webkit-details-marker{display:none}
+details>summary:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+/* Prix de la part */
+.pf-hero{display:grid;grid-template-columns:minmax(220px,.55fr) minmax(0,1.7fr);gap:clamp(24px,4vw,56px);align-items:center;background:var(--forest);color:var(--linen);border-radius:22px;padding:clamp(18px,2.2vw,28px) clamp(20px,2.6vw,32px);overflow:hidden;position:relative}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pf-hero{background:var(--band);border:1px solid var(--line)}}
+:root[data-theme="dark"] .pf-hero{background:var(--band);border:1px solid var(--line)}
+.pf-k{display:inline-flex;align-items:center;gap:10px;font-size:1rem;font-weight:500}
+.pf-big{font-size:clamp(2.4rem,4vw,3.3rem);font-weight:600;letter-spacing:-.04em;line-height:1;margin:12px 0 12px}
+.pf-tags{display:flex;flex-wrap:wrap;gap:8px}
+.pf-tag{display:inline-flex;align-items:center;padding:6px 13px;border-radius:99px;background:rgba(237,234,228,.12);font-size:.88rem;font-weight:500}
+.pf-tag.vif{background:#d8b46a;color:#1c3a2b}
+.pf-hero-txt p{margin:22px 0 0;font-size:.95rem;line-height:1.6;max-width:34ch}
+.pf-courbe svg{width:100%;height:auto;display:block;overflow:visible}
+.pf-courbe .gr{stroke:rgba(237,234,228,.1);stroke-width:1}
+.pf-courbe .ln{fill:none;stroke:var(--linen);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease)}
+.pf-courbe .aire{opacity:0;transition:opacity 1.2s .6s}
+.pf-courbe .pj{fill:none;stroke:#d8b46a;stroke-width:2.5;stroke-dasharray:6 7;stroke-linecap:round}
+.pf-courbe .pj,.pf-courbe .pj-g{opacity:0;transition:opacity .8s 1.7s}
+.pf-courbe .pt{fill:var(--forest);stroke:var(--linen);stroke-width:2}
+.pf-courbe .pt.der{fill:var(--linen)}
+.pf-courbe .pj-pt{stroke:#d8b46a;fill:var(--forest)}
+.pf-courbe text{font-family:var(--font);fill:rgba(237,234,228,.8);font-size:13px}
+.pf-courbe .vl{fill:var(--linen);font-weight:600;font-size:14px}
+.pf-courbe .vl.or{fill:#d8b46a}
+.in .pf-courbe .ln{stroke-dashoffset:0}
+.in .pf-courbe .aire,.in .pf-courbe .pj,.in .pf-courbe .pj-g{opacity:1}
+.pf-legende{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:8px;font-size:.88rem}
+.pf-legende span{display:inline-flex;align-items:center;gap:8px}
+.pf-legende i{width:22px;height:0;border-top:3px solid var(--linen)}
+.pf-legende i.tirets{border-top:3px dashed #d8b46a}
+/* L'essentiel */
+.pf-tuiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start}
+.pf-tuile{background:var(--surface);border:1px solid var(--line);border-radius:22px;transition:border-color .25s,box-shadow .25s}
+.pf-tuile:hover{border-color:var(--ton);box-shadow:0 14px 34px -22px rgba(14,32,24,.45)}
+.pf-tuile summary{display:flex;flex-direction:column;align-items:flex-start;padding:24px 24px 20px}
+.pf-lab{margin-top:18px;font-size:1rem;font-weight:500}
+.pf-lab em{font-style:normal;font-weight:600;color:var(--ton);margin-left:4px}
+.pf-val{font-size:2.6rem;font-weight:600;letter-spacing:-.035em;line-height:1.05;margin-top:6px}
+.pf-duo{display:flex;flex-direction:column;gap:10px;width:100%;margin-top:20px}
+.pf-duo .r{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:.88rem}
+.pf-duo .pf-piste{height:10px;border-radius:99px;background:var(--wash);overflow:hidden}
+.pf-duo i{display:block;height:100%;width:0;border-radius:99px;transition:width 1.2s var(--ease) .2s}
+.pf-duo i.av{background:var(--surface-2)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pf-duo i.av{background:rgba(237,234,228,.3)}}
+:root[data-theme="dark"] .pf-duo i.av{background:rgba(237,234,228,.3)}
+.pf-duo i.ap{background:var(--ton)}
+.pf-plus{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:.9rem;font-weight:500;color:var(--ton)}
+.pf-plus .pf-ico,.pf-chev .pf-ico,.pf-methode summary .pf-ico{width:18px;height:18px;transition:transform .3s var(--ease)}
+details[open] .pf-plus .pf-ico,details[open]>summary .pf-chev .pf-ico,.pf-methode[open] summary .pf-ico{transform:rotate(180deg)}
+.pf-corps{padding:0 24px 24px;font-size:.95rem;line-height:1.6}
+.pf-corps p{margin:0;padding-top:18px;border-top:1px solid var(--line)}
+.pf-calc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--ton-bg)}
+.pf-calc i{font-style:normal;color:var(--ton);font-weight:600}
+.pf-calc b{color:var(--ton);font-weight:600}
+/* Ce que vaut chaque ligne */
+i.inv{background:#d9cdb8}
+i.val{background:var(--ton,#2f6b4f)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) i.inv{background:rgba(237,234,228,.3)}}
+:root[data-theme="dark"] i.inv{background:rgba(237,234,228,.3)}
+.pf-lignes{padding-top:16px;padding-bottom:8px}
+.pf-cles{display:flex;gap:22px;align-items:center;padding:0 0 14px;border-bottom:1px solid var(--line);font-size:.9rem}
+.pf-cles span{display:inline-flex;align-items:center;gap:8px}
+.pf-cles i{width:14px;height:8px;border-radius:99px;display:block}
+.pf-cles i.val{background:var(--ink)}
+.pf-cles .d{margin-left:auto}
+.pf-ligne{border-bottom:1px solid var(--line)}
+.pf-ligne:last-child{border-bottom:0}
+.pf-ligne summary{display:grid;grid-template-columns:110px minmax(150px,220px) minmax(0,1fr) 76px 24px;gap:18px;align-items:center;padding:16px 0;transition:background .2s}
+.pf-ligne summary:hover .pf-nom b{text-decoration:underline;text-underline-offset:3px}
+.pf-logo{height:44px;border-radius:12px;background:#fff;display:grid;place-items:center;padding:6px 10px;overflow:hidden;border:1px solid var(--line)}
+.pf-logo .logo{--lh:24px;--lw:84px;background:var(--src) center/contain no-repeat!important;-webkit-mask:none!important;mask:none!important}
+.pf-logo .txt{font-size:.82rem;font-weight:600;color:#1c3a2b}
+.pf-nom{display:flex;flex-direction:column;line-height:1.35}
+.pf-nom b{font-weight:600}
+.pf-nom span{font-size:.9rem}
+.pf-barres{display:flex;flex-direction:column;gap:6px}
+.pf-barres i{display:block;height:9px;width:0;border-radius:99px;transition:width 1.2s var(--ease) .25s}
+.pf-barres i.val{background:var(--c)}
+.pf-mult{justify-self:end;padding:5px 11px;border-radius:99px;font-weight:600;font-size:.95rem;background:var(--wash)}
+.pf-mult.hausse{background:#dfe9df;color:#2f6b4f}
+.pf-mult.baisse{background:#f3dfd6;color:#9a4127}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pf-mult.hausse{background:rgba(169,209,182,.16);color:#a9d1b6}:root:not([data-theme="light"]) .pf-mult.baisse{background:rgba(230,150,120,.16);color:#f0b39b}}
+:root[data-theme="dark"] .pf-mult.hausse{background:rgba(169,209,182,.16);color:#a9d1b6}:root[data-theme="dark"] .pf-mult.baisse{background:rgba(230,150,120,.16);color:#f0b39b}
+.pf-chev{display:grid;place-items:center}
+.pf-ligne.passee summary{opacity:.6}
+.pf-detail{padding:4px 0 22px 128px}
+.pf-detail dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px 24px;margin:0;padding:18px 20px;border-radius:16px;background:var(--wash)}
+.pf-detail dt{font-size:.88rem;font-weight:500}
+.pf-detail dd{margin:2px 0 0;font-weight:600}
+.pf-detail p{margin:14px 0 0;font-size:.95rem}
+.pf-detail .btn{margin-top:14px}
+/* Du capital levé à la valeur d'aujourd'hui */
+.pf-parcours{--c1:#2f6b4f;--c2:#c9a45c;--c3:#bdb5a8;--c4:#8fb0c4;--c5:#a9c7b2;--ton:#2f6b4f;--ton-bg:#dfe9df}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pf-parcours{--c1:#7fbf98;--c2:#d8b46a;--c3:#6f7a73;--c4:#7ea3ba;--c5:#3f6b55;--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}}
+:root[data-theme="dark"] .pf-parcours{--c1:#7fbf98;--c2:#d8b46a;--c3:#6f7a73;--c4:#7ea3ba;--c5:#3f6b55;--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}
+.pf-parcours i.c1{background:var(--c1)}.pf-parcours i.c2{background:var(--c2)}.pf-parcours i.c3{background:var(--c3)}.pf-parcours i.c4{background:var(--c4)}.pf-parcours i.c5{background:var(--c5)}
+.pf-flux{display:flex;flex-direction:column;gap:18px}
+.pf-flux-r{display:grid;grid-template-columns:150px minmax(0,1fr) 90px;gap:18px;align-items:center}
+.pf-flux-r .t{font-weight:500}
+.pf-flux-r b{font-size:1.15rem;font-weight:600;text-align:right}
+.pf-pile{display:flex;gap:3px;height:26px;width:0;border-radius:9px;overflow:hidden;transition:width 1.4s var(--ease) .15s}
+.pf-pile i{display:block;height:100%;min-width:4px}
+.pf-flux-leg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,56px);margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.pf-flux-leg h3{font-size:1rem;font-weight:600;margin-bottom:12px}
+.pf-flux-leg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pf-flux-leg li{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:12px;align-items:center}
+.pf-flux-leg li i{width:12px;height:12px;border-radius:4px;display:block}
+.pf-flux-leg li b{font-weight:600}
+.pf-gain{display:flex;align-items:center;gap:14px;margin-top:20px;padding:14px 16px;border-radius:16px;background:var(--ton-bg)}
+.pf-gain b{display:block;font-size:1.6rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--ton)}
+.pf-gain span{font-weight:500}
+.pf-gain .pf-pastille{background:var(--surface)}
+.pf-pourquoi{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+.pf-pourquoi summary{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:500;color:var(--ton)}
+.pf-pourquoi summary .pf-ico{width:18px;height:18px;transition:transform .3s var(--ease)}
+.pf-pourquoi[open] summary .pf-ico{transform:rotate(180deg)}
+.pf-pourquoi p{margin:12px 0 0;font-size:.95rem;line-height:1.6}
+@media (max-width:760px){
+  .pf-flux-r{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px}
+  .pf-flux-r .pf-pile{grid-column:1 / -1;grid-row:2}
+  .pf-flux-leg{grid-template-columns:1fr}
+}
+/* Levée et horizon */
+.pf-cartes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pf-carte{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,2.6vw,30px)}
+.pf-carte h3{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:600}
+.pf-carte h3 .pf-ico{color:var(--ton)}
+.pf-levee{flex:1;display:grid;grid-template-columns:150px minmax(0,1fr);gap:26px;align-items:center;margin-top:20px}
+.pf-anneau{position:relative}
+.pf-anneau svg{width:100%;height:auto;display:block}
+.pf-anneau circle{fill:none;stroke-width:14}
+.pf-anneau .fond{stroke:var(--wash)}
+.pf-anneau .plein{stroke:var(--ton);stroke-linecap:round;transition:stroke-dasharray 1.4s var(--ease)}
+.pf-anneau b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
+.pf-levee dl,.pf-tri{margin:0}
+.pf-levee dl{display:flex;flex-direction:column;gap:10px}
+.pf-levee dl div{display:flex;justify-content:space-between;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.pf-levee dl div:last-child{border-bottom:0;padding-bottom:0}
+.pf-levee dt{font-weight:500}
+.pf-levee dd{margin:0;font-weight:600}
+.pf-tri{display:flex;align-items:center;gap:16px;margin-top:20px;padding:16px 18px;border-radius:16px;background:var(--ton-bg)}
+.pf-tri b{white-space:nowrap;font-size:2.3rem;font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--ton)}
+.pf-tri span{font-weight:500;line-height:1.4}
+.pf-etapes{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;position:relative}
+.pf-etapes li{display:grid;grid-template-columns:42px 58px minmax(0,1fr);gap:14px;align-items:center;padding:8px 0;position:relative}
+.pf-etapes li:not(:last-child)::after{content:"";position:absolute;left:20.5px;top:52px;height:calc(100% - 44px);border-left:2px dotted var(--line)}
+.pf-etapes b{font-weight:600}
+.pf-methode{background:var(--surface);border:1px solid var(--line);border-radius:18px}
+.pf-methode summary{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 22px;font-weight:600}
+.pf-methode>div{padding:0 22px 20px;display:flex;flex-direction:column;gap:10px;font-size:.95rem;line-height:1.6}
+.pf-methode p{margin:0}
+.pf-methode b{font-weight:600}
+@media (max-width:1100px){
+  .pf-hero{grid-template-columns:1fr}
+  .pf-tuiles{grid-template-columns:1fr}
+  .pf-ligne summary{grid-template-columns:96px minmax(0,1fr) 70px 22px}
+  .pf-barres{grid-column:1 / -1;grid-row:2}
+  .pf-detail{padding-left:0}
+}
+@media (max-width:760px){
+  .pf-cartes{grid-template-columns:1fr}
+          .pf-logo .logo{--lw:58px}
+  .pf-levee{grid-template-columns:110px minmax(0,1fr);gap:18px}
+  .pf-ligne summary{grid-template-columns:80px minmax(0,1fr) 64px 20px;gap:12px}
+  .pf-logo .logo{--lw:58px}
+  .pf-cles .d{display:none}
+  .pf-detail dl{grid-template-columns:repeat(2,minmax(0,1fr));padding:16px}
+}
 </style>
 </head>
 <body>
@@ -734,8 +912,8 @@ const ASSETS = {"logo_light": "assets/brand/greenpact-light.png", "logo_dark": "
 const SECTIONS = [
   {id:"apercu", label:"Vue d'ensemble"},
   {id:"portefeuille", label:"Portefeuille"},
-  {id:"impact", label:"Impact"},
   {id:"performance", label:"Performance"},
+  {id:"impact", label:"Impact"},
   {id:"lettres", label:"Lettres et lectures"}
 ];
 // 5 rubriques : l'agenda est en bas de la vue d'ensemble, les lectures avec les
@@ -759,7 +937,7 @@ const GLOSS = {
 
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
-  holdings:[], news:[], articles:[], events:[], editions:[], kpis:null, cashflow:null, settings:null, letter:null,
+  holdings:[], news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
   view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
 };
 
@@ -1138,68 +1316,210 @@ const PRINCIPLES = [
 ];
 
 /* ---------- Performance ---------- */
+/* ---------- Performance ----------
+   Sobre au premier regard : le prix de la part, trois indicateurs, la valeur
+   ligne par ligne et l'horizon. Chaque élément s'ouvre sur le détail du calcul. */
+const TEINTE_LIGNE={bluefins:"#1b6fc9",enerpact:"#5fa33a",solarcare:"#e0a21a","4elements":"#2f7d6d",hoji:"#3d6b52","hoji-sg":"#8fac97",wesk:"#a3aaa6"};
+const ICO={
+  part:'<path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/>',
+  nav:'<path d="M12 3.5l8.5 4.5-8.5 4.5L3.5 8z"/><path d="M3.5 12.5l8.5 4.5 8.5-4.5"/><path d="M3.5 16.5l8.5 4.5 8.5-4.5"/>',
+  tvpi:'<ellipse cx="12" cy="6.5" rx="7" ry="3"/><path d="M5 6.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/><path d="M5 11.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/>',
+  moic:'<path d="M12 21v-9"/><path d="M12 12c0-4.4 3-7.5 8-7.5 0 5-3 7.5-8 7.5z"/><path d="M12 15c0-3.3-2.6-5.5-7-5.5 0 3.8 2.6 5.5 7 5.5z"/>',
+  cible:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  distrib:'<path d="M3 14.5h3.5l3.5 2.5h5.5a1.8 1.8 0 0 0 0-3.6H12"/><path d="M6.5 14.5V20H3"/><circle cx="16" cy="6.5" r="3"/>',
+  tri:'<path d="M4 20h16"/><path d="M5.5 16l4.5-4.5 3 3L19 8.5"/><path d="M15 8.5h4v4"/>',
+  chev:'<path d="M6 9l6 6 6-6"/>'
+};
+const ico = k => `<svg class="pf-ico" viewBox="0 0 24 24" aria-hidden="true">${ICO[k]}</svg>`;
+const nb = v => { if(typeof v==="number") return v; const n=parseFloat(String(v??"").replace(",",".").replace(/[^\d.\-]/g,"")); return isNaN(n)?null:n; };
+const fr = (v,d) => Number(v).toLocaleString("fr-FR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const lignes = () => S.holdings.filter(h=>["fonds","direct","gestion"].includes(h.vehicle)).sort((a,b)=>(Number(b.marketValue)||0)-(Number(a.marketValue)||0));
+
 function vPerformance(){
   const k=S.kpis||{};
-  const kpi=(v,lab,key,sub,dark)=>`<div class="kpi ${dark?"dark":""} ${v?"":"empty"}"><div class="v">${v||"À renseigner"}</div><div class="l">${esc(lab)}${key?tip(key):""}</div>${sub?`<small>${esc(sub)}</small>`:""}</div>`;
-  const kp = [
-    kpi(has(k.nav)?counter(k.nav/1e6,2,"","\u00a0M€"):null,"Valeur des actifs (NAV)","nav","Indicative, certifiée en fin d'année",true),
-    kpi(has(k.tvpi)?counter(k.tvpi,2,"","x"):null,"TVPI","tvpi",has(k.raised)?`Sur ${eurC(k.raised)} levés`:""),
-    kpi(has(k.moic)?counter(k.moic,2,"","x"):null,"MOIC","moic",has(k.invested)?`Sur ${eurC(k.invested)} investis`:""),
-    kpi(has(k.dpi)?counter(k.dpi,2,"","x"):null,"DPI","dpi","Premières liquidités visées en 2028"),
-    kpi(has(k.sharePriceNow)?counter(k.sharePriceNow,2,"","\u00a0€"):null,"Prix de la part","part",k.sharePriceChange?`${k.sharePriceChange} sur un an`:""),
-    kpi(has(k.raised)?esc(eurC(k.raised)):null,"Capital levé",null,has(k.raisedTarget)?`Objectif ${eurC(k.raisedTarget)}`:""),
-    kpi(has(k.targetIrr)?esc(k.targetIrr)+" %":null,"TRI net cible","tri","Médian, sur la durée de vie"),
-    kpi(has(k.cash)?esc(eurC(k.cash)):null,"Trésorerie disponible",null,k.cashNote||"")
-  ].join("");
   return `
-  <div class="head"><div><h1>Performance</h1><p>Valeur de la holding, de chaque ligne du portefeuille et de la trésorerie.</p></div>
-    <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="edit-kpis">Mettre à jour les chiffres</button><button class="btn" data-act="new-cash">Ajouter une période</button></div></div>
-  <div class="kpis">${kp}</div>
-  ${k.note?`<p class="note">${esc(k.note)}</p>`:""}
-  ${sharePriceBlock()}
-  ${positionsBlock()}
-  ${cashBlock()}`;
+  <div class="head"><div><h1>Performance</h1></div>
+    <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="edit-kpis">Mettre à jour les chiffres</button></div></div>
+  ${perfEssentiel(k)}
+  ${perfPart(k)}
+  ${perfParcours(k)}
+  ${perfLignes()}
+  ${perfHorizon(k)}
+  ${perfMethode(k)}`;
 }
-function sharePriceBlock(){
-  const k=S.kpis||{}, sp=k.sharePrice||[]; if(sp.length<2) return "";
-  const W=620,Hh=230,pl=10,pr=40,pt=30,pb=34;
-  const vals=sp.map(p=>Number(p.price)), mn=Math.min(...vals)*0.85, mx=Math.max(...vals)*1.08;
-  const x=i=>pl+i*(W-pl-pr)/(sp.length-1), y=v=>pt+(1-(v-mn)/(mx-mn))*(Hh-pt-pb);
-  const d=sp.map((p,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(p.price).toFixed(1)}`).join(" ");
-  const area=d+` L${x(sp.length-1).toFixed(1)},${Hh-pb} L${x(0).toFixed(1)},${Hh-pb} Z`;
-  return `<section class="sec panel" data-reveal><div class="chart-card">
-    <div><div class="sec-h" style="margin-bottom:6px"><h2>Prix de la part</h2>${k.sharePriceChange?`<span class="pill">${esc(k.sharePriceChange)} en ${esc(sp[sp.length-1].year)}</span>`:""}</div>
-    <svg class="line-chart" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Évolution du prix de la part de ${esc(sp[0].year)} à ${esc(sp[sp.length-1].year)}">
-      <path class="area" d="${area}"/><path class="ln" pathLength="1" d="${d}"/>
-      ${sp.map((p,i)=>`<circle class="pt" cx="${x(i).toFixed(1)}" cy="${y(p.price).toFixed(1)}" r="4.5"/><text class="vl" x="${x(i).toFixed(1)}" y="${(y(p.price)-12).toFixed(1)}" text-anchor="middle">${esc(String(p.price).replace(".",","))} €</text><text x="${x(i).toFixed(1)}" y="${Hh-10}" text-anchor="middle">${esc(p.year)}</text>`).join("")}
-    </svg></div>
-    <div class="read"><p><b>Comment lire ce chiffre.</b> Le prix de la part découle de la valeur des actifs (NAV), divisée par le nombre de parts. Il progresse quand les entreprises du portefeuille prennent de la valeur lors de levées, de cessions ou grâce à leur chiffre d'affaires.</p>${k.sharePriceOutlook?`<p>${esc(k.sharePriceOutlook)}</p>`:""}</div>
-  </div></section>`;
-}
-function positionsBlock(){
-  const pos=S.holdings.filter(h=>["fonds","direct","gestion"].includes(h.vehicle)).sort((a,b)=>(Number(b.marketValue)||0)-(Number(a.marketValue)||0));
-  if(!pos.length) return "";
-  const mx=Math.max(1,...pos.map(h=>Math.max(Number(h.marketValue)||0,Number(h.invested)||0)));
-  const sum=f=>pos.reduce((s,h)=>s+(Number(h[f])||0),0), ti=sum("invested"), tv=sum("marketValue");
-  const st=studios().filter(s=>s.fundMoic||s.fundTvpi);
-  return `<section class="sec" data-reveal>
-    <div class="sec-h"><h2>Ce que vaut chaque ligne</h2><p>${esc(eurC(ti))} investis, ${esc(eurC(tv))} de valeur retenue</p></div>
-    <div class="panel"><div class="keys"><span><i style="background:var(--surface-2)"></i>Montant investi</span><span><i style="background:var(--ink)"></i>Valeur retenue</span></div>
-    <div class="pos">${pos.map(h=>`<div class="pos-row ${h.active===false?"past":""}">
-      <div class="nm"><b>${esc(h.name)}</b><span>${esc([h.year?`depuis ${h.year}`:"",h.stake].filter(Boolean).join(" · "))}</span></div>
-      <div class="bars2"><div class="b cost" data-w="${((Number(h.invested)||0)/mx*100).toFixed(1)}%"></div><div class="b val" data-w="${((Number(h.marketValue)||0)/mx*100).toFixed(1)}%"></div><small>${esc(eur(h.invested)||"—")} → ${esc(eur(h.marketValue)||"—")}${h.method?` · ${esc(h.method)}`:""}</small></div>
-      <div class="moic">${esc(h.moic||"")}<span>multiple</span></div>
-    </div>`).join("")}</div></div>
-    <p class="note">La valeur du portefeuille n'est qu'une composante de la NAV, qui inclut aussi la trésorerie et les créances. Valorisation selon les lignes directrices IPEV ; les intérêts dans les studios sont retenus à leur quote-part de NAV.</p>
-    ${st.length?`<div class="studios">${st.map(s=>`<div class="kpi"><div class="v num">${esc(s.fundMoic||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">MOIC</span> · ${esc(s.fundTvpi||"—")} <span style="font-size:1rem;font-weight:500;color:var(--muted)">TVPI</span></div><div class="l">Studio ${esc(s.name)}</div>${s.fundNote?`<small>${esc(s.fundNote)}</small>`:""}</div>`).join("")}</div>`:""}
+
+/* Prix de la part : le chiffre, puis la courbe et la prévision en pointillés. */
+function perfPart(k){
+  const sp=(k.sharePrice||[]).filter(p=>has(p.price));
+  const now = has(k.sharePriceNow) ? Number(k.sharePriceNow) : (sp.length?Number(sp[sp.length-1].price):null);
+  if(now===null) return "";
+  const an = sp.length ? sp[sp.length-1].year : "";
+  const prev = prevision(k);
+  const proj = prev!==null && /^\d{4}$/.test(String(an)) ? {year:String(Number(an)+1), price:now*(1+prev/100)} : null;
+  let chart="";
+  if(sp.length>1){
+    const pts=sp.map(p=>({year:String(p.year),price:Number(p.price)})), all=proj?[...pts,proj]:pts;
+    const W=640,Hh=200,pl=24,pr=34,pt=34,pb=30;
+    const vals=all.map(p=>p.price), mn=Math.min(...vals)*0.8, mx=Math.max(...vals)*1.06;
+    const x=i=>pl+i*(W-pl-pr)/(all.length-1), y=v=>pt+(1-(v-mn)/(mx-mn))*(Hh-pt-pb);
+    const d=pts.map((p,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(p.price).toFixed(1)}`).join(" ");
+    const area=d+` L${x(pts.length-1).toFixed(1)},${Hh-pb} L${x(0).toFixed(1)},${Hh-pb} Z`;
+    const li=pts.length-1;
+    chart = `<div class="pf-courbe">
+      <svg viewBox="0 0 ${W} ${Hh}" role="img" aria-label="Prix de la part de ${esc(pts[0].year)} à ${esc(pts[li].year)}${proj?`, prévision ${esc(proj.year)}`:""}">
+        <defs><linearGradient id="pf-aire" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#edeae4" stop-opacity=".22"/><stop offset="1" stop-color="#edeae4" stop-opacity="0"/></linearGradient></defs>
+        ${[0,1,2,3].map(i=>`<line class="gr" x1="${pl}" x2="${W-pr}" y1="${(pt+i*(Hh-pt-pb)/3).toFixed(1)}" y2="${(pt+i*(Hh-pt-pb)/3).toFixed(1)}"/>`).join("")}
+        <path class="aire" d="${area}" fill="url(#pf-aire)"/>
+        <path class="ln" pathLength="1" d="${d}"/>
+        ${proj?`<path class="pj" d="M${x(li).toFixed(1)},${y(now).toFixed(1)} L${x(li+1).toFixed(1)},${y(proj.price).toFixed(1)}"/>`:""}
+        ${pts.map((p,i)=>`<circle class="pt${i===li?" der":""}" cx="${x(i).toFixed(1)}" cy="${y(p.price).toFixed(1)}" r="${i===li?6:4}"/>${i===0||i===li||p.price!==pts[i-1].price?`<text class="vl" x="${(x(i)-(i===li&&proj?10:0)).toFixed(1)}" y="${(y(p.price)-14).toFixed(1)}" text-anchor="${i===li&&proj?"end":"middle"}">${esc(fr(p.price,2))} €</text>`:""}<text class="an" x="${x(i).toFixed(1)}" y="${Hh-8}" text-anchor="middle">${esc(p.year)}</text>`).join("")}
+        ${proj?`<g class="pj-g"><circle class="pt pj-pt" cx="${x(li+1).toFixed(1)}" cy="${y(proj.price).toFixed(1)}" r="5"/><text class="vl or" x="${x(li+1).toFixed(1)}" y="${(y(proj.price)-14).toFixed(1)}" text-anchor="middle">${esc(fr(proj.price,2))} €</text><text class="an" x="${x(li+1).toFixed(1)}" y="${Hh-8}" text-anchor="middle">${esc(proj.year)}</text></g>`:""}
+      </svg>
+      ${proj?`<div class="pf-legende"><span><i class="plein"></i>Prix constaté</span><span><i class="tirets"></i>Prévision ${esc(proj.year)}</span></div>`:""}
+    </div>`;
+  }
+  return `<section class="sec pf-hero" data-reveal>
+    <div class="pf-hero-txt">
+      <span class="pf-k">${ico("part")}Prix de la part</span>
+      <div class="pf-big">${counter(now,2,""," €")}</div>
+      <div class="pf-tags">${k.sharePriceChange?`<span class="pf-tag vif">${esc(k.sharePriceChange)} en ${esc(an)}</span>`:""}</div>
+    </div>
+    ${chart}
   </section>`;
 }
-function cashBlock(){
-  const rows=(S.cashflow&&S.cashflow.rows)||[];
-  return `<section class="sec" data-reveal><div class="sec-h"><h2>Trésorerie de la holding</h2></div>
-    ${rows.length?`<div class="table-wrap"><table><thead><tr><th>Période</th><th class="r">Entrées</th><th class="r">Sorties</th><th class="r">Solde</th><th>Détail</th><th class="edit-only"></th></tr></thead>
-    <tbody>${rows.map((r,i)=>{const n=(Number(r.inflows)||0)-(Number(r.outflows)||0);return `<tr><td><b style="font-weight:600">${esc(r.period)}</b></td><td class="r">${esc(eur(r.inflows)||"—")}</td><td class="r">${esc(eur(r.outflows)||"—")}</td><td class="r" style="font-weight:600">${n>=0?"+":""}${esc(eur(n))}</td><td style="white-space:normal;min-width:260px;color:var(--muted)">${esc(r.comment||"")}</td><td class="edit-only"><button class="btn ghost small" data-act="edit-cash" data-id="${i}">Modifier</button></td></tr>`;}).join("")}</tbody></table></div>`:`<div class="empty">Aucun flux renseigné.</div>`}
-    <p class="note">${esc((S.cashflow&&S.cashflow.note)||"")}</p></section>`;
+
+/* Trois indicateurs : chiffre et image simple, le calcul s'ouvre au clic. */
+function perfEssentiel(k){
+  const pos=lignes(), inv=pos.reduce((s,h)=>s+(Number(h.invested)||0),0), val=pos.reduce((s,h)=>s+(Number(h.marketValue)||0),0);
+  const date = k.asOf ? dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}) : "";
+  const duo = (a,la,b,lb) => { const mx=Math.max(a,b)||1; return `<span class="pf-duo"><span class="r"><span class="t">${la}</span><span class="pf-piste"><i class="av" data-w="${(a/mx*100).toFixed(1)}%"></i></span></span><span class="r"><span class="t">${lb}</span><span class="pf-piste"><i class="ap" data-w="${(b/mx*100).toFixed(1)}%"></i></span></span></span>`; };
+  const calc = (a,op,b,res) => `<div class="pf-calc"><span>${a}</span><i>${op}</i><span>${b}</span><i>=</i><b>${res}</b></div>`;
+  const t=[];
+  if(has(k.nav)) t.push({ic:"nav",ton:"vert",lab:"Valeur des actifs",val:counter(k.nav/1e6,2,""," M€"),
+    vis:has(k.raised)?duo(k.raised,`${esc(eurC(k.raised))} levés`,k.nav,`${esc(eurC(k.nav))} aujourd'hui`):"",
+    body:`<p>La valeur nette de tout ce que possède Greenpact, dettes déduites${date?`, au ${esc(date)}`:""}. Elle est indicative en cours d'année et certifiée chaque fin d'année dans le rapport annuel.</p>`});
+  if(has(k.tvpi)) t.push({ic:"tvpi",ton:"bleu",lab:"Sur les sommes levées",abbr:"TVPI",val:counter(k.tvpi,2,"","x"),
+    vis:duo(1,"1 € apporté",Number(k.tvpi),`${esc(fr(k.tvpi,2))} € aujourd'hui`),
+    body:`<p>Chaque euro apporté par les actionnaires vaut aujourd'hui ${esc(fr(k.tvpi,2))} €.</p>${has(k.nav)&&has(k.raised)?calc(`${esc(eurC(k.nav))} d'actifs`,"÷",`${esc(eurC(k.raised))} levés`,`${esc(fr(k.tvpi,2))}x`):""}`});
+  if(has(k.moic)) t.push({ic:"moic",ton:"sable",lab:"Sur les sommes investies",abbr:"MOIC",val:counter(k.moic,2,"","x"),
+    vis:duo(1,"1 € investi",Number(k.moic),`${esc(fr(k.moic,2))} € aujourd'hui`),
+    body:`<p>Chaque euro investi dans les entreprises vaut aujourd'hui ${esc(fr(k.moic,2))} €, au vu de la valeur retenue de chaque participation.</p>${inv&&val?calc(`${esc(eurC(val))} de valeur`,"÷",`${esc(eurC(inv))} investis`,`${esc(fr(k.moic,2))}x`):""}`});
+  if(!t.length) return "";
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>L'essentiel</h2></div>
+    <div class="pf-tuiles">${t.map(x=>`<details class="pf-tuile t-${x.ton}">
+      <summary><span class="pf-pastille">${ico(x.ic)}</span><span class="pf-lab">${esc(x.lab)}${x.abbr?` <em>${x.abbr}</em>`:""}</span><span class="pf-val">${x.val}</span>${x.vis}<span class="pf-plus">Comprendre ${ico("chev")}</span></summary>
+      <div class="pf-corps">${x.body}</div>
+    </details>`).join("")}</div></section>`;
+}
+
+/* Ce que vaut chaque ligne : une barre par ligne, le détail s'ouvre au clic. */
+function perfLignes(){
+  const pos=lignes(); if(!pos.length) return "";
+  const mx=Math.max(1,...pos.map(h=>Math.max(Number(h.marketValue)||0,Number(h.invested)||0)));
+  const logo = h => { const id = h.vehicle==="gestion" ? (h.parent||"hoji") : h.id; return ASSETS.logos[id] ? `<i class="logo lg-${esc(id)}" role="img" aria-label="${esc(h.name)}"></i>` : `<b class="txt">${esc(h.name)}</b>`; };
+  const role = h => h.vehicle==="fonds" ? "Venture studio" : h.vehicle==="gestion" ? "Société de gestion" : "En direct";
+  const ton = h => { const m=nb(h.moic); return m===null?"":m>1.005?"hausse":m<0.995?"baisse":"stable"; };
+  const row = h => {
+    const inv=Number(h.invested)||0, val=Number(h.marketValue)||0, diff=val-inv;
+    const faits=[["Investi par Greenpact",eur(inv)],["Valeur retenue",eur(val)],["Plus-value latente",`${diff>=0?"+":"−"}${eur(Math.abs(diff))}`],["Détention",h.stake],["Entrée au capital",h.year],["Méthode de valorisation",h.method]];
+    if(h.fundMoic||h.fundTvpi) faits.push(["Performance du studio",[h.fundMoic&&`MOIC ${h.fundMoic}`,h.fundTvpi&&`TVPI ${h.fundTvpi}`].filter(Boolean).join(" · ")]);
+    const lien = h.vehicle==="fonds" ? `<button class="btn ghost small" data-act="pf" data-id="${esc(h.id)}">Voir les startups du studio</button>` : h.vehicle==="direct" && h.active!==false ? `<button class="btn ghost small" data-act="detail" data-id="${esc(h.id)}">Voir la fiche</button>` : "";
+    return `<details class="pf-ligne ${h.active===false?"passee":""}" style="--c:${TEINTE_LIGNE[h.id]||"#3d6b52"}">
+      <summary>
+        <span class="pf-logo">${logo(h)}</span>
+        <span class="pf-nom"><b>${esc(h.vehicle==="gestion"?h.name.replace(/\s*\(.*\)$/,""):h.name)}</b><span>${esc(role(h))}</span></span>
+        <span class="pf-barres"><i class="inv" data-w="${(inv/mx*100).toFixed(1)}%"></i><i class="val" data-w="${(val/mx*100).toFixed(1)}%"></i></span>
+        <span class="pf-mult ${ton(h)}">${esc(h.moic||"—")}</span>
+        <span class="pf-chev">${ico("chev")}</span>
+      </summary>
+      <div class="pf-detail">
+        <dl>${faits.filter(f=>has(f[1])).map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>
+        ${h.fundNote?`<p>${esc(h.fundNote)}.</p>`:""}
+        ${lien}
+      </div>
+    </details>`;
+  };
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>Ce que vaut chaque ligne</h2></div>
+    <div class="pf-lignes panel">
+      <div class="pf-cles"><span><i class="inv"></i>Montant investi</span><span><i class="val"></i>Valeur retenue</span><span class="d">Multiple</span></div>
+      ${pos.map(row).join("")}
+    </div></section>`;
+}
+
+/* Prévision prudente d'évolution du prix de la part l'an prochain, en %. */
+const prevision = k => has(k.sharePriceForecast) ? Number(k.sharePriceForecast) : 15;
+/* Coûts anté-création (Co-reno, Syscobat…) engagés avant la création des studios,
+   hors montants investis (rapport de performance 10/2026). */
+const ANTE_CREATION = 477000;
+
+/* Du capital levé à la valeur d'aujourd'hui : où est allé l'argent, ce qu'il vaut. */
+function perfParcours(k){
+  if(!has(k.raised)||!has(k.nav)) return "";
+  const pos=lignes(), sum=(l,f)=>l.reduce((s,h)=>s+(Number(h[f])||0),0);
+  const inv=sum(pos.filter(h=>h.active!==false),"invested"), perte=sum(pos.filter(h=>h.active===false),"invested");
+  const ante=has(k.anteCreation)?Number(k.anteCreation):ANTE_CREATION;
+  const reste=Math.max(0,k.raised-inv-perte-ante), port=sum(pos,"marketValue"), autres=Math.max(0,k.nav-port);
+  const mx=Math.max(k.raised,k.nav), gain=k.nav-k.raised;
+  const leve=[["Investi dans les participations",inv,"c1"],["Construction des studios, avant leur création",ante,"c2"],["Participation dépréciée",perte,"c3"],["Frais de gestion et réserves de la holding",reste,"c4"]].filter(s=>s[1]>0);
+  const vaut=[["Valeur des participations",port,"c1"],["Autres actifs, nets des dettes",autres,"c5"]].filter(s=>s[1]>0);
+  const pile=(segs,tot)=>`<span class="pf-pile" data-w="${(tot/mx*100).toFixed(1)}%">${segs.map(s=>`<i class="${s[2]}" style="flex:${s[1]}"></i>`).join("")}</span>`;
+  const legende=segs=>`<ul>${segs.map(s=>`<li><i class="${s[2]}"></i><span>${esc(s[0])}</span><b>${esc(eurC(s[1]))}</b></li>`).join("")}</ul>`;
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>Du capital levé à la valeur d'aujourd'hui</h2></div>
+    <div class="pf-parcours panel">
+      <div class="pf-flux">
+        <div class="pf-flux-r"><span class="t">Capital levé</span>${pile(leve,k.raised)}<b>${esc(eurC(k.raised))}</b></div>
+        <div class="pf-flux-r"><span class="t">Valeur aujourd'hui</span>${pile(vaut,k.nav)}<b>${esc(eurC(k.nav))}</b></div>
+      </div>
+      <div class="pf-flux-leg">
+        <div><h3>Où est allé le capital levé</h3>${legende(leve)}</div>
+        <div><h3>Ce qu'il vaut aujourd'hui</h3>${legende(vaut)}
+          <div class="pf-gain"><span class="pf-pastille">${ico("part")}</span><div><b>${gain>=0?"+":"−"}${esc(eurC(Math.abs(gain)))}</b><span>de valeur créée pour les actionnaires${has(k.tvpi)?`, soit ${esc(fr(k.tvpi,2))}x le capital levé`:""}</span></div></div>
+        </div>
+      </div>
+      <details class="pf-pourquoi"><summary>Pourquoi le montant investi est inférieur au capital levé ${ico("chev")}</summary>
+        <p>Le capital levé ne va pas uniquement dans les participations. Une partie a financé la construction des studios avant leur création (Co-reno, Syscobat…), le fonctionnement de la holding et ses réserves. Le multiple sur les sommes investies (MOIC) ne porte que sur les participations ; la valeur créée pour les actionnaires se lit en rapportant la valeur des actifs au capital levé (TVPI).</p>
+      </details>
+    </div></section>`;
+}
+
+/* Levée en cours et horizon de rendement. */
+function perfHorizon(k){
+  const cartes=[];
+  if(has(k.raised)&&has(k.raisedTarget)){
+    const p=Math.min(1,k.raised/k.raisedTarget), R=54, C=2*Math.PI*R, reste=k.raisedTarget-k.raised;
+    cartes.push(`<div class="pf-carte">
+      <h3>${ico("cible")}Capital levé</h3>
+      <div class="pf-levee">
+        <div class="pf-anneau"><svg viewBox="0 0 140 140" aria-hidden="true"><circle class="fond" r="${R}" cx="70" cy="70"/><circle class="plein" r="${R}" cx="70" cy="70" stroke-dasharray="0 ${C.toFixed(1)}" data-dash="${(p*C).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 70 70)"/></svg><b>${Math.round(p*100)} %</b></div>
+        <dl><div><dt>Levé</dt><dd>${esc(eurC(k.raised))}</dd></div><div><dt>Objectif</dt><dd>${esc(eurC(k.raisedTarget))}</dd></div>${reste>0?`<div><dt>Reste à lever</dt><dd>${esc(eurC(reste))}</dd></div>`:""}${has(k.minTicket)?`<div><dt>Ticket minimum</dt><dd>${esc(eur(k.minTicket))}</dd></div>`:""}</dl>
+      </div></div>`);
+  }
+  const sp=k.sharePrice||[], an=sp.length?sp[sp.length-1].year:"";
+  const prev=prevision(k);
+  const etapes=[
+    has(k.sharePriceNow)&&[ico("cal"),an||"Aujourd'hui",`Part à ${fr(k.sharePriceNow,2)} €`],
+    /^\d{4}$/.test(String(an))&&[ico("part"),String(Number(an)+1),`${prev>=0?"+":"−"}${fr(Math.abs(prev),0)} % visés sur le prix de la part`],
+    [ico("distrib"),"2028",`Premières distributions aux actionnaires${has(k.dpi)?` (DPI actuel : ${fr(k.dpi,2)}x)`:""}`]
+  ].filter(Boolean);
+  cartes.push(`<div class="pf-carte">
+    <h3>${ico("tri")}Rendement visé</h3>
+    ${has(k.targetIrr)?`<div class="pf-tri"><b>${counter(k.targetIrr,0,""," %")}</b><span>de TRI net cible, médian, sur la durée de vie de la holding</span></div>`:""}
+    <ol class="pf-etapes">${etapes.map(e=>`<li><span class="pf-pastille">${e[0]}</span><b>${esc(e[1])}</b><span>${esc(e[2])}</span></li>`).join("")}</ol>
+  </div>`);
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>Levée et horizon</h2></div><div class="pf-cartes">${cartes.join("")}</div></section>`;
+}
+
+/* Méthode et avertissements, repliés. */
+function perfMethode(k){
+  return `<section class="sec"><details class="pf-methode">
+    <summary>Méthode de valorisation et avertissements ${ico("chev")}</summary>
+    <div>
+      ${k.note?`<p>${esc(k.note)}</p>`:""}
+      <p>Les participations sont valorisées selon les lignes directrices IPEV : dernière opération connue, multiple de chiffre d'affaires ou valeur nette comptable selon les cas. Les intérêts dans les studios sont retenus à leur quote-part de NAV.</p>
+      <p><b>TVPI</b> : valeur totale des actifs rapportée aux sommes levées. <b>MOIC</b> : valeur des participations rapportée aux sommes investies. <b>DPI</b> : sommes déjà distribuées rapportées aux sommes levées. <b>TRI</b> : taux de rendement annuel visé, net de frais.</p>
+      <p>${k.note&&/performances passées/i.test(k.note)?"T":"Les performances passées ne préjugent pas des performances futures ; t"}out investissement comporte un risque de perte en capital.</p>
+    </div></details></section>`;
 }
 
 /* ---------- Lectures ---------- */
@@ -1289,8 +1609,7 @@ const FORMS = {
   news:{title:"Nouvelle",fields:[["holdingId","Entreprise","holding",true],["title","Titre","text",true],["date","Date","date",true],["body","Texte","textarea"]]},
   articles:{title:"Lecture",fields:[["title","Titre","text",true],["url","Lien","url"],["source","Source","text"],["date","Date","date",true],["summary","Résumé","textarea"],["memo","Notre lecture","textarea",false,null,"Ce que cela change pour Greenpact ou ses participations"],["tags","Thèmes","text",false,null,"Séparés par des virgules"]]},
   events:{title:"Événement",fields:[["title","Intitulé","text",true],["date","Date","date",true],["time","Heure","text"],["place","Lieu","text"],["description","Description","textarea"],["link","Lien d'inscription","url"]]},
-  kpis:{title:"Chiffres clés",fields:[["nav","NAV (€)","number"],["tvpi","TVPI","number"],["moic","MOIC","number"],["dpi","DPI","number"],["raised","Capital levé (€)","number"],["raisedTarget","Objectif de levée (€)","number"],["invested","Montant investi (€)","number"],["sharePriceNow","Prix de la part (€)","number"],["sharePriceChange","Évolution sur un an","text"],["sharePriceOutlook","Perspective","text"],["targetIrr","TRI cible (%)","number"],["minTicket","Ticket minimum (€)","number"],["nbParticipations","Nombre de participations","number"],["cash","Trésorerie disponible (€)","number"],["cashNote","Précision trésorerie","text"],["asOf","Date d'arrêté","date"],["note","Remarque","text"]]},
-  cash:{title:"Période",fields:[["period","Période","text",true],["inflows","Entrées (€)","number"],["outflows","Sorties (€)","number"],["comment","Détail","text"]]},
+  kpis:{title:"Chiffres clés",fields:[["nav","NAV (€)","number"],["tvpi","TVPI","number"],["moic","MOIC","number"],["dpi","DPI","number"],["raised","Capital levé (€)","number"],["raisedTarget","Objectif de levée (€)","number"],["invested","Montant investi (€)","number"],["sharePriceNow","Prix de la part (€)","number"],["sharePriceChange","Évolution sur un an","text"],["sharePriceOutlook","Perspective","text"],["sharePriceForecast","Prévision d'évolution de la part l'an prochain (%)","number"],["anteCreation","Coûts anté-création (€)","number"],["targetIrr","TRI cible (%)","number"],["minTicket","Ticket minimum (€)","number"],["nbParticipations","Nombre de participations","number"],["asOf","Date d'arrêté","date"],["note","Remarque","text"]]},
   settings:{title:"Liens de la lettre",fields:[["portalUrl","Lien de l'espace","url"],["rdvUrl","Lien de prise de rendez-vous","url"]]},
   letter:{title:"Lettre aux actionnaires",fields:[["label","Libellé","text",false,null,"Ex. Lettre aux actionnaires, septembre 2026"],["title","Titre","text",true],["body","Texte","textarea",true,null,"Un paragraphe par ligne ; **gras** possible"],["signedBy","Signataires","text"],["signedRole","Fonctions","text"]]}
 };
@@ -1349,9 +1668,6 @@ document.addEventListener("click", async e=>{
     const coll=act.replace(/^(new|edit)-/,"");
     if(coll==="letter") return openForm("letter",S.letter,d=>S.db.doc("content/letter").set({...(S.letter||{}),...d,updatedAt:new Date().toISOString()}));
     if(coll==="kpis") return openForm("kpis",S.kpis,d=>S.db.doc("finance/kpis").set({...(S.kpis||{}),...d,updatedAt:new Date().toISOString()}));
-    if(coll==="cash"){ const rows=((S.cashflow&&S.cashflow.rows)||[]).slice(), i=id!==undefined?Number(id):-1;
-      return openForm("cash",i>=0?rows[i]:null,async d=>{ if(i>=0) rows[i]=d; else rows.push(d); await S.db.doc("finance/cashflow").set({...(S.cashflow||{}),rows}); },
-        i>=0?async()=>{ rows.splice(i,1); await S.db.doc("finance/cashflow").set({...(S.cashflow||{}),rows}); }:null); }
     if($("#drawer").open) $("#drawer").close();
     return crud(coll, act.startsWith("edit-")?id:null);
   }
@@ -1397,7 +1713,7 @@ function applyData(d){
     S.holdings=arr(d.holdings).sort((a,b)=>(a.order||0)-(b.order||0));
     S.news=arr(d.news).sort(by("date","desc")); S.articles=arr(d.articles).sort(by("date","desc"));
     S.events=arr(d.events).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
-    S.kpis=(d.finance||{}).kpis||null; S.cashflow=(d.finance||{}).cashflow||null;
+    S.kpis=(d.finance||{}).kpis||null;
     S.settings=(d.config||{}).newsletter||null; S.letter=(d.content||{}).letter||null; S.static=true;
 }
 async function loadSeed(){
@@ -1471,7 +1787,7 @@ async function init(){
     sub(db.collection("articles").orderBy("date","desc").limit(300),r=>S.articles=r);
     sub(db.collection("events").orderBy("date","asc").limit(200),r=>S.events=r);
     sub(db.collection("editions").orderBy("sentAt","desc").limit(100),r=>S.editions=r);
-    docSub("finance/kpis",d=>S.kpis=d); docSub("finance/cashflow",d=>S.cashflow=d); docSub("config/newsletter",d=>S.settings=d); docSub("content/letter",d=>S.letter=d);
+    docSub("finance/kpis",d=>S.kpis=d); docSub("config/newsletter",d=>S.settings=d); docSub("content/letter",d=>S.letter=d);
     setTimeout(()=>{ S.animate=true; render(); },900);
   }
   render();

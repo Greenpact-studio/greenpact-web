@@ -87,10 +87,6 @@ export default function Page() {
 
       <Resultats />
 
-      <section aria-hidden className="conteneur" style={{ paddingBottom: "var(--section)" }}>
-        <Image src="/images/impact-systemique.webp" alt="" width={1600} height={1067} className={s.photo} style={{ aspectRatio: "21 / 9" }} loading="lazy" />
-      </section>
-
       <Systemique />
     </>
   );

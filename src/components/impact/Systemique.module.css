@@ -1,6 +1,8 @@
 /* Schéma de diffusion : six teintes froides et douces, du vert Greenpact au bleu-vert pâle. */
 .sys {
   background: var(--clair);
+  /* Enchaîne directement après les résultats des startups */
+  padding-top: clamp(3.5rem, 6vw, 5rem);
   --n0: #1c3a2b;
   --n1: #2b5546;
   --n2: #3a6f61;

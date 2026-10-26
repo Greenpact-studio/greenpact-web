@@ -7,7 +7,7 @@ import styles from "./Resultats.module.css";
 /** Ce que les startups changent déjà : Bluefins et Sapiologie, avec leur niveau de preuve, chacune menant à sa page détaillée. */
 export function Resultats() {
   return (
-    <section className="conteneur section" aria-labelledby="res-titre">
+    <section className="conteneur section" style={{ paddingBottom: 0 }} aria-labelledby="res-titre">
       <div className={styles.tete}>
         <h2 id="res-titre" style={{ maxWidth: "18ch" }}>
           Ce que les startups changent déjà, chez des industriels.

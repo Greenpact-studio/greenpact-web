@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Greenpact · Espace actionnaires</title>
+<title>Greenpact, espace actionnaires</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -233,9 +233,10 @@ body.can-edit .edit-only.flex{display:flex!important}
 .faits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .fait{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 24px;cursor:pointer;transition:border-color .2s,transform .2s var(--ease)}
 .fait:hover{border-color:var(--ink);transform:translateY(-2px)}
-.fait-t{display:flex;align-items:center;gap:14px;margin-bottom:4px}
-.fait .flogo{width:96px;height:48px;border-radius:12px;background:var(--wash);display:grid;place-items:center;padding:6px 10px;overflow:hidden;flex:none}
-.fait .flogo .logo{--lh:26px;--lw:80px}
+.fait-t{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:6px}
+.fait .flogo{height:40px;display:grid;align-items:center;justify-items:start;flex:none}
+.fait .flogo .logo{--lh:30px;--lw:130px;background-position:left center}
+
 .fait .meta{font-size:.78rem;color:var(--muted)}
 .fait h3{font-size:1.05rem;font-weight:600;line-height:1.3}
 .fait p{font-size:.9rem;color:var(--muted);line-height:1.6}
@@ -541,6 +542,64 @@ dialog::backdrop{background:rgba(14,32,24,.5);backdrop-filter:blur(2px)}
   .imp-photo{animation:none}
 }
 
+/* Précisions en italique vert foncé (à la place des points médians) */
+.nuance{font-style:italic;color:#2f5342;font-weight:inherit}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .nuance{color:#a9d1b6}}
+:root[data-theme="dark"] .nuance{color:#a9d1b6}
+.team .nuance,.branch-h .nuance{color:inherit;opacity:.95}
+/* Accueil de la vue d'ensemble : la lettre et quelques chiffres, en mise en bouche */
+.hz{position:relative;overflow:hidden;border-radius:26px;background:#0e2018;color:var(--linen);padding:clamp(24px,3.4vw,44px)}
+.hz-fond{position:absolute;inset:-6%;background:url("assets/impact/hero.jpg") center/cover no-repeat;opacity:.38;animation:hz-zoom 26s ease-in-out infinite alternate}
+.hz::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(105deg,rgba(14,32,24,.97) 30%,rgba(20,44,33,.86) 62%,rgba(28,58,43,.7))}
+.hz>*:not(.hz-fond){position:relative;z-index:2}
+@keyframes hz-zoom{from{transform:scale(1)}to{transform:scale(1.08) translate(-1.5%,-1%)}}
+.hz-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hz [style*="--d"]{opacity:0;transform:translateY(12px);transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+.hz.in [style*="--d"]{opacity:1;transform:none}
+.hz-lettre h2{font-size:clamp(2rem,3.6vw,3rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0;max-width:14ch}
+.hz-courrier{display:flex;align-items:center;gap:14px;width:100%;max-width:440px;margin-top:26px;padding:14px 16px;border-radius:18px;border:1px solid rgba(237,234,228,.18);background:rgba(237,234,228,.07);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background .25s,border-color .25s,transform .35s var(--ease),opacity .7s var(--ease) var(--d)}
+.hz-courrier:hover{background:rgba(237,234,228,.13);border-color:rgba(237,234,228,.32);transform:translateY(-2px)}
+.hz-env{width:42px;height:42px;border-radius:13px;background:#d8b46a;color:#1c3a2b;display:grid;place-items:center;flex:none}
+.hz-env .pf-ico{width:20px;height:20px}
+.hz-k{display:block;font-size:.82rem;color:rgba(237,234,228,.75)}
+.hz-courrier b{display:block;font-weight:600;font-size:1rem;line-height:1.3}
+.hz-lire{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:500;white-space:nowrap}
+.hz-lire .pf-ico{width:16px;height:16px;transition:transform .25s var(--ease)}
+.hz-courrier:hover .hz-lire .pf-ico{transform:translate(2px,-2px)}
+.hz-jauge{display:block;height:6px;border-radius:99px;background:rgba(237,234,228,.16);overflow:hidden;margin:4px 0 2px}
+.hz-jauge i{display:block;height:100%;width:0;border-radius:99px;background:#d8b46a;transition:width 1.4s var(--ease) .8s}
+.hz-sign{display:flex;align-items:center;gap:14px;margin-top:20px}
+.hz-sign b{display:block;font-weight:600;font-size:.92rem}
+.hz-sign span{font-size:.85rem;color:rgba(237,234,228,.75)}
+.hz .faces img{border-color:#0e2018}
+.hz-tuiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hz-tuile{display:flex;flex-direction:column;gap:6px;padding:18px 18px 16px;border-radius:18px;background:rgba(237,234,228,.07);border:1px solid rgba(237,234,228,.14);color:inherit;text-decoration:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .25s,border-color .25s,transform .35s var(--ease),opacity .7s var(--ease) var(--d)}
+.hz-tuile:hover{background:rgba(237,234,228,.13);border-color:rgba(237,234,228,.3);transform:translateY(-3px)}
+.hz-tuile.large{grid-column:1 / -1}
+.hz-lab{display:flex;align-items:center;gap:8px;font-size:.9rem;font-weight:500;color:rgba(237,234,228,.85)}
+.hz-lab .pf-ico{width:18px;height:18px}
+.hz-va{margin-left:auto;opacity:0;transform:translate(-4px,4px);transition:opacity .25s,transform .25s var(--ease)}
+.hz-va .pf-ico{width:16px;height:16px}
+.hz-tuile:hover .hz-va{opacity:1;transform:none}
+.hz-val{font-size:clamp(1.7rem,2.6vw,2.2rem);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.hz-tuile.large .hz-val{font-size:clamp(2.2rem,3.6vw,3rem)}
+.hz-tuile.rdv .hz-val{font-size:clamp(1.3rem,2vw,1.6rem)}
+.hz-ligne{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.hz-sous{font-size:.9rem;color:rgba(237,234,228,.8)}
+.hz-hausse{display:inline-block;padding:2px 10px;border-radius:99px;background:#d8b46a;color:#1c3a2b;font-weight:600;margin-right:4px}
+.hz-spark{width:150px;max-width:45%;height:auto;overflow:visible}
+.hz-spark path{fill:none;stroke:#d8b46a;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s var(--ease) .7s}
+.hz-spark circle{fill:#d8b46a;opacity:0;transition:opacity .4s 2.1s}
+.hz.in .hz-spark path{stroke-dashoffset:0}
+.hz.in .hz-spark circle{opacity:1}
+.hz-explorer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:clamp(22px,3vw,32px);padding-top:clamp(18px,2.4vw,24px);border-top:1px solid rgba(237,234,228,.14)}
+.hz-explorer>span{font-size:.9rem;font-weight:500;margin-right:6px;color:rgba(237,234,228,.85)}
+.hz-explorer a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:99px;border:1px solid rgba(237,234,228,.22);color:inherit;text-decoration:none;font-size:.9rem;font-weight:500;transition:background .25s,border-color .25s}
+.hz-explorer a:hover{background:var(--linen);color:var(--forest);border-color:var(--linen)}
+.hz-explorer .pf-ico{width:16px;height:16px}
+@media (max-width:1000px){.hz-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.hz-tuile{padding:14px}.hz-lab{font-size:.82rem;gap:6px}.hz-va{display:none}.hz-sous{font-size:.84rem}.hz-explorer>span{width:100%}}
+@media (prefers-reduced-motion: reduce){.hz-fond{animation:none}}
 /* Performance */
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;position:relative}
@@ -593,6 +652,8 @@ tr:last-child td{border-bottom:0}
 .reads{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .read-card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:8px}
 .read-card .src{font-size:.76rem;color:var(--muted)}
+.read-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.76rem}
+.read-top .nuance{text-align:right}
 .read-card h3 a{text-decoration:none}
 .read-card h3 a:hover{text-decoration:underline}
 /* Carte entière cliquable : le lien du titre couvre la carte, le bouton d'édition reste au-dessus */
@@ -956,6 +1017,9 @@ const phEl = h => !hasPhoto(h) ? "" : (h.photoId ? `<span class="ph" style="back
 (function(){ const st=document.createElement("style"); st.textContent = Object.entries(ASSETS.logos).map(([k,u])=>`.lg-${k}{--src:url("${u}");--srcd:url("${(ASSETS.logosDark||{})[k]||u}");--r:${(ASSETS.ratio||{})[k]||3}}`).join("\n") + "\n" + Object.entries(ASSETS.photos||{}).map(([k,u])=>`.ph-${k}{background-image:url("${u}")}`).join("\n") + "\n" + Object.entries(ASSETS.impact||{}).map(([k,u])=>`.ph-imp-${k}{background-image:url("${u}")}`).join("\n"); document.head.appendChild(st); })();
 const logoChip = id => ASSETS.logos[id] ? `<i class="logo lg-${esc(id)}" role="img" aria-label="${esc(holdingName(id))}"></i>` : `<span class="txt">${esc(holdingName(id))}</span>`;
 function proofBadge(p){ if(!p) return ""; const k={"Mesuré":"m","Estimé":"e","Intention":"i"}[p]||"e"; return `<span class="proof proof-${k}">${esc(p)}</span>`; }
+/* Précision accolée à un libellé (thème, date, lieu…) : en italique vert foncé
+   plutôt que séparée par un point médian. Le texte reçu est déjà échappé. */
+const nuance = t => t ? ` <em class="nuance">${t}</em>` : "";
 const tip = k => `<button type="button" class="tip" data-tip="${esc(GLOSS[k])}" aria-label="${esc(GLOSS[k])}">?</button>`;
 
 /* Nav */
@@ -1019,29 +1083,38 @@ function upcoming(){ const t=todayISO(); return S.events.filter(e=>(e.date||"")>
 /* ---------- Vue d'ensemble ---------- */
 function vApercu(){
   const k=S.kpis||{}, L=S.letter;
-  const paras = L && L.body ? L.body.split(/\n+/).filter(Boolean) : [];
-  const excerpt = paras.slice(0,2);
   const people = (L && L.signedBy) || "Laurent Geray et Emmanuel Gonon";
+  const sp=(k.sharePrice||[]).filter(p=>has(p.price)), an=sp.length?sp[sp.length-1].year:"";
+  let spark="";
+  if(sp.length>1){
+    const W=150,Hh=46, v=sp.map(p=>Number(p.price)), mn=Math.min(...v), mx=Math.max(...v)||1;
+    const x=i=>3+i*(W-6)/(sp.length-1), y=n=>Hh-4-(n-mn)/((mx-mn)||1)*(Hh-12);
+    spark=`<svg class="hz-spark" viewBox="0 0 ${W} ${Hh}" aria-hidden="true"><path pathLength="1" d="${v.map((n,i)=>`${i?"L":"M"}${x(i).toFixed(1)},${y(n).toFixed(1)}`).join(" ")}"/><circle cx="${x(v.length-1).toFixed(1)}" cy="${y(v[v.length-1]).toFixed(1)}" r="4"/></svg>`;
+  }
+  // Chiffres qui ne figurent pas ailleurs sur la vue d'ensemble
+  const levee = has(k.raised)&&has(k.raisedTarget) ? Math.min(1,k.raised/k.raisedTarget) : null;
+  const tuiles=[
+    has(k.sharePriceNow)&&`<a class="hz-tuile large" href="#performance" style="--d:.35s"><span class="hz-lab">${ico("part")}Prix de la part<span class="hz-va">${ico("fleche")}</span></span><span class="hz-ligne"><span class="hz-val">${counter(k.sharePriceNow,2,""," €")}</span>${spark}</span>${k.sharePriceChange?`<span class="hz-sous"><b class="hz-hausse">${esc(k.sharePriceChange)}</b> en ${esc(an)}</span>`:""}</a>`,
+    has(k.tvpi)&&`<a class="hz-tuile" href="#performance" style="--d:.45s"><span class="hz-lab">${ico("tvpi")}Valeur créée<span class="hz-va">${ico("fleche")}</span></span><span class="hz-val">${counter(k.tvpi,2,"","x")}</span><span class="hz-sous">1 € apporté vaut aujourd'hui ${esc(fr(k.tvpi,2))} €</span></a>`,
+    levee!==null&&`<a class="hz-tuile" href="#performance" style="--d:.55s"><span class="hz-lab">${ico("cible")}Levée en cours<span class="hz-va">${ico("fleche")}</span></span><span class="hz-val">${counter(Math.round(levee*100),0,""," %")}</span><span class="hz-jauge"><i data-w="${(levee*100).toFixed(1)}%"></i></span><span class="hz-sous">${esc(eurC(k.raised))} sur ${esc(eurC(k.raisedTarget))}</span></a>`
+  ].filter(Boolean).join("");
+  const explorer=[["#portefeuille","moic","Portefeuille"],["#performance","part","Performance"],["#impact","cible","Impact"],["#lettres","lettre","Lettres et lectures"]];
   const letter = `
-  <section class="band" data-reveal>
-    <div class="letter-grid">
-      <div class="letter">
-        <div class="kicker">${esc((L&&L.label)||"Lettre aux actionnaires")}</div>
-        <h2>${esc((L&&L.title)||"Lettre aux actionnaires")}</h2>
-        <div class="body">${excerpt.length?excerpt.map(p=>`<p>${md(p)}</p>`).join(""):`<p>La prochaine lettre sera publiée ici.</p>`}</div>
-        <div class="sign">
+  <section class="hz" data-reveal>
+    <div class="hz-fond" aria-hidden="true"></div>
+    <div class="hz-grid">
+      <div class="hz-lettre">
+        <h2 style="--d:.08s">Bienvenue sur votre espace investisseur</h2>
+        <div class="hz-sign" style="--d:.18s">
           <div class="faces"><img src="${ASSETS.people.laurent}" alt="Laurent Geray"><img src="${ASSETS.people.emmanuel}" alt="Emmanuel Gonon"></div>
           <div><b>${esc(people)}</b><span>${esc((L&&L.signedRole)||"CEO et Chairman, Greenpact")}</span></div>
-          ${paras.length>2?`<button class="btn on-band small" data-act="letter" style="margin-left:auto">Lire la lettre</button>`:""}
-          <button class="btn on-band small edit-only" data-act="edit-letter">Modifier</button>
         </div>
+        ${L&&L.title?`<button class="hz-courrier" data-act="letter" style="--d:.28s"><span class="hz-env">${ico("lettre")}</span><span><span class="hz-k">${esc(L.label||"Dernière lettre aux actionnaires")}</span><b>${esc(L.title)}</b></span><span class="hz-lire">Lire ${ico("fleche")}</span></button>`:""}
+        <button class="btn on-band small edit-only" data-act="edit-letter" style="margin-top:12px">Modifier la lettre</button>
       </div>
-      <div class="board">
-        <div class="row"><span class="big">${has(k.moic)?counter(k.moic,2,"x ",""):"—"}</span><span class="lab"><b>MOIC</b>Valeur rapportée aux montants investis</span></div>
-        <div class="row"><span class="big">${has(k.tvpi)?counter(k.tvpi,2,"x ",""):"—"}</span><span class="lab"><b>TVPI</b>Valeur rapportée aux montants levés</span></div>
-        <div class="row"><span class="big">${has(k.nav)?counter(k.nav/1e6,1,"","\u00a0M€"):"—"}</span><span class="lab"><b>Valeur des actifs</b>${k.sharePriceChange?`Prix de la part ${esc(k.sharePriceChange)} sur un an`:"NAV indicative"}</span></div>
-      </div>
+      <div class="hz-tuiles">${tuiles}</div>
     </div>
+    <nav class="hz-explorer" aria-label="Explorer l'espace" style="--d:.7s"><span>Explorer l'espace</span>${explorer.map(([h,i,l])=>`<a href="${h}">${ico(i)}${esc(l)}</a>`).join("")}</nav>
   </section>`;
   return letter + treeBlock() + teamsBlock() + `
   <section class="sec" data-reveal>
@@ -1057,7 +1130,7 @@ function vApercu(){
 function teamsBlock(){
   const list = companies().filter(hasPhoto);
   if(list.length<3) return "";
-  const card = h => `<button class="team" data-act="detail" data-id="${esc(h.id)}" tabindex="-1">${phEl(h)}<span class="cap">${ASSETS.logos[h.id]?logoChip(h.id):`<b>${esc(h.name)}</b>`}<span>${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span></span></button>`;
+  const card = h => `<button class="team" data-act="detail" data-id="${esc(h.id)}" tabindex="-1">${phEl(h)}<span class="cap">${ASSETS.logos[h.id]?logoChip(h.id):`<b>${esc(h.name)}</b>`}<span>${esc(viaLabel(h))}${nuance(esc(h.theme||""))}</span></span></button>`;
   return `<section class="sec"><div class="sec-h"><h2>Les équipes</h2></div>
     <div class="teams"><div class="teams-track">${list.map(card).join("")}${list.map(card).join("")}</div></div></section>`;
 }
@@ -1071,7 +1144,7 @@ function treeBlock(){
   const chips = list => `<div class="logos">${list.map(h=>`<button class="lchip" style="--d:${(1.2+(d++)*0.05).toFixed(2)}s" data-act="detail" data-id="${esc(h.id)}" title="${esc(h.name)}">${logoChip(h.id)}</button>`).join("")}</div>`;
   // Logos des studios, en version claire, dans leur encadré
   const LOGO_STUDIO = {"4elements":"assets/brand/4elements-clair.png", hoji:"assets/brand/hoji-clair.png"};
-  const branch = (title, sub, list, id) => `<div class="branch"><button class="branch-h" ${id?`data-act="pf" data-id="${esc(id)}"`:`data-act="pf" data-id="direct"`}>${LOGO_STUDIO[id]?`<img src="${LOGO_STUDIO[id]}" alt="${esc(title)}" class="branch-logo ${esc(id)}">`:`<b>${esc(title)}</b>`}<span>${esc(sub)}</span></button>${chips(list)}</div>`;
+  const branch = (title, sub, list, id) => `<div class="branch"><button class="branch-h" ${id?`data-act="pf" data-id="${esc(id)}"`:`data-act="pf" data-id="direct"`}>${LOGO_STUDIO[id]?`<img src="${LOGO_STUDIO[id]}" alt="${esc(title)}" class="branch-logo ${esc(id)}">`:`<b>${esc(title)}</b>`}<span>${Array.isArray(sub)?esc(sub[0])+nuance(esc(sub[1])):esc(sub)}</span></button>${chips(list)}</div>`;
   return `
   <section class="sec">
     <div class="sec-h"><h2>De la holding aux entreprises</h2></div>
@@ -1080,7 +1153,7 @@ function treeBlock(){
       <div class="tree-stem"></div>
       <div class="tree-branches">
         ${branch("Participations directes", `${dir.length} participations`, dir)}
-        ${st.map(s=>branch(s.name, `${s.kind||"Venture studio"} · ${s.stake||""}`, kids(s.id), s.id)).join("")}
+        ${st.map(s=>branch(s.name, [s.kind||"Venture studio", s.stake||""], kids(s.id), s.id)).join("")}
       </div>
     </div>
   </section>`;
@@ -1119,7 +1192,7 @@ function capitalSurvol(e){
     c.querySelectorAll("[data-seg]").forEach(x=>x.classList.toggle("on", x.dataset.seg===actif));
     const items=JSON.parse(c.dataset.items), it=actif!==null?items[+actif]:null;
     c.querySelector(".cv").textContent = it ? it.v : c.dataset.total;
-    c.querySelector(".cl").textContent = it ? `${it.n} · ${it.p} %` : c.dataset.label;
+    c.querySelector(".cl").innerHTML = it ? esc(it.n)+nuance(`${it.p} %`) : esc(c.dataset.label);
   });
 }
 document.addEventListener("mouseover", capitalSurvol);
@@ -1132,7 +1205,7 @@ function faitsMarquants(){
   const list=actus().slice(0,4);
   if(!list.length) return `<div class="empty">Aucune nouvelle publiée.</div>`;
   return `<div class="faits">${list.map(n=>`<article class="fait" data-act="detail" data-id="${esc(n.holdingId)}">
-    <div class="fait-t"><div class="flogo">${logoChip(n.holdingId)}</div><span class="meta">${esc(holdingName(n.holdingId))} · ${esc(dFmt(n.date,{day:"numeric",month:"long"}))}</span></div>
+    <div class="fait-t"><div class="flogo">${logoChip(n.holdingId)}</div><span class="meta">${ASSETS.logos[n.holdingId]?"":esc(holdingName(n.holdingId))}${nuance(esc(dFmt(n.date,{day:"numeric",month:"long"})))}</span></div>
     <h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:""}
     <button class="btn ghost small edit-only" style="margin-top:8px;align-self:flex-start" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button>
   </article>`).join("")}</div>`;
@@ -1141,7 +1214,7 @@ function feedList(list){
   if(!list.length) return `<div class="empty">Aucune nouvelle publiée.</div>`;
   return `<ul class="feed">${list.map(n=>`<li data-act="toggle-news" data-id="${esc(n.id)}">
     <div class="flogo">${logoChip(n.holdingId)}</div>
-    <div><div class="meta">${esc(holdingName(n.holdingId))} · ${esc(dFmt(n.date,{day:"numeric",month:"long"}))}</div><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:""}
+    <div><div class="meta">${esc(holdingName(n.holdingId))}${nuance(esc(dFmt(n.date,{day:"numeric",month:"long"})))}</div><h3>${esc(n.title)}</h3>${n.body?`<p>${esc(n.body)}</p>`:""}
     <button class="btn ghost small edit-only" style="margin-top:8px" data-act="edit-news" data-id="${esc(n.id)}">Modifier</button></div>
   </li>`).join("")}</ul>`;
 }
@@ -1153,7 +1226,7 @@ function coCard(h){
   return `<button class="co" style="--brand:${BRAND[h.id]||"#1c3a2b"}" data-act="detail" data-id="${esc(h.id)}">
     <div class="cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
     <div class="co-body">
-      <span class="via" title="${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}">${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span>
+      <span class="via" title="${esc(viaLabel(h))}${h.theme?`, ${esc(h.theme)}`:""}">${esc(viaLabel(h))}${nuance(esc(h.theme||""))}</span>
       <h3>${esc(h.name)}</h3>
       <p>${esc(h.description||"")}</p>
       <div class="co-impact">${h.impactFigure?`<b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span>${proofBadge(h.proof)}`:""}</div>
@@ -1196,7 +1269,7 @@ function openDetail(id){
     <button class="dr-close" data-act="close-drawer" aria-label="Fermer">×</button>
     <div class="cover dr-cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
     <div class="dr-body">
-      <div><span class="via">${esc(viaLabel(h))}${h.theme?` · ${esc(h.theme)}`:""}</span><h2>${esc(h.name)}</h2>${h.description?`<p class="lead">${esc(h.description)}</p>`:""}</div>
+      <div><span class="via">${esc(viaLabel(h))}${nuance(esc(h.theme||""))}</span><h2>${esc(h.name)}</h2>${h.description?`<p class="lead">${esc(h.description)}</p>`:""}</div>
       ${h.impactFigure?`<div class="impact-hero"><b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span> ${proofBadge(h.proof)}${h.mission?`<p>${esc(h.mission)}</p>`:""}</div>`:(h.mission?`<div class="memo"><b>Impact recherché</b>${esc(h.mission)}</div>`:"")}
       ${facts.length?`<dl class="facts" style="margin:0">${facts.map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>`:""}
       ${(h.highlights||[]).length?`<div><h3 style="margin-bottom:14px">Dernières avancées</h3><ul class="timeline">${h.highlights.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
@@ -1328,6 +1401,7 @@ const ICO={
   distrib:'<path d="M3 14.5h3.5l3.5 2.5h5.5a1.8 1.8 0 0 0 0-3.6H12"/><path d="M6.5 14.5V20H3"/><circle cx="16" cy="6.5" r="3"/>',
   tri:'<path d="M4 20h16"/><path d="M5.5 16l4.5-4.5 3 3L19 8.5"/><path d="M15 8.5h4v4"/>',
   chev:'<path d="M6 9l6 6 6-6"/>',
+  lettre:'<rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/>',
   fleche:'<path d="M7 17L17 7"/><path d="M9 7h8v8"/>'
 };
 const ico = k => `<svg class="pf-ico" viewBox="0 0 24 24" aria-hidden="true">${ICO[k]}</svg>`;
@@ -1422,7 +1496,7 @@ function perfLignes(){
   const row = h => {
     const inv=Number(h.invested)||0, val=Number(h.marketValue)||0, diff=val-inv;
     const faits=[["Investi par Greenpact",eur(inv)],["Valeur retenue",eur(val)],["Plus-value latente",`${diff>=0?"+":"−"}${eur(Math.abs(diff))}`],["Détention",h.stake],["Entrée au capital",h.year],["Méthode de valorisation",h.method]];
-    if(h.fundMoic||h.fundTvpi) faits.push(["Performance du studio",[h.fundMoic&&`MOIC ${h.fundMoic}`,h.fundTvpi&&`TVPI ${h.fundTvpi}`].filter(Boolean).join(" · ")]);
+    if(h.fundMoic||h.fundTvpi) faits.push(["Performance du studio",[h.fundMoic&&`MOIC ${h.fundMoic}`,h.fundTvpi&&`TVPI ${h.fundTvpi}`].filter(Boolean).join(", ")]);
     const lien = h.vehicle==="fonds" ? `<button class="btn ghost small" data-act="pf" data-id="${esc(h.id)}">Voir les startups du studio</button>` : h.vehicle==="direct" && h.active!==false ? `<button class="btn ghost small" data-act="detail" data-id="${esc(h.id)}">Voir la fiche</button>` : "";
     return `<details class="pf-ligne ${h.active===false?"passee":""}" style="--c:${TEINTE_LIGNE[h.id]||"#3d6b52"}">
       <summary>
@@ -1520,15 +1594,18 @@ const LIENS_LECTURES = {
   "lecture-sept-2026-9":"https://www.stockholmresilience.org/publications/publications/2025-11-25-planetary-health-check-2025-a-scientific-assessment-of-the-state-of-the-planet.html",
   "lecture-sept-2026-10":"https://www.unep.org/resources/state-finance-nature-2026"
 };
+/* Trois catégories de lecture ; les anciennes rubriques y sont rattachées. */
+const CATEGORIES = {"IA & société":"IA & économie","Travail & économie":"IA & économie","IA, énergie & ressources":"Énergie & ressources","Climat & adaptation":"Climat & nature","Limites planétaires & capital":"Climat & nature"};
+const categorie = a => { const t=(a.tags||[])[0]||""; return CATEGORIES[t]||t; };
 const lienLecture = a => safeUrl(a.url) || LIENS_LECTURES[a.id] || "";
 function vLectures(){
-  const tags=[...new Set(S.articles.flatMap(a=>a.tags||[]))];
+  const tags=[...new Set(S.articles.map(categorie).filter(Boolean))];
   const q=S.search.toLowerCase();
-  const list=S.articles.filter(a=>(S.tag==="all"||(a.tags||[]).includes(S.tag)) && (!q||[a.title,a.source,a.summary,a.memo].join(" ").toLowerCase().includes(q)));
+  const list=S.articles.filter(a=>(S.tag==="all"||categorie(a)===S.tag) && (!q||[a.title,a.source,a.summary,a.memo].join(" ").toLowerCase().includes(q)));
   return `<div class="head"><div><h1>Lectures</h1><p>Ce que l'équipe lit, et ce qu'elle en retient pour Greenpact.</p></div><button class="btn edit-only" data-act="new-articles">Ajouter une lecture</button></div>
   <div class="toolbar"><div class="seg" role="group" aria-label="Thèmes"><button data-act="tag" data-id="all" aria-pressed="${S.tag==="all"}">Tout</button>${tags.map(t=>`<button data-act="tag" data-id="${esc(t)}" aria-pressed="${S.tag===t}">${esc(t)}</button>`).join("")}</div>
   <input class="search" id="search" type="search" placeholder="Rechercher" value="${esc(S.search)}" aria-label="Rechercher"></div>
-  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card${lienLecture(a)?" lien":""}"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${lienLecture(a)?`<a href="${esc(lienLecture(a))}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}${lienLecture(a)?`<span class="lire">Lire l'article ${ico("fleche")}</span>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
+  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card${lienLecture(a)?" lien":""}"><div class="read-top"><span class="src">${esc(a.source||"")}</span>${categorie(a)?`<em class="nuance">${esc(categorie(a))}</em>`:""}</div><h3>${lienLecture(a)?`<a href="${esc(lienLecture(a))}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}${lienLecture(a)?`<span class="lire">Lire l'article ${ico("fleche")}</span>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
 }
 
 /* ---------- Agenda (en bas de la vue d'ensemble) ---------- */
@@ -1537,7 +1614,7 @@ function agendaBlock(){
 }
 function vAgenda(){
   const t=todayISO(), up=S.events.filter(e=>(e.date||"")>=t), past=S.events.filter(e=>(e.date||"")<t).reverse().slice(0,6);
-  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${e.place?` · ${esc(e.place)}`:""}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
+  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${nuance(esc(e.place||""))}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
   return `<div class="head"><div><h1>Agenda</h1></div><button class="btn edit-only" data-act="new-events">Ajouter un événement</button></div>
   <div class="panel">${up.length?up.map(e=>row(e,false)).join(""):`<div class="empty" style="border:0">Aucun rendez-vous programmé pour le moment.</div>`}</div>
   ${past.length?`<section class="sec"><div class="sec-h"><h2>Passés</h2></div>${past.map(e=>row(e,true)).join("")}</section>`:""}`;
@@ -1552,15 +1629,15 @@ function buildEmail(type,intro,c){
   const p=t=>`<p style="margin:0 0 6px;${F}font-size:15px;line-height:1.6;color:#1c3a2b">${t}</p>`;
   const sm=t=>`<p style="margin:0 0 18px;${F}font-size:13.5px;line-height:1.55;color:#5b6e63">${t}</p>`;
   const sec=(t,b)=>b?`<tr><td style="padding:26px 36px 0"><p style="margin:0 0 14px;${F}font-size:12px;font-weight:600;color:#1c3a2b;border-bottom:1px solid #dcd7cd;padding-bottom:8px">${t}</p>${b}</td></tr>`:"";
-  const news=c.news.map(n=>p(`<b>${esc(holdingName(n.holdingId))}</b> · ${esc(n.title)}`)+sm(esc(n.body||""))).join("");
+  const news=c.news.map(n=>p(`<b>${esc(holdingName(n.holdingId))}</b> <i style="color:#2f5342">${esc(n.title)}</i>`)+sm(esc(n.body||""))).join("");
   const arts=c.articles.map(a=>p(`${safeUrl(a.url)?`<a href="${esc(a.url)}" style="color:#1c3a2b">${esc(a.title)}</a>`:esc(a.title)} <span style="color:#5b6e63">${esc(a.source||"")}</span>`)+sm(esc(a.memo||a.summary||""))).join("");
-  const evs=c.events.slice(0,4).map(e=>p(`<b>${esc(dFmt(e.date,{day:"numeric",month:"long"}))}</b> · ${esc(e.title)}${e.place?`, ${esc(e.place)}`:""}`)).join("");
+  const evs=c.events.slice(0,4).map(e=>p(`<b>${esc(dFmt(e.date,{day:"numeric",month:"long"}))}</b> <i style="color:#2f5342">${esc(e.title)}</i>${e.place?`, ${esc(e.place)}`:""}`)).join("");
   const figs=type==="complète"&&has(k.nav)?`<tr><td style="padding:26px 36px 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1c3a2b;border-radius:14px"><tr>${[[eurC(k.nav),"Valeur des actifs"],[fx(k.tvpi),"TVPI"],[k.sharePriceChange||"","Prix de la part"]].map(f=>`<td style="padding:18px 16px;${F}color:#edeae4"><div style="font-size:22px;font-weight:600">${esc(f[0])}</div><div style="font-size:12px;opacity:.7">${f[1]}</div></td>`).join("")}</tr></table></td></tr>`:"";
   const portal=safeUrl(set.portalUrl), rdv=safeUrl(set.rdvUrl);
   return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Greenpact, lettre aux actionnaires</title></head><body style="margin:0;padding:0;background:#edeae4">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#edeae4"><tr><td align="center" style="padding:28px 12px">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#f6f4f0;border-radius:18px;overflow:hidden">
-<tr><td style="background:#1c3a2b;padding:28px 36px"><div style="${F}font-size:26px;letter-spacing:2px;color:#edeae4"><span style="font-weight:300">GREEN</span><span style="font-weight:700">PACT</span></div><div style="${F}font-size:12px;color:#edeae4;opacity:.7;margin-top:6px">Lettre aux actionnaires · ${esc(dFmt(new Date().toISOString(),{day:"numeric",month:"long",year:"numeric"}))} · Confidentiel</div></td></tr>
+<tr><td style="background:#1c3a2b;padding:28px 36px"><div style="${F}font-size:26px;letter-spacing:2px;color:#edeae4"><span style="font-weight:300">GREEN</span><span style="font-weight:700">PACT</span></div><div style="${F}font-size:12px;color:#edeae4;opacity:.7;margin-top:6px">Lettre aux actionnaires <i>du ${esc(dFmt(new Date().toISOString(),{day:"numeric",month:"long",year:"numeric"}))}</i>, confidentielle</div></td></tr>
 ${intro?`<tr><td style="padding:28px 36px 0">${intro.split(/\n+/).map(x=>p(esc(x))).join("")}</td></tr>`:""}
 ${figs}${sec("Portefeuille",news)}${sec("Lectures",arts)}${sec("Rendez-vous",evs)}
 <tr><td style="padding:30px 36px">${portal?`<a href="${esc(portal)}" style="display:inline-block;background:#1c3a2b;color:#edeae4;padding:12px 22px;border-radius:99px;text-decoration:none;${F}font-size:14px">Ouvrir l'espace actionnaires</a>`:""}
@@ -1572,7 +1649,7 @@ function currentEmail(){ return buildEmail(S.nlType||defaultType(),S.nlIntro,sin
 function updatePreview(){ const f=$("#nl-preview"); if(f) f.srcdoc=currentEmail(); }
 function vLettres(){
   const c=sinceLast(), type=S.nlType||defaultType(), next=nextNewsletterDate();
-  const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))} · ${esc(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
+  const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))}${nuance(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
   setTimeout(updatePreview,0);
   return `<div class="head"><div><h1>Lettres et lectures</h1></div></div>
   <section class="edit-only" style="margin-bottom:46px"><div class="nl-grid">

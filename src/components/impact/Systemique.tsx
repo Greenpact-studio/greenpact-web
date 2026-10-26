@@ -56,8 +56,8 @@ export function Systemique() {
             <span className={styles.ligne}>Au-delà de nos startups :</span> <span className={styles.ligne}>un impact systémique.</span>
           </h2>
           <p className="sobre">
-            <span className={styles.ligneTexte}>Six leviers pour recalibrer un système entier plutôt qu&apos;une solution ponctuelle :</span>{" "}
-            <span className={styles.ligneTexte}>l&apos;impact part d&apos;une entreprise et s&apos;étend jusqu&apos;à la communauté.</span>
+            Six leviers pour recalibrer un système entier plutôt qu&apos;une solution ponctuelle : l&apos;impact part d&apos;une entreprise et
+            s&apos;étend jusqu&apos;à la communauté.
           </p>
         </div>
 

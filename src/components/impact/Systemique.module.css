@@ -20,7 +20,7 @@
 .tete h2 {
   max-width: none;
 }
-/* Titre sur deux lignes fixes, texte d'accompagnement sur deux lignes */
+/* Titre sur deux lignes fixes ; le texte d'accompagnement s'aligne sur la colonne des leviers */
 .ligne {
   display: block;
 }
@@ -28,16 +28,7 @@
   max-width: none;
 }
 @media (min-width: 1100px) {
-  .tete {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
   .ligne {
-    white-space: nowrap;
-  }
-}
-@media (min-width: 1360px) {
-  .ligneTexte {
-    display: block;
     white-space: nowrap;
   }
 }

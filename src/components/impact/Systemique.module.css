@@ -18,7 +18,28 @@
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 .tete h2 {
-  max-width: 16ch;
+  max-width: none;
+}
+/* Titre sur deux lignes fixes, texte d'accompagnement sur deux lignes */
+.ligne {
+  display: block;
+}
+.tete p {
+  max-width: none;
+}
+@media (min-width: 1100px) {
+  .tete {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .ligne {
+    white-space: nowrap;
+  }
+}
+@media (min-width: 1360px) {
+  .ligneTexte {
+    display: block;
+    white-space: nowrap;
+  }
 }
 .leviers {
   display: flex;

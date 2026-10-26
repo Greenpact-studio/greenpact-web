@@ -306,7 +306,9 @@ body.can-edit .edit-only.flex{display:flex!important}
 .co:hover{box-shadow:0 14px 34px color-mix(in srgb,var(--brand) 22%,transparent)}
 .co-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1;border-top:3px solid color-mix(in srgb,var(--brand) 60%,transparent)}
 .cover.light{background-color:color-mix(in srgb,var(--brand) 14%,var(--surface-2))!important}
-.co-body .via{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.005em}
+.co-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:.7rem;min-width:0}
+.co-top .nuance{flex:none;max-width:55%;padding-right:2px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.co-body .via{min-width:0;font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.005em}
 .co-body h3{font-size:1.08rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .co-body p{font-size:.86rem;line-height:1.6;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;height:calc(1.6em * 3);margin-bottom:6px}
 .co-impact{margin-top:auto;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--brand) 28%,var(--line));display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;align-items:start;min-height:calc(2.9em + 13px)}
@@ -1226,7 +1228,7 @@ function coCard(h){
   return `<button class="co" style="--brand:${BRAND[h.id]||"#1c3a2b"}" data-act="detail" data-id="${esc(h.id)}">
     <div class="cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
     <div class="co-body">
-      <span class="via" title="${esc(viaLabel(h))}${h.theme?`, ${esc(h.theme)}`:""}">${esc(viaLabel(h))}${nuance(esc(h.theme||""))}</span>
+      <div class="co-top"><span class="via" title="${esc(viaLabel(h))}">${esc(viaLabel(h))}</span>${h.theme?`<em class="nuance">${esc(h.theme)}</em>`:""}</div>
       <h3>${esc(h.name)}</h3>
       <p>${esc(h.description||"")}</p>
       <div class="co-impact">${h.impactFigure?`<b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span>${proofBadge(h.proof)}`:""}</div>

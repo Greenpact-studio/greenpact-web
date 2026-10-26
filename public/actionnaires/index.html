@@ -595,6 +595,13 @@ tr:last-child td{border-bottom:0}
 .read-card .src{font-size:.76rem;color:var(--muted)}
 .read-card h3 a{text-decoration:none}
 .read-card h3 a:hover{text-decoration:underline}
+/* Carte entière cliquable : le lien du titre couvre la carte, le bouton d'édition reste au-dessus */
+.read-card.lien{position:relative;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s var(--ease)}
+.read-card.lien h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.read-card.lien:hover{border-color:var(--ink);box-shadow:0 14px 34px -22px rgba(14,32,24,.45);transform:translateY(-2px)}
+.read-card.lien .btn{position:relative;z-index:1}
+.read-card .lire{display:inline-flex;align-items:center;gap:6px;margin-top:auto;padding-top:6px;font-size:.88rem;font-weight:500}
+.read-card .lire .pf-ico{width:16px;height:16px}
 .read-card p{font-size:.88rem;color:var(--muted)}
 .memo{margin-top:6px;border-radius:12px;background:var(--wash);padding:12px 14px;font-size:.86rem}
 .memo b{display:block;font-size:.74rem;font-weight:600;margin-bottom:2px}
@@ -765,37 +772,24 @@ i.val{background:var(--ton,#2f6b4f)}
 .pf-detail dd{margin:2px 0 0;font-weight:600}
 .pf-detail p{margin:14px 0 0;font-size:.95rem}
 .pf-detail .btn{margin-top:14px}
-/* Du capital levé à la valeur d'aujourd'hui */
-.pf-parcours{--c1:#2f6b4f;--c2:#c9a45c;--c3:#bdb5a8;--c4:#8fb0c4;--c5:#a9c7b2;--ton:#2f6b4f;--ton-bg:#dfe9df}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pf-parcours{--c1:#7fbf98;--c2:#d8b46a;--c3:#6f7a73;--c4:#7ea3ba;--c5:#3f6b55;--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}}
-:root[data-theme="dark"] .pf-parcours{--c1:#7fbf98;--c2:#d8b46a;--c3:#6f7a73;--c4:#7ea3ba;--c5:#3f6b55;--ton:#a9d1b6;--ton-bg:rgba(169,209,182,.14)}
-.pf-parcours i.c1{background:var(--c1)}.pf-parcours i.c2{background:var(--c2)}.pf-parcours i.c3{background:var(--c3)}.pf-parcours i.c4{background:var(--c4)}.pf-parcours i.c5{background:var(--c5)}
-.pf-flux{display:flex;flex-direction:column;gap:18px}
-.pf-flux-r{display:grid;grid-template-columns:150px minmax(0,1fr) 90px;gap:18px;align-items:center}
-.pf-flux-r .t{font-weight:500}
-.pf-flux-r b{font-size:1.15rem;font-weight:600;text-align:right}
-.pf-pile{display:flex;gap:3px;height:26px;width:0;border-radius:9px;overflow:hidden;transition:width 1.4s var(--ease) .15s}
-.pf-pile i{display:block;height:100%;min-width:4px}
-.pf-flux-leg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,56px);margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
-.pf-flux-leg h3{font-size:1rem;font-weight:600;margin-bottom:12px}
-.pf-flux-leg ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
-.pf-flux-leg li{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:12px;align-items:center}
-.pf-flux-leg li i{width:12px;height:12px;border-radius:4px;display:block}
-.pf-flux-leg li b{font-weight:600}
-.pf-gain{display:flex;align-items:center;gap:14px;margin-top:20px;padding:14px 16px;border-radius:16px;background:var(--ton-bg)}
-.pf-gain b{display:block;font-size:1.6rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--ton)}
-.pf-gain span{font-weight:500}
-.pf-gain .pf-pastille{background:var(--surface)}
-.pf-pourquoi{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
-.pf-pourquoi summary{display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:500;color:var(--ton)}
-.pf-pourquoi summary .pf-ico{width:18px;height:18px;transition:transform .3s var(--ease)}
-.pf-pourquoi[open] summary .pf-ico{transform:rotate(180deg)}
-.pf-pourquoi p{margin:12px 0 0;font-size:.95rem;line-height:1.6}
-@media (max-width:760px){
-  .pf-flux-r{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px}
-  .pf-flux-r .pf-pile{grid-column:1 / -1;grid-row:2}
-  .pf-flux-leg{grid-template-columns:1fr}
-}
+/* Anneau compact (Performance) */
+.capital.compact{grid-template-columns:minmax(200px,250px) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.capital.compact .capital-anneau{max-width:250px}
+.capital.compact .donut circle{stroke-width:40}
+.capital.compact.survol .donut circle.on{stroke-width:50}
+.capital.compact .capital-centre b{font-size:clamp(1.3rem,2vw,1.7rem)}
+.capital.compact .capital-legende li{padding:10px 12px}
+/* Participations regroupées : le détail s'ouvre au clic */
+.capital-legende li.groupe .nm{display:inline-flex;align-items:center;gap:6px}
+.capital-legende li.groupe .pf-ico{width:16px;height:16px;transition:transform .3s var(--ease)}
+.capital-legende li.groupe.ouvert .pf-ico{transform:rotate(180deg)}
+.capital .capital-legende li.sous-liste{display:none;padding:0 0 6px 30px;cursor:default;border-radius:0}
+.capital-legende li.groupe.ouvert+li.sous-liste{display:block}
+.capital-legende li.sous-liste ul{list-style:none;margin:0;padding:0}
+.capital .capital-legende li.sous-liste ul li{display:grid;grid-template-columns:1fr auto 64px;gap:14px;align-items:center;padding:7px 12px;border:0;cursor:default}
+.capital-legende li.sous-liste .nm{font-weight:400}
+.capital-legende li.sous-liste b{text-align:right;font-size:.95rem;font-weight:500}
+.capital.survol .capital-legende li.sous-liste{opacity:.45}
 /* Levée et horizon */
 .pf-cartes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .pf-carte{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,2.6vw,30px)}
@@ -1092,25 +1086,29 @@ function treeBlock(){
   </section>`;
 }
 /* Répartition du capital : un anneau large, relié à sa légende. Survoler une
-   part (ou une ligne de la légende) la met en avant et affiche son montant. */
-function donut(){
+   part (ou une ligne de la légende) la met en avant et affiche son montant.
+   Options : postes ajoutés après les participations, libellé du total, variante
+   compacte, et regroupement des participations en une part dépliable (grouper). */
+function donut(o={}){
   const pos = S.holdings.filter(h=>["fonds","direct","gestion"].includes(h.vehicle) && h.active!==false && Number(h.invested)>0);
   const groups = {}; pos.forEach(h=>{ const key = h.vehicle==="gestion" ? (h.parent||"hoji") : h.id; groups[key]=(groups[key]||0)+Number(h.invested); });
-  const items = Object.entries(groups).map(([id,v])=>({id,v,name:holdingName(id)})).sort((a,b)=>b.v-a.v);
-  if(!items.length) return `<div class="empty">Montants investis à renseigner.</div>`;
-  const tot = items.reduce((s,i)=>s+i.v,0), R=110, C=2*Math.PI*R, G=3;
   const shades = ["#1c3a2b","#3d6b52","#7d9c88","#b3c4b6","#d8ded6","#e4e0d8"];
+  const lignesInv = Object.entries(groups).map(([id,v])=>({id,v,name:holdingName(id)})).sort((a,b)=>b.v-a.v).map((it,i)=>({...it,c:shades[i%shades.length]}));
+  const items = (o.grouper && lignesInv.length ? [{id:"participations",name:o.grouper,v:lignesInv.reduce((s,i)=>s+i.v,0),c:shades[0],sous:lignesInv}] : lignesInv).concat((o.extra||[]).filter(x=>x.v>0));
+  if(!items.length) return `<div class="empty">Montants investis à renseigner.</div>`;
+  const label = o.label || "investis au total";
+  const tot = items.reduce((s,i)=>s+i.v,0), R=110, C=2*Math.PI*R, G=3;
   let acc=0;
-  const segs = items.map((it,i)=>{ const len=it.v/tot*C; const s=`<circle class="seg" data-seg="${i}" r="${R}" cx="150" cy="150" stroke="${shades[i%shades.length]}" stroke-dasharray="0 ${C}" data-dash="${Math.max(0,len-G).toFixed(1)} ${C}" stroke-dashoffset="${(-acc).toFixed(1)}" transform="rotate(-90 150 150)"></circle>`; acc+=len; return s; }).join("");
+  const segs = items.map((it,i)=>{ const len=it.v/tot*C; const s=`<circle class="seg" data-seg="${i}" r="${R}" cx="150" cy="150" stroke="${it.c}" stroke-dasharray="0 ${C}" data-dash="${Math.max(0,len-G).toFixed(1)} ${C}" stroke-dashoffset="${(-acc).toFixed(1)}" transform="rotate(-90 150 150)"></circle>`; acc+=len; return s; }).join("");
   const data = esc(JSON.stringify(items.map(it=>({n:it.name,v:eurC(it.v),p:Math.round(it.v/tot*100)}))));
-  return `<div class="capital" data-items="${data}" data-total="${esc(eurC(tot))}">
+  return `<div class="capital${o.compact?" compact":""}" data-items="${data}" data-total="${esc(eurC(tot))}" data-label="${esc(label)}">
     <div class="capital-anneau">
       <svg class="donut" viewBox="0 0 300 300" role="img" aria-label="Répartition des montants investis">${segs}</svg>
-      <div class="capital-centre" aria-live="polite"><b class="cv">${esc(eurC(tot))}</b><span class="cl">investis au total</span></div>
+      <div class="capital-centre" aria-live="polite"><b class="cv">${esc(eurC(tot))}</b><span class="cl">${esc(label)}</span></div>
     </div>
-    <ul class="capital-legende">${items.map((it,i)=>`<li data-seg="${i}" tabindex="0"><i style="background:${shades[i%shades.length]}"></i><span class="nm">${esc(it.name)}</span><span class="mt">${esc(eurC(it.v))}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>`).join("")}</ul>
+    <ul class="capital-legende">${items.map((it,i)=>`<li data-seg="${i}" tabindex="0"${it.sous?` class="groupe" data-act="cap-detail" aria-expanded="false"`:""}><i style="background:${it.c}"></i><span class="nm">${esc(it.name)}${it.sous?ico("chev"):""}</span><span class="mt">${esc(eurC(it.v))}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>${it.sous?`<li class="sous-liste"><ul>${it.sous.map(x=>`<li><span class="nm">${esc(x.name)}</span><span class="mt">${esc(eurC(x.v))}</span><b class="num">${Math.round(x.v/tot*100)} %</b></li>`).join("")}</ul></li>`:""}`).join("")}</ul>
   </div>
-  <p class="note une-ligne">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`;
+  ${o.compact?"":`<p class="note une-ligne">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`}`;
 }
 function capitalSurvol(e){
   const el=e.target instanceof Element?e.target:null;
@@ -1121,7 +1119,7 @@ function capitalSurvol(e){
     c.querySelectorAll("[data-seg]").forEach(x=>x.classList.toggle("on", x.dataset.seg===actif));
     const items=JSON.parse(c.dataset.items), it=actif!==null?items[+actif]:null;
     c.querySelector(".cv").textContent = it ? it.v : c.dataset.total;
-    c.querySelector(".cl").textContent = it ? `${it.n} · ${it.p} %` : "investis au total";
+    c.querySelector(".cl").textContent = it ? `${it.n} · ${it.p} %` : c.dataset.label;
   });
 }
 document.addEventListener("mouseover", capitalSurvol);
@@ -1329,7 +1327,8 @@ const ICO={
   cal:'<rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
   distrib:'<path d="M3 14.5h3.5l3.5 2.5h5.5a1.8 1.8 0 0 0 0-3.6H12"/><path d="M6.5 14.5V20H3"/><circle cx="16" cy="6.5" r="3"/>',
   tri:'<path d="M4 20h16"/><path d="M5.5 16l4.5-4.5 3 3L19 8.5"/><path d="M15 8.5h4v4"/>',
-  chev:'<path d="M6 9l6 6 6-6"/>'
+  chev:'<path d="M6 9l6 6 6-6"/>',
+  fleche:'<path d="M7 17L17 7"/><path d="M9 7h8v8"/>'
 };
 const ico = k => `<svg class="pf-ico" viewBox="0 0 24 24" aria-hidden="true">${ICO[k]}</svg>`;
 const nb = v => { if(typeof v==="number") return v; const n=parseFloat(String(v??"").replace(",",".").replace(/[^\d.\-]/g,"")); return isNaN(n)?null:n; };
@@ -1398,7 +1397,7 @@ function perfEssentiel(k){
   const t=[];
   if(has(k.nav)) t.push({ic:"nav",ton:"vert",lab:"Valeur des actifs",val:counter(k.nav/1e6,2,""," M€"),
     vis:has(k.raised)?duo(k.raised,`${esc(eurC(k.raised))} levés`,k.nav,`${esc(eurC(k.nav))} aujourd'hui`):"",
-    body:`<p>La valeur nette de tout ce que possède Greenpact, dettes déduites${date?`, au ${esc(date)}`:""}. Elle est indicative en cours d'année et certifiée chaque fin d'année dans le rapport annuel.</p>`});
+    body:`<p>La valeur nette de tout ce que possède Greenpact${date?`, au ${esc(date)}`:""}. Elle est indicative en cours d'année et certifiée chaque fin d'année dans le rapport annuel.</p>`});
   if(has(k.tvpi)) t.push({ic:"tvpi",ton:"bleu",lab:"Sur les sommes levées",abbr:"TVPI",val:counter(k.tvpi,2,"","x"),
     vis:duo(1,"1 € apporté",Number(k.tvpi),`${esc(fr(k.tvpi,2))} € aujourd'hui`),
     body:`<p>Chaque euro apporté par les actionnaires vaut aujourd'hui ${esc(fr(k.tvpi,2))} €.</p>${has(k.nav)&&has(k.raised)?calc(`${esc(eurC(k.nav))} d'actifs`,"÷",`${esc(eurC(k.raised))} levés`,`${esc(fr(k.tvpi,2))}x`):""}`});
@@ -1453,34 +1452,19 @@ const prevision = k => has(k.sharePriceForecast) ? Number(k.sharePriceForecast) 
    hors montants investis (rapport de performance 10/2026). */
 const ANTE_CREATION = 477000;
 
-/* Du capital levé à la valeur d'aujourd'hui : où est allé l'argent, ce qu'il vaut. */
+/* Où est allé le capital levé : l'anneau de la vue d'ensemble, complété des
+   postes qui ne sont pas des participations. */
 function perfParcours(k){
-  if(!has(k.raised)||!has(k.nav)) return "";
+  if(!has(k.raised)) return "";
   const pos=lignes(), sum=(l,f)=>l.reduce((s,h)=>s+(Number(h[f])||0),0);
   const inv=sum(pos.filter(h=>h.active!==false),"invested"), perte=sum(pos.filter(h=>h.active===false),"invested");
   const ante=has(k.anteCreation)?Number(k.anteCreation):ANTE_CREATION;
-  const reste=Math.max(0,k.raised-inv-perte-ante), port=sum(pos,"marketValue"), autres=Math.max(0,k.nav-port);
-  const mx=Math.max(k.raised,k.nav), gain=k.nav-k.raised;
-  const leve=[["Investi dans les participations",inv,"c1"],["Construction des studios, avant leur création",ante,"c2"],["Participation dépréciée",perte,"c3"],["Frais de gestion et réserves de la holding",reste,"c4"]].filter(s=>s[1]>0);
-  const vaut=[["Valeur des participations",port,"c1"],["Autres actifs, nets des dettes",autres,"c5"]].filter(s=>s[1]>0);
-  const pile=(segs,tot)=>`<span class="pf-pile" data-w="${(tot/mx*100).toFixed(1)}%">${segs.map(s=>`<i class="${s[2]}" style="flex:${s[1]}"></i>`).join("")}</span>`;
-  const legende=segs=>`<ul>${segs.map(s=>`<li><i class="${s[2]}"></i><span>${esc(s[0])}</span><b>${esc(eurC(s[1]))}</b></li>`).join("")}</ul>`;
-  return `<section class="sec" data-reveal><div class="sec-h"><h2>Du capital levé à la valeur d'aujourd'hui</h2></div>
-    <div class="pf-parcours panel">
-      <div class="pf-flux">
-        <div class="pf-flux-r"><span class="t">Capital levé</span>${pile(leve,k.raised)}<b>${esc(eurC(k.raised))}</b></div>
-        <div class="pf-flux-r"><span class="t">Valeur aujourd'hui</span>${pile(vaut,k.nav)}<b>${esc(eurC(k.nav))}</b></div>
-      </div>
-      <div class="pf-flux-leg">
-        <div><h3>Où est allé le capital levé</h3>${legende(leve)}</div>
-        <div><h3>Ce qu'il vaut aujourd'hui</h3>${legende(vaut)}
-          <div class="pf-gain"><span class="pf-pastille">${ico("part")}</span><div><b>${gain>=0?"+":"−"}${esc(eurC(Math.abs(gain)))}</b><span>de valeur créée pour les actionnaires${has(k.tvpi)?`, soit ${esc(fr(k.tvpi,2))}x le capital levé`:""}</span></div></div>
-        </div>
-      </div>
-      <details class="pf-pourquoi"><summary>Pourquoi le montant investi est inférieur au capital levé ${ico("chev")}</summary>
-        <p>Le capital levé ne va pas uniquement dans les participations. Une partie a financé la construction des studios avant leur création (Co-reno, Syscobat…), le fonctionnement de la holding et ses réserves. Le multiple sur les sommes investies (MOIC) ne porte que sur les participations ; la valeur créée pour les actionnaires se lit en rapportant la valeur des actifs au capital levé (TVPI).</p>
-      </details>
-    </div></section>`;
+  const reste=Math.max(0,k.raised-inv-perte-ante);
+  return `<section class="sec" data-reveal><div class="sec-h"><h2>Où est allé le capital levé</h2></div>
+    <div class="panel">${donut({compact:true,label:"levés au total",grouper:"Investi dans les participations",extra:[
+      {id:"ante",name:"Construction des studios",v:ante,c:"#c9a45c"},
+      {id:"deprecie",name:"Participation dépréciée",v:perte,c:"#bdb5a8"},
+      {id:"frais",name:"Frais de gestion et réserves",v:reste,c:"#8fb0c4"}]})}</div></section>`;
 }
 
 /* Levée en cours et horizon de rendement. */
@@ -1523,6 +1507,20 @@ function perfMethode(k){
 }
 
 /* ---------- Lectures ---------- */
+/* Liens des lectures de septembre 2026, utilisés tant que le champ « Lien » est vide. */
+const LIENS_LECTURES = {
+  "lecture-sept-2026-1":"https://hai.stanford.edu/ai-index/2026-ai-index-report",
+  "lecture-sept-2026-2":"https://www.laprocure.com/author/0-12712076/hazan-eric",
+  "lecture-sept-2026-3":"https://www.anthropic.com/research/labor-market-impacts",
+  "lecture-sept-2026-4":"https://www.oecd.org/en/publications/venture-capital-investments-in-artificial-intelligence-through-2025_a13752f5-en/full-report.html",
+  "lecture-sept-2026-5":"https://www.iea.org/reports/energy-and-ai",
+  "lecture-sept-2026-6":"https://www.senat.fr/rap/r25-949/r25-949-syn.pdf",
+  "lecture-sept-2026-7":"https://www.banquedesterritoires.fr/canicule-secheresse-incendies-le-bilan-climatique-hors-normes-de-lete-2026",
+  "lecture-sept-2026-8":"https://www.unep.org/resources/adaptation-gap-report-2025",
+  "lecture-sept-2026-9":"https://www.stockholmresilience.org/publications/publications/2025-11-25-planetary-health-check-2025-a-scientific-assessment-of-the-state-of-the-planet.html",
+  "lecture-sept-2026-10":"https://www.unep.org/resources/state-finance-nature-2026"
+};
+const lienLecture = a => safeUrl(a.url) || LIENS_LECTURES[a.id] || "";
 function vLectures(){
   const tags=[...new Set(S.articles.flatMap(a=>a.tags||[]))];
   const q=S.search.toLowerCase();
@@ -1530,7 +1528,7 @@ function vLectures(){
   return `<div class="head"><div><h1>Lectures</h1><p>Ce que l'équipe lit, et ce qu'elle en retient pour Greenpact.</p></div><button class="btn edit-only" data-act="new-articles">Ajouter une lecture</button></div>
   <div class="toolbar"><div class="seg" role="group" aria-label="Thèmes"><button data-act="tag" data-id="all" aria-pressed="${S.tag==="all"}">Tout</button>${tags.map(t=>`<button data-act="tag" data-id="${esc(t)}" aria-pressed="${S.tag===t}">${esc(t)}</button>`).join("")}</div>
   <input class="search" id="search" type="search" placeholder="Rechercher" value="${esc(S.search)}" aria-label="Rechercher"></div>
-  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${safeUrl(a.url)?`<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
+  ${list.length?`<div class="reads">${list.map(a=>`<article class="read-card${lienLecture(a)?" lien":""}"><span class="src">${esc(a.source||"")}${(a.tags||[])[0]?` · ${esc(a.tags[0])}`:""}</span><h3>${lienLecture(a)?`<a href="${esc(lienLecture(a))}" target="_blank" rel="noopener">${esc(a.title)}</a>`:esc(a.title)}</h3>${a.summary?`<p>${esc(a.summary)}</p>`:""}${a.memo?`<div class="memo"><b>Notre lecture</b>${esc(a.memo)}</div>`:""}${lienLecture(a)?`<span class="lire">Lire l'article ${ico("fleche")}</span>`:""}<button class="btn ghost small edit-only" style="align-self:flex-start;margin-top:auto" data-act="edit-articles" data-id="${esc(a.id)}">${a.memo?"Modifier":"Ajouter un mémo"}</button></article>`).join("")}</div>`:`<div class="empty">Aucune lecture ne correspond.</div>`}`;
 }
 
 /* ---------- Agenda (en bas de la vue d'ensemble) ---------- */
@@ -1660,6 +1658,7 @@ document.addEventListener("click", async e=>{
   if(act==="imp-fam"){ const f=S.impFam||[]; S.impFam = !id ? [] : (f.includes(id) ? f.filter(x=>x!==id) : [...f,id]); if(S.impFam.length===4) S.impFam=[]; S.animate=true; render(); return; }
   if(act==="imp-proof"){ S.impProof=id; S.animate=true; render(); return; }
   if(act==="flip"){ b.classList.toggle("on"); return; }
+  if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }
   if(act==="letter"){ const L=S.letter||{}; $("#modal-form").innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${esc(L.label||"")}</div><h2>${esc(L.title||"")}</h2><div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem">${(L.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${md(p)}</p>`).join("")}</div><div class="sign" style="margin-top:8px"><div class="faces"><img src="${ASSETS.people.laurent}" alt=""><img src="${ASSETS.people.emmanuel}" alt=""></div><div><b>${esc(L.signedBy||"")}</b><span style="color:var(--muted);font-size:.8rem">${esc(L.signedRole||"")}</span></div></div><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#f-cancel").onclick=()=>$("#modal").close(); $("#modal").showModal(); return; }
   if(act==="photo"){ S.photoFor=id; $("#photo-input").value=""; $("#photo-input").click(); return; }
@@ -1685,7 +1684,8 @@ document.addEventListener("click", async e=>{
     catch(err){ toast(err&&err.code==="not_granted"?"Rédaction automatique non autorisée.":"La proposition n'a pas abouti."); } finally{ b.disabled=false; } return; }
 });
 $("#drawer").addEventListener("click",e=>{ if(e.target===$("#drawer")) $("#drawer").close(); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.body.classList.remove("nav-open"); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.body.classList.remove("nav-open");
+  if((e.key==="Enter"||e.key===" ") && e.target instanceof Element && e.target.matches('[data-act="cap-detail"]')){ e.preventDefault(); e.target.click(); } });
 document.addEventListener("input",e=>{
   if(e.target.id==="search"){ S.search=e.target.value; const p=e.target.selectionStart; render(); const s=$("#search"); s.focus(); s.setSelectionRange(p,p); }
   if(e.target.id==="nl-intro"){ S.nlIntro=e.target.value; clearTimeout(S._pv); S._pv=setTimeout(updatePreview,300); }

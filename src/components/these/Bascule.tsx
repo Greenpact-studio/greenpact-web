@@ -43,7 +43,7 @@ export function Bascule() {
         const nombres = q<HTMLElement>("[data-nombre]");
         nombres.forEach((n) => (n.textContent = "0"));
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: q(`.${styles.projections}`)[0], start: "top 70%", end: "bottom 60%", scrub: 0.5 },
+          scrollTrigger: { trigger: q(`.${styles.projections}`)[0], start: "top 90%", end: "top 55%", scrub: 0.4 },
         });
         jauges.forEach((j, i) => {
           const n = nombres[i];

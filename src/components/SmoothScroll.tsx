@@ -44,12 +44,13 @@ export function SmoothScroll() {
       return;
     }
 
+    // Amorti léger : la page suit la molette presque immédiatement (lerp élevé),
+    // sans l'effet d'inertie lourd ressenti sur les souris Windows.
     const lenis = new Lenis({
-      duration: 1.4,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.16,
       smoothWheel: true,
       syncTouch: false,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 1,
     });
 
     lenisActif = lenis;

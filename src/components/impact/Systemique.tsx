@@ -52,8 +52,13 @@ export function Systemique() {
     <section ref={racine} className={`section ${styles.sys}`} aria-labelledby="sys-titre">
       <div className="conteneur">
         <div className={styles.tete}>
-          <h2 id="sys-titre">Au-delà de nos startups : un impact systémique.</h2>
-          <p className="sobre">Six leviers pour recalibrer un système entier plutôt qu&apos;une solution ponctuelle : l&apos;impact part d&apos;une entreprise et s&apos;étend jusqu&apos;à la communauté.</p>
+          <h2 id="sys-titre">
+            <span className={styles.ligne}>Au-delà de nos startups :</span> <span className={styles.ligne}>un impact systémique.</span>
+          </h2>
+          <p className="sobre">
+            <span className={styles.ligneTexte}>Six leviers pour recalibrer un système entier plutôt qu&apos;une solution ponctuelle :</span>{" "}
+            <span className={styles.ligneTexte}>l&apos;impact part d&apos;une entreprise et s&apos;étend jusqu&apos;à la communauté.</span>
+          </p>
         </div>
 
         <ol className={styles.leviers}>

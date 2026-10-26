@@ -40,7 +40,7 @@ export function CycleImpact() {
         const L = ligne.getTotalLength();
         gsap.set(ligne, { strokeDasharray: L, strokeDashoffset: L });
         const tl = gsap.timeline({
-          scrollTrigger: { trigger: q(`.${styles.frise}`)[0], start: "top 70%", end: "bottom 70%", scrub: 0.6 },
+          scrollTrigger: { trigger: q(`.${styles.frise}`)[0], start: "top 90%", end: "top 55%", scrub: 0.4 },
         });
         tl.to(ligne, { strokeDashoffset: 0, ease: "none", duration: 3 }, 0);
         q(`.${styles.phase}`).forEach((p, i) => {

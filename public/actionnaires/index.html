@@ -51,26 +51,18 @@ p{margin:0}
 /* Connexion (mode Supabase) : photo à gauche, formulaire à droite */
 #login{position:fixed;inset:0;z-index:40;display:grid;grid-template-columns:minmax(0,1fr) minmax(620px,1fr);background:var(--linen);color:var(--forest)}
 #login[hidden]{display:none}
-/* Photo de panneaux solaires, voilée de vert en haut (logo) et en bas (texte) */
+/* Photo de panneaux solaires, légèrement voilée en haut pour le logo */
 #login .visuel{position:relative;overflow:hidden;background:#0e2018 url("assets/brand/connexion-solaire.jpg") center 70%/cover no-repeat;color:var(--linen);display:flex;flex-direction:column;justify-content:space-between;padding:48px 56px}
-#login .visuel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.45) 0%,rgba(14,32,24,0) 26%,rgba(14,32,24,.45) 50%,rgba(14,32,24,.92) 78%)}
+#login .visuel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.45) 0%,rgba(14,32,24,0) 26%,rgba(14,32,24,0) 72%,rgba(14,32,24,.2) 100%)}
 #login .visuel>*{position:relative}
 #login .visuel img{width:190px}
-#login .adn{max-width:34rem;animation:fadein .9s .2s var(--ease) both}
-#login .adn-k{margin:0 0 10px;font-size:.82rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(237,234,228,.8)}
-#login .adn-t{margin:0;font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:500;line-height:1.25;letter-spacing:-.015em;max-width:20ch}
-#login .adn-piliers{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#login .adn-piliers li{padding:14px 14px 12px;border-radius:16px;background:rgba(237,234,228,.1);border:1px solid rgba(237,234,228,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;flex-direction:column;gap:4px}
-#login .adn-piliers b{font-weight:600;font-size:.98rem}
-#login .adn-piliers span{font-size:.82rem;line-height:1.4;color:rgba(237,234,228,.85)}
 #login .trouver{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+#login .trouver ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+#login .trouver li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+#login .trouver li:last-child{border-bottom:0}
+#login .trouver b{font-weight:600;white-space:nowrap}
+#login .trouver li span{color:var(--muted)}
 #login .trouver-t{margin:0 0 14px;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-#login .trouver ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
-#login .trouver li{display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:12px;align-items:start}
-#login .trouver .ic{grid-row:span 2;width:34px;height:34px;border-radius:11px;background:rgba(28,58,43,.08);display:grid;place-items:center}
-#login .trouver svg{width:18px;height:18px;fill:none;stroke:var(--forest);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-#login .trouver b{font-weight:600;font-size:.92rem;line-height:1.3}
-#login .trouver li>span:last-child{font-size:.84rem;line-height:1.45;color:var(--muted)}
 #login .panneau{display:grid;place-items:center;padding:48px 36px;overflow:auto}
 #login .box{width:min(33.5rem,100%);display:flex;flex-direction:column}
 #login .sur-titre{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
@@ -98,11 +90,9 @@ p{margin:0}
   #login .visuel{min-height:200px;padding:28px 24px}
   #login .visuel img{width:150px}
   #login .visuel{min-height:150px}
-  #login .adn{display:none}
   #login .panneau{place-items:start center;padding:36px 24px 48px}
   #login h1{font-size:1.9rem}
 }
-@media (max-width:560px){ #login .trouver ul{grid-template-columns:1fr} }
 .seal-card .logout{margin-top:10px;background:transparent;border:1px solid rgba(237,234,228,.3);color:var(--linen);border-radius:99px;padding:4px 12px;font-size:.74rem;cursor:pointer}
 .seal-card .logout[hidden]{display:none}
 #curtain{position:fixed;inset:0;z-index:50;background:var(--forest);display:grid;place-items:center;color:var(--linen);transition:transform 1s var(--ease)}
@@ -929,15 +919,6 @@ i.val{background:var(--ton,#2f6b4f)}
 <div id="login" hidden>
   <div class="visuel">
     <img id="login-logo" alt="Greenpact">
-    <div class="adn">
-      <p class="adn-k">Holding d'investissement à impact</p>
-      <p class="adn-t">Investir dans la transformation durable des entreprises.</p>
-      <ul class="adn-piliers">
-        <li><b>2 startup studios</b><span>Hoji, l'IA industrielle, et 4Elements, la deeptech</span></li>
-        <li><b>4 secteurs</b><span>Industrie, énergie, construction et agriculture</span></li>
-        <li><b>Un impact mesuré</b><span>Chaque année, startup par startup</span></li>
-      </ul>
-    </div>
   </div>
   <div class="panneau">
     <div class="box">
@@ -960,11 +941,11 @@ i.val{background:var(--ton,#2f6b4f)}
       <div class="trouver">
         <p class="trouver-t">Ce que vous y trouverez</p>
         <ul>
-          <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2.5"/><path d="M4 7.5l8 5.5 8-5.5"/></svg></span><b>Vue d'ensemble</b><span>La lettre des dirigeants et les faits marquants</span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12c0-4.4 3-7.5 8-7.5 0 5-3 7.5-8 7.5z"/><path d="M12 15c0-3.3-2.6-5.5-7-5.5 0 3.8 2.6 5.5 7 5.5z"/></svg></span><b>Portefeuille</b><span>La fiche et l'avancée de chaque participation</span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 17l5-5 4 4 7-8"/><path d="M15 8h5v5"/></svg></span><b>Performance</b><span>Le prix de la part et la valeur de chaque ligne</span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2"/></svg></span><b>Impact</b><span>Les indicateurs mesurés, avec leur niveau de preuve</span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/></svg></span><b>Lettres et agenda</b><span>Les lettres, nos lectures et les prochains rendez-vous</span></li>
+          <li><b>Vue d'ensemble</b><span>la lettre des dirigeants</span></li>
+          <li><b>Portefeuille</b><span>chaque participation en détail</span></li>
+          <li><b>Performance</b><span>le prix de la part</span></li>
+          <li><b>Impact</b><span>les résultats mesurés</span></li>
+          <li><b>Lettres et agenda</b><span>nos lectures et les rendez-vous</span></li>
         </ul>
       </div>
       <p class="acces">Pas encore d'accès ? Écrivez à <a href="mailto:Laurent@greenpact.fr">Laurent Geray</a>.</p>
@@ -1580,10 +1561,8 @@ function perfParcours(k){
   const reste=Math.max(0,k.raised-inv-perte-ante);
   // Frais de gestion : 2,5 % par an du montant visé à terme, depuis la création en 2021
   const cible=has(k.raisedTarget)?Number(k.raisedTarget):null, ans=(k.asOf?new Date(k.asOf).getFullYear():new Date().getFullYear())-2021+1;
-  const parAn=cible?cible*TAUX_FRAIS/100:null;
-  const detailFrais = cible ? `<p>Les frais de gestion représentent ${esc(fr(TAUX_FRAIS,1))} % par an du montant que Greenpact lèvera à terme (${esc(eurC(cible))}), depuis sa création en 2021. Ils financent l'équipe, la sélection et le suivi des participations, et le reporting aux actionnaires.</p>
-    <div class="cap-calc"><span>${esc(fr(TAUX_FRAIS,1))} %</span><i>×</i><span>${esc(eurC(cible))}</span><i>=</i><b>${esc(eurC(parAn))} par an</b></div>
-    <div class="cap-calc"><span>${esc(eurC(parAn))}</span><i>×</i><span>${ans} ans, de 2021 à ${2021+ans-1}</span><i>≈</i><b>${esc(eurC(parAn*ans))}</b></div>` : "";
+  const detailFrais = cible ? `<p>${esc(fr(TAUX_FRAIS,1))} % par an des ${esc(eurC(cible))} que Greenpact lèvera à terme, depuis 2021.</p>
+    <div class="cap-calc"><span>${esc(fr(TAUX_FRAIS,1))} %</span><i>×</i><span>${esc(eurC(cible))}</span><i>×</i><span>${ans} ans</span><i>≈</i><b>${esc(eurC(reste))}</b></div>` : "";
   return `<section class="sec" data-reveal><div class="sec-h"><h2>Où est allé le capital levé</h2></div>
     <div class="panel">${donut({compact:true,label:"levés au total",grouper:"Investi dans les participations",extra:[
       {id:"ante",name:"Construction des studios",v:ante,c:"#c9a45c"},

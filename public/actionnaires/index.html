@@ -107,6 +107,9 @@ p{margin:0}
 
 /* Shell */
 .shell{position:relative;display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+/* La marge verte descend jusqu'en bas de la page, même quand on défile au-delà du menu */
+@media (min-width:861px){.shell{background:linear-gradient(90deg,var(--forest) 268px,transparent 268px)}}
+#scrim{display:none}
 .side{position:sticky;top:0;height:100vh;background:var(--forest);color:var(--linen);display:flex;flex-direction:column;padding:30px 22px 24px;overflow:hidden}
 .side .brand-logo{display:block;width:178px;height:auto;max-width:100%;margin:2px 4px 6px}
 .side .tag{font-size:.78rem;color:rgba(237,234,228,.6);margin:0 4px 34px}
@@ -927,7 +930,7 @@ i.val{background:var(--ton,#2f6b4f)}
         <h1>Connexion</h1>
         <p class="intro"><span>Saisissez l'adresse e-mail que vous avez communiquée à Greenpact.</span> <span>Vous recevrez un lien de connexion, valable une heure.</span></p>
         <label for="login-email">Adresse e-mail</label>
-        <input id="login-email" type="email" autocomplete="email" required placeholder="prenom.nom@exemple.fr">
+        <input id="login-email" type="email" autocomplete="off" required placeholder="prenom.nom@exemple.fr">
         <button type="submit" class="envoyer" id="login-btn">Recevoir mon lien de connexion</button>
         <div class="msg" id="login-msg" role="alert"></div>
       </form>

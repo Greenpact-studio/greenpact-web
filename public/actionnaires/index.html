@@ -51,16 +51,23 @@ p{margin:0}
 /* Connexion (mode Supabase) : photo à gauche, formulaire à droite */
 #login{position:fixed;inset:0;z-index:40;display:grid;grid-template-columns:minmax(0,1fr) minmax(620px,1fr);background:var(--linen);color:var(--forest)}
 #login[hidden]{display:none}
-#login .visuel{position:relative;background:#0e2018 url("assets/impact/hero.jpg") center/cover no-repeat;color:var(--linen);display:flex;flex-direction:column;justify-content:space-between;padding:48px 56px}
-#login .visuel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.55) 0%,rgba(14,32,24,.05) 40%,rgba(14,32,24,.6) 100%)}
+/* Photo de panneaux solaires, légèrement voilée en haut pour le logo */
+#login .visuel{position:relative;overflow:hidden;background:#0e2018 url("assets/brand/connexion-solaire.jpg") center 70%/cover no-repeat;color:var(--linen);display:flex;flex-direction:column;justify-content:space-between;padding:48px 56px}
+#login .visuel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,32,24,.45) 0%,rgba(14,32,24,0) 26%,rgba(14,32,24,0) 72%,rgba(14,32,24,.2) 100%)}
 #login .visuel>*{position:relative}
 #login .visuel img{width:190px}
-#login .visuel p{margin:0;font-size:1.35rem;font-weight:300;line-height:1.4;max-width:22ch}
+#login .trouver{margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+#login .trouver ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+#login .trouver li{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+#login .trouver li:last-child{border-bottom:0}
+#login .trouver b{font-weight:600;white-space:nowrap}
+#login .trouver li span{color:var(--muted)}
+#login .trouver-t{margin:0 0 14px;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 #login .panneau{display:grid;place-items:center;padding:48px 36px;overflow:auto}
 #login .box{width:min(33.5rem,100%);display:flex;flex-direction:column}
 #login .sur-titre{font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
 #login h1{font-size:2.3rem;font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 16px}
-#login .intro{margin:0 0 36px;color:var(--muted);font-size:.95rem;line-height:1.7}
+#login .intro{margin:0 0 28px;color:var(--muted);font-size:.95rem;line-height:1.7}
 #login .intro span{display:block}
 #login label{font-size:.82rem;font-weight:500;margin-bottom:8px}
 #login input{width:100%;padding:15px 16px;border-radius:12px;border:1px solid rgba(28,58,43,.22);background:#fff;color:var(--forest);font-size:1rem;transition:border-color .2s,box-shadow .2s}
@@ -70,7 +77,7 @@ p{margin:0}
 #login button[disabled]{opacity:.6;cursor:default}
 #login .msg{margin-top:14px;font-size:.88rem;color:#a04a2c}
 #login .msg:empty{display:none}
-#login .acces{margin:40px 0 0;padding-top:22px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+#login .acces{margin:26px 0 0;padding-top:22px;border-top:1px solid var(--line);font-size:.9rem;color:var(--muted)}
 #login .acces a{color:var(--forest);font-weight:500;text-underline-offset:3px}
 #login .envoye{display:flex;flex-direction:column}
 #login .envoye[hidden]{display:none}
@@ -83,7 +90,6 @@ p{margin:0}
   #login .visuel{min-height:200px;padding:28px 24px}
   #login .visuel img{width:150px}
   #login .visuel{min-height:150px}
-  #login .visuel p{display:none}
   #login .panneau{place-items:start center;padding:36px 24px 48px}
   #login h1{font-size:1.9rem}
 }
@@ -854,6 +860,11 @@ i.val{background:var(--ton,#2f6b4f)}
 .capital-legende li.sous-liste .nm{font-weight:400}
 .capital-legende li.sous-liste b{text-align:right;font-size:.95rem;font-weight:500}
 .capital.survol .capital-legende li.sous-liste{opacity:.45}
+.cap-explic{padding:4px 12px 8px;font-size:.92rem;line-height:1.6}
+.cap-explic p{margin:0 0 10px}
+.cap-calc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;padding:10px 14px;border-radius:12px;background:var(--wash)}
+.cap-calc i{font-style:normal;font-weight:600;color:var(--muted)}
+.cap-calc b{font-weight:600}
 /* Levée et horizon */
 .pf-cartes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .pf-carte{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,2.6vw,30px)}
@@ -908,7 +919,6 @@ i.val{background:var(--ton,#2f6b4f)}
 <div id="login" hidden>
   <div class="visuel">
     <img id="login-logo" alt="Greenpact">
-    <p>Investir dans la transformation durable des entreprises.</p>
   </div>
   <div class="panneau">
     <div class="box">
@@ -927,6 +937,16 @@ i.val{background:var(--ton,#2f6b4f)}
         <h1>Vérifiez votre boîte mail</h1>
         <p class="intro">Un lien de connexion a été envoyé à <b id="login-adresse"></b>. Il est valable une heure. S'il n'apparaît pas, regardez dans les indésirables.</p>
         <button type="button" class="lien-retour" id="login-retour">Utiliser une autre adresse</button>
+      </div>
+      <div class="trouver">
+        <p class="trouver-t">Ce que vous y trouverez</p>
+        <ul>
+          <li><b>Vue d'ensemble</b><span>la lettre des dirigeants</span></li>
+          <li><b>Portefeuille</b><span>chaque participation en détail</span></li>
+          <li><b>Performance</b><span>le prix de la part</span></li>
+          <li><b>Impact</b><span>les résultats mesurés</span></li>
+          <li><b>Lettres et agenda</b><span>nos lectures et les rendez-vous</span></li>
+        </ul>
       </div>
       <p class="acces">Pas encore d'accès ? Écrivez à <a href="mailto:Laurent@greenpact.fr">Laurent Geray</a>.</p>
     </div>
@@ -1182,7 +1202,7 @@ function donut(o={}){
       <svg class="donut" viewBox="0 0 300 300" role="img" aria-label="Répartition des montants investis">${segs}</svg>
       <div class="capital-centre" aria-live="polite"><b class="cv">${esc(eurC(tot))}</b><span class="cl">${esc(label)}</span></div>
     </div>
-    <ul class="capital-legende">${items.map((it,i)=>`<li data-seg="${i}" tabindex="0"${it.sous?` class="groupe" data-act="cap-detail" aria-expanded="false"`:""}><i style="background:${it.c}"></i><span class="nm">${esc(it.name)}${it.sous?ico("chev"):""}</span><span class="mt">${esc(eurC(it.v))}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>${it.sous?`<li class="sous-liste"><ul>${it.sous.map(x=>`<li><span class="nm">${esc(x.name)}</span><span class="mt">${esc(eurC(x.v))}</span><b class="num">${Math.round(x.v/tot*100)} %</b></li>`).join("")}</ul></li>`:""}`).join("")}</ul>
+    <ul class="capital-legende">${items.map((it,i)=>{ const ouvrable=it.sous||it.detail; return `<li data-seg="${i}" tabindex="0"${ouvrable?` class="groupe" data-act="cap-detail" aria-expanded="false"`:""}><i style="background:${it.c}"></i><span class="nm">${esc(it.name)}${ouvrable?ico("chev"):""}</span><span class="mt">${esc(eurC(it.v))}</span><b class="num">${Math.round(it.v/tot*100)} %</b></li>${it.sous?`<li class="sous-liste"><ul>${it.sous.map(x=>`<li><span class="nm">${esc(x.name)}</span><span class="mt">${esc(eurC(x.v))}</span><b class="num">${Math.round(x.v/tot*100)} %</b></li>`).join("")}</ul></li>`:it.detail?`<li class="sous-liste"><div class="cap-explic">${it.detail}</div></li>`:""}`; }).join("")}</ul>
   </div>
   ${o.compact?"":`<p class="note une-ligne">Montants investis par Greenpact depuis sa création, par ligne. Les studios réinvestissent ensuite dans leurs propres startups.</p>`}`;
 }
@@ -1528,6 +1548,8 @@ const prevision = k => has(k.sharePriceForecast) ? Number(k.sharePriceForecast) 
 /* Coûts anté-création (Co-reno, Syscobat…) engagés avant la création des studios,
    hors montants investis (rapport de performance 10/2026). */
 const ANTE_CREATION = 477000;
+/* Taux annuel des frais de gestion, en % du montant visé à terme. */
+const TAUX_FRAIS = 2.5;
 
 /* Où est allé le capital levé : l'anneau de la vue d'ensemble, complété des
    postes qui ne sont pas des participations. */
@@ -1537,11 +1559,15 @@ function perfParcours(k){
   const inv=sum(pos.filter(h=>h.active!==false),"invested"), perte=sum(pos.filter(h=>h.active===false),"invested");
   const ante=has(k.anteCreation)?Number(k.anteCreation):ANTE_CREATION;
   const reste=Math.max(0,k.raised-inv-perte-ante);
+  // Frais de gestion : 2,5 % par an du montant visé à terme, depuis la création en 2021
+  const cible=has(k.raisedTarget)?Number(k.raisedTarget):null, ans=(k.asOf?new Date(k.asOf).getFullYear():new Date().getFullYear())-2021+1;
+  const detailFrais = cible ? `<p>${esc(fr(TAUX_FRAIS,1))} % par an des ${esc(eurC(cible))} que Greenpact lèvera à terme, depuis 2021.</p>
+    <div class="cap-calc"><span>${esc(fr(TAUX_FRAIS,1))} %</span><i>×</i><span>${esc(eurC(cible))}</span><i>×</i><span>${ans} ans</span><i>≈</i><b>${esc(eurC(reste))}</b></div>` : "";
   return `<section class="sec" data-reveal><div class="sec-h"><h2>Où est allé le capital levé</h2></div>
     <div class="panel">${donut({compact:true,label:"levés au total",grouper:"Investi dans les participations",extra:[
       {id:"ante",name:"Construction des studios",v:ante,c:"#c9a45c"},
       {id:"deprecie",name:"Participation dépréciée",v:perte,c:"#bdb5a8"},
-      {id:"frais",name:"Frais de gestion et réserves",v:reste,c:"#8fb0c4"}]})}</div></section>`;
+      {id:"frais",name:"Frais de gestion et réserves",v:reste,c:"#8fb0c4",detail:detailFrais}]})}</div></section>`;
 }
 
 /* Levée en cours et horizon de rendement. */

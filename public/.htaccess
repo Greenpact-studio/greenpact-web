@@ -32,6 +32,8 @@ ErrorDocument 404 /404.html
   RewriteRule ^nos-defis/?$ https://www.greenpact.fr/these-impact/ [R=301,L]
   RewriteRule ^comment/?$ https://www.greenpact.fr/ [R=301,L]
   RewriteRule ^contact/?$ https://www.greenpact.fr/devenir-investisseur/ [R=301,L]
+  # L'ancienne page de présentation de l'espace investisseur mène à la connexion.
+  RewriteRule ^espace-investisseur/?$ https://www.greenpact.fr/actionnaires/ [R=301,L]
   # Plus de WordPress : ses pages d'administration renvoient à l'accueil.
   RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php) https://www.greenpact.fr/ [R=301,L]
 </IfModule>

@@ -92,8 +92,7 @@
     background-color 0.3s var(--ease),
     color 0.3s var(--ease);
 }
-.plein .espace:hover,
-.plein .espaceActif {
+.plein .espace:hover {
   background: var(--vert);
   color: var(--clair);
 }

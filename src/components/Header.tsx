@@ -68,10 +68,11 @@ export function Header() {
           </ul>
         </nav>
 
-        <Link href={ESPACE_INVESTISSEUR.href} className={`${styles.espace} ${actif(ESPACE_INVESTISSEUR.href) ? styles.espaceActif : ""}`} aria-current={actif(ESPACE_INVESTISSEUR.href) ? "page" : undefined}>
+        {/* L'espace est une application à part (public/actionnaires/) : lien classique, pas de navigation Next. */}
+        <a href={ESPACE_INVESTISSEUR.href} className={styles.espace}>
           <Cadenas />
           {ESPACE_INVESTISSEUR.label}
-        </Link>
+        </a>
 
         <button
           type="button"
@@ -96,9 +97,7 @@ export function Header() {
             </li>
           ))}
           <li style={{ transitionDelay: `${80 + NAV.length * 40}ms` }}>
-            <Link href={ESPACE_INVESTISSEUR.href} aria-current={actif(ESPACE_INVESTISSEUR.href) ? "page" : undefined}>
-              {ESPACE_INVESTISSEUR.label}
-            </Link>
+            <a href={ESPACE_INVESTISSEUR.href}>{ESPACE_INVESTISSEUR.label}</a>
           </li>
         </ul>
       </div>

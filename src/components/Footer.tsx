@@ -23,9 +23,9 @@ export function Footer() {
               </li>
             ))}
             <li>
-              <Link href={ESPACE_INVESTISSEUR.href} className="lien">
+              <a href={ESPACE_INVESTISSEUR.href} className="lien">
                 {ESPACE_INVESTISSEUR.label}
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>

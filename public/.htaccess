@@ -24,6 +24,10 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Une seule adresse canonique : https://www.greenpact.fr (certificat OVH Let's Encrypt).
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.greenpact\.fr$ [NC]
+  RewriteRule ^(.*)$ https://www.greenpact.fr/$1 [R=301,L]
   # Anciennes adresses WordPress → nouvelles pages.
   RewriteRule ^notre-equipe/?$ https://www.greenpact.fr/equipe/ [R=301,L]
   RewriteRule ^nos-realisations/?$ https://www.greenpact.fr/portfolio/ [R=301,L]

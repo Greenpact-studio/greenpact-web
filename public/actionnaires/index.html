@@ -614,6 +614,7 @@ dialog::backdrop{background:rgba(14,32,24,.5);backdrop-filter:blur(2px)}
 @media (prefers-reduced-motion: reduce){.hz-fond{animation:none}}
 /* Documents */
 .docs{display:flex;flex-direction:column;gap:12px}
+.head+.docs-sec{margin-top:0}
 .doc{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;width:100%;padding:18px 22px;border-radius:18px;border:1px solid var(--line);background:var(--surface);color:inherit;font:inherit;text-align:left;cursor:pointer;transition:border-color .25s,box-shadow .25s,transform .25s var(--ease)}
 .doc:hover{border-color:var(--ink);box-shadow:0 14px 34px -24px rgba(14,32,24,.5);transform:translateY(-2px)}
 .doc-ic{position:relative;width:46px;height:54px;display:grid;place-items:center;color:var(--ink)}
@@ -733,7 +734,17 @@ label textarea{min-height:96px;resize:vertical}
 .form-actions{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(10px);background:var(--forest);color:var(--linen);padding:10px 18px;border-radius:99px;font-size:.86rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60}
 .toast.show{opacity:1;transform:translateX(-50%)}
-.foot{margin-top:70px;padding-top:20px;border-top:1px solid var(--line);font-size:.74rem;color:var(--faint);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot{margin-top:70px;padding:22px 0 8px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted);display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;flex-wrap:wrap}
+.foot-l{display:flex;align-items:center;gap:12px}
+.foot-logo{height:14px;width:auto;opacity:.75}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .foot-logo{content:url("assets/brand/greenpact-light.png")}}
+:root[data-theme="dark"] .foot-logo{content:url("assets/brand/greenpact-light.png")}
+.foot-mentions{max-width:46ch}
+.foot-mentions summary{list-style:none;cursor:pointer;text-align:right;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.foot-mentions summary::-webkit-details-marker{display:none}
+.foot-mentions summary:hover{color:var(--ink)}
+.foot-mentions p{margin:8px 0 0;font-size:.78rem;line-height:1.55;color:var(--muted);text-align:right}
+@media (max-width:600px){.foot-mentions summary,.foot-mentions p{text-align:left}}
 
 /* Responsive */
 @media (max-width:1100px){
@@ -858,7 +869,7 @@ i.val{background:var(--ton,#2f6b4f)}
 .pf-nom span{font-size:.9rem}
 .pf-barres{display:flex;flex-direction:column;gap:6px}
 .pf-barres i{display:block;height:9px;width:0;border-radius:99px;transition:width 1.2s var(--ease) .25s}
-.pf-barres i.val{background:var(--c)}
+.pf-barres i.val{background:var(--ink)}
 .pf-mult{justify-self:end;padding:5px 11px;border-radius:99px;font-weight:600;font-size:.95rem;background:var(--wash)}
 .pf-mult.hausse{background:#dfe9df;color:#2f6b4f}
 .pf-mult.baisse{background:#f3dfd6;color:#9a4127}
@@ -972,7 +983,7 @@ i.val{background:var(--ton,#2f6b4f)}
         <p class="trouver-t">Ce que vous y trouverez</p>
         <ul>
           <li><b>Vue d'ensemble</b><span>la lettre des dirigeants</span></li>
-          <li><b>Portefeuille</b><span>chaque participation en détail</span></li>
+          <li><b>Portefeuille & news</b><span>chaque participation et ses actualités</span></li>
           <li><b>Performance</b><span>le prix de la part</span></li>
           <li><b>Impact</b><span>les résultats mesurés</span></li>
           <li><b>Lettres et agenda</b><span>nos lectures et les rendez-vous</span></li>
@@ -1002,7 +1013,10 @@ i.val{background:var(--ton,#2f6b4f)}
       <div class="edit-only flex" style="gap:8px"><button class="btn ghost small" data-act="new-news">Publier une nouvelle</button></div>
     </div>
     <div id="app"></div>
-    <div class="foot"><span>Greenpact SAS, Lyon. Document marketing non réglementaire. Les performances passées ne préjugent pas des performances futures ; tout investissement comporte un risque de perte en capital.</span><span>Confidentiel</span></div>
+    <footer class="foot">
+      <div class="foot-l"><img src="assets/brand/greenpact-dark.png" alt="Greenpact" class="foot-logo"><span>Espace réservé aux actionnaires de Greenpact</span></div>
+      <details class="foot-mentions"><summary>Mentions légales</summary><p>Greenpact SAS, Lyon. Document d'information non réglementaire. Les performances passées ne préjugent pas des performances futures et tout investissement comporte un risque de perte en capital.</p></details>
+    </footer>
   </main>
 </div>
 
@@ -1020,7 +1034,7 @@ const ASSETS = {"logo_light": "assets/brand/greenpact-light.png", "logo_dark": "
 
 const SECTIONS = [
   {id:"apercu", label:"Vue d'ensemble"},
-  {id:"portefeuille", label:"Portefeuille"},
+  {id:"portefeuille", label:"Portefeuille & news"},
   {id:"performance", label:"Performance"},
   {id:"impact", label:"Impact"},
   {id:"lettres", label:"Lettres et lectures"},
@@ -1153,7 +1167,7 @@ function vApercu(){
     has(k.tvpi)&&`<a class="hz-tuile" href="#performance" style="--d:.45s"><span class="hz-lab">${ico("tvpi")}Valeur créée<span class="hz-va">${ico("fleche")}</span></span><span class="hz-val">${counter(k.tvpi,2,"","x")}</span><span class="hz-sous">1 € apporté vaut aujourd'hui ${esc(fr(k.tvpi,2))} €</span></a>`,
     levee!==null&&`<a class="hz-tuile" href="#performance" style="--d:.55s"><span class="hz-lab">${ico("cible")}Levée en cours<span class="hz-va">${ico("fleche")}</span></span><span class="hz-val">${counter(Math.round(levee*100),0,""," %")}</span><span class="hz-jauge"><i data-w="${(levee*100).toFixed(1)}%"></i></span><span class="hz-sous">${esc(eurC(k.raised))} sur ${esc(eurC(k.raisedTarget))}</span></a>`
   ].filter(Boolean).join("");
-  const explorer=[["#portefeuille","moic","Portefeuille"],["#performance","part","Performance"],["#impact","cible","Impact"],["#lettres","lettre","Lettres et lectures"]];
+  const explorer=[["#portefeuille","moic","Portefeuille & news"],["#performance","part","Performance"],["#impact","cible","Impact"],["#lettres","lettre","Lettres et lectures"]];
   const letter = `
   <section class="hz" data-reveal>
     <div class="hz-fond" aria-hidden="true"></div>
@@ -1297,7 +1311,7 @@ function vPortefeuille(){
   const byPhase = PHASES.map(([id,lab,desc])=>({id,lab,desc,items:all.filter(h=>h.phase===id)}));
   const max = Math.max(1,...byPhase.map(p=>p.items.length));
   return `
-  <div class="head"><div><h1>Portefeuille</h1></div>
+  <div class="head"><div><h1>Portefeuille & news</h1></div>
     <div class="edit-only flex" style="gap:8px;flex-wrap:wrap"><button class="btn ghost" data-act="new-holdings">Ajouter une participation</button></div></div>
   <section>
     <div class="sec-h"><h2>Où en sont les entreprises</h2></div>
@@ -1619,7 +1633,7 @@ function perfHorizon(k){
   const etapes=[
     has(k.sharePriceNow)&&[ico("cal"),an||"Aujourd'hui",`Part à ${fr(k.sharePriceNow,2)} €`],
     /^\d{4}$/.test(String(an))&&[ico("part"),String(Number(an)+1),`${prev>=0?"+":"−"}${fr(Math.abs(prev),0)} % visés sur le prix de la part`],
-    [ico("distrib"),"2028",`Premières distributions aux actionnaires${has(k.dpi)?` (DPI actuel : ${fr(k.dpi,2)}x)`:""}`]
+    [ico("distrib"),"2028","Premières distributions aux actionnaires"]
   ].filter(Boolean);
   cartes.push(`<div class="pf-carte">
     <h3>${ico("tri")}Rendement visé</h3>
@@ -1645,30 +1659,48 @@ function perfMethode(k){
    Fichiers du dossier privé « documents » de Supabase Storage, lisibles par les
    seuls actionnaires connectés (supabase/documents.sql). L'année est lue dans le
    nom du fichier : déposer un PDF dans le dossier suffit à l'afficher ici. */
-function docTitre(nom){ const an=(String(nom).match(/20\d\d/g)||[]).pop(); return { an, titre: an?`Comptes annuels ${an}`:String(nom).replace(/\.pdf$/i,"").replace(/[_-]+/g," ") }; }
+const MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const DOC_CATS=[
+  {id:"performance", titre:"Rapports de performance", test:/perf/i, nom:"Rapport de performance"},
+  {id:"impact", titre:"Rapports d'impact", test:/impact/i, nom:"Rapport d'impact"},
+  {id:"comptes", titre:"Comptes annuels", test:/compt|plaquette|bilan|liasse/i, nom:"Comptes annuels"},
+  {id:"autres", titre:"Autres documents", test:/./, nom:""}
+];
+/* Catégorie, titre et date lus dans le nom du fichier
+   (ex. Rapport_Performance_10-2026.pdf, GREENPACT_Comptes_annuels_2025.pdf). */
+function docTitre(nom){
+  const n=String(nom), cat=DOC_CATS.find(c=>c.test.test(n));
+  const an=(n.match(/20\d\d/g)||[]).pop();
+  const mm=n.match(/(?:^|\D)(0?[1-9]|1[0-2])[ _.-]20\d\d(?!\d)/)||n.match(/20\d\d[ _.-](0?[1-9]|1[0-2])(?!\d)/);
+  const mois=mm&&cat.id!=="comptes"?MOIS[Number(mm[1])-1]:"";
+  const brut=n.replace(/\.pdf$/i,"").replace(/[_-]+/g," ");
+  const titre=cat.id==="comptes"&&an?`Comptes annuels ${an}`:cat.nom?(an?`${cat.nom} ${mois?mois+" ":""}${an}`:cat.nom):brut;
+  const sous=cat.id==="comptes"&&an?`Exercice clos le 31 décembre ${an}`:"";
+  return { cat:cat.id, an, cle:`${an||""}${mm?String(mm[1]).padStart(2,"0"):"00"}`, titre: titre.charAt(0).toUpperCase()+titre.slice(1), sous };
+}
 function vDocuments(){
   const head=`<div class="head"><div><h1>Documents</h1></div></div>`;
   if(!S.sb) return head+`<div class="empty">Les documents sont disponibles une fois connecté à l'espace.</div>`;
   if(S.docs===null){ chargerDocs(); return head+`<div class="empty">Chargement des documents…</div>`; }
   if(!S.docs.length) return head+`<div class="empty">Aucun document pour le moment.</div>`;
   const taille=o=>{ const n=Number(o&&o.size); return n?(n>=1e6?`${fr(n/1e6,1)} Mo`:`${Math.round(n/1e3)} ko`):""; };
-  return head+`<section data-reveal><div class="sec-h"><h2>Comptes annuels</h2></div>
-    <div class="docs">${S.docs.map(f=>{ const t=docTitre(f.name); return `<button class="doc" data-act="doc" data-id="${esc(f.name)}">
+  const carte=f=>{ const t=docTitre(f.name); return `<button class="doc" data-act="doc" data-id="${esc(f.name)}">
       <span class="doc-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><b>PDF</b></span>
-      <span class="doc-txt"><b>${esc(t.titre)}</b>${t.an?`<span>Exercice clos le 31 décembre ${esc(t.an)}</span>`:""}</span>
+      <span class="doc-txt"><b>${esc(t.titre)}</b>${t.sous?`<span>${esc(t.sous)}</span>`:""}</span>
       <span class="doc-dl">${taille(f.metadata)?`<em class="nuance">${esc(taille(f.metadata))}</em>`:""}<span class="doc-btn">Télécharger <svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg></span></span>
-    </button>`; }).join("")}</div></section>`;
+    </button>`; };
+  return head+DOC_CATS.map(c=>{ const l=S.docs.filter(f=>docTitre(f.name).cat===c.id); return l.length?`<section class="sec docs-sec" data-reveal><div class="sec-h"><h2>${esc(c.titre)}</h2></div><div class="docs">${l.map(carte).join("")}</div></section>`:""; }).join("");
 }
 async function chargerDocs(){
   if(S.docsEnCours) return; S.docsEnCours=true;
   const { data, error } = await S.sb.storage.from("documents").list("", { limit:100, sortBy:{ column:"name", order:"desc" } });
   S.docsEnCours=false;
-  S.docs = error ? [] : (data||[]).filter(f=>f.name && !f.name.startsWith(".") && /\.pdf$/i.test(f.name)).sort((a,b)=>(docTitre(b.name).an||"").localeCompare(docTitre(a.name).an||""));
+  S.docs = error ? [] : (data||[]).filter(f=>f.name && !f.name.startsWith(".") && /\.pdf$/i.test(f.name)).sort((a,b)=>docTitre(b.name).cle.localeCompare(docTitre(a.name).cle));
   if(error) console.warn("Documents indisponibles", error);
   if(S.view==="documents") render();
 }
 async function telechargerDoc(nom){
-  const t=docTitre(nom), nomFichier=t.an?`Greenpact - Comptes annuels ${t.an}.pdf`:nom;
+  const t=docTitre(nom), nomFichier=t.cat!=="autres"?`Greenpact - ${t.titre}.pdf`:nom;
   const { data, error } = await S.sb.storage.from("documents").createSignedUrl(nom, 120, { download:nomFichier });
   if(error||!data){ toast("Le document n'a pas pu être ouvert."); return; }
   location.href=data.signedUrl;
@@ -1816,6 +1848,10 @@ function crud(coll,id){
 }
 
 /* ---------- Actions ---------- */
+/* Ouvre la fenêtre en haut de son contenu (le bouton Fermer, en bas, ne prend pas le focus). */
+function ouvrirEnHaut(){ const dlg=$("#modal"), f=$("#modal-form"); dlg.showModal(); f.setAttribute("tabindex","-1"); f.focus({preventScroll:true}); f.scrollTop=0; dlg.scrollTop=0; requestAnimationFrame(()=>{ f.scrollTop=0; dlg.scrollTop=0; }); }
+/* Un clic hors de la fenêtre (sur le fond assombri) la referme. */
+document.addEventListener("click", e=>{ const dlg=$("#modal"); if(e.target!==dlg || !dlg.open) return; const r=dlg.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close(); });
 document.addEventListener("click", async e=>{
   const b=e.target.closest("[data-act]"); if(!b) return;
   const act=b.dataset.act, id=b.dataset.id;
@@ -1832,7 +1868,7 @@ document.addEventListener("click", async e=>{
   if(act==="doc"){ if(S.sb) telechargerDoc(id); return; }
   if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }
-  if(act==="letter"){ const L=S.letter||{}; $("#modal-form").innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${esc(L.label||"")}</div><h2>${esc(L.title||"")}</h2><div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem">${(L.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${md(p)}</p>`).join("")}</div><div class="sign" style="margin-top:8px"><div class="faces"><img src="${ASSETS.people.laurent}" alt=""><img src="${ASSETS.people.emmanuel}" alt=""></div><div><b>${esc(L.signedBy||"")}</b><span style="color:var(--muted);font-size:.8rem">${esc(L.signedRole||"")}</span></div></div><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#f-cancel").onclick=()=>$("#modal").close(); $("#modal").showModal(); return; }
+  if(act==="letter"){ const L=S.letter||{}; $("#modal-form").innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${esc(L.label||"")}</div><h2>${esc(L.title||"")}</h2><div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem">${(L.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${md(p)}</p>`).join("")}</div><div class="sign" style="margin-top:8px"><div class="faces"><img src="${ASSETS.people.laurent}" alt=""><img src="${ASSETS.people.emmanuel}" alt=""></div><div><b>${esc(L.signedBy||"")}</b><span style="color:var(--muted);font-size:.8rem">${esc(L.signedRole||"")}</span></div></div><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#f-cancel").onclick=()=>$("#modal").close(); ouvrirEnHaut(); return; }
   if(act==="photo"){ S.photoFor=id; $("#photo-input").value=""; $("#photo-input").click(); return; }
   if(act.startsWith("new-")||act.startsWith("edit-")){
     if(!needDb()) return;
@@ -1848,7 +1884,7 @@ document.addEventListener("click", async e=>{
   if(act==="mark-sent"){ if(!needDb()) return; const c=sinceLast();
     if(!confirm("Archiver cette lettre comme envoyée aujourd'hui ?")) return;
     try{ await S.db.collection("editions").add({number:(S.editions[0]?.number||0)+1,type:S.nlType||defaultType(),sentAt:new Date().toISOString(),title:`Lettre du ${dFmt(new Date().toISOString(),{day:"numeric",month:"long"})}`,counts:`${c.news.length} nouvelle(s), ${c.articles.length} lecture(s), ${Math.min(c.events.length,4)} rendez-vous`,html:currentEmail()}); S.nlIntro=""; S.nlType=null; toast("Lettre archivée"); }catch(err){ toast(errMsg(err)); } return; }
-  if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; $("#modal-form").innerHTML=`<h2>${esc(ed.title||"")}</h2><iframe class="preview" sandbox="" title="Lettre archivée"></iframe><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#modal-form iframe").srcdoc=ed.html||""; $("#f-cancel").onclick=()=>$("#modal").close(); $("#modal").showModal(); return; }
+  if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; $("#modal-form").innerHTML=`<h2>${esc(ed.title||"")}</h2><iframe class="preview" sandbox="" title="Lettre archivée"></iframe><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#modal-form iframe").srcdoc=ed.html||""; $("#f-cancel").onclick=()=>$("#modal").close(); ouvrirEnHaut(); return; }
   if(act==="draft-intro"){ const c=sinceLast(), ta=$("#nl-intro"); b.disabled=true;
     const facts=[...c.news.map(n=>`Portefeuille, ${holdingName(n.holdingId)} : ${n.title}. ${n.body||""}`),...c.articles.map(a=>`Lecture : ${a.title}. ${a.memo||a.summary||""}`),...c.events.slice(0,3).map(e=>`Rendez-vous : ${e.title}, le ${dFmt(e.date)}`)].join("\n");
     const prompt=`Rédige l'édito d'une lettre envoyée aux actionnaires de Greenpact, holding d'investissement à impact. Signataires : Emmanuel Gonon (président) et Laurent Geray (directeur général). Lecteurs : investisseurs exigeants de 40 à 60 ans. Ton : sobre, direct, factuel. Interdits : superlatifs, formules creuses (« nous sommes ravis », « environnement stimulant », « dans un monde en mutation »), emoji, questions rhétoriques. Format : ${(S.nlType||defaultType())==="complète"?"100 à 140 mots, deux paragraphes":"50 à 80 mots, un paragraphe"}, en français, sans titre ni signature. N'invente aucun fait ni chiffre absent de la liste.\n\nNouveautés :\n${facts||"(aucune nouveauté : écris deux phrases brèves annonçant la suite)"}\n\nRéponds uniquement par le texte.`;
@@ -1878,13 +1914,16 @@ function sub(q,cb){ q.onSnapshot(s=>{ cb(s.docs.map(d=>({id:d.id,...d.data()})))
 function docSub(path,cb){ S.db.doc(path).onSnapshot(s=>{ cb(s.exists?s.data():null); scheduleRender(); },()=>{}); }
 
 /* Mode autonome (hors claude.ai) : lecture seule depuis data/seed.json */
+/* Événements ajoutés à l'agenda en attendant leur saisie dans la base (même id : pas de doublon). */
+const EVENEMENTS_AJOUTES=[{id:"cercle-visio-2026-11-10", date:"2026-11-10", time:"18h à 21h", place:"En visioconférence", title:"Cercle Greenpacter en visioconférence", description:"Pour celles et ceux qui n'ont pas pu assister à la présentation du 8 octobre au Chalet du Parc.", link:"", createdAt:"2026-10-28T09:00:00.000Z"}];
+const avecEvenementsAjoutes = l => l.concat(EVENEMENTS_AJOUTES.filter(e=>!l.some(x=>x.id===e.id)));
 /* Remplit l'état à partir d'un objet { collection: { id: données } } (seed.json ou Supabase). */
 function applyData(d){
     const arr=o=>Object.entries(o||{}).map(([id,v])=>({id,...v}));
     const by=(f,dir)=>(a,b)=>String(a[f]||"").localeCompare(String(b[f]||""))*(dir==="desc"?-1:1);
     S.holdings=arr(d.holdings).sort((a,b)=>(a.order||0)-(b.order||0));
     S.news=arr(d.news).sort(by("date","desc")); S.articles=arr(d.articles).sort(by("date","desc"));
-    S.events=arr(d.events).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
+    S.events=avecEvenementsAjoutes(arr(d.events)).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
     S.kpis=(d.finance||{}).kpis||null;
     S.settings=(d.config||{}).newsletter||null; S.letter=(d.content||{}).letter||null; S.static=true;
 }

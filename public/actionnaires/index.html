@@ -1740,7 +1740,7 @@ function agendaBlock(){
 }
 function vAgenda(){
   const t=todayISO(), up=S.events.filter(e=>(e.date||"")>=t), past=S.events.filter(e=>(e.date||"")<t).reverse().slice(0,6);
-  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${nuance(esc(e.place||""))}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">S'inscrire</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
+  const row=(e,p)=>{const d=new Date(e.date);return `<div class="event ${p?"past":""}"><div class="cal" aria-hidden="true"><div class="m">${esc(d.toLocaleDateString("fr-FR",{month:"short"}))}</div><div class="d">${d.getDate()}</div></div><div><h3>${esc(e.title)}</h3><p>${esc(dFmt(e.date,{weekday:"long",day:"numeric",month:"long"}))}${e.time?`, ${esc(e.time)}`:""}${nuance(esc(e.place||""))}</p>${e.description?`<p>${esc(e.description)}</p>`:""}</div><div class="acts" style="display:flex;gap:8px">${!p&&safeUrl(e.link)?`<a class="btn small" href="${esc(e.link)}" target="_blank" rel="noopener">${/meet\.google|zoom\.us|teams\.microsoft/i.test(e.link)?"Rejoindre la visio":"S'inscrire"}</a>`:""}<button class="btn ghost small edit-only" data-act="edit-events" data-id="${esc(e.id)}">Modifier</button></div></div>`;};
   return `<div class="head"><div><h1>Agenda</h1></div><button class="btn edit-only" data-act="new-events">Ajouter un événement</button></div>
   <div class="panel">${up.length?up.map(e=>row(e,false)).join(""):`<div class="empty" style="border:0">Aucun rendez-vous programmé pour le moment.</div>`}</div>
   ${past.length?`<section class="sec"><div class="sec-h"><h2>Passés</h2></div>${past.map(e=>row(e,true)).join("")}</section>`:""}`;
@@ -1915,8 +1915,8 @@ function docSub(path,cb){ S.db.doc(path).onSnapshot(s=>{ cb(s.exists?s.data():nu
 
 /* Mode autonome (hors claude.ai) : lecture seule depuis data/seed.json */
 /* Événements ajoutés à l'agenda en attendant leur saisie dans la base (même id : pas de doublon). */
-const EVENEMENTS_AJOUTES=[{id:"cercle-visio-2026-11-10", date:"2026-11-10", time:"18h à 21h", place:"En visioconférence", title:"Cercle Greenpacter en visioconférence", description:"Pour celles et ceux qui n'ont pas pu assister à la présentation du 8 octobre au Chalet du Parc.", link:"", createdAt:"2026-10-28T09:00:00.000Z"}];
-const avecEvenementsAjoutes = l => l.concat(EVENEMENTS_AJOUTES.filter(e=>!l.some(x=>x.id===e.id)));
+const EVENEMENTS_AJOUTES=[{id:"cercle-visio-2026-11-10", date:"2026-11-10", time:"18h à 21h", place:"En visioconférence", title:"Cercle Greenpacter en visioconférence", description:"Pour celles et ceux qui n'ont pas pu assister à la présentation du 8 octobre au Chalet du Parc.", link:"https://meet.google.com/htr-vcuv-ggz", createdAt:"2026-10-28T09:00:00.000Z"}];
+const avecEvenementsAjoutes = l => l.map(x=>{ const a=EVENEMENTS_AJOUTES.find(e=>e.id===x.id); return a&&!x.link?{...x,link:a.link}:x; }).concat(EVENEMENTS_AJOUTES.filter(e=>!l.some(x=>x.id===e.id)));
 /* Remplit l'état à partir d'un objet { collection: { id: données } } (seed.json ou Supabase). */
 function applyData(d){
     const arr=o=>Object.entries(o||{}).map(([id,v])=>({id,...v}));

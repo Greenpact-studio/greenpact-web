@@ -1547,10 +1547,10 @@ function perfEssentiel(k){
     body:`<p>La valeur nette de tout ce que possède Greenpact${date?`, au ${esc(date)}`:""}. Elle est indicative en cours d'année et certifiée chaque fin d'année dans le rapport annuel.</p>`});
   if(has(k.tvpi)) t.push({ic:"tvpi",ton:"bleu",lab:"Sur les sommes levées",abbr:"TVPI",val:counter(k.tvpi,2,"","x"),
     vis:duo(1,"1 € apporté",Number(k.tvpi),`${esc(fr(k.tvpi,2))} € aujourd'hui`),
-    body:`<p>Chaque euro apporté par les actionnaires vaut aujourd'hui ${esc(fr(k.tvpi,2))} €.</p>${has(k.nav)&&has(k.raised)?calc(`${esc(eurC(k.nav))} d'actifs`,"÷",`${esc(eurC(k.raised))} levés`,`${esc(fr(k.tvpi,2))}x`):""}`});
+    body:`<p>Chaque euro apporté par les actionnaires vaut aujourd'hui ${esc(fr(k.tvpi,2))} €, <b>trésorerie et créances comprises</b>.</p>${has(k.nav)&&has(k.raised)?calc(`${esc(eurC(k.nav))} d'actifs`,"÷",`${esc(eurC(k.raised))} levés`,`${esc(fr(k.tvpi,2))}x`):""}`});
   if(has(k.moic)) t.push({ic:"moic",ton:"sable",lab:"Sur les sommes investies",abbr:"MOIC",val:counter(k.moic,2,"","x"),
     vis:duo(1,"1 € investi",Number(k.moic),`${esc(fr(k.moic,2))} € aujourd'hui`),
-    body:`<p>Chaque euro investi dans les entreprises vaut aujourd'hui ${esc(fr(k.moic,2))} €, au vu de la valeur retenue de chaque participation.</p>${inv&&val?calc(`${esc(eurC(val))} de valeur`,"÷",`${esc(eurC(inv))} investis`,`${esc(fr(k.moic,2))}x`):""}`});
+    body:`<p>Chaque euro investi dans les entreprises vaut aujourd'hui ${esc(fr(k.moic,2))} €, au vu de la valeur retenue de chaque participation, <b>hors trésorerie</b>.</p>${inv&&val?calc(`${esc(eurC(val))} de valeur`,"÷",`${esc(eurC(inv))} investis`,`${esc(fr(k.moic,2))}x`):""}`});
   if(!t.length) return "";
   return `<section class="sec" data-reveal><div class="sec-h"><h2>L'essentiel</h2></div>
     <div class="pf-tuiles">${t.map(x=>`<details class="pf-tuile t-${x.ton}">

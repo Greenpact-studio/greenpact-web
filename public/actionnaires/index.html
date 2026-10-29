@@ -1061,7 +1061,7 @@ const GLOSS = {
 
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
-  holdings:[], news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
+  holdings:[], detentions:{}, news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
   sb:null, docs:null, view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
 };
 
@@ -1079,6 +1079,9 @@ const safeUrl = u => /^https?:\/\//i.test(u||"") ? u : "";
 function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2600); }
 const H = id => S.holdings.find(h=>h.id===id);
 const holdingName = id => (H(id)||{}).name || "Greenpact";
+/* Détention affichée : valeur synchronisée depuis Notion (collection « detentions »,
+   cf. scripts/sync-detentions.mjs), à défaut le texte saisi dans la fiche. */
+const detentionDe = h => (h && S.detentions[h.id] && S.detentions[h.id].affichage) || (h && h.stake) || "";
 const logoOf = id => ASSETS.logos[id] || null;
 const hasPhoto = h => !!(h && (h.photoId || (ASSETS.photos||{})[h.id]));
 const photoUrl = h => h && h.photoId ? "/_blob/"+h.photoId : null;
@@ -1222,7 +1225,7 @@ function treeBlock(){
       <div class="tree-stem"></div>
       <div class="tree-branches">
         ${branch("Participations directes", `${dir.length} participations`, dir)}
-        ${st.map(s=>branch(s.name, [s.kind||"Venture studio", s.stake||""], kids(s.id), s.id)).join("")}
+        ${st.map(s=>branch(s.name, [s.kind||"Venture studio", detentionDe(s)], kids(s.id), s.id)).join("")}
       </div>
     </div>
   </section>`;
@@ -1329,7 +1332,7 @@ function vPortefeuille(){
 function openDetail(id){
   const h=H(id); if(!h) return;
   if(h.vehicle==="fonds"){ S.pf=id; location.hash="#portefeuille"; if(S.view==="portefeuille") render(); return; }
-  const facts=[["Stade",h.stage],["Activité",h.revenue],["Équipe",h.team],["Création",h.year],["Détention",h.stake],
+  const facts=[["Stade",h.stage],["Activité",h.revenue],["Équipe",h.team],["Création",h.year],["Détention",detentionDe(h)],
     [h.parent&&h.vehicle==="startup"?`Investi par ${holdingName(h.parent)}`:"Investi par Greenpact", has(h.invested)?eur(h.invested):""],
     ["Valeur retenue",has(h.marketValue)?eur(h.marketValue):""],["Multiple",h.moic]].filter(f=>f[1]);
   const nws=actus().filter(n=>n.holdingId===h.id);
@@ -1564,7 +1567,7 @@ function perfLignes(){
   const ton = h => { const m=nb(h.moic); return m===null?"":m>1.005?"hausse":m<0.995?"baisse":"stable"; };
   const row = h => {
     const inv=Number(h.invested)||0, val=Number(h.marketValue)||0, diff=val-inv;
-    const faits=[["Investi par Greenpact",eur(inv)],["Valeur retenue",eur(val)],["Plus-value latente",`${diff>=0?"+":"−"}${eur(Math.abs(diff))}`],["Détention",h.stake],["Entrée au capital",h.year],["Méthode de valorisation",h.method]];
+    const faits=[["Investi par Greenpact",eur(inv)],["Valeur retenue",eur(val)],["Plus-value latente",`${diff>=0?"+":"−"}${eur(Math.abs(diff))}`],["Détention",detentionDe(h)],["Entrée au capital",h.year],["Méthode de valorisation",h.method]];
     if(h.fundMoic||h.fundTvpi) faits.push(["Performance du studio",[h.fundMoic&&`MOIC ${h.fundMoic}`,h.fundTvpi&&`TVPI ${h.fundTvpi}`].filter(Boolean).join(", ")]);
     const lien = h.vehicle==="fonds" ? `<button class="btn ghost small" data-act="pf" data-id="${esc(h.id)}">Voir les startups du studio</button>` : h.vehicle==="direct" && h.active!==false ? `<button class="btn ghost small" data-act="detail" data-id="${esc(h.id)}">Voir la fiche</button>` : "";
     return `<details class="pf-ligne ${h.active===false?"passee":""}" style="--c:${TEINTE_LIGNE[h.id]||"#3d6b52"}">
@@ -1803,7 +1806,7 @@ const FORMS = {
     ["proof","Niveau de preuve","select",false,[["",""],["Mesuré","Mesuré"],["Estimé","Estimé"],["Intention","Intention"]]],
     ["impactTheme","Famille d'impact","select",false,[["",""],["Décarboner la production","Décarboner la production"],["Consommer moins d'énergie","Consommer moins d'énergie"],["Boucler les cycles","Boucler les cycles"],["Adapter, transitionner","Adapter, transitionner"]]],
     ["stage","Stade (détail)","text"],["year","Année","text"],["revenue","Activité","text"],["team","Équipe","text"],["founders","Fondateurs","text"],
-    ["stake","Détention","text"],["invested","Montant investi (€)","number"],["marketValue","Valeur retenue (€)","number"],["moic","Multiple","text"],["method","Méthode de valorisation","text"],
+    ["stake","Détention","text",false,null,"Remplacée par la valeur Notion quand elle existe"],["invested","Montant investi (€)","number"],["marketValue","Valeur retenue (€)","number"],["moic","Multiple","text"],["method","Méthode de valorisation","text"],
     ["kind","Description courte du studio","text"],["fundMoic","MOIC du studio","text"],["fundTvpi","TVPI du studio","text"],["fundNote","Précision","text"],
     ["highlights","Dernières avancées","lines",false,null,"Une par ligne"],["kpis","Indicateurs suivis","lines",false,null,"Un par ligne"],
     ["dataAsOf","Données au","date"],["website","Site web","url"],["order","Ordre","number"]]},
@@ -1924,7 +1927,7 @@ function applyData(d){
     S.holdings=arr(d.holdings).sort((a,b)=>(a.order||0)-(b.order||0));
     S.news=arr(d.news).sort(by("date","desc")); S.articles=arr(d.articles).sort(by("date","desc"));
     S.events=avecEvenementsAjoutes(arr(d.events)).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
-    S.kpis=(d.finance||{}).kpis||null;
+    S.detentions=d.detentions||{}; S.kpis=(d.finance||{}).kpis||null;
     S.settings=(d.config||{}).newsletter||null; S.letter=(d.content||{}).letter||null; S.static=true;
 }
 async function loadSeed(){

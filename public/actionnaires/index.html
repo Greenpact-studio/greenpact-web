@@ -1038,7 +1038,8 @@ const SECTIONS = [
   {id:"performance", label:"Performance"},
   {id:"impact", label:"Impact"},
   {id:"lettres", label:"Lettres et lectures"},
-  {id:"documents", label:"Documents"}
+  {id:"documents", label:"Documents"},
+  {id:"mon-espace", label:"Mon espace"}
 ];
 // 5 rubriques : l'agenda est en bas de la vue d'ensemble, les lectures avec les
 // lettres. Les anciennes adresses mènent au bon endroit.
@@ -1062,7 +1063,7 @@ const GLOSS = {
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
   holdings:[], detentions:{}, news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
-  sb:null, docs:null, view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
+  sb:null, docs:null, perso:null, dossier:"", view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
 };
 
 /* Utils */
@@ -1109,7 +1110,7 @@ function route(){
 window.addEventListener("hashchange", route);
 
 function render(){
-  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments};
+  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments,"mon-espace":vMonEspace};
   const k=S.kpis||{};
   $("#stamp").innerHTML = k.asOf ? `Données au <b>${esc(dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
   const banner = S.ready && !S.db && !S.static ? `<div class="empty" style="margin-bottom:24px">Les données ne sont pas disponibles dans cette vue. Ouvrez l'espace depuis son lien en étant connecté.</div>` : "";
@@ -1672,8 +1673,8 @@ const DOC_CATS=[
 ];
 /* Catégorie, titre et date lus dans le nom du fichier
    (ex. Rapport_Performance_10-2026.pdf, GREENPACT_Comptes_annuels_2025.pdf). */
-function docTitre(nom){
-  const n=String(nom), cat=DOC_CATS.find(c=>c.test.test(n));
+function docTitre(nom, cats=DOC_CATS){
+  const n=String(nom), cat=cats.find(c=>c.test.test(n));
   const an=(n.match(/20\d\d/g)||[]).pop();
   const mm=n.match(/(?:^|\D)(0?[1-9]|1[0-2])[ _.-]20\d\d(?!\d)/)||n.match(/20\d\d[ _.-](0?[1-9]|1[0-2])(?!\d)/);
   const mois=mm&&cat.id!=="comptes"?MOIS[Number(mm[1])-1]:"";
@@ -1687,13 +1688,15 @@ function vDocuments(){
   if(!S.sb) return head+`<div class="empty">Les documents sont disponibles une fois connecté à l'espace.</div>`;
   if(S.docs===null){ chargerDocs(); return head+`<div class="empty">Chargement des documents…</div>`; }
   if(!S.docs.length) return head+`<div class="empty">Aucun document pour le moment.</div>`;
+  return head+DOC_CATS.map(c=>{ const l=S.docs.filter(f=>docTitre(f.name).cat===c.id); return l.length?`<section class="sec docs-sec" data-reveal><div class="sec-h"><h2>${esc(c.titre)}</h2></div><div class="docs">${l.map(f=>carteDoc(f,docTitre(f.name),"doc")).join("")}</div></section>`:""; }).join("");
+}
+function carteDoc(f,t,act){
   const taille=o=>{ const n=Number(o&&o.size); return n?(n>=1e6?`${fr(n/1e6,1)} Mo`:`${Math.round(n/1e3)} ko`):""; };
-  const carte=f=>{ const t=docTitre(f.name); return `<button class="doc" data-act="doc" data-id="${esc(f.name)}">
+  return `<button class="doc" data-act="${act}" data-id="${esc(f.name)}">
       <span class="doc-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg><b>PDF</b></span>
       <span class="doc-txt"><b>${esc(t.titre)}</b>${t.sous?`<span>${esc(t.sous)}</span>`:""}</span>
       <span class="doc-dl">${taille(f.metadata)?`<em class="nuance">${esc(taille(f.metadata))}</em>`:""}<span class="doc-btn">Télécharger <svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M5 20h14"/></svg></span></span>
-    </button>`; };
-  return head+DOC_CATS.map(c=>{ const l=S.docs.filter(f=>docTitre(f.name).cat===c.id); return l.length?`<section class="sec docs-sec" data-reveal><div class="sec-h"><h2>${esc(c.titre)}</h2></div><div class="docs">${l.map(carte).join("")}</div></section>`:""; }).join("");
+    </button>`;
 }
 async function chargerDocs(){
   if(S.docsEnCours) return; S.docsEnCours=true;
@@ -1706,6 +1709,39 @@ async function chargerDocs(){
 async function telechargerDoc(nom){
   const t=docTitre(nom), nomFichier=t.cat!=="autres"?`Greenpact - ${t.titre}.pdf`:nom;
   const { data, error } = await S.sb.storage.from("documents").createSignedUrl(nom, 120, { download:nomFichier });
+  if(error||!data){ toast("Le document n'a pas pu être ouvert."); return; }
+  location.href=data.signedUrl;
+}
+
+/* ---------- Mon espace ----------
+   Documents propres à chaque actionnaire, dans le dossier privé « personnel » de
+   Supabase Storage : un sous-dossier par adresse principale. Le serveur ne laisse
+   lire que son propre sous-dossier (supabase/espace-personnel.sql) ; une seconde
+   adresse (associé d'une même société) est rattachée au dossier principal. */
+const PERSO_CATS=[
+  {id:"attestation", titre:"Attestations de détention", test:/attest|parts/i, nom:"Attestation de détention de parts"},
+  {id:"performance", titre:"Performance individuelle", test:/perf/i, nom:"Rapport de performance individuelle"},
+  {id:"autres", titre:"Autres documents", test:/./, nom:""}
+];
+function vMonEspace(){
+  const head=`<div class="head"><div><h1>Mon espace</h1><p class="sub">Vos documents personnels. Ils ne sont visibles que par vous.</p></div></div>`;
+  if(!S.sb) return head+`<div class="empty">Vos documents sont disponibles une fois connecté à l'espace.</div>`;
+  if(S.perso===null){ chargerPerso(); return head+`<div class="empty">Chargement de vos documents…</div>`; }
+  if(!S.perso.length) return head+`<div class="empty">Vos documents personnels (attestation de détention de parts, rapport de performance individuelle) seront bientôt disponibles ici.</div>`;
+  return head+PERSO_CATS.map(c=>{ const l=S.perso.filter(f=>docTitre(f.name,PERSO_CATS).cat===c.id); return l.length?`<section class="sec docs-sec" data-reveal><div class="sec-h"><h2>${esc(c.titre)}</h2></div><div class="docs">${l.map(f=>carteDoc(f,docTitre(f.name,PERSO_CATS),"doc-perso")).join("")}</div></section>`:""; }).join("");
+}
+async function chargerPerso(){
+  if(S.persoEnCours) return; S.persoEnCours=true;
+  const { data:dossier, error:e1 } = await S.sb.rpc("mon_dossier_personnel");
+  const res = dossier ? await S.sb.storage.from("personnel").list(dossier, { limit:100, sortBy:{ column:"name", order:"desc" } }) : { data:[], error:e1 };
+  S.persoEnCours=false; S.dossier=dossier||"";
+  S.perso = res.error ? [] : (res.data||[]).filter(f=>f.name && !f.name.startsWith(".") && /\.pdf$/i.test(f.name)).sort((a,b)=>docTitre(b.name,PERSO_CATS).cle.localeCompare(docTitre(a.name,PERSO_CATS).cle));
+  if(res.error) console.warn("Documents personnels indisponibles", res.error);
+  if(S.view==="mon-espace") render();
+}
+async function telechargerPerso(nom){
+  const t=docTitre(nom,PERSO_CATS), nomFichier=t.cat!=="autres"?`Greenpact - ${t.titre}.pdf`:nom;
+  const { data, error } = await S.sb.storage.from("personnel").createSignedUrl(`${S.dossier}/${nom}`, 120, { download:nomFichier });
   if(error||!data){ toast("Le document n'a pas pu être ouvert."); return; }
   location.href=data.signedUrl;
 }
@@ -1870,6 +1906,7 @@ document.addEventListener("click", async e=>{
   if(act==="imp-proof"){ S.impProof=id; S.animate=true; render(); return; }
   if(act==="flip"){ b.classList.toggle("on"); return; }
   if(act==="doc"){ if(S.sb) telechargerDoc(id); return; }
+  if(act==="doc-perso"){ if(S.sb&&S.dossier) telechargerPerso(id); return; }
   if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }
   if(act==="letter"){ const L=S.letter||{}; $("#modal-form").innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${esc(L.label||"")}</div><h2>${esc(L.title||"")}</h2><div style="display:flex;flex-direction:column;gap:12px;font-size:.95rem">${(L.body||"").split(/\n+/).filter(Boolean).map(p=>`<p>${md(p)}</p>`).join("")}</div><div class="sign" style="margin-top:8px"><div class="faces"><img src="${ASSETS.people.laurent}" alt=""><img src="${ASSETS.people.emmanuel}" alt=""></div><div><b>${esc(L.signedBy||"")}</b><span style="color:var(--muted);font-size:.8rem">${esc(L.signedRole||"")}</span></div></div><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#f-cancel").onclick=()=>$("#modal").close(); ouvrirEnHaut(); return; }

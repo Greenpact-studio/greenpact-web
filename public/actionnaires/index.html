@@ -1270,7 +1270,8 @@ function capitalSurvol(e){
 document.addEventListener("mouseover", capitalSurvol);
 document.addEventListener("focusin", capitalSurvol);
 /* Actualités affichées partout dans l'espace : celles marquées « une » (les
-   faits marquants du moment). Sans aucune marquée, toutes les nouvelles. */
+   faits marquants du moment, ceux de la dernière newsletter). Sans aucune
+   marquée, toutes les nouvelles. Le filtre des entreprises ne s'y applique pas. */
 function actus(){ const une=S.news.filter(n=>n.une); return une.length?une:S.news; }
 /* Faits marquants : les quatre actualités choisies (champ « une »), en cartes. */
 function faitsMarquants(){
@@ -1327,7 +1328,7 @@ function vPortefeuille(){
     <div class="toolbar"><div class="seg" role="group" aria-label="Filtrer">${opts.map(o=>`<button data-act="pf" data-id="${esc(o[0])}" aria-pressed="${f===o[0]}">${esc(o[1])} <span style="opacity:.55">${o[2]}</span></button>`).join("")}</div></div>
     ${list.length?`<div class="grid">${list.map(coCard).join("")}</div>`:`<div class="empty">Aucune entreprise dans cette sélection.</div>`}
   </section>
-  <section class="sec"><div class="sec-h"><h2>Nouvelles du portefeuille</h2></div><div class="panel">${feedList(actus().filter(n=>f==="all"||n.holdingId===f||(H(n.holdingId)||{}).parent===f||(f==="direct"&&(H(n.holdingId)||{}).vehicle==="direct")))}</div></section>`;
+  <section class="sec"><div class="sec-h"><h2>Nouvelles du portefeuille</h2></div><div class="panel">${feedList(actus())}</div></section>`;
 }
 function openDetail(id){
   const h=H(id); if(!h) return;

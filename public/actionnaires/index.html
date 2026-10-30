@@ -1680,7 +1680,9 @@ function docTitre(nom, cats=DOC_CATS){
   const mois=mm&&cat.id!=="comptes"?MOIS[Number(mm[1])-1]:"";
   const brut=n.replace(/\.pdf$/i,"").replace(/[_-]+/g," ");
   const titre=cat.id==="comptes"&&an?`Comptes annuels ${an}`:cat.nom?(an?`${cat.nom} ${mois?mois+" ":""}${an}`:cat.nom):brut;
-  const sous=cat.id==="comptes"&&an?`Exercice clos le 31 décembre ${an}`:"";
+  // « …__Valorinet.pdf » : titulaire précisé quand une même personne a plusieurs attestations.
+  const titulaire=n.includes("__")?n.replace(/\.pdf$/i,"").split("__").pop().replace(/_+/g," "):"";
+  const sous=cat.id==="comptes"&&an?`Exercice clos le 31 décembre ${an}`:titulaire;
   return { cat:cat.id, an, cle:`${an||""}${mm?String(mm[1]).padStart(2,"0"):"00"}`, titre: titre.charAt(0).toUpperCase()+titre.slice(1), sous };
 }
 function vDocuments(){
@@ -1719,7 +1721,7 @@ async function telechargerDoc(nom){
    lire que son propre sous-dossier (supabase/espace-personnel.sql) ; une seconde
    adresse (associé d'une même société) est rattachée au dossier principal. */
 const PERSO_CATS=[
-  {id:"attestation", titre:"Attestations de détention", test:/attest|parts/i, nom:"Attestation de détention de parts"},
+  {id:"attestation", titre:"Attestations de détention", test:/attest|parts/i, nom:"Attestation de détention d'actions"},
   {id:"performance", titre:"Performance individuelle", test:/perf/i, nom:"Rapport de performance individuelle"},
   {id:"autres", titre:"Autres documents", test:/./, nom:""}
 ];

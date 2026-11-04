@@ -68,7 +68,7 @@ function positionsStartups(x: number, n: number) {
 /**
  * Section épinglée : le schéma se construit pendant que les quatre étapes se succèdent.
  * Un seul trait fin, deux couleurs, aucune ligne ne passe sur un texte.
- * Le défilement épinglé est court (≈ 1,5 écran). Sans animation (mobile ou
+ * Le défilement épinglé reste court (≈ 2,4 écrans). Sans animation (mobile ou
  * prefers-reduced-motion), les étapes sont empilées et le schéma est complet.
  */
 export function RecitModele() {
@@ -100,7 +100,7 @@ export function RecitModele() {
           scrollTrigger: {
             trigger: scene.current,
             start: "top top",
-            end: "+=" + Math.round(window.innerHeight * 1.5),
+            end: "+=" + Math.round(window.innerHeight * 2.4),
             pin: true,
             scrub: 0.5,
             anticipatePin: 1,
@@ -112,28 +112,33 @@ export function RecitModele() {
           tl.to(etapes[vers], { autoAlpha: 1, y: 0, duration: 0.3 }, pos + 0.32);
         };
 
-        // 1 → 2 : les entrepreneurs se rassemblent et forment Greenpact.
+        // Chaque étape suit le même rythme : son texte s'affiche, l'animation qui
+        // l'illustre se joue, puis une pause laisse le temps de lire avant la suivante.
+
+        // Étape 1 : les entrepreneurs, dispersés, se rapprochent.
         q<SVGCircleElement>(".entrepreneur").forEach((p, i) => {
-          tl.to(p, { attr: { cx: ANNEAU[i][0], cy: ANNEAU[i][1] }, duration: 0.8, ease: "power2.inOut" }, 0);
+          tl.to(p, { attr: { cx: ANNEAU[i][0], cy: ANNEAU[i][1] }, duration: 0.8, ease: "power2.inOut" }, 0.3);
         });
-        passer(0, 1, 0.55);
-        tl.to(q(".gp-anneau"), { strokeDashoffset: 0, duration: 0.5 }, 0.7);
-        tl.to(q(".gp-coeur, .gp-nom"), { autoAlpha: 1, duration: 0.3 }, 0.95);
-        tl.to(q(".entrepreneur"), { autoAlpha: 0, duration: 0.2 }, 1.05);
 
-        // 2 → 3 : trois branches, puis les startups.
-        passer(1, 2, 1.4);
-        tl.to(q(".branche"), { strokeDashoffset: 0, duration: 0.45, stagger: 0.08 }, 1.5);
-        tl.to(q(".bloc"), { autoAlpha: 1, duration: 0.3, stagger: 0.08 }, 1.8);
-        tl.to(q(".peigne"), { strokeDashoffset: 0, duration: 0.4, stagger: 0.05 }, 2.1);
-        tl.to(q(".startup"), { scale: 1, duration: 0.25, stagger: 0.015 }, 2.35);
+        // Étape 2 : ils forment Greenpact.
+        passer(0, 1, 1.6);
+        tl.to(q(".gp-anneau"), { strokeDashoffset: 0, duration: 0.5 }, 2.0);
+        tl.to(q(".gp-coeur, .gp-nom"), { autoAlpha: 1, duration: 0.3 }, 2.3);
+        tl.to(q(".entrepreneur"), { autoAlpha: 0, duration: 0.2 }, 2.4);
 
-        // 3 → 4 : tout converge vers le socle d'une industrie durable.
-        passer(2, 3, 2.9);
-        tl.to(q(".descente"), { strokeDashoffset: 0, duration: 0.35, stagger: 0.06 }, 3.0);
-        tl.to(q(".socle"), { strokeDashoffset: 0, duration: 0.45 }, 3.25);
-        tl.to(q(".pilier"), { autoAlpha: 1, duration: 0.3, stagger: 0.1 }, 3.5);
-        tl.to({}, { duration: 0.3 });
+        // Étape 3 : trois branches, puis les startups.
+        passer(1, 2, 3.2);
+        tl.to(q(".branche"), { strokeDashoffset: 0, duration: 0.45, stagger: 0.08 }, 3.6);
+        tl.to(q(".bloc"), { autoAlpha: 1, duration: 0.3, stagger: 0.08 }, 3.9);
+        tl.to(q(".peigne"), { strokeDashoffset: 0, duration: 0.4, stagger: 0.05 }, 4.2);
+        tl.to(q(".startup"), { scale: 1, duration: 0.25, stagger: 0.015 }, 4.5);
+
+        // Étape 4 : tout converge vers le socle d'une industrie durable.
+        passer(2, 3, 5.9);
+        tl.to(q(".descente"), { strokeDashoffset: 0, duration: 0.35, stagger: 0.06 }, 6.3);
+        tl.to(q(".socle"), { strokeDashoffset: 0, duration: 0.45 }, 6.55);
+        tl.to(q(".pilier"), { autoAlpha: 1, duration: 0.3, stagger: 0.1 }, 6.8);
+        tl.to({}, { duration: 0.9 });
       });
 
       mm.add("(prefers-reduced-motion: reduce), (max-width: 899px)", () => {

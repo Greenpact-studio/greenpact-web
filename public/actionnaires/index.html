@@ -1150,7 +1150,7 @@ const active = () => S.holdings.filter(h=>h.active!==false);
 const companies = () => active().filter(h=>h.vehicle==="direct"||h.vehicle==="startup");
 const studios = () => active().filter(h=>h.vehicle==="fonds");
 function viaLabel(h){ if(h.vehicle==="direct") return h.parent ? `En direct et via ${holdingName(h.parent)}` : "Participation directe"; if(h.parent) return `Via ${holdingName(h.parent)}`; return ""; }
-function lastEdition(){ return S.editions[0]||null; }
+function lastEdition(){ return S.editions.find(e=>e.type!=="groupe")||null; }  // la lettre du groupe ne compte pas dans le rythme de la lettre Greenpact
 function nextNewsletterDate(){ const l=lastEdition(); return l?addDays(l.sentAt,CADENCE_DAYS):null; }
 function upcoming(){ const t=todayISO(); return S.events.filter(e=>(e.date||"")>=t); }
 
@@ -1818,7 +1818,7 @@ function currentEmail(){ return buildEmail(S.nlType||defaultType(),S.nlIntro,sin
 function updatePreview(){ const f=$("#nl-preview"); if(f) f.srcdoc=currentEmail(); }
 function vLettres(){
   const c=sinceLast(), type=S.nlType||defaultType(), next=nextNewsletterDate();
-  const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">N° ${esc(e.number)}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))}${nuance(e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
+  const archive=S.editions.length?`<ul class="feed">${S.editions.map(e=>`<li data-act="view-edition" data-id="${esc(e.id)}"><div class="flogo" style="background:var(--forest);border:0"><span class="txt" style="color:#edeae4">${e.type==="groupe"?"Groupe":`N° ${esc(e.number)}`}</span></div><div><div class="meta">${esc(dFmt(e.sentAt,{day:"numeric",month:"long",year:"numeric"}))}${nuance(e.type==="groupe"?"lettre groupe":e.type==="complète"?"édition mensuelle":"édition courte")}</div><h3>${esc(e.title||"Lettre aux actionnaires")}</h3><p>${esc(e.counts||"")}</p></div></li>`).join("")}</ul>`:`<div class="empty" style="border:0">La première lettre n'a pas encore été envoyée.</div>`;
   setTimeout(updatePreview,0);
   return `<div class="head"><div><h1>Lettres et lectures</h1></div></div>
   <section class="edit-only" style="margin-bottom:46px"><div class="nl-grid">
@@ -1927,7 +1927,7 @@ document.addEventListener("click", async e=>{
   if(act==="dl-html"){ try{ const r=await S.downloads.save({filename:`lettre-greenpact-${todayISO()}.html`,data:currentEmail()}); if(r&&r.status==="saved") toast("Fichier enregistré"); }catch{} return; }
   if(act==="mark-sent"){ if(!needDb()) return; const c=sinceLast();
     if(!confirm("Archiver cette lettre comme envoyée aujourd'hui ?")) return;
-    try{ await S.db.collection("editions").add({number:(S.editions[0]?.number||0)+1,type:S.nlType||defaultType(),sentAt:new Date().toISOString(),title:`Lettre du ${dFmt(new Date().toISOString(),{day:"numeric",month:"long"})}`,counts:`${c.news.length} nouvelle(s), ${c.articles.length} lecture(s), ${Math.min(c.events.length,4)} rendez-vous`,html:currentEmail()}); S.nlIntro=""; S.nlType=null; toast("Lettre archivée"); }catch(err){ toast(errMsg(err)); } return; }
+    try{ await S.db.collection("editions").add({number:Math.max(0,...S.editions.map(x=>x.number||0))+1,type:S.nlType||defaultType(),sentAt:new Date().toISOString(),title:`Lettre du ${dFmt(new Date().toISOString(),{day:"numeric",month:"long"})}`,counts:`${c.news.length} nouvelle(s), ${c.articles.length} lecture(s), ${Math.min(c.events.length,4)} rendez-vous`,html:currentEmail()}); S.nlIntro=""; S.nlType=null; toast("Lettre archivée"); }catch(err){ toast(errMsg(err)); } return; }
   if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; $("#modal-form").innerHTML=`<h2>${esc(ed.title||"")}</h2><iframe class="preview" sandbox="" title="Lettre archivée"></iframe><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#modal-form iframe").srcdoc=ed.html||""; $("#f-cancel").onclick=()=>$("#modal").close(); ouvrirEnHaut(); return; }
   if(act==="draft-intro"){ const c=sinceLast(), ta=$("#nl-intro"); b.disabled=true;
     const facts=[...c.news.map(n=>`Portefeuille, ${holdingName(n.holdingId)} : ${n.title}. ${n.body||""}`),...c.articles.map(a=>`Lecture : ${a.title}. ${a.memo||a.summary||""}`),...c.events.slice(0,3).map(e=>`Rendez-vous : ${e.title}, le ${dFmt(e.date)}`)].join("\n");

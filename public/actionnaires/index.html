@@ -163,6 +163,23 @@ body.can-edit .edit-only.flex{display:flex!important}
 .sec{margin-top:56px}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
 .sec-h p{color:var(--muted);font-size:.88rem}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.q-boite{margin-bottom:46px}
+.q-boite textarea{width:100%;box-sizing:border-box;font:inherit;font-size:1.02rem;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);resize:vertical;min-height:64px}
+.q-boite textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
+#q-resultats{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.q-envoi{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:14px 18px;border-radius:14px;background:color-mix(in srgb,var(--brand) 8%,transparent);color:var(--muted);font-size:.9rem}
+.faq-g{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
+.faq-item{border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:10px}
+.faq-item summary{cursor:pointer;padding:14px 18px;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";color:var(--muted);font-size:1.2rem;line-height:1}
+.faq-item[open] summary::after{content:"–"}
+.faq-rep{padding:0 18px 16px;color:var(--ink);font-size:.93rem;line-height:1.65}
+.faq-rep a{color:var(--forest);text-decoration:underline}
+.q-etat{margin-left:auto;flex-shrink:0;font-size:.72rem;font-weight:500;padding:2px 9px;border-radius:99px;background:rgba(0,0,0,.06);color:var(--muted)}
+.q-etat.ok{background:color-mix(in srgb,var(--brand) 18%,transparent);color:var(--forest)}
+.nav .pastille{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:8px;padding:0 5px;border-radius:99px;background:#e0663f;color:#fff;font-size:.7rem;font-weight:600;vertical-align:1px}
 .empty{border:1px dashed var(--line);border-radius:14px;padding:26px;color:var(--muted);text-align:center;font-size:.9rem}
 
 /* Hero band */
@@ -1045,7 +1062,8 @@ const SECTIONS = [
   {id:"impact", label:"Impact"},
   {id:"lettres", label:"Lettres et lectures"},
   {id:"documents", label:"Documents"},
-  {id:"mon-espace", label:"Mon espace"}
+  {id:"mon-espace", label:"Mon espace"},
+  {id:"questions", label:"Questions"}
 ];
 // 5 rubriques : l'agenda est en bas de la vue d'ensemble, les lectures avec les
 // lettres. Les anciennes adresses mènent au bon endroit.
@@ -1069,7 +1087,7 @@ const GLOSS = {
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
   holdings:[], detentions:{}, news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
-  sb:null, docs:null, perso:null, dossier:"", view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
+  sb:null, docs:null, perso:null, dossier:"", questions:null, qTexte:"", view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
 };
 
 /* Utils */
@@ -1103,7 +1121,7 @@ const tip = k => `<button type="button" class="tip" data-tip="${esc(GLOSS[k])}" 
 
 /* Nav */
 function renderNav(){
-  $("#nav").innerHTML = SECTIONS.map(s=>`<a href="#${s.id}" ${S.view===s.id?'aria-current="page"':""}>${s.label}</a>`).join("");
+  $("#nav").innerHTML = SECTIONS.map(s=>`<a href="#${s.id}" ${S.view===s.id?'aria-current="page"':""}>${s.label}${s.id==="questions"&&nonLues()?`<span class="pastille" aria-label="${nonLues()} réponse(s) non lue(s)">${nonLues()}</span>`:""}</a>`).join("");
 }
 function route(){
   const brut=(location.hash||"#apercu").slice(1), h=ALIAS[brut]||brut;
@@ -1116,7 +1134,7 @@ function route(){
 window.addEventListener("hashchange", route);
 
 function render(){
-  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments,"mon-espace":vMonEspace};
+  const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments,"mon-espace":vMonEspace,questions:vQuestions};
   const k=S.kpis||{};
   $("#stamp").innerHTML = k.asOf ? `Données au <b>${esc(dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
   const banner = S.ready && !S.db && !S.static ? `<div class="empty" style="margin-bottom:24px">Les données ne sont pas disponibles dans cette vue. Ouvrez l'espace depuis son lien en étant connecté.</div>` : "";
@@ -1754,6 +1772,75 @@ async function telechargerPerso(nom){
   location.href=data.signedUrl;
 }
 
+/* ---------- Questions (FAQ et questions à l'équipe) ----------
+   Recherche instantanée dans la FAQ et les réponses déjà reçues ; sinon, la question part
+   à l'équipe en un clic (table public.questions, voir supabase/questions.sql). L'équipe
+   répond depuis Supabase ; l'investisseur est prévenu par e-mail et par une pastille. */
+const FAQ=[
+  ["Mon investissement","Combien d'actions est-ce que je détiens, et combien valent-elles ?","Tout est dans <a href=\"#mon-espace\">Mon espace</a>. Votre attestation de détention donne le nombre d'actions au 30 octobre 2026. Votre rapport de performance individuelle donne leur valeur à date : nombre d'actions × 2,70 €."],
+  ["Mon investissement","Comment est fixé le prix de l'action (2,70 €) ?","C'est le prix de souscription de la dernière augmentation de capital (mars et juillet 2026). Il repose sur la valeur de nos participations, selon la méthode décrite dans le rapport de performance, section « Méthode de valorisation ». Il a progressé de 15 % par rapport à 2025 (2,33 €)."],
+  ["Mon investissement","Que veulent dire MOIC et TVPI ?","<b>MOIC (×1,89)</b> : chaque euro investi dans les entreprises vaut aujourd'hui 1,89 €, trésorerie exclue.<br><b>TVPI (×1,42)</b> : la valeur totale de nos actifs (participations, trésorerie et créances) représente 1,42 fois les montants levés auprès des actionnaires."],
+  ["Mon investissement","Comment lire mon rapport de performance individuelle ?","La <b>valeur à date</b> est la valeur actuelle de vos actions. La valeur liquidative, la plus-value, le multiple et le TRI sont des <b>projections</b>, fondées sur nos hypothèses de développement et de distributions entre 2028 et 2034. Ce ne sont pas des garanties."],
+  ["Mon investissement","Quand vais-je percevoir un retour sur mon investissement ?","Les premières distributions sont prévues à partir de 2028, avec un horizon de liquidité fixé à 2034. La forme de ces distributions (dividendes, réduction de capital…) n'est pas encore décidée : elle sera soumise à l'assemblée générale."],
+  ["Mon investissement","Puis-je investir davantage ?","Oui, lors des augmentations de capital. Nous visons une levée de 2 M€ dans les 12 prochains mois. Signalez-nous votre intérêt ci-dessus et nous vous préviendrons en priorité."],
+  ["Documents et démarches","Quel document fournir à ma banque, à mon notaire ou à l'administration fiscale ?","Votre <b>attestation de détention d'actions</b>, dans <a href=\"#mon-espace\">Mon espace</a>. Elle est signée et indique, opération par opération, le nombre d'actions, leur prix et le montant investi (votre prix de revient). Pour toute question fiscale, rapprochez-vous de votre conseiller : Greenpact ne peut pas donner de conseil fiscal."],
+  ["Documents et démarches","Une information me concernant me semble inexacte. Que faire ?","Posez la question ci-dessus en précisant le document et la ligne concernés. Nous vérifions et corrigeons le document dans votre espace."],
+  ["L'espace investisseur","Puis-je me connecter avec une autre adresse, ou donner accès à mon associé ?","Oui. Plusieurs adresses peuvent ouvrir le même espace, par exemple pour une société détenue par deux associés. Indiquez-nous l'adresse à ajouter."],
+  ["L'espace investisseur","Puis-je partager les informations de l'espace ?","Non. Elles sont confidentielles et réservées aux actionnaires de Greenpact. Vos documents personnels ne sont visibles que par vous."],
+  ["L'espace investisseur","À quelle fréquence l'espace est-il mis à jour ?","Les nouvelles du portefeuille : au fil de l'eau. Les newsletters : chaque mois. Le rapport de performance, l'attestation et le rapport de performance individuelle : une fois par an."],
+  ["Greenpact","Où est investi mon argent, et quels sont les frais ?","Dans deux venture studios que nous avons cofondés, <b>Hoji</b> (intelligence artificielle) et <b>4Elements</b> (deeptech), et en direct dans les startups qui en sortent : 18 participations aujourd'hui. Les frais de gestion sont d'environ 2,5 % par an."]
+];
+const sansAccent=t=>String(t||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+const MOTS_VIDES=new Set("je j me m mon ma mes le la les l un une des de du d et ou a au aux en est il elle on que qu quoi qui pour par sur dans ce cet cette ces se s y comment quel quelle quels quelles puis peut est-ce vous votre vos".split(" "));
+const nonLues=()=>(S.questions||[]).filter(q=>q.reponse&&!q.lu).length;
+function pertinence(q,txt){
+  const mots=sansAccent(q).split(/[^a-z0-9€%]+/).filter(m=>m.length>2&&!MOTS_VIDES.has(m)), t=sansAccent(txt);
+  return mots.reduce((n,m)=>n+(t.includes(m.length>5?m.slice(0,-1):m)?1:0),0)/Math.max(1,mots.length);
+}
+function blocQR(titre,rep,ouvert,meta=""){ return `<details class="faq-item"${ouvert?" open":""}><summary>${esc(titre)}${meta}</summary><div class="faq-rep">${rep}</div></details>`; }
+function majResultats(){
+  const z=$("#q-resultats"); if(!z) return; const t=(S.qTexte||"").trim();
+  if(t.length<3){ z.innerHTML=""; return; }
+  const base=[...FAQ.map(f=>({t:f[1],r:f[2]})),...(S.questions||[]).filter(q=>q.reponse).map(q=>({t:q.question,r:esc(q.reponse).replace(/\n/g,"<br>")}))];
+  const trouves=base.map(x=>({...x,p:pertinence(t,x.t+" "+x.r),pt:pertinence(t,x.t)})).filter(x=>x.p>=.5).map(x=>({...x,p:x.p+x.pt}))  // la question compte double.sort((a,b)=>b.p-a.p).slice(0,3);
+  z.innerHTML=(trouves.length?`<p class="note">Ces réponses peuvent vous aider :</p>${trouves.map((x,i)=>blocQR(x.t,x.r,i===0)).join("")}`:"")+
+    `<div class="q-envoi"><span>${trouves.length?"Pas la réponse que vous cherchez ?":"Aucune réponse existante."}</span><button type="button" class="btn" data-act="q-envoyer">Envoyer ma question à l'équipe</button></div>`;
+}
+function vQuestions(){
+  const head=`<div class="head"><div><h1>Questions</h1><p class="sub">Trouvez une réponse immédiate, ou posez votre question à l'équipe Greenpact.</p></div></div>`;
+  if(S.sb&&S.questions===null) chargerQuestions();
+  if(S.sb&&nonLues()) marquerLues();
+  const miennes=(S.questions||[]);
+  const groupes=[...new Set(FAQ.map(f=>f[0]))];
+  setTimeout(majResultats,0);
+  return head+`<section class="q-boite"><label class="sr-only" for="q-recherche">Votre question</label>
+    <textarea id="q-recherche" rows="2" maxlength="1000" placeholder="Posez votre question… (ex. : comment est calculée la valeur de mes actions ?)">${esc(S.qTexte||"")}</textarea>
+    <div id="q-resultats" aria-live="polite"></div></section>
+  ${miennes.length?`<section class="sec" data-reveal><div class="sec-h"><h2>Mes questions</h2></div>${miennes.map(q=>blocQR(q.question,q.reponse?esc(q.reponse).replace(/\n/g,"<br>"):`<span class="note">En attente de réponse. Vous serez prévenu par e-mail.</span>`,q.reponse&&!q.lu,` <span class="q-etat${q.reponse?" ok":""}">${q.reponse?(q.lu?"Répondu":"Nouvelle réponse"):"En attente"}</span>`)).join("")}</section>`:""}
+  <section class="sec" data-reveal><div class="sec-h"><h2>Questions fréquentes</h2></div>${groupes.map(g=>`<h3 class="faq-g">${esc(g)}</h3>${FAQ.filter(f=>f[0]===g).map(f=>blocQR(f[1],f[2])).join("")}`).join("")}</section>`;
+}
+async function chargerQuestions(){
+  if(S.qEnCours) return; S.qEnCours=true;
+  const { data, error } = await S.sb.from("questions").select("id,question,reponse,lu,cree_le").order("cree_le",{ascending:false});
+  S.qEnCours=false; S.questions = error ? [] : data||[];
+  if(error) console.warn("Questions indisponibles", error);
+  renderNav(); if(S.view==="questions") render();
+}
+async function marquerLues(){
+  S.questions.forEach(q=>{ if(q.reponse) q._vue=!q.lu; });
+  const { error } = await S.sb.rpc("marquer_reponses_lues");
+  if(!error){ S.questions.forEach(q=>{ if(q.reponse) q.lu=true; }); renderNav(); }
+}
+async function envoyerQuestion(){
+  const t=(S.qTexte||"").trim();
+  if(t.length<5){ toast("Écrivez votre question avant de l'envoyer."); return; }
+  if(!S.sb){ toast("Connectez-vous pour envoyer une question."); return; }
+  const { data, error } = await S.sb.from("questions").insert({ question:t }).select("id,question,reponse,lu,cree_le").single();
+  if(error){ toast("La question n'a pas pu être envoyée. Réessayez dans un instant."); console.warn(error); return; }
+  S.questions=[data,...(S.questions||[])]; S.qTexte="";
+  render(); toast("Question envoyée. Vous serez prévenu par e-mail dès la réponse.");
+}
+
 /* ---------- Lectures ---------- */
 /* Liens des lectures de septembre 2026, utilisés tant que le champ « Lien » est vide. */
 const LIENS_LECTURES = {
@@ -1914,6 +2001,7 @@ document.addEventListener("click", async e=>{
   if(act==="imp-proof"){ S.impProof=id; S.animate=true; render(); return; }
   if(act==="flip"){ b.classList.toggle("on"); return; }
   if(act==="doc"){ if(S.sb) telechargerDoc(id); return; }
+  if(act==="q-envoyer"){ envoyerQuestion(); return; }
   if(act==="doc-perso"){ if(S.sb&&S.dossier) telechargerPerso(id); return; }
   if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }
@@ -1944,6 +2032,7 @@ $("#drawer").addEventListener("click",e=>{ if(e.target===$("#drawer")) $("#drawe
 document.addEventListener("keydown",e=>{ if(e.key==="Escape") document.body.classList.remove("nav-open");
   if((e.key==="Enter"||e.key===" ") && e.target instanceof Element && e.target.matches('[data-act="cap-detail"]')){ e.preventDefault(); e.target.click(); } });
 document.addEventListener("input",e=>{
+  if(e.target.id==="q-recherche"){ S.qTexte=e.target.value; majResultats(); }
   if(e.target.id==="search"){ S.search=e.target.value; const p=e.target.selectionStart; render(); const s=$("#search"); s.focus(); s.setSelectionRange(p,p); }
   if(e.target.id==="nl-intro"){ S.nlIntro=e.target.value; clearTimeout(S._pv); S._pv=setTimeout(updatePreview,300); }
 });
@@ -2033,7 +2122,7 @@ async function initEnLigne(){
   if(location.hash.includes("access_token")) history.replaceState(null,"",location.pathname);
   if(!session){ $("#curtain")?.remove(); showLogin(sb); return; }
   S.sb=sb;
-  afficherCompte(session.user.email);
+  afficherCompte(session.user.email); chargerQuestions();
   const lo=$("#logout"); lo.hidden=false; lo.addEventListener("click", async ()=>{ await sb.auth.signOut(); location.replace(location.pathname); });
   try{ await loadSupabase(sb); }catch(e){ console.warn("Données Supabase indisponibles", e); toast("Les données n'ont pas pu être chargées."); }
   // Connecté mais absent de la liste des actionnaires : aucune donnée n'est lisible.

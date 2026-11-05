@@ -117,6 +117,11 @@ p{margin:0}
 .nav a{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;text-decoration:none;color:rgba(237,234,228,.78);font-weight:500;font-size:.93rem;transition:background .2s,color .2s}
 .nav a:hover{color:var(--linen);background:rgba(237,234,228,.07)}
 .nav a[aria-current="page"]{background:var(--linen);color:var(--forest)}
+.nav a[href="#mon-espace"]{color:#d8b46a}
+.nav a[href="#mon-espace"]:hover{background:rgba(216,180,106,.12);color:#e2c38f}
+.nav a[href="#mon-espace"][aria-current="page"]{background:#d8b46a;color:#1c3a2b}
+.nav a[href="#questions"]::after{content:"?";display:grid;place-items:center;width:18px;height:18px;margin-left:8px;border-radius:50%;border:1px solid currentColor;font-size:.68rem;font-weight:600;opacity:.45}
+.nav a[href="#questions"]:has(.pastille)::after{display:none}
 .nav a small{font-size:.72rem;font-weight:500;opacity:.7}
 .seal-card{margin-top:auto;position:relative;z-index:1;border:1px solid rgba(237,234,228,.18);border-radius:14px;padding:14px 14px 12px;font-size:.78rem;color:rgba(237,234,228,.72);line-height:1.5}
 .seal-card .who{display:flex;align-items:center;gap:8px;color:var(--linen);font-weight:500;font-size:.84rem;margin-bottom:6px}
@@ -164,21 +169,36 @@ body.can-edit .edit-only.flex{display:flex!important}
 .sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:18px}
 .sec-h p{color:var(--muted);font-size:.88rem}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.q-boite{margin-bottom:46px}
-.q-boite textarea{width:100%;box-sizing:border-box;font:inherit;font-size:1.02rem;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:#fff;color:var(--ink);resize:vertical;min-height:64px}
-.q-boite textarea:focus{outline:2px solid var(--brand);outline-offset:1px}
-#q-resultats{margin-top:14px;display:flex;flex-direction:column;gap:10px}
-.q-envoi{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:14px 18px;border-radius:14px;background:color-mix(in srgb,var(--brand) 8%,transparent);color:var(--muted);font-size:.9rem}
-.faq-g{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
-.faq-item{border:1px solid var(--line);border-radius:14px;background:#fff;margin-bottom:10px}
-.faq-item summary{cursor:pointer;padding:14px 18px;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.q-hero{position:relative;overflow:hidden;background:var(--band);color:var(--on-band);border-radius:22px;padding:clamp(24px,4vw,40px);margin-bottom:22px}
+.q-hero::after{content:"?";position:absolute;right:-10px;top:-46px;font-size:15rem;font-weight:700;line-height:1;color:#d8b46a;opacity:.12;pointer-events:none}
+.q-hero h2{margin:0 0 18px;font-size:clamp(1.3rem,2.4vw,1.7rem);color:var(--on-band);max-width:24ch}
+.q-hero h2 em{font-style:normal;color:#d8b46a}
+.q-champ{position:relative;z-index:1;display:flex;align-items:flex-end;gap:10px;background:#f6f4f0;border-radius:18px;padding:8px 8px 8px 18px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.q-champ textarea{flex:1;border:0;background:transparent;font:inherit;font-size:1.02rem;color:#1c3a2b;resize:none;padding:10px 0;min-height:28px;max-height:160px;outline:none}
+.q-champ textarea::placeholder{color:rgba(28,58,43,.5)}
+.q-champ:focus-within{box-shadow:0 0 0 3px rgba(216,180,106,.65),0 10px 30px rgba(0,0,0,.18)}
+.btn-or{display:inline-flex;align-items:center;gap:8px;border:0;background:#d8b46a;color:#1c3a2b;padding:11px 18px;border-radius:14px;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;white-space:nowrap;transition:transform .15s,filter .15s}
+.btn-or:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.q-pistes{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.q-pistes button{border:1px solid rgba(237,234,228,.28);background:rgba(237,234,228,.06);color:var(--on-band);border-radius:99px;padding:6px 14px;font:inherit;font-size:.82rem;cursor:pointer;transition:background .2s,border-color .2s}
+.q-pistes button:hover{background:rgba(216,180,106,.18);border-color:#d8b46a}
+#q-resultats{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+#q-resultats:empty{display:none}
+.q-envoi{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:16px 20px;border-radius:16px;border:1px dashed #d8b46a;background:rgba(216,180,106,.1);color:var(--ink);font-size:.92rem}
+.faq-liste{display:flex;flex-direction:column;gap:10px}
+.faq-item{border:1px solid var(--line);border-radius:16px;background:var(--surface);transition:border-color .2s,box-shadow .2s}
+.faq-item:hover{border-color:rgba(216,180,106,.7)}
+.faq-item[open]{border-color:#d8b46a;box-shadow:0 8px 24px rgba(28,58,43,.08)}
+.faq-item summary{cursor:pointer;padding:16px 18px;font-weight:500;list-style:none;display:flex;align-items:center;gap:14px}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:"+";color:var(--muted);font-size:1.2rem;line-height:1}
-.faq-item[open] summary::after{content:"–"}
-.faq-rep{padding:0 18px 16px;color:var(--ink);font-size:.93rem;line-height:1.65}
-.faq-rep a{color:var(--forest);text-decoration:underline}
-.q-etat{margin-left:auto;flex-shrink:0;font-size:.72rem;font-weight:500;padding:2px 9px;border-radius:99px;background:rgba(0,0,0,.06);color:var(--muted)}
-.q-etat.ok{background:color-mix(in srgb,var(--brand) 18%,transparent);color:var(--forest)}
+.faq-item summary::after{content:"+";margin-left:auto;flex-shrink:0;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--wash);color:var(--ink);font-size:1.1rem;transition:transform .25s var(--ease),background .2s}
+.faq-item[open] summary::after{transform:rotate(45deg);background:#d8b46a;color:#1c3a2b}
+.faq-rep{padding:0 18px 18px;color:var(--ink);font-size:.93rem;line-height:1.7;animation:faqOuvre .3s var(--ease)}
+@keyframes faqOuvre{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.faq-rep a{color:inherit;text-decoration:underline;text-decoration-color:#d8b46a;text-underline-offset:3px}
+.q-etat{flex-shrink:0;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--wash);color:var(--muted)}
+.q-etat.ok{background:rgba(169,209,182,.35);color:var(--ink)}
+.q-etat.neuf{background:#d8b46a;color:#1c3a2b}
 .nav .pastille{display:inline-grid;place-items:center;min-width:18px;height:18px;margin-left:8px;padding:0 5px;border-radius:99px;background:#e0663f;color:#fff;font-size:.7rem;font-weight:600;vertical-align:1px}
 .empty{border:1px dashed var(--line);border-radius:14px;padding:26px;color:var(--muted);text-align:center;font-size:.9rem}
 
@@ -1087,7 +1107,7 @@ const GLOSS = {
 const S = {
   db:null, user:null, sample:null, downloads:null, assets:null, canEdit:false, ready:false,
   holdings:[], detentions:{}, news:[], articles:[], events:[], editions:[], kpis:null, settings:null, letter:null,
-  sb:null, docs:null, perso:null, dossier:"", questions:null, qTexte:"", view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
+  sb:null, docs:null, perso:null, dossier:"", questions:null, faqPub:[], qTexte:"", view:"apercu", pf:"all", tag:"all", search:"", nlType:null, nlIntro:"", animate:true, photoFor:null
 };
 
 /* Utils */
@@ -1797,32 +1817,40 @@ function pertinence(q,txt){
   const mots=sansAccent(q).split(/[^a-z0-9€%]+/).filter(m=>m.length>2&&!MOTS_VIDES.has(m)), t=sansAccent(txt);
   return mots.reduce((n,m)=>n+(t.includes(m.length>5?m.slice(0,-1):m)?1:0),0)/Math.max(1,mots.length);
 }
-function blocQR(titre,rep,ouvert,meta=""){ return `<details class="faq-item"${ouvert?" open":""}><summary>${esc(titre)}${meta}</summary><div class="faq-rep">${rep}</div></details>`; }
+function blocQR(titre,rep,ouvert,meta=""){ return `<details class="faq-item"${ouvert?" open":""}><summary><span>${esc(titre)}</span>${meta}</summary><div class="faq-rep">${rep}</div></details>`; }
 function majResultats(){
   const z=$("#q-resultats"); if(!z) return; const t=(S.qTexte||"").trim();
   if(t.length<3){ z.innerHTML=""; return; }
-  const base=[...FAQ.map(f=>({t:f[1],r:f[2]})),...(S.questions||[]).filter(q=>q.reponse).map(q=>({t:q.question,r:esc(q.reponse).replace(/\n/g,"<br>")}))];
+  const base=[...FAQ.map(f=>({t:f[1],r:f[2]})),...(S.faqPub||[]).map(q=>({t:q.question,r:esc(q.reponse).replace(/\n/g,"<br>")})),...(S.questions||[]).filter(q=>q.reponse).map(q=>({t:q.question,r:esc(q.reponse).replace(/\n/g,"<br>")}))];
   const trouves=base.map(x=>({...x,p:pertinence(t,x.t+" "+x.r),pt:pertinence(t,x.t)})).filter(x=>x.p>=.5).map(x=>({...x,p:x.p+x.pt}))  // la question compte double.sort((a,b)=>b.p-a.p).slice(0,3);
-  z.innerHTML=(trouves.length?`<p class="note">Ces réponses peuvent vous aider :</p>${trouves.map((x,i)=>blocQR(x.t,x.r,i===0)).join("")}`:"")+
-    `<div class="q-envoi"><span>${trouves.length?"Pas la réponse que vous cherchez ?":"Aucune réponse existante."}</span><button type="button" class="btn" data-act="q-envoyer">Envoyer ma question à l'équipe</button></div>`;
+  z.innerHTML=(trouves.length?`${trouves.map((x,i)=>blocQR(x.t,x.r,i===0)).join("")}`:"")+
+    `<div class="q-envoi"><span>${trouves.length?"Pas tout à fait votre question ?":"Pas encore de réponse à cette question."} L'équipe vous répond par e-mail.</span><button type="button" class="btn-or" data-act="q-envoyer">Envoyer à l'équipe</button></div>`;
 }
+// Suggestions : un libellé court qui remplit le champ avec la question de la FAQ correspondante.
+const PISTES=[["Valeur de mes actions",0],["Prix de l'action",1],["Distributions",4],["Attestation pour ma banque",6],["Investir davantage",5]];
 function vQuestions(){
-  const head=`<div class="head"><div><h1>Questions</h1><p class="sub">Trouvez une réponse immédiate, ou posez votre question à l'équipe Greenpact.</p></div></div>`;
   if(S.sb&&S.questions===null) chargerQuestions();
   if(S.sb&&nonLues()) marquerLues();
-  const miennes=(S.questions||[]);
-  const groupes=[...new Set(FAQ.map(f=>f[0]))];
+  const miennes=S.questions||[], pub=S.faqPub||[], rep=q=>esc(q.reponse).replace(/\n/g,"<br>");
   setTimeout(majResultats,0);
-  return head+`<section class="q-boite"><label class="sr-only" for="q-recherche">Votre question</label>
-    <textarea id="q-recherche" rows="2" maxlength="1000" placeholder="Posez votre question… (ex. : comment est calculée la valeur de mes actions ?)">${esc(S.qTexte||"")}</textarea>
-    <div id="q-resultats" aria-live="polite"></div></section>
-  ${miennes.length?`<section class="sec" data-reveal><div class="sec-h"><h2>Mes questions</h2></div>${miennes.map(q=>blocQR(q.question,q.reponse?esc(q.reponse).replace(/\n/g,"<br>"):`<span class="note">En attente de réponse. Vous serez prévenu par e-mail.</span>`,q.reponse&&!q.lu,` <span class="q-etat${q.reponse?" ok":""}">${q.reponse?(q.lu?"Répondu":"Nouvelle réponse"):"En attente"}</span>`)).join("")}</section>`:""}
-  <section class="sec" data-reveal><div class="sec-h"><h2>Questions fréquentes</h2></div>${groupes.map(g=>`<h3 class="faq-g">${esc(g)}</h3>${FAQ.filter(f=>f[0]===g).map(f=>blocQR(f[1],f[2])).join("")}`).join("")}</section>`;
+  return `<div class="head"><div><h1>Questions</h1></div></div>
+  <section class="q-hero"><h2>Une question sur votre investissement ? <em>Écrivez-la.</em></h2>
+    <div class="q-champ"><label class="sr-only" for="q-recherche">Votre question</label>
+      <textarea id="q-recherche" rows="1" maxlength="1000" placeholder="Ex. : comment est calculée la valeur de mes actions ?">${esc(S.qTexte||"")}</textarea>
+      <button type="button" class="btn-or" data-act="q-envoyer">Envoyer</button></div>
+    <div class="q-pistes" aria-label="Suggestions">${PISTES.map(([t,i])=>`<button type="button" data-act="q-piste" data-id="${esc(FAQ[i][1])}">${esc(t)}</button>`).join("")}</div>
+  </section>
+  <div id="q-resultats" aria-live="polite"></div>
+  ${miennes.length?`<section class="sec" data-reveal><div class="sec-h"><h2>Mes questions</h2></div><div class="faq-liste">${miennes.map(q=>blocQR(q.question,q.reponse?rep(q):`<span class="note">En attente de réponse. Vous serez prévenu par e-mail.</span>`,q.reponse&&!q.lu,`<span class="q-etat${q.reponse?(q.lu?" ok":" neuf"):""}">${q.reponse?(q.lu?"Répondu":"Nouvelle réponse"):"En attente"}</span>`)).join("")}</div></section>`:""}
+  <section class="sec" data-reveal><div class="sec-h"><h2>Questions fréquentes</h2></div><div class="faq-liste">${[...pub.map(q=>blocQR(q.question,rep(q))),...FAQ.map(f=>blocQR(f[1],f[2]))].join("")}</div></section>`;
 }
 async function chargerQuestions(){
   if(S.qEnCours) return; S.qEnCours=true;
-  const { data, error } = await S.sb.from("questions").select("id,question,reponse,lu,cree_le").order("cree_le",{ascending:false});
-  S.qEnCours=false; S.questions = error ? [] : data||[];
+  const [{ data, error }, pub] = await Promise.all([
+    S.sb.from("questions").select("id,question,reponse,lu,cree_le").order("cree_le",{ascending:false}),
+    S.sb.rpc("faq_publique")
+  ]);
+  S.qEnCours=false; S.questions = error ? [] : data||[]; S.faqPub = pub.error ? [] : pub.data||[];
   if(error) console.warn("Questions indisponibles", error);
   renderNav(); if(S.view==="questions") render();
 }
@@ -2002,6 +2030,7 @@ document.addEventListener("click", async e=>{
   if(act==="flip"){ b.classList.toggle("on"); return; }
   if(act==="doc"){ if(S.sb) telechargerDoc(id); return; }
   if(act==="q-envoyer"){ envoyerQuestion(); return; }
+  if(act==="q-piste"){ const z=$("#q-recherche"); S.qTexte=id; z.value=id; majResultats(); $("#q-resultats").scrollIntoView({behavior:"smooth",block:"nearest"}); return; }
   if(act==="doc-perso"){ if(S.sb&&S.dossier) telechargerPerso(id); return; }
   if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }

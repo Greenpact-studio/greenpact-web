@@ -93,7 +93,7 @@ p{margin:0}
   #login .panneau{place-items:start center;padding:36px 24px 48px}
   #login h1{font-size:1.9rem}
 }
-.seal-card .logout{margin-top:10px;background:transparent;border:1px solid rgba(237,234,228,.3);color:var(--linen);border-radius:99px;padding:4px 12px;font-size:.74rem;cursor:pointer}
+.seal-card .logout{background:transparent;border:1px solid rgba(237,234,228,.3);color:var(--linen);border-radius:99px;padding:4px 12px;font-size:.74rem;cursor:pointer}
 .seal-card .logout[hidden]{display:none}
 #curtain{position:fixed;inset:0;z-index:50;background:var(--forest);display:grid;place-items:center;color:var(--linen);transition:transform 1s var(--ease)}
 #curtain.up{transform:translateY(-100%)}
@@ -120,7 +120,14 @@ p{margin:0}
 .nav a small{font-size:.72rem;font-weight:500;opacity:.7}
 .seal-card{margin-top:auto;position:relative;z-index:1;border:1px solid rgba(237,234,228,.18);border-radius:14px;padding:14px 14px 12px;font-size:.78rem;color:rgba(237,234,228,.72);line-height:1.5}
 .seal-card .who{display:flex;align-items:center;gap:8px;color:var(--linen);font-weight:500;font-size:.84rem;margin-bottom:6px}
-.seal-card .role{display:inline-block;margin-top:8px;padding:2px 9px;border-radius:99px;background:rgba(237,234,228,.12);color:var(--linen);font-size:.72rem}
+/* Adresse sur deux lignes (identifiant / @domaine), coupée proprement si elle reste trop longue */
+.seal-card .compte{margin-top:10px;padding-top:10px;border-top:1px solid rgba(237,234,228,.14);min-width:0}
+.seal-card .compte[hidden]{display:none}
+.seal-card .compte-l{display:block;font-size:.7rem;letter-spacing:.02em;color:rgba(237,234,228,.55)}
+.seal-card .compte-id{display:block;color:var(--linen);font-weight:500;font-size:.8rem;line-height:1.35;overflow-wrap:anywhere}
+.seal-card .compte-id span{display:block}
+.seal-card .compte-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.seal-card .role{display:inline-block;padding:2px 9px;border-radius:99px;background:rgba(237,234,228,.12);color:var(--linen);font-size:.72rem}
 main{min-width:0;padding:0 clamp(18px,3.4vw,52px) 24px;min-height:100vh;display:flex;flex-direction:column}
 #app{flex:1 0 auto;min-width:0}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 18px;border-bottom:1px solid var(--line);margin-bottom:34px;position:sticky;top:0;z-index:4;background:var(--bg)}
@@ -1002,10 +1009,10 @@ i.val{background:var(--ton,#2f6b4f)}
     <div class="tag">Holding d'investissement à impact</div>
     <nav class="nav" id="nav"></nav>
     <div class="seal-card">
-      <div class="who"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span id="viewer">Accès réservé</span></div>
+      <div class="who"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>Accès réservé</span></div>
       Informations confidentielles destinées aux seuls actionnaires de Greenpact. Merci de ne pas les diffuser.
-      <div><span class="role" id="role">Lecture</span></div>
-      <button type="button" class="logout" id="logout" hidden>Se déconnecter</button>
+      <div class="compte" id="compte" hidden><span class="compte-l">Connecté avec</span><span class="compte-id" id="viewer"></span></div>
+      <div class="compte-actions"><span class="role" id="role">Lecture</span><button type="button" class="logout" id="logout" hidden>Se déconnecter</button></div>
     </div>
   </aside>
   <main>
@@ -1989,6 +1996,11 @@ async function loadSupabase(sb){
   const d={}; (data||[]).forEach(r=>{ (d[r.collection] ||= {})[r.id]=r.data; });
   applyData(d);
 }
+function afficherCompte(t){
+  const v=$("#viewer"), i=String(t||"").lastIndexOf("@");
+  v.replaceChildren(...(i>0?[t.slice(0,i),t.slice(i)]:[t]).map(x=>Object.assign(document.createElement("span"),{textContent:x})));
+  v.title=t||""; $("#compte").hidden=!t;
+}
 function showLogin(sb){
   const box=$("#login"); box.hidden=false; document.documentElement.classList.add("login-ouvert"); $("#login-logo").src=ASSETS.logo_light;
   const msg=$("#login-msg"), btn=$("#login-btn"), form=$("#login-form"), envoye=$("#login-envoye");
@@ -2014,7 +2026,7 @@ async function initEnLigne(){
   if(location.hash.includes("access_token")) history.replaceState(null,"",location.pathname);
   if(!session){ $("#curtain")?.remove(); showLogin(sb); return; }
   S.sb=sb;
-  $("#viewer").textContent=session.user.email; $("#role").textContent="Lecture seule";
+  afficherCompte(session.user.email); $("#role").textContent="Lecture seule";
   const lo=$("#logout"); lo.hidden=false; lo.addEventListener("click", async ()=>{ await sb.auth.signOut(); location.replace(location.pathname); });
   try{ await loadSupabase(sb); }catch(e){ console.warn("Données Supabase indisponibles", e); toast("Les données n'ont pas pu être chargées."); }
   // Connecté mais absent de la liste des actionnaires : aucune donnée n'est lisible.
@@ -2036,7 +2048,7 @@ async function init(){
   S.canEdit = user ? !!(await user.canEdit()) : false;
   document.body.classList.toggle("can-edit",S.canEdit);
   $("#role").textContent = S.canEdit?"Mode éditeur":"Lecture seule";
-  if(user){ try{ const me=await user.me(); if(me&&me.name) $("#viewer").textContent=me.name; }catch{} }
+  if(user){ try{ const me=await user.me(); if(me&&me.name) afficherCompte(me.name); }catch{} }
   if(db){
     sub(db.collection("holdings").orderBy("order","asc"),r=>S.holdings=r);
     sub(db.collection("news").orderBy("date","desc").limit(300),r=>S.news=r);

@@ -179,9 +179,6 @@ body.can-edit .edit-only.flex{display:flex!important}
 .q-champ:focus-within{box-shadow:0 0 0 3px rgba(216,180,106,.65),0 10px 30px rgba(0,0,0,.18)}
 .btn-or{display:inline-flex;align-items:center;gap:8px;border:0;background:#d8b46a;color:#1c3a2b;padding:11px 18px;border-radius:14px;font:inherit;font-weight:600;font-size:.9rem;cursor:pointer;white-space:nowrap;transition:transform .15s,filter .15s}
 .btn-or:hover{filter:brightness(1.06);transform:translateY(-1px)}
-.q-pistes{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.q-pistes button{border:1px solid rgba(237,234,228,.28);background:rgba(237,234,228,.06);color:var(--on-band);border-radius:99px;padding:6px 14px;font:inherit;font-size:.82rem;cursor:pointer;transition:background .2s,border-color .2s}
-.q-pistes button:hover{background:rgba(216,180,106,.18);border-color:#d8b46a}
 #q-resultats{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
 #q-resultats:empty{display:none}
 .q-envoi{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;padding:16px 20px;border-radius:16px;border:1px dashed #d8b46a;background:rgba(216,180,106,.1);color:var(--ink);font-size:.92rem}
@@ -1826,8 +1823,6 @@ function majResultats(){
   z.innerHTML=(trouves.length?`${trouves.map((x,i)=>blocQR(x.t,x.r,i===0)).join("")}`:"")+
     `<div class="q-envoi"><span>${trouves.length?"Pas tout à fait votre question ?":"Pas encore de réponse à cette question."} L'équipe vous répond par e-mail.</span><button type="button" class="btn-or" data-act="q-envoyer">Envoyer à l'équipe</button></div>`;
 }
-// Suggestions : un libellé court qui remplit le champ avec la question de la FAQ correspondante.
-const PISTES=[["Valeur de mes actions",0],["Prix de l'action",1],["Distributions",4],["Attestation pour ma banque",6],["Investir davantage",5]];
 function vQuestions(){
   if(S.sb&&S.questions===null) chargerQuestions();
   if(S.sb&&nonLues()) marquerLues();
@@ -1838,7 +1833,6 @@ function vQuestions(){
     <div class="q-champ"><label class="sr-only" for="q-recherche">Votre question</label>
       <textarea id="q-recherche" rows="1" maxlength="1000" placeholder="Ex. : comment est calculée la valeur de mes actions ?">${esc(S.qTexte||"")}</textarea>
       <button type="button" class="btn-or" data-act="q-envoyer">Envoyer</button></div>
-    <div class="q-pistes" aria-label="Suggestions">${PISTES.map(([t,i])=>`<button type="button" data-act="q-piste" data-id="${esc(FAQ[i][1])}">${esc(t)}</button>`).join("")}</div>
   </section>
   <div id="q-resultats" aria-live="polite"></div>
   ${miennes.length?`<section class="sec" data-reveal><div class="sec-h"><h2>Mes questions</h2></div><div class="faq-liste">${miennes.map(q=>blocQR(q.question,q.reponse?rep(q):`<span class="note">En attente de réponse. Vous serez prévenu par e-mail.</span>`,q.reponse&&!q.lu,`<span class="q-etat${q.reponse?(q.lu?" ok":" neuf"):""}">${q.reponse?(q.lu?"Répondu":"Nouvelle réponse"):"En attente"}</span>`)).join("")}</div></section>`:""}
@@ -2030,7 +2024,6 @@ document.addEventListener("click", async e=>{
   if(act==="flip"){ b.classList.toggle("on"); return; }
   if(act==="doc"){ if(S.sb) telechargerDoc(id); return; }
   if(act==="q-envoyer"){ envoyerQuestion(); return; }
-  if(act==="q-piste"){ const z=$("#q-recherche"); S.qTexte=id; z.value=id; majResultats(); $("#q-resultats").scrollIntoView({behavior:"smooth",block:"nearest"}); return; }
   if(act==="doc-perso"){ if(S.sb&&S.dossier) telechargerPerso(id); return; }
   if(act==="cap-detail"){ const o=b.classList.toggle("ouvert"); b.setAttribute("aria-expanded",o); return; }
   if(act==="nltype"){ S.nlType=id; render(); return; }

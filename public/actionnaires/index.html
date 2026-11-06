@@ -1635,8 +1635,10 @@ function perfLignes(){
     </div></section>`;
 }
 
-/* Prévision prudente d'évolution du prix de la part l'an prochain, en %. */
-const prevision = k => has(k.sharePriceForecast) ? Number(k.sharePriceForecast) : 15;
+/* Prix de la part visé pour 2027 (prévision, sans garantie). L'évolution en % s'en déduit
+   à partir du prix actuel ; à défaut, prévision saisie dans les chiffres, ou +15 %. */
+const PRIX_VISE_2027 = 3.20;
+const prevision = k => has(k.sharePriceNow) && Number(k.sharePriceNow)>0 ? (PRIX_VISE_2027/Number(k.sharePriceNow)-1)*100 : has(k.sharePriceForecast) ? Number(k.sharePriceForecast) : 15;
 /* Coûts anté-création (Co-reno, Syscobat…) engagés avant la création des studios,
    hors montants investis (rapport de performance 10/2026). */
 const ANTE_CREATION = 477000;
@@ -1678,7 +1680,7 @@ function perfHorizon(k){
   const prev=prevision(k);
   const etapes=[
     has(k.sharePriceNow)&&[ico("cal"),an||"Aujourd'hui",`Part à ${fr(k.sharePriceNow,2)} €`],
-    /^\d{4}$/.test(String(an))&&[ico("part"),String(Number(an)+1),`${prev>=0?"+":"−"}${fr(Math.abs(prev),0)} % visés sur le prix de la part`],
+    /^\d{4}$/.test(String(an))&&[ico("part"),String(Number(an)+1),`Part visée à ${fr(PRIX_VISE_2027,2)} € (${prev>=0?"+":"−"}${fr(Math.abs(prev),0)} %)`],
     [ico("distrib"),"2028","Premières distributions aux actionnaires"]
   ].filter(Boolean);
   cartes.push(`<div class="pf-carte">

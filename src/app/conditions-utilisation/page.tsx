@@ -35,7 +35,7 @@ export default function Page() {
 
       <h2>4. Nature des informations</h2>
       <p>
-        Les informations sont fournies à titre d&apos;information. Elles ne constituent ni un conseil en investissement, ni une recommandation, ni une offre ou sollicitation d&apos;achat ou de vente de titres. Les valorisations, prévisions et objectifs, notamment de prix de la part, sont des estimations sans garantie. Les performances passées ne préjugent pas des performances futures.
+        Les informations sont fournies à titre indicatif. Elles ne constituent ni un conseil en investissement, ni une recommandation, ni une offre ou sollicitation d&apos;achat ou de vente de titres. Les valorisations, prévisions et objectifs, notamment de prix de la part, sont des estimations sans garantie. Les performances passées ne préjugent pas des performances futures.
       </p>
       <p>
         Un investissement dans Greenpact comporte un risque de perte en capital, limité au montant investi, et une liquidité réduite. Greenpact ne procède à aucune offre au public de ses titres.
@@ -48,7 +48,7 @@ export default function Page() {
 
       <h2>6. Questions posées depuis l&apos;espace</h2>
       <p>
-        Vos questions sont adressées à l&apos;équipe de Greenpact, qui y répond dans l&apos;espace. Une question peut être reprise, reformulée et anonymisée, dans la foire aux questions visible par les autres actionnaires.
+        Vos questions sont adressées à l&apos;équipe de Greenpact, qui y répond dans l&apos;espace. Avec votre accord, une question peut être reprise, reformulée et anonymisée dans la foire aux questions visible par les autres actionnaires.
       </p>
 
       <h2>7. Données personnelles</h2>

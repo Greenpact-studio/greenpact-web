@@ -57,13 +57,9 @@ export default function Page() {
       </ul>
 
       <h2>Destinataires et sous-traitants</h2>
-      <p>Vos données ne sont ni vendues ni louées. Elles sont accessibles à l&apos;équipe de Greenpact et à nos sous-traitants, chacun pour sa seule mission :</p>
-      <ul>
-        <li>OVH SAS (France) : hébergement du site.</li>
-        <li>Supabase Inc. : hébergement de l&apos;espace investisseur, serveurs situés en {SOCIETE.regionSupabase}.</li>
-        <li>Google (Google Workspace) : messagerie et notification des questions posées.</li>
-        <li>Mailjet (France) : envoi des lettres d&apos;information.</li>
-      </ul>
+      <p>
+        Vos données ne sont ni vendues ni louées. Elles sont accessibles à l&apos;équipe de Greenpact et à nos prestataires techniques (hébergement, messagerie, envoi des lettres d&apos;information), chacun pour sa seule mission et dans le cadre d&apos;un contrat conforme au RGPD. La liste de ces prestataires est communiquée sur simple demande.
+      </p>
       <p>
         Lorsque des données sont accessibles depuis un pays hors de l&apos;Union européenne, le transfert est encadré par une décision d&apos;adéquation de la Commission européenne ou par les clauses contractuelles types qu&apos;elle a adoptées.
       </p>
@@ -75,7 +71,7 @@ export default function Page() {
 
       <h2>Sécurité</h2>
       <p>
-        Connexion chiffrée (HTTPS), accès à l&apos;espace investisseur par lien de connexion à usage unique, réservé aux adresses autorisées, et règles d&apos;accès limitant chaque actionnaire à ses propres documents.
+        Nous mettons en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données contre tout accès non autorisé, perte ou altération.
       </p>
 
       <h2>Vos droits</h2>

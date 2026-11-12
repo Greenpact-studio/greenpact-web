@@ -28,7 +28,7 @@ export default function Page() {
         <dd>{SOCIETE.rcs}</dd>
         <dt>TVA intracommunautaire</dt>
         <dd>{SOCIETE.tva}</dd>
-        <dt>Présidente</dt>
+        <dt>Président</dt>
         <dd>{SOCIETE.president}</dd>
         <dt>Contact</dt>
         <dd>

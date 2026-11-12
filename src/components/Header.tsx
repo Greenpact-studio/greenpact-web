@@ -53,7 +53,7 @@ export function Header() {
       <div className={`conteneur ${styles.barre}`}>
         <Link href="/" className={styles.logo} aria-label="Greenpact, accueil">
           <Image src="/logo-greenpact.png" alt="Greenpact" width={1200} height={138} priority className={styles.logoVert} />
-          <Image src="/logo-greenpact-blanc.png" alt="" width={1200} height={138} priority className={styles.logoBlanc} aria-hidden />
+          <Image src="/logo-greenpact-blanc.png" alt="Greenpact" width={1200} height={138} priority className={styles.logoBlanc} aria-hidden />
         </Link>
 
         <nav className={styles.nav} aria-label="Navigation principale">

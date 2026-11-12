@@ -69,7 +69,7 @@ export default function Page() {
                   const contenu = (
                     <>
                       <span className={styles.suLogo} style={su.logoTaille ? ({ "--taille": su.logoTaille } as CSSProperties) : undefined}>
-                        {su.logo ? <Image src={`/logos/${su.logo}`} alt="" width={360} height={120} loading="lazy" /> : <span className={styles.suMot}>{su.nom}</span>}
+                        {su.logo ? <Image src={`/logos/${su.logo}`} alt={su.nom} width={360} height={120} loading="lazy" /> : <span className={styles.suMot}>{su.nom}</span>}
                       </span>
                       <span className={styles.suTexte}>
                         <span className={styles.suNom}>{su.nom}</span>

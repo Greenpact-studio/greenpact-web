@@ -766,6 +766,16 @@ tr:last-child td{border-bottom:0}
 
 /* Forms */
 #modal{width:min(580px,94vw);border-radius:22px;margin:auto}
+#modal.lecture{width:min(760px,96vw);background:#edeae4}
+#modal.lecture form{padding:0;gap:0;max-height:92vh}
+.lect-tete{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:14px;padding:14px 18px 14px 24px;background:var(--forest);color:#edeae4}
+.lect-tete div{flex:1;min-width:0}
+.lect-tete small{display:block;font-size:.75rem;opacity:.7;letter-spacing:.04em}
+.lect-tete h2{margin:0;font-size:1rem;color:#edeae4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lect-fermer{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid rgba(237,234,228,.35);background:transparent;color:#edeae4;font-size:1.3rem;line-height:1;cursor:pointer}
+.lect-fermer:hover{background:rgba(237,234,228,.12)}
+.lect-corps{padding:0}
+.lect-corps iframe{display:block;width:100%;height:70vh;border:0;background:#edeae4}
 #modal form{padding:26px;display:flex;flex-direction:column;gap:14px;max-height:86vh;overflow:auto}
 label{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:500}
 label input,label textarea,label select{padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font-weight:400;font-size:.9rem}
@@ -2008,6 +2018,11 @@ function crud(coll,id){
 
 /* ---------- Actions ---------- */
 /* Ouvre la fenêtre en haut de son contenu (le bouton Fermer, en bas, ne prend pas le focus). */
+// Liseuse : la lettre (600-680 px) est réduite pour tenir dans la largeur, sans défilement horizontal ni interne.
+function ajusterLettre(fr){ const d=fr.contentDocument; if(!d||!d.body) return; const r=d.documentElement; r.style.zoom=""; d.body.style.margin="0"; r.style.overflowX="hidden";
+  const larg=fr.clientWidth, cont=Math.max(r.scrollWidth,d.body.scrollWidth), z=cont>larg?larg/cont:1; r.style.zoom=z<1?String(z):"";
+  fr.style.height=Math.ceil(r.scrollHeight*(z<1&&!CSS.supports("zoom","1")?z:1))+"px"; }
+window.addEventListener("resize",()=>{ const fr=$("#modal.lecture iframe"); if(fr) ajusterLettre(fr); });
 function ouvrirEnHaut(){ const dlg=$("#modal"), f=$("#modal-form"); dlg.showModal(); f.setAttribute("tabindex","-1"); f.focus({preventScroll:true}); f.scrollTop=0; dlg.scrollTop=0; requestAnimationFrame(()=>{ f.scrollTop=0; dlg.scrollTop=0; }); }
 /* Un clic hors de la fenêtre (sur le fond assombri) la referme. */
 document.addEventListener("click", e=>{ const dlg=$("#modal"); if(e.target!==dlg || !dlg.open) return; const r=dlg.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) dlg.close(); });
@@ -2045,7 +2060,10 @@ document.addEventListener("click", async e=>{
   if(act==="mark-sent"){ if(!needDb()) return; const c=sinceLast();
     if(!confirm("Archiver cette lettre comme envoyée aujourd'hui ?")) return;
     try{ await S.db.collection("editions").add({number:Math.max(0,...S.editions.map(x=>x.number||0))+1,type:S.nlType||defaultType(),sentAt:new Date().toISOString(),title:`Lettre du ${dFmt(new Date().toISOString(),{day:"numeric",month:"long"})}`,counts:`${c.news.length} nouvelle(s), ${c.articles.length} lecture(s), ${Math.min(c.events.length,4)} rendez-vous`,html:currentEmail()}); S.nlIntro=""; S.nlType=null; toast("Lettre archivée"); }catch(err){ toast(errMsg(err)); } return; }
-  if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; $("#modal-form").innerHTML=`<h2>${esc(ed.title||"")}</h2><iframe class="preview" sandbox="" title="Lettre archivée"></iframe><div class="form-actions"><span></span><button type="button" class="btn" id="f-cancel">Fermer</button></div>`; $("#modal-form iframe").srcdoc=ed.html||""; $("#f-cancel").onclick=()=>$("#modal").close(); ouvrirEnHaut(); return; }
+  if(act==="view-edition"){ const ed=S.editions.find(x=>x.id===id); if(!ed) return; const dlg=$("#modal"); dlg.classList.add("lecture"); dlg.addEventListener("close",()=>dlg.classList.remove("lecture"),{once:true});
+    $("#modal-form").innerHTML=`<div class="lect-tete"><div><small>${esc(dFmt(ed.sentAt,{day:"numeric",month:"long",year:"numeric"}))}</small><h2>${esc(ed.title||"Lettre aux actionnaires")}</h2></div><button type="button" class="lect-fermer" id="f-cancel" aria-label="Fermer">×</button></div><div class="lect-corps"><iframe sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" title="Lettre archivée"></iframe></div>`;
+    const fr=$("#modal-form iframe"); fr.onload=()=>ajusterLettre(fr); fr.srcdoc=(ed.html||"").replace(/<head>/i,'<head><base target="_blank">');
+    $("#f-cancel").onclick=()=>dlg.close(); ouvrirEnHaut(); return; }
   if(act==="draft-intro"){ const c=sinceLast(), ta=$("#nl-intro"); b.disabled=true;
     const facts=[...c.news.map(n=>`Portefeuille, ${holdingName(n.holdingId)} : ${n.title}. ${n.body||""}`),...c.articles.map(a=>`Lecture : ${a.title}. ${a.memo||a.summary||""}`),...c.events.slice(0,3).map(e=>`Rendez-vous : ${e.title}, le ${dFmt(e.date)}`)].join("\n");
     const prompt=`Rédige l'édito d'une lettre envoyée aux actionnaires de Greenpact, holding d'investissement à impact. Signataires : Emmanuel Gonon (président) et Laurent Geray (directeur général). Lecteurs : investisseurs exigeants de 40 à 60 ans. Ton : sobre, direct, factuel. Interdits : superlatifs, formules creuses (« nous sommes ravis », « environnement stimulant », « dans un monde en mutation »), emoji, questions rhétoriques. Format : ${(S.nlType||defaultType())==="complète"?"100 à 140 mots, deux paragraphes":"50 à 80 mots, un paragraphe"}, en français, sans titre ni signature. N'invente aucun fait ni chiffre absent de la liste.\n\nNouveautés :\n${facts||"(aucune nouveauté : écris deux phrases brèves annonçant la suite)"}\n\nRéponds uniquement par le texte.`;

@@ -22,6 +22,9 @@ export function Chiffres() {
     const ctx = gsap.context(() => {
       const nombres = Array.from(racine.current!.querySelectorAll<HTMLElement>("[data-valeur]"));
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // La valeur finale est écrite dans le HTML statique (moteurs, sans JS) ;
+      // côté client on repart de 0 avant que le bloc n'entre à l'écran.
+      if (!reduce) nombres.forEach((el) => (el.textContent = "0"));
       const compter = () => {
         nombres.forEach((el, i) => {
           const cible = Number(el.dataset.valeur);
@@ -75,7 +78,7 @@ export function Chiffres() {
             <div key={i} className={styles.item}>
               <p className={styles.valeur}>
                 <span className={styles.nombre} data-valeur={c.valeur}>
-                  0
+                  {c.valeur}
                 </span>
                 {c.suffixe}
               </p>

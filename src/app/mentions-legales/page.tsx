@@ -47,9 +47,6 @@ export default function Page() {
         </a>
         ).
       </p>
-      <p>
-        Les données de l&apos;espace investisseur (/actionnaires/) sont hébergées par Supabase Inc. (supabase.com), sur des serveurs situés en {SOCIETE.regionSupabase}.
-      </p>
 
       <h2>Propriété intellectuelle</h2>
       <p>

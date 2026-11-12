@@ -47,6 +47,14 @@ export default function Page() {
         Adresse e-mail et nom des destinataires de nos lettres aux actionnaires et partenaires. Base légale : intérêt légitime pour les actionnaires et les contacts professionnels, consentement pour les autres. Chaque lettre comporte un lien de désinscription.
       </p>
 
+      <h2>Destinataires</h2>
+      <p>
+        Vos données ne sont ni vendues ni louées. Elles sont accessibles à l&apos;équipe de Greenpact et à nos prestataires techniques (hébergement, messagerie, envoi des lettres d&apos;information), chacun pour sa seule mission et dans le cadre d&apos;un contrat conforme au RGPD. La liste de ces prestataires est communiquée sur simple demande.
+      </p>
+      <p>
+        Lorsque des données sont accessibles depuis un pays hors de l&apos;Union européenne, le transfert est encadré par une décision d&apos;adéquation de la Commission européenne ou par les clauses contractuelles types qu&apos;elle a adoptées.
+      </p>
+
       <h2>Durées de conservation</h2>
       <ul>
         <li>Accès à l&apos;espace investisseur et documents personnels : tant que vous êtes actionnaire. L&apos;accès est fermé et les documents personnels supprimés dans les 3 mois suivant la cession de la totalité de vos titres.</li>
@@ -55,24 +63,6 @@ export default function Page() {
         <li>Échanges par e-mail : 1 an après le dernier échange, sauf relation en cours.</li>
         <li>Journaux techniques : 12 mois au plus.</li>
       </ul>
-
-      <h2>Destinataires et sous-traitants</h2>
-      <p>
-        Vos données ne sont ni vendues ni louées. Elles sont accessibles à l&apos;équipe de Greenpact et à nos prestataires techniques (hébergement, messagerie, envoi des lettres d&apos;information), chacun pour sa seule mission et dans le cadre d&apos;un contrat conforme au RGPD. La liste de ces prestataires est communiquée sur simple demande.
-      </p>
-      <p>
-        Lorsque des données sont accessibles depuis un pays hors de l&apos;Union européenne, le transfert est encadré par une décision d&apos;adéquation de la Commission européenne ou par les clauses contractuelles types qu&apos;elle a adoptées.
-      </p>
-
-      <h2>Cookies et stockage local</h2>
-      <p>
-        Le site public ne dépose aucun cookie. L&apos;espace investisseur enregistre dans votre navigateur votre session de connexion et une préférence d&apos;affichage. Ces éléments sont strictement nécessaires au service : ils ne requièrent pas de consentement et ne servent à aucun suivi.
-      </p>
-
-      <h2>Sécurité</h2>
-      <p>
-        Nous mettons en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données contre tout accès non autorisé, perte ou altération.
-      </p>
 
       <h2>Vos droits</h2>
       <p>
@@ -84,6 +74,16 @@ export default function Page() {
           cnil.fr
         </a>
         ).
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Nous mettons en œuvre des mesures techniques et organisationnelles adaptées pour protéger vos données contre tout accès non autorisé, perte ou altération.
+      </p>
+
+      <h2>Cookies et stockage local</h2>
+      <p>
+        Le site public ne dépose aucun cookie. L&apos;espace investisseur enregistre dans votre navigateur votre session de connexion et une préférence d&apos;affichage. Ces éléments sont strictement nécessaires au service : ils ne requièrent pas de consentement et ne servent à aucun suivi.
       </p>
     </PageLegale>
   );

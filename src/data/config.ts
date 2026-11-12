@@ -60,6 +60,6 @@ export const MENTIONS_REGLEMENTAIRES =
 // Pages légales, reliées dans le footer et le sitemap.
 export const PAGES_LEGALES = [
   { href: "/mentions-legales/", label: "Mentions légales" },
-  { href: "/confidentialite/", label: "Confidentialité" },
-  { href: "/conditions-utilisation/", label: "Conditions d'utilisation" },
+  { href: "/confidentialite/", label: "Politique de confidentialité" },
+  { href: "/conditions-utilisation/", label: "CGU" },
 ] as const;

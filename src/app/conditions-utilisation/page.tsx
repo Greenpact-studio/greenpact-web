@@ -5,7 +5,7 @@ import { SOCIETE, MISE_A_JOUR_LEGAL } from "@/data/legal";
 import { EmailProtege } from "@/components/EmailProtege";
 
 export const metadata: Metadata = {
-  title: "Conditions d'utilisation de l'espace investisseur",
+  title: "Conditions générales d'utilisation de l'espace investisseur",
   description: "Règles d'accès et d'usage de l'espace réservé aux actionnaires de Greenpact.",
   alternates: { canonical: "/conditions-utilisation/" },
 };
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <PageLegale
-      titre="Conditions d'utilisation"
+      titre="Conditions générales d'utilisation"
       intro="Règles d'accès et d'usage de l'espace investisseur, réservé aux actionnaires de Greenpact."
       miseAJour={MISE_A_JOUR_LEGAL}
     >

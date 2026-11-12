@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { NAV, SITE } from "@/data/config";
+import { NAV, SITE, PAGES_LEGALES } from "@/data/config";
 import { listerArticles } from "@/lib/actualites";
 
 export const dynamic = "force-static";
@@ -19,5 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     }));
   const etudes = [{ url: `${SITE.url}/these-impact/bluefins/`, changeFrequency: "monthly" as const, priority: 0.6 }];
-  return [...pages, ...etudes, ...articles];
+  const legales = PAGES_LEGALES.map((n) => ({ url: `${SITE.url}${n.href}`, changeFrequency: "yearly" as const, priority: 0.2 }));
+  return [...pages, ...etudes, ...articles, ...legales];
 }

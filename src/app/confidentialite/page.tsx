@@ -49,10 +49,10 @@ export default function Page() {
 
       <h2>Durées de conservation</h2>
       <ul>
-        <li>Accès à l&apos;espace investisseur et documents personnels : tant que vous êtes actionnaire, puis [durée] après la cession de vos titres.</li>
-        <li>Questions et réponses : [durée] après la dernière question.</li>
+        <li>Accès à l&apos;espace investisseur et documents personnels : tant que vous êtes actionnaire. L&apos;accès est fermé et les documents personnels supprimés dans les 3 mois suivant la cession de la totalité de vos titres.</li>
+        <li>Questions et réponses : 1 an après la dernière question.</li>
         <li>Lettres d&apos;information : jusqu&apos;à votre désinscription.</li>
-        <li>Échanges par e-mail : [durée] après le dernier échange.</li>
+        <li>Échanges par e-mail : 1 an après le dernier échange, sauf relation en cours.</li>
         <li>Journaux techniques : 12 mois au plus.</li>
       </ul>
 

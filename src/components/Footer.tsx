@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { NAV, SITE, MENTIONS_REGLEMENTAIRES, ESPACE_INVESTISSEUR } from "@/data/config";
+import { NAV, SITE, MENTIONS_REGLEMENTAIRES, ESPACE_INVESTISSEUR, PAGES_LEGALES } from "@/data/config";
 import { EmailProtege } from "./EmailProtege";
 import styles from "./Footer.module.css";
 
@@ -60,9 +60,22 @@ export function Footer() {
 
       <div className={`conteneur ${styles.bas}`}>
         <p className={styles.mentions}>{MENTIONS_REGLEMENTAIRES}</p>
-        <p className={`small ${styles.copy}`}>
-          © {new Date().getFullYear()} Greenpact, www.greenpact.fr
-        </p>
+        <div className={styles.legal}>
+          <p className={`small ${styles.copy}`}>
+            © {new Date().getFullYear()} Greenpact, www.greenpact.fr
+          </p>
+          <nav aria-label="Informations légales">
+            <ul className={`small ${styles.liensLegaux}`}>
+              {PAGES_LEGALES.map((p) => (
+                <li key={p.href}>
+                  <Link href={p.href} className="lien">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
     </footer>
   );

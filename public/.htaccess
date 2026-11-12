@@ -5,6 +5,21 @@ DirectoryIndex index.html
 ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>
+  # En-têtes de sécurité (toutes les réponses, y compris redirections et erreurs).
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # CSP en observation : elle signale dans la console sans rien bloquer.
+  # Après une semaine sans alerte, remplacer « Content-Security-Policy-Report-Only »
+  # par « Content-Security-Policy ».
+  # Domaines tiers : cdn.jsdelivr.net (client Supabase de /actionnaires/),
+  # fonts.googleapis.com / fonts.gstatic.com (polices de /actionnaires/),
+  # *.supabase.co en https et wss (données et temps réel de /actionnaires/),
+  # youtube-nocookie.com, embed.podcasts.apple.com, linkedin.com (lecteurs intégrés).
+  Header always set Content-Security-Policy-Report-Only "default-src 'self'; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'self' https://www.youtube-nocookie.com https://embed.podcasts.apple.com https://www.linkedin.com; media-src 'self' https:; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'"
+
   # Scripts et styles : noms hachés à chaque build, cache long et immuable.
   <FilesMatch "\.(js|css|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"

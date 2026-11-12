@@ -56,3 +56,10 @@ export const ANCIENNES_ANCRES: Record<string, string> = {
 
 export const MENTIONS_REGLEMENTAIRES =
   "Ce document est un document marketing, non réglementaire, et n'est pas approuvé par l'Autorité des Marchés Financiers. Les informations contenues sont fournies à titre indicatif et ne constituent pas une garantie de performance future. GREENPACT décline toute responsabilité quant à l'exactitude ou l'exhaustivité des informations. Le projet d'investissement ne bénéficiera d'aucune garantie ou protection et comportera un risque de perte en capital, limité à l'investissement initial, et une période de blocage minimum. Les performances passées ne préjugent pas des performances futures.";
+
+// Pages légales, reliées dans le footer et le sitemap.
+export const PAGES_LEGALES = [
+  { href: "/mentions-legales/", label: "Mentions légales" },
+  { href: "/confidentialite/", label: "Confidentialité" },
+  { href: "/conditions-utilisation/", label: "Conditions d'utilisation" },
+] as const;

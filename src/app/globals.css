@@ -10,7 +10,7 @@
   --clair-rgb: 237, 234, 228;
 
   --vert-90: rgba(var(--vert-rgb), 0.9);
-  --vert-70: rgba(var(--vert-rgb), 0.7);
+  --vert-70: rgba(var(--vert-rgb), 0.74); /* contraste AA (≥ 4,5:1) sur fond clair */
   --vert-55: rgba(var(--vert-rgb), 0.55);
   --vert-30: rgba(var(--vert-rgb), 0.3);
   --vert-15: rgba(var(--vert-rgb), 0.15);

@@ -28,7 +28,7 @@ export default function Page() {
         <dd>{SOCIETE.rcs}</dd>
         <dt>TVA intracommunautaire</dt>
         <dd>{SOCIETE.tva}</dd>
-        <dt>Présidente</dt>
+        <dt>Président</dt>
         <dd>{SOCIETE.president}</dd>
         <dt>Contact</dt>
         <dd>
@@ -46,9 +46,6 @@ export default function Page() {
           ovhcloud.com
         </a>
         ).
-      </p>
-      <p>
-        Les données de l&apos;espace investisseur (/actionnaires/) sont hébergées par Supabase Inc. (supabase.com), sur des serveurs situés en {SOCIETE.regionSupabase}.
       </p>
 
       <h2>Propriété intellectuelle</h2>

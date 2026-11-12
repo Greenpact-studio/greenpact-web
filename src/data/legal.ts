@@ -8,11 +8,10 @@ export const SOCIETE = {
   rcs: "889 308 441 RCS Lyon",
   siren: "889 308 441",
   tva: "FR87 889 308 441",
-  president: "WAOUP (SAS), représentée par FC MARKA, elle-même représentée par Emmanuel Gonon",
-  directeurPublication: "Emmanuel Gonon, représentant de la société WAOUP, Présidente de Greenpact",
+  president: "Emmanuel Gonon",
+  directeurPublication: "Emmanuel Gonon, Président de Greenpact",
   email: "Laurent@greenpact.fr",
   telephone: "06 51 20 99 29",
-  regionSupabase: "Irlande (Union européenne)",
 };
 
 export const HEBERGEUR = {

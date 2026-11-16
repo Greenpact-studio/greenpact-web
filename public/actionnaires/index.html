@@ -1160,14 +1160,13 @@ function route(){
 }
 window.addEventListener("hashchange", route);
 
-/* Fiche : date de la dernière modification (fiche ou une de ses nouvelles), puis date des chiffres. */
+/* Fiche : une seule date, celle de la dernière modification (fiche ou une de ses nouvelles). */
 function majFiche(h,nws){
   const f=d=>esc(dFmt(d,{day:"numeric",month:"long",year:"numeric"}));
   const dates=[(S.maj||{})["holdings/"+h.id],...nws.map(n=>(S.maj||{})["news/"+n.id]||n.date)].filter(Boolean).sort();
   const maj=dates.at(-1)||h.dataAsOf;
   if(!maj) return "";
-  const chiffres=h.dataAsOf&&f(h.dataAsOf)!==f(maj)?` Chiffres au ${f(h.dataAsOf)}.`:"";
-  return `<p class="note" style="margin:0">Mis à jour le ${f(maj)}.${chiffres}${h.method?` Valorisation : ${esc(h.method)}.`:""}</p>`;
+  return `<p class="note" style="margin:0">Mis à jour le ${f(maj)}.${h.method?` Valorisation : ${esc(h.method)}.`:""}</p>`;
 }
 function render(){
   const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments,"mon-espace":vMonEspace,questions:vQuestions};

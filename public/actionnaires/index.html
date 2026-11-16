@@ -398,7 +398,8 @@ dialog::backdrop{background:rgba(14,32,24,.5);backdrop-filter:blur(2px)}
 .dr-body .lead{color:var(--muted);margin-top:8px}
 .impact-hero{background:var(--forest);color:var(--linen);border-radius:16px;padding:18px 20px}
 .impact-hero b{display:block;font-size:2rem;font-weight:600;letter-spacing:-.02em;line-height:1.1}
-.impact-hero span{font-size:.86rem;color:rgba(237,234,228,.78)}
+.impact-hero .ih-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.impact-hero span:not(.proof){font-size:.86rem;color:rgba(237,234,228,.78)}
 .impact-hero p{margin-top:10px;font-size:.88rem;color:rgba(237,234,228,.86)}
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .facts div{padding:12px 14px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
@@ -1404,7 +1405,7 @@ function openDetail(id){
     <div class="cover dr-cover ${coverClass(h)}">${phEl(h)}<span class="lg">${logoChip(h.id)}</span>${h.phase?`<span class="stage">${esc(phaseLabel(h.phase))}</span>`:""}</div>
     <div class="dr-body">
       <div><span class="via">${esc(viaLabel(h))}${nuance(esc(h.theme||""))}</span><h2>${esc(h.name)}</h2>${h.description?`<p class="lead">${esc(h.description)}</p>`:""}</div>
-      ${h.impactFigure?`<div class="impact-hero"><b>${esc(h.impactFigure)}</b><span>${esc(h.impactLabel||"")}</span> ${proofBadge(h.proof)}${h.mission?`<p>${esc(h.mission)}</p>`:""}</div>`:(h.mission?`<div class="memo"><b>Impact recherché</b>${esc(h.mission)}</div>`:"")}
+      ${h.impactFigure?`<div class="impact-hero"><div class="ih-top"><b>${esc(h.impactFigure)}</b>${proofBadge(h.proof)}</div><span>${esc(h.impactLabel||"")}</span>${h.mission?`<p>${esc(h.mission)}</p>`:""}</div>`:(h.mission?`<div class="memo"><b>Impact recherché</b>${esc(h.mission)}</div>`:"")}
       ${facts.length?`<dl class="facts" style="margin:0">${facts.map(f=>`<div><dt>${esc(f[0])}</dt><dd>${esc(f[1])}</dd></div>`).join("")}</dl>`:""}
       ${(h.highlights||[]).length?`<div><h3 style="margin-bottom:14px">Dernières avancées</h3><ul class="timeline">${h.highlights.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
       ${(h.kpis||[]).length?`<div><h3 style="margin-bottom:10px">Indicateurs d'impact suivis</h3><div class="chips">${h.kpis.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`:""}

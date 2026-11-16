@@ -1160,10 +1160,20 @@ function route(){
 }
 window.addEventListener("hashchange", route);
 
+/* Fiche : date de la dernière modification (fiche ou une de ses nouvelles), puis date des chiffres. */
+function majFiche(h,nws){
+  const f=d=>esc(dFmt(d,{day:"numeric",month:"long",year:"numeric"}));
+  const dates=[(S.maj||{})["holdings/"+h.id],...nws.map(n=>(S.maj||{})["news/"+n.id]||n.date)].filter(Boolean).sort();
+  const maj=dates.at(-1)||h.dataAsOf;
+  if(!maj) return "";
+  const chiffres=h.dataAsOf&&f(h.dataAsOf)!==f(maj)?` Chiffres au ${f(h.dataAsOf)}.`:"";
+  return `<p class="note" style="margin:0">Mis à jour le ${f(maj)}.${chiffres}${h.method?` Valorisation : ${esc(h.method)}.`:""}</p>`;
+}
 function render(){
   const views={apercu:vApercu,portefeuille:vPortefeuille,impact:vImpact,performance:vPerformance,lettres:vLettres,documents:vDocuments,"mon-espace":vMonEspace,questions:vQuestions};
   const k=S.kpis||{};
-  $("#stamp").innerHTML = k.asOf ? `Données au <b>${esc(dFmt(k.asOf,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
+  const majLe = S.majLe || k.asOf;
+  $("#stamp").innerHTML = majLe ? `Mis à jour le <b>${esc(dFmt(majLe,{day:"numeric",month:"long",year:"numeric"}))}</b>` : "Espace confidentiel";
   const banner = S.ready && !S.db && !S.static ? `<div class="empty" style="margin-bottom:24px">Les données ne sont pas disponibles dans cette vue. Ouvrez l'espace depuis son lien en étant connecté.</div>` : "";
   $("#app").innerHTML = `<div class="view${S.animate?"":" still"}">${banner}${views[S.view]()}</div>`;
   afterRender();
@@ -1401,7 +1411,7 @@ function openDetail(id){
       ${(h.kpis||[]).length?`<div><h3 style="margin-bottom:10px">Indicateurs d'impact suivis</h3><div class="chips">${h.kpis.map(x=>`<span class="pill">${esc(x)}</span>`).join("")}</div></div>`:""}
       ${h.founders?`<div><h3 style="margin-bottom:6px">Fondateurs</h3><p style="color:var(--muted);font-size:.9rem">${esc(h.founders)}</p></div>`:""}
       ${nws.length?`<div><h3 style="margin-bottom:6px">Nouvelles</h3>${feedList(nws)}</div>`:""}
-      ${h.dataAsOf?`<p class="note" style="margin:0">Données au ${esc(dFmt(h.dataAsOf,{day:"numeric",month:"long",year:"numeric"}))}${h.method?`. Valorisation : ${esc(h.method)}`:""}.</p>`:""}
+      ${majFiche(h,nws)}
       <div class="edit-only flex" style="gap:8px;flex-wrap:wrap">
         ${S.assets?`<button class="btn ghost small" data-act="photo" data-id="${esc(h.id)}">${h.photoId?"Changer la photo":"Ajouter une photo"}</button>`:""}
         <button class="btn ghost small" data-act="edit-holdings" data-id="${esc(h.id)}">Modifier la fiche</button>
@@ -2120,9 +2130,13 @@ async function loadSeed(){
 const SUPABASE = { url: "https://ceqqfmngceqowefdttxc.supabase.co", key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNlcXFmbW5nY2Vxb3dlZmR0dHhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1Njg3NjgsImV4cCI6MjEwODE0NDc2OH0.8ahzfh8mEUlVYRGoIS7gs018XyOMb9nREGoTyn9YcnU" };
 const enLigne = () => /^https?:$/.test(location.protocol) && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname) && window.supabase;
 async function loadSupabase(sb){
-  const { data, error } = await sb.from("documents").select("collection,id,data");
+  const { data, error } = await sb.from("documents").select("collection,id,data,updated_at");
   if(error) throw error;
-  const d={}; (data||[]).forEach(r=>{ (d[r.collection] ||= {})[r.id]=r.data; });
+  // Date de dernière modification : la plus récente de toutes les lignes (ajouts, modifications,
+  // et suppressions, notées par la ligne meta/derniere-suppression ; voir supabase/derniere-maj.sql).
+  const d={}; S.maj={}; S.majLe=null;
+  (data||[]).forEach(r=>{ (d[r.collection] ||= {})[r.id]=r.data; S.maj[r.collection+"/"+r.id]=r.updated_at;
+    if(r.updated_at && (!S.majLe || r.updated_at>S.majLe)) S.majLe=r.updated_at; });
   applyData(d);
 }
 function afficherCompte(t){

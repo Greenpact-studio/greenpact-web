@@ -2111,6 +2111,11 @@ function applyData(d){
     const arr=o=>Object.entries(o||{}).map(([id,v])=>({id,...v}));
     const by=(f,dir)=>(a,b)=>String(a[f]||"").localeCompare(String(b[f]||""))*(dir==="desc"?-1:1);
     S.holdings=arr(d.holdings).sort((a,b)=>(a.order||0)-(b.order||0));
+    // Impact : chiffres et indicateurs suivis venant de Notion (collection « impact », voir
+    // scripts/sync-impact.mjs). Sans KPI chiffré dans Notion, la fiche garde son chiffre.
+    const I=d.impact||{};
+    S.holdings=S.holdings.map(h=>{ const i=I[h.id]; if(!i) return h;
+      return {...h, ...(i.figure?{impactFigure:i.figure,impactLabel:String(i.label||"").replace(/^(\p{Lu})(?=\p{Ll})/u,c=>c.toLowerCase()),proof:i.proof}:{}), ...((i.kpis||[]).length?{kpis:i.kpis}:{})}; });
     S.news=arr(d.news).sort(by("date","desc")); S.articles=arr(d.articles).sort(by("date","desc"));
     S.events=avecEvenementsAjoutes(arr(d.events)).sort(by("date","asc")); S.editions=arr(d.editions).sort(by("sentAt","desc"));
     S.detentions=d.detentions||{}; S.kpis=(d.finance||{}).kpis||null;

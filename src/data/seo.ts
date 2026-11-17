@@ -11,7 +11,7 @@ export const ORGANISATION = {
   legalName: "GREENPACT",
   url: `${SITE.url}/`,
   logo: `${SITE.url}/logo-greenpact.png`,
-  description: SITE.description,
+  description: SITE.descriptionGoogle,
   foundingDate: "2021",
   slogan: SITE.tagline,
   areaServed: "FR",
@@ -70,7 +70,7 @@ export function filAriane(href: string) {
 export const FAQ = [
   {
     q: "Qu'est-ce que Greenpact ?",
-    r: "Greenpact est une holding d'investissement à impact créée en 2021. Elle finance des startups qui accélèrent la transformation durable des entreprises dans l'industrie, l'énergie, la construction et l'agriculture, via deux venture studios, Hoji Ventures et 4Elements, et des participations directes.",
+    r: "Greenpact est une holding d'investissement à impact créée en 2021. Elle réunit entrepreneurs, dirigeants et family offices pour financer les entreprises qui rendent l'économie européenne plus compétitive, plus souveraine et plus durable, dans l'industrie, l'énergie, la construction et l'agriculture, via deux startup studios, Hoji Ventures et 4Elements, et des participations directes.",
   },
   {
     q: "Comment Greenpact investit-elle ?",

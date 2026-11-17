@@ -9,7 +9,7 @@ import { SITE } from "@/data/config";
 
 export const metadata: Metadata = {
   title: { absolute: "Greenpact | Holding d'investissement à impact et venture studios" },
-  description: SITE.description,
+  description: SITE.descriptionGoogle,
   alternates: { canonical: "/" },
 };
 

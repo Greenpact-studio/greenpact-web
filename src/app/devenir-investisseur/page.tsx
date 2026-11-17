@@ -58,7 +58,7 @@ export default function Page() {
           <div className={styles.pourquoiTexte}>
             <h2 id="pourquoi-titre">Pourquoi nous rejoindre</h2>
             <p className="sobre">
-              Les Greenpacters sont des entrepreneurs, des dirigeants et des family offices qui investissent dans la transformation durable des entreprises, et s'y impliquent.
+              Les Greenpacters sont des entrepreneurs, des dirigeants et des family offices qui investissent pour une économie européenne plus compétitive, plus souveraine et plus durable, et s'y impliquent.
             </p>
           </div>
           <Reveal cascade as="ol" className={styles.raisons} y={20}>

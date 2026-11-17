@@ -41,6 +41,9 @@ export default function Page() {
         <li>
           <strong>Données de connexion</strong> (date de connexion, jeton de session) : sécurité de l&apos;espace. Base légale : intérêt légitime.
         </li>
+        <li>
+          <strong>Suivi de l&apos;utilisation</strong> (date de dernière connexion, questions posées, clics dans nos lettres) : améliorer l&apos;information et la relation avec nos actionnaires. Ces données restent internes à Greenpact. Base légale : intérêt légitime.
+        </li>
       </ul>
       <h3>Lettres d&apos;information</h3>
       <p>

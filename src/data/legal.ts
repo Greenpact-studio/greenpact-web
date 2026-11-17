@@ -20,4 +20,4 @@ export const HEBERGEUR = {
   site: "https://www.ovhcloud.com",
 };
 
-export const MISE_A_JOUR_LEGAL = "12 novembre 2026";
+export const MISE_A_JOUR_LEGAL = "17 novembre 2026";

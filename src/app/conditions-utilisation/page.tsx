@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLegale } from "@/components/legal/PageLegale";
-import { SOCIETE, MISE_A_JOUR_LEGAL } from "@/data/legal";
+import { SOCIETE } from "@/data/legal";
 import { EmailProtege } from "@/components/EmailProtege";
 
 export const metadata: Metadata = {
@@ -15,7 +15,6 @@ export default function Page() {
     <PageLegale
       titre="Conditions générales d'utilisation"
       intro="Règles d'accès et d'usage de l'espace investisseur, réservé aux actionnaires de Greenpact."
-      miseAJour={MISE_A_JOUR_LEGAL}
     >
       <h2>1. Objet</h2>
       <p>

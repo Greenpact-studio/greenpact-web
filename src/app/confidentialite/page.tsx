@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageLegale } from "@/components/legal/PageLegale";
-import { SOCIETE, MISE_A_JOUR_LEGAL } from "@/data/legal";
+import { SOCIETE } from "@/data/legal";
 import { EmailProtege } from "@/components/EmailProtege";
 
 export const metadata: Metadata = {
@@ -15,7 +15,6 @@ export default function Page() {
     <PageLegale
       titre="Politique de confidentialité"
       intro="Les données que nous traitons, pourquoi, combien de temps, et comment exercer vos droits."
-      miseAJour={MISE_A_JOUR_LEGAL}
     >
       <h2>Responsable du traitement</h2>
       <p>

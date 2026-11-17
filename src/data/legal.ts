@@ -11,7 +11,6 @@ export const SOCIETE = {
   president: "Emmanuel Gonon",
   directeurPublication: "Emmanuel Gonon, Président de Greenpact",
   email: "Laurent@greenpact.fr",
-  telephone: "06 51 20 99 29",
 };
 
 export const HEBERGEUR = {
@@ -20,4 +19,3 @@ export const HEBERGEUR = {
   site: "https://www.ovhcloud.com",
 };
 
-export const MISE_A_JOUR_LEGAL = "17 novembre 2026";

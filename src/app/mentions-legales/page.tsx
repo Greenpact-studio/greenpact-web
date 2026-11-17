@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageLegale } from "@/components/legal/PageLegale";
-import { SOCIETE, HEBERGEUR, MISE_A_JOUR_LEGAL } from "@/data/legal";
+import { SOCIETE, HEBERGEUR } from "@/data/legal";
 import { MENTIONS_REGLEMENTAIRES } from "@/data/config";
 import { EmailProtege } from "@/components/EmailProtege";
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <PageLegale titre="Mentions légales" miseAJour={MISE_A_JOUR_LEGAL}>
+    <PageLegale titre="Mentions légales">
       <h2>Éditeur du site</h2>
       <dl>
         <dt>Dénomination</dt>
@@ -32,7 +32,7 @@ export default function Page() {
         <dd>{SOCIETE.president}</dd>
         <dt>Contact</dt>
         <dd>
-          <EmailProtege email={SOCIETE.email} className="lien" /> · {SOCIETE.telephone}
+          <EmailProtege email={SOCIETE.email} className="lien" />
         </dd>
       </dl>
 

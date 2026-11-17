@@ -1,11 +1,14 @@
 # Publication du site statique sur OVH.
 # Déclencheurs : chaque push sur main, un bouton manuel, et toutes les 6 h
-# (pour rafraîchir les épisodes du podcast lus dans le flux RSS au build).
+# (pour rafraîchir les épisodes du podcast et les posts LinkedIn lus au build).
 #
 # Secrets à créer dans GitHub (Settings → Secrets and variables → Actions) :
 #   OVH_FTP_SERVER    ex. ftp.cluster0xx.hosting.ovh.net
 #   OVH_FTP_USERNAME  identifiant FTP OVH
 #   OVH_FTP_PASSWORD  mot de passe FTP OVH
+#   LINKEDIN_CLIENT_ID, LINKEDIN_CLIENT_SECRET, LINKEDIN_REFRESH_TOKEN, LINKEDIN_ORG_ID
+#                     posts LinkedIn de la page Greenpact (voir scripts/linkedin.mjs) ;
+#                     facultatifs : sans eux, le site garde data/linkedin.json
 #
 # Les serveurs FTP d'OVH n'acceptent pas le FTPS explicite (« 500 This security
 # scheme is not implemented »). On tente donc d'abord le SFTP (port 22, mêmes
@@ -36,6 +39,13 @@ jobs:
           cache: npm
 
       - run: npm ci
+      - name: Derniers posts LinkedIn
+        run: node scripts/linkedin.mjs
+        env:
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_ORG_ID: ${{ secrets.LINKEDIN_ORG_ID }}
       - run: npm run build
 
       # Trois envois SFTP : d'abord les scripts (noms hachés), puis les pages,

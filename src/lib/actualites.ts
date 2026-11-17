@@ -92,14 +92,17 @@ export async function listerEpisodes(max = 8): Promise<Episode[]> {
 /* ─── Données JSON (data/*.json) ─── */
 export type Apparition = { titre: string; media: string; date: string; lien?: string; exemple?: boolean };
 // Post LinkedIn : soit `iframe` (code « Intégrer ce post »), soit simplement `lien` vers le post,
-// avec un `resume` et une `image` facultatifs. Affichés dans l'ordre du fichier data/linkedin.json.
+// avec un `resume` et une `image` facultatifs. Les derniers posts de la page sont récupérés
+// avant chaque build par scripts/linkedin.mjs (data/linkedin-auto.json) ; à défaut, on
+// affiche data/linkedin.json, rempli à la main, dans l'ordre du fichier.
 export type PostLinkedIn = { titre: string; date?: string; resume?: string; image?: string; iframe?: string; lien?: string; exemple?: boolean };
 
 export function listerApparitions(): Apparition[] {
   return lireJSON<Apparition[]>("apparitions.json").sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 export function listerPostsLinkedIn(): PostLinkedIn[] {
-  return lireJSON<PostLinkedIn[]>("linkedin.json");
+  const auto = lireJSON<PostLinkedIn[]>("linkedin-auto.json");
+  return auto.length ? auto : lireJSON<PostLinkedIn[]>("linkedin.json");
 }
 
 function lireJSON<T>(nom: string): T {

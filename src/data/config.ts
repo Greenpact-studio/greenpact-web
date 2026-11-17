@@ -5,6 +5,9 @@ export const SITE = {
   url: "https://www.greenpact.fr",
   description:
     "Holding d'investissement à impact, Greenpact réunit entrepreneurs, dirigeants et family offices pour financer, via deux startup studios et des participations directes, une économie européenne plus compétitive, plus souveraine et plus durable.",
+  // Description courte (≤ 155 caractères) pour Google et les partages.
+  descriptionGoogle:
+    "Holding d'investissement à impact, Greenpact finance une économie européenne plus compétitive, souveraine et durable, via deux startup studios.",
   tagline: "Reconstruire l’économie réelle en Europe",
   contact: {
     email: "Laurent@greenpact.fr",

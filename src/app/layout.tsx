@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: SITE.nom,
     template: `%s | ${SITE.nom}`,
   },
-  description: SITE.description,
+  description: SITE.descriptionGoogle,
   openGraph: {
     type: "website",
     locale: "fr_FR",

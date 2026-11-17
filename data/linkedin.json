@@ -1,5 +1,11 @@
 [
   {
+    "titre": "Greenpact lève des fonds",
+    "resume": "Greenpact ouvre son capital pour accélérer l'industrie de la transition. Rejoignez les Greenpacters.",
+    "image": "/images/investir-cta.webp",
+    "lien": "https://www.linkedin.com/posts/greenpactstudio_greenpact-impactinvesting-capitalrisque-activity-7524021986319290368-Ns6U"
+  },
+  {
     "titre": "Bluefins",
     "resume": "La nageoire inspirée des baleines qui fait avancer les navires grâce à la houle.",
     "image": "/images/linkedin-bluefins.webp",
@@ -10,11 +16,5 @@
     "resume": "Mesurer l'empreinte des produits dès la conception, à l'échelle d'un catalogue.",
     "image": "/images/linkedin-sapiologie.webp",
     "lien": "https://lnkd.in/p/ecf73b85"
-  },
-  {
-    "titre": "Greenpact, par Éric Angelier",
-    "resume": "Le regard d'Éric Angelier, administrateur, sur Greenpact.",
-    "image": "/images/entree-these.webp",
-    "lien": "https://lnkd.in/p/e2_HMKD2"
   }
 ]

@@ -22,7 +22,7 @@ export const DIRECTES: ParticipationDirecte[] = [
     nom: "Bluefins",
     secteur: "Transport maritime",
     description:
-      "Foil auto-propulsif qui réduit de 20 % la consommation de carburant et les émissions de CO₂ des navires de commerce.",
+      "Foil propulsif qui récupère l'énergie de la houle pour réduire de 20 % la consommation de carburant et les émissions de CO₂ des navires de commerce.",
     url: "https://bluefins-systems.com",
     logo: "bluefins.png",
     logoClair: "bluefins.png",
@@ -85,10 +85,10 @@ export const STUDIOS: Studio[] = [
     url: "https://www.4elements.studio",
     positionnement: "Venture studio deeptech climat, avec 50 laboratoires R&D partenaires.",
     startups: [
-      { nom: "Bluefins", description: "Foil auto-propulsif pour le transport maritime.", url: "https://bluefins-systems.com", logo: "bluefins.png" },
-      { nom: "Aqua Green Protect", description: "Gel bio pour protéger les exploitations agricoles et produire des engrais naturels.", logo: "aqua-green-protect.png", logoTaille: 1.5 }, // TODO URL
+      { nom: "Bluefins", description: "Foil propulsif pour le transport maritime.", url: "https://bluefins-systems.com", logo: "bluefins.png" },
+      { nom: "Aqua Green Protect", description: "Glu contre les cicadelles et mousse antigel pour protéger vignes et vergers.", logo: "aqua-green-protect.png", logoTaille: 1.5 }, // TODO URL
       { nom: "CaliCO₂", description: "Captation des émissions carbone dans les fumées industrielles.", url: "https://www.linkedin.com/company/calico2company/", logo: "calico2.png" },
-      { nom: "Thermal AI", description: "Fluides thermiques pour réduire la consommation énergétique des datacenters.", logo: "thermal-ai-v2.png" }, // TODO URL
+      { nom: "Thermia", description: "Fluides thermiques sans PFAS, conçus par IA, pour réduire la consommation énergétique des datacenters." }, // TODO URL et logo (l'ancien logo « thermal AI » ne correspond plus au nom)
       { nom: "Ayakem", description: "Mousses et isolants biosourcés à partir de résidus de bois.", url: "https://www.linkedin.com/company/ayakem/", logo: "ayakem-v2.png" },
       { nom: "WatAO", description: "Destruction des PFAS dans l'eau.", url: "https://www.linkedin.com/company/watao/", logo: "watao.png" },
       { nom: "Cedrus", description: "Audit et étude énergétiques de bâtiments.", url: "https://cedrus.solutions", logo: "cedrus-v2.png" },

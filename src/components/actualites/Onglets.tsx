@@ -5,7 +5,7 @@ import { useEffect, useState, type ReactNode } from "react";
 export type Onglet = { id: string; label: string; compte: number; contenu: ReactNode };
 
 /**
- * Quatre onglets discrets (Articles, Podcast, Apparitions, LinkedIn).
+ * Cinq onglets discrets (Vidéos, Articles, Podcast, Apparitions, LinkedIn).
  * L'onglet actif est reflété dans l'ancre de l'URL (#podcast) pour être partageable.
  */
 export function Onglets({ onglets, styles }: { onglets: Onglet[]; styles: Record<string, string> }) {

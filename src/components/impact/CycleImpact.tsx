@@ -73,7 +73,7 @@ export function CycleImpact() {
                 <span className={styles.point} aria-hidden />
                 <div className={styles.carte}>
                   <p className={styles.meta}>
-                    {p.porteur} · {p.moment}
+                    {p.porteur} | {p.moment}
                   </p>
                   <h3>
                     {String(i + 1).padStart(2, "0")} {p.titre}

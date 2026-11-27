@@ -77,7 +77,7 @@ export function Systemique() {
               </div>
               <div className={styles.texte}>
                 <p className={styles.meta}>
-                  {String(i + 1).padStart(2, "0")} · {l.niveau}
+                  {String(i + 1).padStart(2, "0")} | {l.niveau}
                 </p>
                 <h3>{l.effet}</h3>
                 <p className={styles.description}>{l.texte}</p>

@@ -40,7 +40,7 @@ export const NAV = [
   { href: "/these-impact/", label: "Thèse d'impact" },
   { href: "/equipe/", label: "Équipe" },
   { href: "/portfolio/", label: "Portfolio" },
-  { href: "/actualites/", label: "Actualités" },
+  { href: "/actualites/", label: "Médias" },
   { href: "/devenir-investisseur/", label: "Devenir investisseur" },
 ] as const;
 

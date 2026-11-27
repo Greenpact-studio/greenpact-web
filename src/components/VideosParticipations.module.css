@@ -41,6 +41,6 @@
   margin: 0;
 }
 .texte {
-  max-width: var(--mesure);
+  max-width: none; /* jusqu'au bord de la vidéo (le style global limite les paragraphes à 36rem) */
   margin: 0;
 }

@@ -17,17 +17,17 @@ export const VIDEOS: Video[] = [
     startup: "Revalue",
     studio: "Hoji Ventures",
     youtubeId: "PojJdtd0yzs",
-    titre: "Revalue : faire d'un équipement en fin de vie une source de revenu",
+    titre: "Revalue : redonner de la valeur aux équipements en fin de vie",
     texte:
-      "Revalue aide les industriels à choisir, pour chaque équipement en panne ou en fin d'usage, entre réparer, reconditionner, réemployer ou recycler. Une startup du studio Hoji Ventures, dont Greenpact est actionnaire.",
+      "Charles Souillard, CEO et fondateur de Revalue, était présent au SEPEM aux côtés d'Envie Rhône-Alpes et de Grenoble-Alpes Métropole. Au programme : le remanufacturing, qui remet des équipements en service à un niveau équivalent au neuf, une démarche applicable à toute l'industrie.",
   },
   {
     id: "fyxe",
     startup: "Fyxe",
     studio: "Hoji Ventures",
     youtubeId: "PoP5hEoCsmQ",
-    titre: "Fyxe : garder le savoir-faire des équipes de maintenance",
+    titre: "Fyxe : faire du savoir des experts un levier de performance pour l'usine",
     texte:
-      "Fyxe capitalise les connaissances des équipes de maintenance et d'exploitation pour qu'elles profitent à tout le site industriel. Une startup du studio Hoji Ventures, dont Greenpact est actionnaire.",
+      "Tanguy Steeg, CEO de Fyxe, était invité au SEPEM avec le directeur des opérations de Kalistrut Aerospace (groupe PCC) pour un retour d'expérience : la démarche menée ensemble, ce qui a coincé et les premiers résultats pour la production et la formation des équipes.",
   },
 ];

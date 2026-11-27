@@ -28,6 +28,7 @@
 }
 .etiquette {
   font-size: var(--t-small);
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--vert-70);

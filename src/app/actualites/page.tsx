@@ -6,12 +6,14 @@ import { JsonLd } from "@/components/JsonLd";
 import { filAriane } from "@/data/seo";
 import { Onglets } from "@/components/actualites/Onglets";
 import { SITE } from "@/data/config";
+import { VideosParticipations } from "@/components/VideosParticipations";
+import { VIDEOS } from "@/data/videos";
 import { listerArticles, listerEpisodes, listerApparitions, listerPostsLinkedIn, dateFR } from "@/lib/actualites";
 import styles from "./actualites.module.css";
 
 export const metadata: Metadata = {
-  title: "Actualités, podcast REGEN et presse",
-  description: "Articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact.",
+  title: "Médias : vidéos, articles, podcast REGEN et presse",
+  description: "Vidéos des participations, articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact.",
   alternates: { canonical: "/actualites/" },
 };
 
@@ -28,6 +30,12 @@ export default async function Page() {
   const posts = listerPostsLinkedIn();
 
   const onglets = [
+    {
+      id: "videos",
+      label: "Vidéos",
+      compte: VIDEOS.length,
+      contenu: <VideosParticipations />,
+    },
     {
       id: "articles",
       label: "Articles",
@@ -83,7 +91,7 @@ export default async function Page() {
                     <span className={styles.date}>{dateFR(e.date)}</span>
                     <span className={styles.ligneTitre}>{e.titre}</span>
                     <span className={styles.ligneDroite}>
-                      {e.duree ? `${e.duree} · ` : ""}Écouter ↗
+                      {e.duree ? `${e.duree} | ` : ""}Écouter ↗
                     </span>
                   </a>
                 </li>
@@ -188,7 +196,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd data={filAriane("/actualites/")} />
-      <EnTetePage titre="Actualités" intro="Articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact." />
+      <EnTetePage titre="Médias" intro="Vidéos des participations, articles, podcast REGEN, apparitions et publications LinkedIn de Greenpact." />
       <section className="conteneur" style={{ paddingBottom: "var(--section)" }}>
         <Onglets onglets={onglets} styles={styles} />
       </section>

@@ -5,6 +5,7 @@ import { EnTetePage } from "@/components/EnTetePage";
 import { JsonLd } from "@/components/JsonLd";
 import { filAriane } from "@/data/seo";
 import { Reveal } from "@/components/Reveal";
+import { VideosParticipations } from "@/components/VideosParticipations";
 import { DIRECTES, STUDIOS, SYNTHESE_PORTFOLIO } from "@/data/portfolio";
 import styles from "./portfolio.module.css";
 
@@ -46,6 +47,17 @@ export default function Page() {
             </a>
           ))}
         </div>
+      </section>
+
+      {/* Vidéos publiques des participations (src/data/videos.ts) */}
+      <section id="videos" className="conteneur" style={{ paddingBottom: "var(--section)" }} aria-labelledby="videos-titre">
+        <h2 id="videos-titre" className={styles.titreSection}>
+          Nos participations en vidéo
+        </h2>
+        <p className="lead" style={{ maxWidth: "var(--mesure)", marginBottom: "2.5rem" }}>
+          Des startups du portefeuille de nos venture studios présentent leur activité.
+        </p>
+        <VideosParticipations ancres />
       </section>
 
       {/* 7.2 Venture studios */}

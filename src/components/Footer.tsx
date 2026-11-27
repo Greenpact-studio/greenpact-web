@@ -34,10 +34,10 @@ export function Footer() {
           <p className="small sobre">Contact</p>
           <ul>
             <li>
-              Laurent Geray · <EmailProtege email={SITE.contact.email} className="lien" />
+              Laurent Geray | <EmailProtege email={SITE.contact.email} className="lien" />
             </li>
             <li>
-              Emmanuel Gonon · <EmailProtege email={SITE.contact.emailEmmanuel} className="lien" />
+              Emmanuel Gonon | <EmailProtege email={SITE.contact.emailEmmanuel} className="lien" />
             </li>
           </ul>
           <p className="small sobre" style={{ marginTop: "1.25rem" }}>
